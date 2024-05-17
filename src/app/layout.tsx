@@ -7,8 +7,12 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://indaga.site'),
   title: "Indaga",
   description: "Sitio de Indaga",
+  openGraph: {
+    images: '/opengraph-image.png',
+  },
 };
 
 export default function RootLayout({
