@@ -4,17 +4,18 @@
   justify-content: space-between;
   align-items: center;
   justify-content: center;
-  padding: 6rem;
+  padding: 5%;
   min-height: 100vh;
   background-color: #fff994;
   color: #1f7e89;
-  font-family: "Inter", sans-serif;
 }
 
 .description {
   display: inherit;
   justify-content: inherit;
   align-items: center;
+  text-align: center;
+  flex-direction: column;
   justify-content: center;
   font-size: 0.85rem;
   max-width: var(--max-width);
@@ -32,11 +33,39 @@
   bottom: 0;
 }
 
+.t1{
+  font-size:2rem;
+  margin-top:5rem;
+}
+
+.t2{
+  margin-top:1rem;
+  font-size:1.5rem;
+}
+.t3{
+  font-size:4rem;
+  font-weight:500;
+  margin-top:1rem;
+}
+
 .logo {
 }
 
 @media (max-width: 700px) {
   .logo {
-    max-width: 100%;
+    max-width: 80%;
+  }
+  .t1{
+    font-size:1rem;
+    margin-top:5rem;
+  }
+  
+  .t2{
+    margin-top:1rem;
+    font-size:1.2rem;
+  }
+  .t3{
+    font-size:2rem;
+    margin-top:1rem;
   }
 }
