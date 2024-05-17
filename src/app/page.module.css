@@ -26,11 +26,17 @@
   width: 100%;
   padding: 20px 5%;
   border-top: 2px solid #1f7e8933;
-  display:flex;
+  display: flex;
   justify-content: space-between;
-  position:absolute;
-  bottom:0;
-  /* *{
-    display:flex;
-  } */
+  position: absolute;
+  bottom: 0;
+}
+
+.logo {
+}
+
+@media (max-width: 700px) {
+  .logo {
+    max-width: 100%;
+  }
 }
