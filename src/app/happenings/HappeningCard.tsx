@@ -1,16 +1,9 @@
 import Image from "next/image";
 import { Button } from "@/app/components/Button";
 import Link from "next/link";
-const categories = ["Arte", "Gastronomía", "Música", "Cultura"];
+import { HappeningProps } from "./happenings.types";
 
-interface HappeningCardProps {
-  category: (typeof categories)[number];
-  title: string;
-  location: string;
-  locationUrl: string;
-  fecha: Date;
-  image: string;
-}
+interface HappeningCardProps extends Omit<HappeningProps, 'description'> {}
 
 export const HappeningCard: React.FC<HappeningCardProps> = ({
   category,
@@ -33,7 +26,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({
       <div className="flex flex-col p-8 py-4">
         <span className="text-sm text-gray-500">{category}</span>
         <h2>{title}</h2>
-        <p>@{location}</p>
+        <p className="text-blue">@{location}</p>
         <p>{fecha.toLocaleDateString()}</p>
         <Button>Ver evento</Button>
       </div>

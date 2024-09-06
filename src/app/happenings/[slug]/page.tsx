@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/app/components/Button";
 import { happenings } from "../mockHappenings";
 import Link from "next/link";
+import { WhatsappShareButton, WhatsappIcon } from "next-share";
 
 export default function Happening() {
   const params = useParams();
@@ -16,7 +17,6 @@ export default function Happening() {
   }
 
   const event = happenings.find((happening) => happening.slug === slug);
-  console.log(event);
 
   if (!event) {
     return (
@@ -29,11 +29,31 @@ export default function Happening() {
     );
   }
 
-  const { category, title, image, location, locationUrl, fecha } = event;
+  const { category, title, image, location, locationUrl, fecha, description } =
+    event;
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: description,
+          url: `https://indaga.site/happenings/${slug}`,
+        });
+        console.log('Compartido con éxito');
+      } catch (error) {
+        console.error('Error al compartir:', error);
+      }
+    } else {
+      // Fallback para navegadores que no soportan la API de Web Share
+      const shareUrl = `https://indaga.site/happenings/${slug}`;
+      alert(`Copia este enlace para compartir: ${shareUrl}`);
+    }
+  };
 
   return (
-    <div>
-      <div className="h-32 w-full bg-gray-200 relative">
+    <div className="flex">
+      <div className="h-100 w-full bg-gray-200 relative">
         <Image
           src={image}
           alt={`Imagen de ${title}`}
@@ -47,8 +67,21 @@ export default function Happening() {
         <Link href={locationUrl} className="text-sm text-blue">
           <p>@{location}</p>
         </Link>
+        <p>{description}</p>
         <p>{fecha.toLocaleDateString()}</p>
-        <Button>Ver evento</Button>
+        <div className="flex gap-2">
+          <Link href={"/happenings"}>
+            <Button secondary>Volver</Button>
+          </Link>
+          <Button onClick={handleShare}>Compartir</Button>
+        </div>
+        {/* <WhatsappShareButton
+          url={`https://indaga.site/happenings/${slug}`}
+          title={title}
+          separator=":: "
+        >
+          <WhatsappIcon size={32} round />
+        </WhatsappShareButton> */}
       </div>
     </div>
   );
