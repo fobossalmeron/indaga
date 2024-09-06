@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import styles from "./layout.module.css";
 import "./globals.css";
+import { Nav } from "./Nav";
+import { Footer } from "./Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const general_sans = localFont({ src: "./../assets/fonts/GeneralSans-Variable.woff2" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://indaga.site'),
+  metadataBase: new URL("https://indaga.site"),
   title: "Indaga",
   description: "Sitio de Indaga",
   openGraph: {
-    images: '/opengraph-image.png',
+    images: "/opengraph-image.png",
   },
 };
 
@@ -21,12 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={inter.className}>
-        {children}
-        <div className={styles.footer}>
-          <a href="mailto:hello@indaga.site">Contacto</a>© Indaga, 2024
-        </div>
+    <html lang="es" className={`${general_sans.className} bg-offwhite`}>
+      <body>
+        <Nav />
+        <main className="flex flex-col bg-offwhite text-eerie pt-20 items-center">{children}</main>
+        <Footer />
       </body>
       <GoogleAnalytics gaId="G-1QH9PC856P" />
     </html>

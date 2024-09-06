@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 
 export default function CafeSanFrancisco() {
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} bg-offwhite`}>
       <div className={styles.description}>
         <Image
           src="/indaga.svg"
