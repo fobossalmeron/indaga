@@ -2,6 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontWeight: {
+      normal: '365',
+      medium: '455',
+    },
     extend: {
       colors: {
         fern: "#527442",

@@ -24,10 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${general_sans.className} bg-offwhite`}>
+    <html lang="es" className={`${general_sans.className} font-normal bg-offwhite`}>
       <body>
         <Nav />
-        <main className="flex flex-col bg-offwhite text-eerie pt-20 items-center px-8 py-16">
+        <main className="flex flex-col bg-offwhite text-eerie pt-20 items-center px-8 py-16 relative">
           {children}
         </main>
         <Footer />

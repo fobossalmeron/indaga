@@ -4,39 +4,30 @@ import Link from "next/link";
 import festival_santa_lucia from "@/assets/img/festival_santa_lucia.svg?url";
 import imago_delgado from "@/assets/img/imago_delgado.svg?url";
 
+const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <Link
+    href={href}
+    className="px-0 py-3 bg-transparent hover:underline"
+  >
+    {children}
+  </Link>
+);
+
 export const Footer = () => {
   return (
     <footer
       className={
-        "px-20 py-20 w-full h-auto bg-white flex flex-col items-start text-blue gap-32 text-2xl font-regular"
+        "px-20 py-20 w-full h-auto bg-white flex flex-col items-start text-blue gap-32 text-2xl z-1 relative"
       }
     >
       <div className="flex w-full justify-between items-start">
         <nav className="flex flex-col flex-start align-text-left">
-          <Link
-            href="/home"
-            className="px-0 py-3 bg-transparent hover:underline"
-          >
-            Home{" "}
-          </Link>
-          <Link
-            href="/happenings"
-            className="px-0 py-3 bg-transparent hover:underline"
-          >
-            Happenings
-          </Link>
-          <Link
-            href="/guia"
-            className="px-0 py-3 bg-transparent hover:underline"
-          >
-            Guía
-          </Link>
-          <Link
-            href="/rutas"
-            className="px-0 py-3 bg-transparent hover:underline"
-          >
-            Rutas
-          </Link>
+          <FooterLink href="/home">Home</FooterLink>
+          <FooterLink href="/happenings">Happenings</FooterLink>
+          <FooterLink href="/guia">Guía</FooterLink>
+          <FooterLink href="/rutas">Rutas</FooterLink>
+          <FooterLink href="https://www.instagram.com/indagamx/">Instagram</FooterLink>
+          <FooterLink href="/nosotras">Nosotras</FooterLink>
         </nav>
         <Image
           src={festival_santa_lucia}

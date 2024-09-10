@@ -3,32 +3,32 @@ import { HappeningProps } from "./happenings.types";
 export const happenings: HappeningProps[] = [
     {
       category: "Arte",
-      title: "Evento de Arte",
-      description: "Un evento de arte que reunirá a los mejores artistas de la región. Se exhibirán obras de pintura, escultura y fotografía. Los asistentes podrán disfrutar de una experiencia única y enriquecedora. \nhttps://www.url1.com\nhttps://www.url2.com",
+      title: "Una mirada a Gerardo Mier",
+      description: "Disfruta de una experiencia única en el Museo MARCO con la nueva exposición de Gerardo Mier. Sumérgete en su mundo pictórico, donde la naturaleza y lo urbano se fusionan en obras de gran impacto visual. Una noche especial llena de arte, cultura y sorpresas. ¡No te lo pierdas! \n\n<a href='https://www.google.com/maps/place/Juan+Zuazua,+Padre+Raymundo+Jardón+y,+Centro,+64000+Monterrey,+N.L.' target='_blank' rel='noopener noreferrer'>Juan Zuazua, Padre Raymundo Jardón y, Centro, 64000 Monterrey, N.L.</a>\n\n<a href='https://www.marco.org.mx/' target='_blank' rel='noopener noreferrer'>https://www.marco.org.mx/</a>",
       image:
         "https://festivalsantalucia.gob.mx/wp-content/uploads/grandes-eventos.png",
-      location: "Lugar del Evento",
+      location: "Museo Marco",
       locationUrl: "https://www.google.com",
-      fecha: new Date("2024-10-20"),
-      slug: "evento-de-arte",
+      fecha: new Date("2024-9-4"),
+      slug: "una-mirada-a-gerardo-mier",
     },
     {
       category: "Gastronomía",
-      title: "Evento de Gastronomía",
+      title: "Piano Sky– Una velada en el piano Sky",
       description: "Un festival de comida que ofrecerá los platillos más deliciosos de la región. Los asistentes podrán degustar una variedad de sabores y disfrutar de una experiencia gastronómica única. Habrá opciones para todos los gustos y preferencias.",
       image:
-        "https://festivalsantalucia.gob.mx/wp-content/uploads/grandes-eventos.png",
-      location: "Lugar del Evento",
+        "https://festivalsantalucia.gob.mx/wp-content/uploads/monterrey-ovaciona-al-cigala-3.png",
+      location: "Macroplaza",
       locationUrl: "https://www.google.com",
       fecha: new Date("2024-10-21"),
-      slug: "evento-de-gastronomia",
+      slug: "piano-sky",
     },
     {
       category: "Música",
-      title: "Evento de Música",
+      title: "Los amantes (cuarteto)",
       description: "Un concierto que reunirá a los mejores músicos de la región. Se presentarán una variedad de géneros musicales, desde rock hasta jazz. Los asistentes podrán disfrutar de una noche de música en vivo y energía.",
       image:
-        "https://festivalsantalucia.gob.mx/wp-content/uploads/grandes-eventos.png",
+        "https://festivalsantalucia.gob.mx/wp-content/uploads/inauguracion-2023.png",
       location: "Lugar del Evento",
       locationUrl: "https://www.google.com",
       fecha: new Date("2024-10-22"),
@@ -36,7 +36,7 @@ export const happenings: HappeningProps[] = [
     },
     {
       category: "Cultura",
-      title: "Evento de Cultura",
+      title: "12 Actos en el teatro Metropolitan",
       description: "Un evento que celebra la diversidad cultural de la región. Se presentarán exposiciones, espectáculos y actividades que reflejan la riqueza cultural de la zona. Los asistentes podrán aprender y disfrutar de una experiencia cultural única.",
       image:
         "https://festivalsantalucia.gob.mx/wp-content/uploads/grandes-eventos.png",
@@ -46,8 +46,8 @@ export const happenings: HappeningProps[] = [
       slug: "evento-de-cultura",
     },
     {
-      category: "Deporte",
-      title: "Maratón de la Ciudad",
+      category: "Cultura",
+      title: "Una mirada a Gerardo Mier",
       description: "Una competencia atlética que reunirá a corredores de todas las edades y habilidades. El recorrido pasará por los lugares más emblemáticos de la ciudad, ofreciendo una experiencia única y emocionante.",
       image:
         "https://festivalsantalucia.gob.mx/wp-content/uploads/grandes-eventos.png",
@@ -57,7 +57,7 @@ export const happenings: HappeningProps[] = [
       slug: "maraton-de-la-ciudad",
     },
     {
-      category: "Educación",
+      category: "Gastronomía",
       title: "Feria de la Ciencia",
       description: "Una feria que busca promover la educación científica y tecnológica en la región. Se presentarán proyectos innovadores y experimentos interactivos para todos los asistentes.",
       image:
@@ -68,7 +68,7 @@ export const happenings: HappeningProps[] = [
       slug: "feria-de-la-ciencia",
     },
     {
-      category: "Medio Ambiente",
+      category: "Música",
       title: "Día de la Tierra",
       description: "Un evento que busca concienciar sobre la importancia de la protección del medio ambiente. Se realizarán actividades de limpieza, talleres educativos y exposiciones sobre la conservación de la naturaleza.",
       image:

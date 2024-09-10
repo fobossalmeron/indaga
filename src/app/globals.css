@@ -109,3 +109,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.dangerous-links a {
+  @apply text-blue underline;
+}

@@ -7,7 +7,13 @@ const nextConfig = {
         hostname: 'festivalsantalucia.gob.mx',
         port: '', // Deja vacío si no se usa un puerto específico
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+      },
     ],
+    unoptimized: true,
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports

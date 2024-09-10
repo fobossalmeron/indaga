@@ -21,7 +21,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
       href={href}
       className={`py-3 bg-transparent hover:underline ${
         isActive ? "underline" : ""
-      } text-2xl font-regular transition-all`}
+      } text-2xl transition-all`}
     >
       {children}
     </Link>
@@ -52,7 +52,7 @@ const handleColor = (pathname: string) => {
 export const Nav = () => {
   return (
     <nav
-      className={`w-full h-20 bg-white flex items-center justify-around ${handleColor(
+      className={`w-full h-16 bg-white flex items-center justify-around ${handleColor(
         usePathname()
       )} fixed top-0 left-0 right-0 z-50`}
     >
@@ -75,7 +75,7 @@ export const Nav = () => {
           </li>
         </ul>
       </nav>
-      <Button>Descarga la guía</Button>
+      <Button thin>Descarga la guía</Button>
     </nav>
   );
 };
