@@ -24,6 +24,11 @@ export default function HappeningsAll() {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
+
+        //intenta usar esto para regresar la imagen
+        const returnImage = (entry: any) => {
+          return `http://localhost:1337${entry.attributes.image.data.attributes.url}?format=webp&width=610&height=260`
+        }
         
         const data = await res.json();
         const optimizedEntries = data.data.map((entry: {attributes: HappeningProps}) => ({
