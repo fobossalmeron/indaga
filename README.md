@@ -1,5 +1,7 @@
 
 ## Pendientes 
 
-OG image not showing
-Check for GA connection
+Conectar rutas a strapi
+Home diseño
+hacer deploy de strapi
+poner blob a happening

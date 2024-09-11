@@ -13,7 +13,7 @@ export default function HappeningsLayout({
   return (
     <Fade>
       <Header title="Rutas culturales" subtitle="El camino al neoleonés" image={rutas_icon} />
-      <div className="flex flex-col max-w-[970px] mx-auto" ref={animationParent}>{children}</div>
+      <div className="flex flex-col max-w-[970px] mx-auto">{children}</div>
     </Fade>
   );
 }

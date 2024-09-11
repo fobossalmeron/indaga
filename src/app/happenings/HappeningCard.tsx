@@ -10,25 +10,20 @@ import { truncate } from "@/app/utils/truncate";
 
 interface HappeningCardProps extends Omit<HappeningProps, "description"> {}
 
-export const HappeningCard: React.FC<HappeningCardProps> = ({
-  category,
-  title,
-  location,
-  fecha,
-  image,
-}) => {
-  console.log(image);
+export const HappeningCard: React.FC<HappeningCardProps> = ({ attributes }) => {
+  const { category, title, location, date, image } = attributes;
+
   return (
     <article className="duration-600 flex h-full w-[305px] flex-col overflow-hidden rounded-3xl bg-white outline-2 outline-transparent transition-all ease-in-out hover:-translate-y-1 hover:shadow-md hover:outline">
-      <div className="relative min-h-[130px] max-h-[130px] w-full bg-gray-200 h-full">
+      <div className="relative h-full max-h-[130px] min-h-[130px] w-full bg-gray-200">
         <Image
-          src={image}
+          src={!image.data.attributes.url.startsWith('/uploads/') ? image.data.attributes.url : "http://localhost:1337" + image.data.attributes.url}
           alt={`Imagen de ${title}`}
           fill={true}
           style={{ objectFit: "cover" }}
         />
       </div>
-      <div className="flex flex-col h-full justify-between gap-2 px-5 py-4">
+      <div className="flex h-full flex-col justify-between gap-2 px-5 py-4">
         <div className="flex flex-col items-start gap-2">
           <Category category={category} />
           <div>
@@ -37,7 +32,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({
           </div>
         </div>
         <div className="flex flex-col">
-          {/* <p className="mb-4 text-2xl capitalize">{formatDate(fecha)}</p> */}
+          <p className="mb-4 text-2xl capitalize">{formatDate(date)}</p>
           <Button fullWidth>Ver evento</Button>
         </div>
       </div>

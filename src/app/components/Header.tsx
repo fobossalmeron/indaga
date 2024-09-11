@@ -1,15 +1,28 @@
-import Image from "next/image";
+"use client";
 
-export const Header = ({ title, subtitle, image }: { title: string, subtitle?: string, image?: string }) => {
+import Image from "next/image";
+import { Fade } from "react-awesome-reveal";
+
+export const Header = ({
+  title,
+  subtitle,
+  image,
+}: {
+  title: string;
+  subtitle?: string;
+  image?: string;
+}) => {
   return (
-    <header className="flex items-center gap-4 pt-16 pb-5">
-      <div className="w-14 h-14">
-        {image && <Image src={image} alt={title} width={60} height={60} />}
-      </div>
-      <div className="flex flex-col">
-      <h1 className="text-5xl">{title}</h1>
-      {subtitle && <h2 className="text-2xl text-[#505854]">{subtitle}</h2>}
-      </div>
-    </header>
+    <Fade>
+      <header className="flex items-center gap-4 pb-5 pt-16">
+        <div className="h-14 w-14">
+          {image && <Image src={image} alt={title} width={60} height={60} />}
+        </div>
+        <div className="flex flex-col">
+          <h1 className="text-5xl">{title}</h1>
+          {subtitle && <h2 className="text-2xl text-[#505854]">{subtitle}</h2>}
+        </div>
+      </header>
+    </Fade>
   );
 };

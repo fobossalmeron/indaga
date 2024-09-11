@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-import { Nav } from "./Nav";
-import { Footer } from "./Footer";
+import { Nav } from "@/app/components/Nav";
+import { Footer } from "@/app/components/Footer";
 
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="es" className={`${general_sans.className} font-normal bg-offwhite`}>
       <body>
         <Nav />
-        <main className="flex flex-col bg-offwhite text-eerie pt-20 items-center px-8 py-16 relative">
+        <main className="flex flex-col bg-offwhite text-eerie items-center pt-16 relative">
           {children}
         </main>
         <Footer />

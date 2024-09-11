@@ -3,8 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontWeight: {
-      normal: '365',
-      medium: '455',
+      normal: '358',
+      medium: '448',
     },
     extend: {
       colors: {

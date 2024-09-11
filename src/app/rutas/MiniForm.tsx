@@ -32,7 +32,7 @@ export default function MiniForm() {
         })}
         type="email"
         placeholder="Tu email"
-        className="border border-gray-300 bg-transparent p-2.5 px-5"
+        className="rounded-xl border border-gray-300 bg-transparent p-2.5 px-5"
       />
       {errors.email && <span role="alert">{errors.email.message}</span>}
 
