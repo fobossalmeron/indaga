@@ -36,24 +36,21 @@ const NavColor: Record<string, string> = {
 };
 
 const handleColor = (pathname: string) => {
-  if (pathname.includes("/happenings")) {
-    return "text-fern";
-  }
-  if (pathname.includes("/guia")) {
-    return "text-blue";
-  }
-  if (pathname.includes("/rutas")) {
-    return "text-ocre";
-  } else {
-    return "text-black";
-  }
+  const route =
+    Object.keys(NavColor).find(
+      (route) => route !== "/" && pathname.includes(route)
+    ) || "/";
+  const color = NavColor[route];
+  return `text-${color}`;
 };
 
 export const Nav = () => {
+  const pathname = usePathname();
+
   return (
     <nav
       className={`w-full h-16 bg-white flex items-center justify-around ${handleColor(
-        usePathname()
+        pathname
       )} fixed top-0 left-0 right-0 z-50`}
     >
       <Link href="/" className="w-100 transition-all">

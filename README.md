@@ -1,10 +1,13 @@
 
 ## Pendientes 
+Prismic:
+- conectar Rutas
+- conectar About
+- conectar si se puede Guía 
 
-Conectar rutas a strapi
+
 Home diseño
-poner blob a happening
-
-Server
-Limita el tamaño de imágenes a 10mb o algo así 
-Bajar el tamaño del droplet
+Echar a andar el registro de Rutas
+poner blob a happening (recuperar)
+Echar a andar el compartir
+móvil
