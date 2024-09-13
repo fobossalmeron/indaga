@@ -1,18 +1,17 @@
+import { PrismicRichText } from "@prismicio/react";
+import { Content, RichTextField } from "@prismicio/client";
+
 export interface HappeningProps {
-    attributes: {
-        slug: string;
+    uid: string;
+    data: {
         category: (typeof categories)[number];
         title: string;
         image: {
-            data: {
-                attributes: {
                     url: string;
-                };
-            };
         };
-        location: string;
-        locationUrl: string;
-        description: string;
+        location_name: string;
+        location_url: string;
+        description: RichTextField;
         date: string;
     };
   }
