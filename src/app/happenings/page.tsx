@@ -20,7 +20,5 @@ export default async function HappeningsAll() {
     ],
   });
 
-  // console.log(entries);
-
   return <HappeningsFull entries={entries} />;
 }

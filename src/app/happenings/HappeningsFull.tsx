@@ -12,7 +12,6 @@ export default function HappeningsFull({
 }: {
   entries: Content.HappeningDocument[];
 }) {
-  entries.forEach(entry => console.log(entry));
   return (
     <Fade>
       <div className="flex justify-center">
@@ -25,10 +24,7 @@ export default function HappeningsFull({
         <Fade>
           {entries &&
             entries.map((entry) => (
-              <Link
-                href={`/happenings/${entry.uid}`}
-                key={entry.uid + "link"}
-              >
+              <Link href={`/happenings/${entry.uid}`} key={entry.uid + "link"}>
                 <HappeningCard key={entry.uid} {...entry} />
               </Link>
             ))}
