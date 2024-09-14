@@ -29,7 +29,7 @@ const NavLink = ({
 export default function Home() {
   return (
     <div className="align-start relative flex w-full bg-offwhite">
-      <div className="sticky top-5 mt-14 max-h-[115vh] w-full max-w-[50%]">
+      <div className="sticky top-40 mt-14 max-h-[115vh] w-full max-w-[50%]">
         <Image
           src={home_blob}
           alt="Home Blob"

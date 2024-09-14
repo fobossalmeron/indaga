@@ -6,8 +6,9 @@ Prismic:
 - conectar si se puede Guía 
 
 
-Home diseño
-Echar a andar el registro de Rutas
+Home sticky
+bug de happenings
 poner blob a happening (recuperar)
+Echar a andar el registro de Rutas
 Echar a andar el compartir
 móvil

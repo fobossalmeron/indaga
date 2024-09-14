@@ -22,12 +22,16 @@ export const Footer = () => {
     >
       <div className="flex w-full justify-between items-start">
         <nav className="flex flex-col flex-start align-text-left">
+          <div className="flex gap-8">
           <FooterLink href="/home">Home</FooterLink>
           <FooterLink href="/happenings">Happenings</FooterLink>
           <FooterLink href="/guia">Guía</FooterLink>
           <FooterLink href="/rutas">Rutas</FooterLink>
+          </div>
+          <div className="flex gap-8">
           <FooterLink href="https://www.instagram.com/indagamx/">Instagram</FooterLink>
           <FooterLink href="/nosotras">Nosotras</FooterLink>
+          </div>
         </nav>
         <Image
           src={festival_santa_lucia}
