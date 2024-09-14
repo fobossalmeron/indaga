@@ -13,6 +13,7 @@ module.exports = {
         ocre: "#DA7829",
         blue: "#465FC0",
         eerie: "#212322",
+        mindaro: "#CAE47C",
         guiaOrange: "#FF7434",
         guiaBlue: "#72DFFC",
         guiaPurple: "#755EFA",

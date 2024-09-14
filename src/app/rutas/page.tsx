@@ -7,7 +7,7 @@ import FraseRutas from "@/assets/img/frase_rutas.svg";
 export default function RoutesAll() {
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center text-ocre">
         <Fade>
           <FraseRutas />
         </Fade>

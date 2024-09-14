@@ -12,10 +12,12 @@ export default async function Happening({
   params: { slug: string };
 }) {
   const client = createClient();
-  const event = await client.getByUID<Content.HappeningDocument>("happening", params.slug);
-
-  console.log(event);
-
+  let event;
+  try {
+    event = await client.getByUID<Content.HappeningDocument>("happening", params.slug);
+  } catch (error) {
+    console.log("Error al obtener el evento:", error);
+  }
   if (!event) {
     return (
       //Esto hay que mejorarlo

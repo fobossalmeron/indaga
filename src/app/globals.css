@@ -113,3 +113,18 @@ a {
 .dangerous-links a {
   @apply text-blue underline;
 }
+
+.home-link {
+  path {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  .default {
+    opacity: 1;
+    @apply stroke-blue;
+  }
+  &:hover path {
+    opacity: 1;
+    @apply stroke-mindaro;
+  }
+}

@@ -4,7 +4,13 @@ declare module '*.svg' {
   export default content
 }
 
-declare module '*.svg?url' {
-  const content: any
-  export default content
+declare module "*.svg?url" {
+  const src: string;
+  export default src;
+}
+
+declare module "*.svg?unoptimized" {
+  import * as React from 'react';
+  const content: FC<SVGProps<SVGElement>>
+  export default ReactComponent;
 }

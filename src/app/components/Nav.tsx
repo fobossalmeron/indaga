@@ -29,18 +29,16 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
 };
 
 const NavColor: Record<string, string> = {
-  "/": "black",
-  "/happenings": "fern",
-  "/guia": "blue",
-  "/rutas": "ocre",
+  "happenings": "fern",
+  "guia": "blue",
+  "rutas": "ocre",
 };
 
 const handleColor = (pathname: string) => {
-  const route =
-    Object.keys(NavColor).find(
-      (route) => route !== "/" && pathname.includes(route)
-    ) || "/";
-  const color = NavColor[route];
+  const route = Object.keys(NavColor).find(
+    (route) => pathname.includes(route)
+  );
+  const color = route ? NavColor[route] : "eerie";
   return `text-${color}`;
 };
 
