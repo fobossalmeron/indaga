@@ -1,11 +1,11 @@
 import { Content } from "@prismicio/client";
-import Image from "next/image";
 import { Button } from "@/app/components/Button";
 import Link from "next/link";
 import { Category } from "../../components/Category";
 import { formatDate } from "@/app/utils/formatDate";
 import ShareArrow from "@/assets/img/share_arrow.svg";
 import { PrismicRichText } from "@prismicio/react";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 
 export default function HappeningsFull({
   event,
@@ -25,10 +25,9 @@ export default function HappeningsFull({
   return (
     <div className="mt-16 flex max-w-[920px] overflow-hidden rounded-3xl bg-white">
       <div className="h-100 relative w-1/2 max-w-[460px] bg-gray-200">
-        <Image
-          src={image.url ?? ""}
-          alt={`Imagen de ${title}`}
+        <PrismicNextImage
           fill={true}
+          field={image}
           style={{ objectFit: "cover" }}
         />
       </div>
@@ -41,7 +40,13 @@ export default function HappeningsFull({
           <p className="text-4xl capitalize">
             {formatDate(date ?? "1-1-2024")}
           </p>
-          <Link
+          <PrismicNextLink
+            field={location_url}
+            className="text-xl font-medium text-blue underline"
+          >
+            <p>@{location_name}</p>
+          </PrismicNextLink>
+          {/* <Link
             href={
               location_url?.link_type === "Web" && "url" in location_url
                 ? location_url.url.startsWith("https://")
@@ -52,7 +57,7 @@ export default function HappeningsFull({
             className="text-xl font-medium text-blue underline"
           >
             <p>@{location_name}</p>
-          </Link>
+          </Link> */}
         </div>
         <div className="dangerous-links leading-5">
           <PrismicRichText field={description} />
