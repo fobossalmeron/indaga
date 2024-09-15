@@ -46,7 +46,7 @@ export default function Home() {
               src={festival_santa_lucia}
               alt="Festival Santa Lucia"
               width={290}
-              height={82}
+              height={80}
             />
             <ul className="flex flex-col items-start justify-center gap-10 text-[#4D4E6A]">
               <NavLink

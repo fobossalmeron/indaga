@@ -12,7 +12,7 @@ export default function RoutesAll() {
           <FraseRutas />
         </Fade>
       </div>
-      <div className="mt-16 flex w-full flex-wrap justify-center gap-4">
+      <div className="mt-16 flex w-full flex-wrap justify-center gap-4 pb-24">
         <Fade cascade damping={0.1}>
           {happenings.map((happening, index) => (
             <RouteCard

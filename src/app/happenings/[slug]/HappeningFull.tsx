@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/app/components/Button";
 import Link from "next/link";
 import { Category } from "../../components/Category";
@@ -6,6 +8,7 @@ import ShareArrow from "@/assets/img/share_arrow.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Content, LinkField } from "@prismicio/client";
+import { Fade } from "react-awesome-reveal";
 
 export default function HappeningsFull({
   event,
@@ -36,6 +39,7 @@ export default function HappeningsFull({
       : location_url;
 
   return (
+    <Fade>
     <div className="mt-16 flex max-w-[920px] overflow-hidden rounded-3xl bg-white">
       <div className="h-100 relative w-1/2 max-w-[460px] bg-gray-200">
         <PrismicNextImage
@@ -77,5 +81,6 @@ export default function HappeningsFull({
         </div>
       </div>
     </div>
+    </Fade>
   );
 }
