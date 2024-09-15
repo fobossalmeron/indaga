@@ -1,20 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "festivalsantalucia.gob.mx",
-        port: "",
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "1337",
-      },
-    ],
-    unoptimized: true,
-  },
   webpack(config) {
     // Encuentra la regla existente que maneja las importaciones de SVG
     const fileLoaderRule = config.module.rules.find((rule) =>

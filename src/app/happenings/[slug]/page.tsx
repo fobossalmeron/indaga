@@ -2,6 +2,8 @@ import HappeningFull from "./HappeningFull";
 import { createClient } from "@/prismicio";
 import { Content } from "@prismicio/client";
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 // Función para generar rutas estáticas
 export async function generateStaticParams() {
@@ -22,11 +24,16 @@ export default async function Happening({ params }: { params: { slug: string } }
       "happening",
       params.slug,
     );
-    return <HappeningFull event={event} />;
+    return (
+      <Suspense fallback={<Loading />}>
+        <HappeningFull event={event} />
+      </Suspense>
+    );
   } catch (error) {
     console.error(`Error al obtener el evento ${params.slug}:`, error);
     notFound();
   }
 }
 
-export const revalidate = 3600; // Revalidar cada hora
+// Habilita ISR
+export const revalidate = 60; // revalidar cada minuto
