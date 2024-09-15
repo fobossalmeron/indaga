@@ -66,6 +66,13 @@
           "allowTargetBlank": true,
           "select": null
         }
+      },
+      "slug": {
+        "type": "Text",
+        "config": {
+          "label": "Slug",
+          "placeholder": ""
+        }
       }
     }
   }

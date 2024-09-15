@@ -21,12 +21,13 @@ export default function HappeningsFull({
     date,
     description,
   } = event.data;
-
+  console.log(event);
   return (
     <div className="mt-16 flex max-w-[920px] overflow-hidden rounded-3xl bg-white">
       <div className="h-100 relative w-1/2 max-w-[460px] bg-gray-200">
         <PrismicNextImage
           fill={true}
+          alt=""
           field={image}
           style={{ objectFit: "cover" }}
         />
