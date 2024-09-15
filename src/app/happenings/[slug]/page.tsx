@@ -5,25 +5,29 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import Loading from './loading';
 
-// Función para generar rutas estáticas
-export async function generateStaticParams() {
-  const client = createClient();
-  const happenings = await client.getAllByType("happening");
+// Eliminamos generateStaticParams ya que no generaremos rutas estáticas
 
-  return happenings.map((happening) => ({
-    slug: happening.uid,
-  }));
-}
-
-// Componente de la página
 export default async function Happening({ params }: { params: { slug: string } }) {
   const client = createClient();
+  console.log("Prismic client fetchOptions:", client.fetchOptions);
 
   try {
     const event = await client.getByUID<Content.HappeningDocument>(
       "happening",
       params.slug,
+      {
+        fetchOptions: {
+          cache: "no-store",
+          next: { tags: ["prismic", "happenings"] },
+        },
+      }
     );
+    console.log("Evento obtenido:", event);
+
+    if (!event) {
+      notFound();
+    }
+
     return (
       <Suspense fallback={<Loading />}>
         <HappeningFull event={event} />
@@ -35,5 +39,4 @@ export default async function Happening({ params }: { params: { slug: string } }
   }
 }
 
-// Habilita ISR
-export const revalidate = 60; // revalidar cada minuto
+// Eliminamos la línea de revalidate

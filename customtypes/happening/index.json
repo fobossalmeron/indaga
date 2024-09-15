@@ -16,7 +16,8 @@
         "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": ""
+          "placeholder": "",
+          "useAsTitle" : true
         }
       },
       "image": {
@@ -62,16 +63,9 @@
         "type": "Link",
         "config": {
           "label": "Location url",
-          "placeholder": "",
+          "placeholder": "https://... ",
           "allowTargetBlank": true,
-          "select": null
-        }
-      },
-      "slug": {
-        "type": "Text",
-        "config": {
-          "label": "Slug",
-          "placeholder": ""
+          "select": "web"
         }
       }
     }

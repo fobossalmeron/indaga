@@ -78,23 +78,12 @@ interface HappeningDocumentData {
    * Location url field in *Happening*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: *None*
+   * - **Placeholder**: https://...
    * - **API ID Path**: happening.location_url
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   location_url: prismic.LinkField;
-
-  /**
-   * Slug field in *Happening*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: happening.slug
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  slug: prismic.KeyTextField;
 }
 
 /**

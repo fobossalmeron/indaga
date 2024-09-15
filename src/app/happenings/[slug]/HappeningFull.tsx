@@ -1,4 +1,3 @@
-import { Content } from "@prismicio/client";
 import { Button } from "@/app/components/Button";
 import Link from "next/link";
 import { Category } from "../../components/Category";
@@ -6,6 +5,7 @@ import { formatDate } from "@/app/utils/formatDate";
 import ShareArrow from "@/assets/img/share_arrow.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { Content, LinkField } from "@prismicio/client";
 
 export default function HappeningsFull({
   event,
@@ -21,7 +21,20 @@ export default function HappeningsFull({
     date,
     description,
   } = event.data;
-  console.log(event);
+  console.log(location_url);
+
+  const validatedLocationUrl =
+    location_url.link_type === "Web" && "url" in location_url
+      ? location_url?.url?.startsWith("https://") ||
+        location_url?.url?.startsWith("http://")
+        ? location_url
+        : ({
+            link_type: "Web",
+            url: `https://${location_url.url}`,
+            target: "_blank",
+          } as LinkField)
+      : location_url;
+
   return (
     <div className="mt-16 flex max-w-[920px] overflow-hidden rounded-3xl bg-white">
       <div className="h-100 relative w-1/2 max-w-[460px] bg-gray-200">
@@ -42,23 +55,11 @@ export default function HappeningsFull({
             {formatDate(date ?? "1-1-2024")}
           </p>
           <PrismicNextLink
-            field={location_url}
+            field={validatedLocationUrl}
             className="text-xl font-medium text-blue underline"
           >
             <p>@{location_name}</p>
           </PrismicNextLink>
-          {/* <Link
-            href={
-              location_url?.link_type === "Web" && "url" in location_url
-                ? location_url.url.startsWith("https://")
-                  ? location_url.url
-                  : `https://${location_url.url}`
-                : "#"
-            }
-            className="text-xl font-medium text-blue underline"
-          >
-            <p>@{location_name}</p>
-          </Link> */}
         </div>
         <div className="dangerous-links leading-5">
           <PrismicRichText field={description} />
