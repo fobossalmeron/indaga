@@ -20,7 +20,7 @@ export const Footer = () => {
   return (
     <footer
       className={
-        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-20 py-10 text-2xl text-blue"
+        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-20 py-10 text-xl md-lg:text-2xl text-blue"
       }
     >
       <div className="flex w-full max-w-[1240px] flex-col items-start justify-between gap-32">

@@ -69,7 +69,9 @@ export const Nav = () => {
             </li>
           </ul>
         </nav>
-        <Button thin>Descarga la guía</Button>
+        <div className="hidden xsm:block">
+          <Button thin>Descarga la guía</Button>
+        </div>
       </div>
     </nav>
   );

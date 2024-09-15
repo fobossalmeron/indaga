@@ -2,11 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    fontWeight: {
-      normal: '358',
-      medium: '448',
-    },
     extend: {
+      screens: {
+        'xsm': '460px',
+        'sm': '640px',
+        'md': '768px',
+        'md-lg': '875px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
       colors: {
         fern: "#527442",
         offwhite: "#F4F5F4",
@@ -18,6 +23,10 @@ module.exports = {
         guiaBlue: "#72DFFC",
         guiaPurple: "#755EFA",
       },
+    },
+    fontWeight: {
+      normal: '358',
+      medium: '448',
     },
   },
   plugins: [],
