@@ -15,6 +15,7 @@ export const happenings: Content.HappeningDocument[] = [
       lang: "es-es",
       alternate_languages: [],
       data: {
+        slug: "una-mirada-a-gerardo-mier",
         category: "Arte",
         title: "Una mirada a Gerardo Mier",
         image: {
@@ -84,6 +85,7 @@ export const happenings: Content.HappeningDocument[] = [
       lang: "es-es",
       alternate_languages: [],
       data: {
+        slug: "otro-evento",
         category: "Gastronomía",
         title: "Otro evento",
         image: {
@@ -153,6 +155,7 @@ export const happenings: Content.HappeningDocument[] = [
       lang: "es-es",
       alternate_languages: [],
       data: {
+        slug: "tercer-evento",
         category: "Música",
         title: "Tercer evento",
         image: {
@@ -222,6 +225,7 @@ export const happenings: Content.HappeningDocument[] = [
       lang: "es-es",
       alternate_languages: [],
       data: {
+        slug: "cuarto-evento",
         category: "Cultura",
         title: "Cuarto evento",
         image: {
@@ -291,6 +295,7 @@ export const happenings: Content.HappeningDocument[] = [
       lang: "es-es",
       alternate_languages: [],
       data: {
+        slug: "quinto-evento",
         category: "Cultura",
         title: "Quinto evento",
         image: {
@@ -360,6 +365,7 @@ export const happenings: Content.HappeningDocument[] = [
       lang: "es-es",
       alternate_languages: [],
       data: {
+        slug: "sexto-evento",
         category: "Música",
         title: "Sexto evento",
         image: {
