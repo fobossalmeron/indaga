@@ -20,11 +20,11 @@ export const Footer = () => {
   return (
     <footer
       className={
-        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-20 py-10 text-xl md-lg:text-2xl text-blue"
+        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 sm:px-10 md:px-20 py-10 text-xl md-lg:text-2xl text-blue"
       }
     >
       <div className="flex w-full max-w-[1240px] flex-col items-start justify-between gap-32">
-        <div className="flex w-full items-start justify-between">
+        <div className="flex w-full items-start justify-between flex-col-reverse gap-5 md:flex-row md:gap-0">
           <nav className="flex-start align-text-left flex flex-col">
             <div className="flex gap-8">
               <FooterLink href="/home">Home</FooterLink>
@@ -44,7 +44,7 @@ export const Footer = () => {
             alt="Festival Santa Lucia"
             width={217.5}
             height={60}
-            className="pt-4"
+            className="pt-4 md-lg:max-w-[217.5px] max-w-[180px] w-full"
           />
         </div>
         <div className="flex flex-col gap-3">
