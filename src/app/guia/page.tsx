@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CloudGuideFull } from "./CloudGuideFull";
+import { CloudCTAFull } from "./CloudCTAFull";
 import { Portal } from "./Portal";
 import bares from "@/assets/img/bares.png";
 import musica from "@/assets/img/musica.png";
@@ -12,7 +12,7 @@ import guia_blob from "@/assets/img/guia_blob.svg?url";
 export default function GuideAll() {
   return (
     <>
-      <CloudGuideFull />
+      <CloudCTAFull />
       <div className="flex max-w-[1000px] flex-wrap justify-center items-end gap-x-6 gap-y-20 py-24">
         <Portal
           title="Bares y Cantinas"

@@ -2,7 +2,7 @@
 import { Fade } from "react-awesome-reveal";
 import DescargaGuia from "@/assets/img/descarga_guia.svg";
 
-export const CloudGuideFull: React.FC = () => {
+export const CloudCTAFull: React.FC = () => {
   return (
     <Fade>
       <div className="flex justify-center relative font-medium text-blue text-2xl ">

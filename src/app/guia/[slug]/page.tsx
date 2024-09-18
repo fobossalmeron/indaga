@@ -1,19 +1,59 @@
-import * as prismic from '@prismicio/client';
+import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
-import Image from "next/image";
 import { Button } from "@/app/components/Button";
-import { Content } from "@prismicio/client";
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 import Link from "next/link";
-import Diamond from "@/assets/img/diamond.svg";
+import diamond from "@/assets/img/diamond.svg?url";
+import { CategoryChip } from "./CategoryChip";
+import BackArrow from "@/assets/img/back_arrow.svg";
+import bares from "@/assets/img/bares.png";
+import musica from "@/assets/img/musica.png";
+import cafeterias from "@/assets/img/cafeterias.png";
+import monumentos from "@/assets/img/monumentos.png";
+import restaurantes from "@/assets/img/restaurantes.png";
+import museos from "@/assets/img/museos.png";
+import Image from "next/image";
+import TextBubble from "@/assets/img/text_bubble.svg";
+import OffEl from "@/assets/img/off_el.svg";
+import CloudAlone from "@/assets/img/cloud_alone.svg";
 
 const categories = [
-  { slug: "bares-y-cantinas", title: "Bares & Cantinas" },
-  { slug: "musica-en-vivo", title: "Música en Vivo" },
-  { slug: "cafeterias", title: "Cafeterías" },
-  { slug: "monumentos-historicos", title: "Monumentos Históricos" },
-  { slug: "restaurantes", title: "Restaurantes" },
-  { slug: "espacios-de-arte", title: "Espacios de Arte" }
+  {
+    slug: "bares-y-cantinas",
+    title: "Bares & Cantinas",
+    image: bares,
+    color: "text-guiaOrange",
+  },
+  {
+    slug: "musica-en-vivo",
+    title: "Música en Vivo",
+    image: musica,
+    color: "text-guiaPurple",
+  },
+  {
+    slug: "cafeterias",
+    title: "Cafeterías",
+    image: cafeterias,
+    color: "text-guiaMustard",
+  },
+  {
+    slug: "monumentos-historicos",
+    title: "Monumentos Históricos",
+    image: monumentos,
+    color: "text-guiaCyan",
+  },
+  {
+    slug: "restaurantes",
+    title: "Restaurantes",
+    image: restaurantes,
+    color: "text-guiaSunset",
+  },
+  {
+    slug: "espacios-de-arte",
+    title: "Espacios de Arte",
+    image: museos,
+    color: "text-guiaPink",
+  },
 ];
 
 export default async function Categoria({
@@ -26,7 +66,11 @@ export default async function Categoria({
   try {
     const lugares = await client.getAllByType("lugar", {
       filters: [
-        prismic.filter.at("my.lugar.categoria", categories.find(category => category.slug === params.slug)?.title ?? '')
+        prismic.filter.at(
+          "my.lugar.categoria",
+          categories.find((category) => category.slug === params.slug)?.title ??
+            "",
+        ),
       ],
       fetchOptions: {
         cache: "no-store",
@@ -34,31 +78,73 @@ export default async function Categoria({
       },
     });
 
-    if (!categories.some(category => category.slug === params.slug)) {
+    if (!categories.some((category) => category.slug === params.slug)) {
       notFound();
     }
 
-    console.log(lugares)
-
     return (
-      <div className="flex flex-col">
-        <Link href="/guia">
-          <Button secondary>Volver a la guía</Button>
-        </Link>
-        <div>
-          <div className={`h-100 relative w-full text-white`}>
-            <h2 className="px-10 py-2 text-center text-2xl text-white">
-              {categories.find(category => category.slug === params.slug)!.title}
-            </h2>
+      <div className="mt-10 flex flex-col">
+        <div className="flex flex-col items-center justify-center gap-4">
+          <CategoryChip slug={params.slug} />
+          <Link href="/guia">
+            <Button secondary thin className="gap-3 pl-5">
+              <BackArrow />
+              Volver a las categorías
+            </Button>
+          </Link>
+        </div>
+        <div className="my-8 flex flex-row gap-4">
+          <div className="flex w-full justify-center">
+            <Image
+              src={
+                categories.find((category) => category.slug === params.slug)
+                  ?.image || ""
+              }
+              alt={`Imagen de ${params.slug}`}
+              width={516}
+              height={0}
+              sizes="50vw"
+            />
           </div>
-          <div className="flex flex-col p-8 py-4">
-            {lugares.map((lugar, index) => (
-              <div key={index} className="flex gap-2">
-                <p>{lugar.data.nombre}</p>
-                {lugar.data.treasure_hunt && <Diamond />}
+          <div className="grid place-items-center [&>*]:col-start-1 [&>*]:row-start-1">
+            <TextBubble />
+            <div className="align ml-32 flex flex-col gap-4 p-8 py-4 text-white">
+              {lugares.map((lugar, index) => (
+                <div
+                  key={lugar.data.nombre}
+                  className="flex flex-row items-center gap-6"
+                >
+                  {lugar.data.treasure_hunt ? (
+                    <Image
+                      src={diamond}
+                      alt="Treasure Hunt"
+                      width={26}
+                      height={26}
+                    />
+                  ) : (
+                    <OffEl
+                      className={`h-[26px] w-[26px] ${categories.find((c) => c.slug === params.slug)?.color || ""}`}
+                      style={{
+                        transform: index % 2 === 0 ? "rotate(180deg)" : "none",
+                      }}
+                    />
+                  )}
+                  <p className="text-4xl">{lugar.data.nombre}</p>
+                </div>
+              ))}
+              <div>
+                <a
+                  href="/guia.pdf"
+                  target="_blank"
+                  className="grid place-items-center [&>*]:col-start-1 [&>*]:row-start-1"
+                >
+                  <p className="text-2xl font-medium text-white underline">
+                    Descarga la Guía
+                  </p>
+                  <CloudAlone />
+                </a>
               </div>
-            ))}
-            <div className="flex gap-2"></div>
+            </div>
           </div>
         </div>
       </div>
