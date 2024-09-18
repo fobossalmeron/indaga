@@ -20,8 +20,11 @@ module.exports = {
         eerie: "#212322",
         mindaro: "#CAE47C",
         guiaOrange: "#FF7434",
-        guiaBlue: "#72DFFC",
+        guiaCyan: "#72DFFC",
+        guiaMustard: "#F3BB44",
         guiaPurple: "#755EFA",
+        guiaSunset: "#FF5542",
+        guiaPink:"#FF60B8"
       },
     },
     fontWeight: {

@@ -44,8 +44,8 @@ export const Button = React.memo(({
 
 Button.displayName = 'Button';
 
-export const ButtonSubmit = ({ text }: { text: string }) => {
-  const buttonClasses = `${BUTTON_STYLES.base} ${BUTTON_STYLES.primary}`;
+export const ButtonSubmit = ({ text, className }: { text: string, className?: string }) => {
+  const buttonClasses = `${BUTTON_STYLES.base} ${BUTTON_STYLES.primary} ${className}`;
 
   return <input value={text} type="submit" className={buttonClasses} />;
 };

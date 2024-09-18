@@ -102,7 +102,65 @@ export type HappeningDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HappeningDocument;
+/**
+ * Content for Lugar documents
+ */
+interface LugarDocumentData {
+  /**
+   * Nombre field in *Lugar*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lugar.nombre
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  nombre: prismic.KeyTextField;
+
+  /**
+   * Treasure Hunt field in *Lugar*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: lugar.treasure_hunt
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  treasure_hunt: prismic.BooleanField;
+
+  /**
+   * Categoria field in *Lugar*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Categoría
+   * - **API ID Path**: lugar.categoria
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  categoria: prismic.SelectField<
+    | "Bares & Cantinas"
+    | "Monumentos Históricos "
+    | "Cafeterías"
+    | "Música en vivo"
+    | "Espacios de Arte"
+    | "Restaurantes"
+  >;
+}
+
+/**
+ * Lugar document from Prismic
+ *
+ * - **API ID**: `lugar`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LugarDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<LugarDocumentData>, "lugar", Lang>;
+
+export type AllDocumentTypes = HappeningDocument | LugarDocument;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -113,6 +171,12 @@ declare module "@prismicio/client" {
   }
 
   namespace Content {
-    export type { HappeningDocument, HappeningDocumentData, AllDocumentTypes };
+    export type {
+      HappeningDocument,
+      HappeningDocumentData,
+      LugarDocument,
+      LugarDocumentData,
+      AllDocumentTypes,
+    };
   }
 }

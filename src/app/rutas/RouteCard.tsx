@@ -12,7 +12,7 @@ export const RouteCard: React.FC<RouteProps> = ({
   description,
 }) => {
   return (
-    <article className="duration-600 max-w-[470px] flex w-full flex-col overflow-hidden rounded-2xl bg-white outline-2 outline-transparent transition-all ease-in-out hover:-translate-y-1 hover:shadow-md hover:outline">
+    <article className="duration-600 max-w-[469px] flex w-full flex-col overflow-hidden rounded-2xl bg-white outline-2 outline-transparent transition-all ease-in-out">
       <div className="relative h-32 w-full bg-gray-200">
         <Image
           src={image}
@@ -21,7 +21,7 @@ export const RouteCard: React.FC<RouteProps> = ({
           style={{ objectFit: "cover" }}
         />
       </div>
-      <div className="flex flex-col items-start p-8 py-4 gap-2">
+      <div className="flex flex-col items-start p-5 py-4 gap-2">
         <Category category={category} />
         <h2 className="text-3xl">{title}</h2>
         <p className="text-normal">{description}</p>

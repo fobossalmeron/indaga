@@ -30,14 +30,16 @@ export default function Home() {
   return (
     <div className="align-start relative flex w-full bg-offwhite">
       <div className="sticky top-40 mt-14 max-h-[115vh] w-full max-w-[50%]">
+        <div className="relative w-full h-full min-h-[1000px]">
         <Image
           src={home_blob}
           alt="Home Blob"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="top right"
+          fill
+          sizes="50vw"
+          className="object-cover object-top-right"
           priority
         />
+        </div>
       </div>
       <div className="flex max-w-[calc(370px+13%)] flex-col items-center justify-start p-[10%_8%]">
         <div className="flex flex-col items-start">

@@ -20,19 +20,19 @@ export const Footer = () => {
   return (
     <footer
       className={
-        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 sm:px-10 md:px-20 py-10 text-xl md-lg:text-2xl text-blue"
+        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 sm:px-10 md:px-20 pb-10 pt-2 sm:pt-10 text-xl md-lg:text-2xl text-blue"
       }
     >
       <div className="flex w-full max-w-[1240px] flex-col items-start justify-between gap-32">
         <div className="flex w-full items-start justify-between flex-col-reverse gap-5 md:flex-row md:gap-0">
-          <nav className="flex-start align-text-left flex flex-col">
-            <div className="flex gap-8">
+          <nav className="flex-start align-text-left flex flex-row sm:flex-col gap-8 sm:gap-0">
+            <div className="flex flex-wrap gap-y-0 gap-x-8 flex-col sm:flex-row">
               <FooterLink href="/home">Home</FooterLink>
               <FooterLink href="/happenings">Happenings</FooterLink>
               <FooterLink href="/guia">Guía</FooterLink>
               <FooterLink href="/rutas">Rutas</FooterLink>
             </div>
-            <div className="flex gap-8">
+            <div className="flex gap-y-0 gap-x-8 flex-col sm:flex-row">
               <FooterLink href="https://www.instagram.com/indagamx/">
                 Instagram
               </FooterLink>

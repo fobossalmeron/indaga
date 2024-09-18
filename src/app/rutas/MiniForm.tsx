@@ -13,14 +13,14 @@ export default function MiniForm() {
   } = useForm<InputProps>();
   const onSubmit: SubmitHandler<InputProps> = (data) => console.log(data);
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full pt-5">
       {/* <input
         className="border border-gray-300 bg-transparent p-2.5 px-5"
         {...register("email", { required: true })}
       />
       {errors.email && <span>This field is required</span>} */}
 
-      <label htmlFor="email">email</label>
+      <label className="sr-only" htmlFor="email">email</label>
       <input
         id="email"
         {...register("email", {
@@ -32,11 +32,11 @@ export default function MiniForm() {
         })}
         type="email"
         placeholder="Tu email"
-        className="rounded-xl border border-gray-300 bg-transparent p-2.5 px-5"
+        className="rounded-l-xl border border-gray-300 bg-transparent p-2.5 px-5 w-full"
       />
       {errors.email && <span role="alert">{errors.email.message}</span>}
 
-      <ButtonSubmit text="Ver evento" />
+      <ButtonSubmit className="rounded-l-none" text="Agendar excursión" />
     </form>
   );
 }
