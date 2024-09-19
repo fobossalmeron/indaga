@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Button } from "@/app/components/Button";
 import { RouteProps } from "./route.types";
 import { Category } from "@/app/components/Category";
 import MiniForm from "./MiniForm";

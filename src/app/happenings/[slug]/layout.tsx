@@ -11,9 +11,9 @@ export default function HappeningsLayout({
 }>) {
   return (
     <>
-      {children}
-      <Fade className="absolute -bottom-1/4 -right-[11%] z-[-1]">
-        <Image src={blob_happening} alt="" aria-hidden="true"  />
+      <div className="z-10">{children}</div>
+      <Fade className="absolute -bottom-1/4 -right-[11%] z-[0]">
+        <Image src={blob_happening} alt="" aria-hidden="true" />
       </Fade>
     </>
   );
