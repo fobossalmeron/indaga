@@ -1,7 +1,7 @@
 {
   "format": "custom",
-  "id": "happening",
-  "label": "Happening",
+  "id": "route",
+  "label": "Ruta",
   "repeatable": true,
   "status": true,
   "json": {
@@ -9,8 +9,9 @@
       "title": {
         "type": "Text",
         "config": {
+          "label": "Título",
           "placeholder": "",
-          "label": "Título"
+          "useAsTitle": true
         }
       },
       "uid": {
@@ -32,14 +33,7 @@
         "config": {
           "label": "Categoria",
           "placeholder": "",
-          "options": ["Arte", "Cultura", "Música", "Gastronomía"]
-        }
-      },
-      "date": {
-        "type": "Date",
-        "config": {
-          "label": "Fecha del evento",
-          "placeholder": ""
+          "options": ["En la ciudad", "Fuera de la ciudad"]
         }
       },
       "description": {
@@ -49,22 +43,6 @@
           "placeholder": "",
           "allowTargetBlank": true,
           "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
-        }
-      },
-      "location_name": {
-        "type": "Text",
-        "config": {
-          "label": "Nombre de Locación ",
-          "placeholder": ""
-        }
-      },
-      "location_url": {
-        "type": "Link",
-        "config": {
-          "label": "URL de Locación",
-          "placeholder": "https://... ",
-          "allowTargetBlank": true,
-          "select": "web"
         }
       }
     }

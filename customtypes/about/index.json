@@ -1,0 +1,27 @@
+{
+  "format": "custom",
+  "id": "about",
+  "label": "Nosotras",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Título",
+          "placeholder": ""
+        }
+      },
+      "text": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Texto",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,list-item,hyperlink"
+        }
+      }
+    }
+  }
+}

@@ -5,11 +5,50 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Content for Nosotras documents
+ */
+interface AboutDocumentData {
+  /**
+   * Título field in *Nosotras*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Texto field in *Nosotras*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Nosotras document from Prismic
+ *
+ * - **API ID**: `about`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AboutDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<AboutDocumentData>, "about", Lang>;
+
+/**
  * Content for Happening documents
  */
 interface HappeningDocumentData {
   /**
-   * Title field in *Happening*
+   * Título field in *Happening*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -20,7 +59,7 @@ interface HappeningDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Image field in *Happening*
+   * Imagen field in *Happening*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -31,7 +70,7 @@ interface HappeningDocumentData {
   image: prismic.ImageField<never>;
 
   /**
-   * Category field in *Happening*
+   * Categoria field in *Happening*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
@@ -42,7 +81,7 @@ interface HappeningDocumentData {
   category: prismic.SelectField<"Arte" | "Cultura" | "Música" | "Gastronomía">;
 
   /**
-   * Date field in *Happening*
+   * Fecha del evento field in *Happening*
    *
    * - **Field Type**: Date
    * - **Placeholder**: *None*
@@ -53,7 +92,7 @@ interface HappeningDocumentData {
   date: prismic.DateField;
 
   /**
-   * Description field in *Happening*
+   * Descripción field in *Happening*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -64,7 +103,7 @@ interface HappeningDocumentData {
   description: prismic.RichTextField;
 
   /**
-   * Location name field in *Happening*
+   * Nombre de Locación  field in *Happening*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -75,7 +114,7 @@ interface HappeningDocumentData {
   location_name: prismic.KeyTextField;
 
   /**
-   * Location url field in *Happening*
+   * URL de Locación field in *Happening*
    *
    * - **Field Type**: Link
    * - **Placeholder**: https://...
@@ -160,7 +199,72 @@ interface LugarDocumentData {
 export type LugarDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<LugarDocumentData>, "lugar", Lang>;
 
-export type AllDocumentTypes = HappeningDocument | LugarDocument;
+/**
+ * Content for Ruta documents
+ */
+interface RouteDocumentData {
+  /**
+   * Título field in *Ruta*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Imagen field in *Ruta*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Categoria field in *Ruta*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  category: prismic.SelectField<"En la ciudad" | "Fuera de la ciudad">;
+
+  /**
+   * Descripción field in *Ruta*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Ruta document from Prismic
+ *
+ * - **API ID**: `route`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type RouteDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<RouteDocumentData>, "route", Lang>;
+
+export type AllDocumentTypes =
+  | AboutDocument
+  | HappeningDocument
+  | LugarDocument
+  | RouteDocument;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -172,10 +276,14 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AboutDocument,
+      AboutDocumentData,
       HappeningDocument,
       HappeningDocumentData,
       LugarDocument,
       LugarDocumentData,
+      RouteDocument,
+      RouteDocumentData,
       AllDocumentTypes,
     };
   }
