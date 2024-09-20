@@ -179,7 +179,7 @@ interface LugarDocumentData {
    */
   categoria: prismic.SelectField<
     | "Bares & Cantinas"
-    | "Monumentos Históricos "
+    | "Monumentos Históricos"
     | "Cafeterías"
     | "Música en vivo"
     | "Espacios de Arte"

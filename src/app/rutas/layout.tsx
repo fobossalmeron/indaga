@@ -7,13 +7,15 @@ export default function HappeningsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col items-center">
+    <>
       <Header
         title="Rutas culturales"
         subtitle="El camino al neoleonés"
         image={rutas_icon}
       />
-      <div className="mx-auto flex max-w-[970px] flex-col">{children}</div>
-    </div>
+      <div className="mx-auto flex w-full max-w-[970px] flex-col pb-24">
+        {children}
+      </div>
+    </>
   );
 }

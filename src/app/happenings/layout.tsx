@@ -1,6 +1,4 @@
-"use client";
 import { Header } from "@/app/components/Header";
-import { Fade } from "react-awesome-reveal";
 import happening_icon from "@/assets/img/happening_icon.svg?url";
 
 export default function HappeningsLayout({

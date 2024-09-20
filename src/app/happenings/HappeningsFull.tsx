@@ -17,11 +17,11 @@ export default function HappeningsFull({
       <div className="flex justify-center">
         <FechasHappenings />
       </div>
-      <div className="relative mt-16 flex min-h-[350px] flex-wrap justify-center gap-8">
+      <div className="relative mt-16 flex min-h-[350px] w-full flex-wrap justify-center gap-8">
         <Fade triggerOnce delay={500} className="absolute -left-[15%] top-1/2">
           <Image src={blob_happenings} alt="" aria-hidden="true" />
         </Fade>
-        <Fade>
+        <Fade cascade damping={0.1}>
           {entries &&
             entries.map((entry) => (
               <Link href={`/happenings/${entry.uid}`} key={entry.uid + "link"}>

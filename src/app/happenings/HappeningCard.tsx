@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { Button } from "@/app/components/Button";
-import Link from "next/link";
 import { Content } from "@prismicio/client";
 import { Category } from "../components/Category";
 import { Fade } from "react-awesome-reveal";
@@ -15,7 +14,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
   const { category, title, location_name, date, image } = data;
 
   return (
-    <article className="group flex h-full w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent outline-2 outline-transparent transition-all duration-300 ease-in-out hover:shadow-md hover:outline">
+    <article className="group flex h-full w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md">
       <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
         <Fade delay={100}>
           <Image
