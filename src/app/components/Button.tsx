@@ -44,8 +44,13 @@ export const Button = React.memo(({
 
 Button.displayName = 'Button';
 
-export const ButtonSubmit = ({ text, className }: { text: string, className?: string }) => {
-  const buttonClasses = `${BUTTON_STYLES.base} ${BUTTON_STYLES.primary} ${className}`;
+export const ButtonSubmit = ({ text, className, loading }: { text: string, className?: string, loading?: boolean }) => {
+  const buttonClasses = `${BUTTON_STYLES.base} ${BUTTON_STYLES.primary} ${className} min-w-[185px]`;
 
-  return <input value={text} type="submit" className={buttonClasses} />;
+  return (
+    <button type="submit" className={buttonClasses} disabled={loading}>
+      {loading ?           <div className="loader mr-2" />
+ : text}
+    </button>
+  );
 };

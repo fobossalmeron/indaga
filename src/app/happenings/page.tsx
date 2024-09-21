@@ -10,7 +10,7 @@ export default async function HappeningsAll() {
       cache: "no-store",
       next: { tags: ["prismic", "happenings"] },
     },
-    limit: 20,
+    limit: 100,
     orderings: [
       {
         field: "my.happening.date",

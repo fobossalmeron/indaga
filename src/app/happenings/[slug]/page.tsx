@@ -5,8 +5,6 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import Loading from './loading';
 
-// Eliminamos generateStaticParams ya que no generaremos rutas estáticas
-
 export default async function Happening({ params }: { params: { slug: string } }) {
   const client = createClient();
   console.log("Prismic client fetchOptions:", client.fetchOptions);
