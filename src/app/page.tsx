@@ -22,7 +22,7 @@ const NavLink = ({
       {svg && (
         <div className="pointer-events-none absolute left-0 top-0">{svg}</div>
       )}
-    </li>
+    </li> 
   );
 };
 

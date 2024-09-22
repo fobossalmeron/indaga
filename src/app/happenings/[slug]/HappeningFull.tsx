@@ -24,7 +24,6 @@ export default function HappeningsFull({
     date,
     description,
   } = event.data;
-  console.log(location_url);
 
   const validatedLocationUrl =
     location_url.link_type === "Web" && "url" in location_url
@@ -46,6 +45,7 @@ export default function HappeningsFull({
           fill={true}
           alt=""
           field={image}
+          priority={true}
           style={{ objectFit: "cover" }}
         />
       </div>
