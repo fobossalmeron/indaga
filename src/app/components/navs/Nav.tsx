@@ -1,53 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Logo from "@/assets/img/logotipo.svg";
 import Link from "next/link";
 import { Button } from "@/app/components/Button";
-import { usePathname } from "next/navigation";
 import OffLogotipo from "@/assets/img/off_logotipo.svg";
-
-interface NavLinkProps {
-  href: string;
-  children: React.ReactNode;
-}
-
-const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
-  const pathname = usePathname();
-  const isActive = pathname.includes(href);
-
-  return (
-    <Link
-      href={href}
-      className={`bg-transparent py-3 hover:underline ${
-        isActive ? "underline" : ""
-      } text-2xl transition-all`}
-    >
-      {children}
-    </Link>
-  );
-};
-
-const NavColor: Record<string, string> = {
-  happenings: "fern",
-  guia: "blue",
-  rutas: "ocre",
-};
-
-const handleColor = (pathname: string) => {
-  const route = Object.keys(NavColor).find((route) => pathname.includes(route));
-  const color = route ? NavColor[route] : "eerie";
-  return `text-${color}`;
-};
+import { NavLink } from "./NavLink";
+import { useNavColor } from "./useNavColor";
 
 export const Nav = () => {
-  const pathname = usePathname();
+  const navColor = useNavColor();
 
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 flex h-16 w-full px-5 sm:px-10 md:px-20 items-center justify-center bg-white ${handleColor(
-        pathname,
-      )}`}
+      className={`fixed left-0 right-0 top-0 z-50 flex h-16 w-full px-5 sm:px-10 md:px-20 items-center justify-center bg-white ${navColor}`}
     >
       <div className="flex items-center justify-between w-full max-w-[1240px]">
         <Link href="/" className="w-100 transition-all">

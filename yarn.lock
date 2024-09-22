@@ -5205,6 +5205,7 @@ __metadata:
     eslint-config-next: "npm:14.2.3"
     googleapis: "npm:^144.0.0"
     next: "npm:^14.2.10"
+    next-nprogress-bar: "npm:^2.3.13"
     next-share: "npm:^0.27.0"
     postcss: "npm:^8.4.45"
     prettier: "npm:^3.3.3"
@@ -6349,6 +6350,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-nprogress-bar@npm:^2.3.13":
+  version: 2.3.13
+  resolution: "next-nprogress-bar@npm:2.3.13"
+  dependencies:
+    nprogress: "npm:^0.2.0"
+  checksum: 10c0/c72362a28afd25d418dd55a4be4e5c0567a819d38d08fb1acd423ed48882c3bf5c3f6d3f53ba6dabf37f6ffd7852cd7f3f6761ddd0d14bef8dca7425ec92fe6e
+  languageName: node
+  linkType: hard
+
 "next-share@npm:^0.27.0":
   version: 0.27.0
   resolution: "next-share@npm:0.27.0"
@@ -6525,6 +6535,13 @@ __metadata:
   dependencies:
     path-key: "npm:^4.0.0"
   checksum: 10c0/124df74820c40c2eb9a8612a254ea1d557ddfab1581c3e751f825e3e366d9f00b0d76a3c94ecd8398e7f3eee193018622677e95816e8491f0797b21e30b2deba
+  languageName: node
+  linkType: hard
+
+"nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "nprogress@npm:0.2.0"
+  checksum: 10c0/eab9a923a1ad1eed71a455ecfbc358442dd9bcd71b9fa3fa1c67eddf5159360b182c218f76fca320c97541a1b45e19ced04e6dcb044a662244c5419f8ae9e821
   languageName: node
   linkType: hard
 

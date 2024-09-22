@@ -2,7 +2,6 @@
 ## Pendientes 
 
 Funcional:
-- Echar a andar el registro de Rutas
 - Echar a andar el compartir
 
 Desktop:
