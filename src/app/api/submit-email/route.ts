@@ -18,8 +18,7 @@ export async function POST(request: Request) {
     const range = 'Correos!A2:C'; // Comenzamos desde A2 para preservar el encabezado
 
     // Formatear la fecha correctamente para Google Sheets
-    const fechaActual = new Date();
-    const fechaFormateada = `${fechaActual.getDate()}/${fechaActual.getMonth() + 1}/${fechaActual.getFullYear()} ${fechaActual.getHours()}:${fechaActual.getMinutes()}`;
+    const fechaRegistro = new Date().toLocaleString('es-MX', { timeZone: 'America/Monterrey', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
 
     // Añadir el email, la ruta y la fecha formateada a la hoja de cálculo
     await sheets.spreadsheets.values.append({
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS', // Asegura que siempre inserte nuevas filas
       requestBody: {
-        values: [[email, route, fechaFormateada]],
+        values: [[email, route, fechaRegistro]],
       },
     });
 

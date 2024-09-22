@@ -63,13 +63,12 @@ export default function MiniForm({ openModal, route }: MiniFormProps) {
             })}
             type="email"
             placeholder="Tu email"
-            className="w-full rounded-l-xl border border-gray-300 bg-transparent p-2.5 px-5"
+            className="w-full rounded-l-xl border border-gray-300 bg-transparent p-2.5 px-5 transition-all duration-300 ease-in-out hover:border-fern hover:shadow-[0_0_10px_rgba(82,116,66,0.5)] focus:border-fern focus:outline-none"
           />
           <ButtonSubmit 
             className="rounded-l-none" 
             text={"Agendar excursión"}
             loading={isSubmitting}
-            //loading={true}
           />
         </div>
         {errors.email && (
