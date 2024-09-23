@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
 import { useNavColor } from "./useNavColor";
@@ -11,13 +11,18 @@ export const MobileNav = () => {
   const navColor = useNavColor();
   const pathname = usePathname();
 
-  // Cerrar el menú cuando cambia la ruta
-  if (isOpen && pathname) setIsOpen(false);
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleMenu}
         className="fixed bottom-5 right-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-fern p-2.5 text-white shadow-md lg:hidden"
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
       >

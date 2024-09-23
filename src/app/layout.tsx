@@ -13,8 +13,8 @@ const general_sans = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://indaga.site"),
-  title: "Indaga",
-  description: "Sitio de Indaga",
+  title: "Off Festival - Indaga",
+  description: "Off Festival del Festival Santa Lucía - Indaga",
   openGraph: {
     images: "/opengraph-image.png",
   },

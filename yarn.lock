@@ -1963,6 +1963,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prismicio/helpers@npm:^2.3.9":
+  version: 2.3.9
+  resolution: "@prismicio/helpers@npm:2.3.9"
+  dependencies:
+    "@prismicio/richtext": "npm:^2.1.4"
+    "@prismicio/types": "npm:^0.2.7"
+    imgix-url-builder: "npm:^0.0.3"
+  checksum: 10c0/111aba8dcb0b057dd07908d9d93b48dd40c3c82e2b80a25dfb31f4e61b62ffe65246e9c1e75e74712fb25c74262b07aa4fbf35e33baff7c6075df0babcdd14ef
+  languageName: node
+  linkType: hard
+
 "@prismicio/mocks@npm:^2.3.3":
   version: 2.3.3
   resolution: "@prismicio/mocks@npm:2.3.3"
@@ -2008,7 +2019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prismicio/richtext@npm:^2.1.5":
+"@prismicio/richtext@npm:^2.1.4, @prismicio/richtext@npm:^2.1.5":
   version: 2.1.5
   resolution: "@prismicio/richtext@npm:2.1.5"
   dependencies:
@@ -5154,6 +5165,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"imgix-url-builder@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "imgix-url-builder@npm:0.0.3"
+  checksum: 10c0/558395bb98f3a1c6340eb7cb3571d75624fe3d06ab687f92d461c59bbb7acdc16f1fa33d43c872e281a395d6b01404550e61465bb2a6a56a6f78b10bea7400a0
+  languageName: node
+  linkType: hard
+
 "imgix-url-builder@npm:^0.0.4":
   version: 0.0.4
   resolution: "imgix-url-builder@npm:0.0.4"
@@ -5193,6 +5211,7 @@ __metadata:
     "@formkit/auto-animate": "npm:^0.8.2"
     "@next/third-parties": "npm:^14.2.3"
     "@prismicio/client": "npm:^7.8.1"
+    "@prismicio/helpers": "npm:^2.3.9"
     "@prismicio/next": "npm:^1.6.0"
     "@prismicio/react": "npm:^2.8.0"
     "@slicemachine/adapter-next": "npm:^0.3.49"

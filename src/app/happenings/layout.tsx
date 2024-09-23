@@ -14,7 +14,7 @@ export default function HappeningsLayout({
         image={happening_icon}
       />
       <div
-        className="mx-auto flex w-full max-w-[1000px] flex-col pb-24"
+        className="mx-auto flex w-full max-w-[1020px] flex-col pb-24"
       >
         {children}
       </div>

@@ -14,7 +14,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
   const { category, title, location_name, date, image } = data;
 
   return (
-    <article className="group flex h-full w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md">
+    <article className="group flex h-full w-full sm:w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md">
       <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
         <Fade delay={100}>
           <Image
@@ -31,7 +31,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
           <div className="flex flex-col items-start gap-2">
             <Category category={category ?? "Arte"} />
             <h2 className="text-2xl leading-tight">
-              {truncate(title ?? "Error en título")}
+              {truncate(title ?? "Error en título", 40)}
             </h2>
             <p className="text-blue underline">@{location_name}</p>
           </div>
