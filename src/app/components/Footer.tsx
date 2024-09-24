@@ -22,44 +22,44 @@ export const Footer = () => {
   return (
     <footer
       className={
-        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 sm:px-10 md:px-20 pb-10 pt-2 sm:pt-10 text-xl md-lg:text-2xl text-blue"
+        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 pb-10 pt-5 text-xl text-blue sm:px-10 sm:pt-10 md:px-20 md-lg:text-2xl"
       }
     >
       <div className="flex w-full max-w-[1240px] flex-col items-start justify-between gap-32">
-        <div className="flex w-full items-start justify-between flex-col-reverse gap-5 md:flex-row md:gap-0">
-          <nav className="flex-start align-text-left flex flex-row sm:flex-col gap-8 sm:gap-0">
-            <Fade delay={200}>
-              <div className="flex flex-wrap gap-y-0 gap-x-8 flex-col sm:flex-row">
+        <div className="flex w-full flex-col-reverse items-start justify-between gap-8 sm:gap-5 md:flex-row md:gap-0">
+          <nav className="flex-start align-text-left flex flex-row gap-8 sm:flex-col sm:gap-0">
+            <Fade delay={200} triggerOnce>
+              <div className="flex flex-col flex-wrap gap-x-8 gap-y-0 sm:flex-row">
                 <FooterLink href="/home">Home</FooterLink>
                 <FooterLink href="/happenings">Happenings</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
                 <FooterLink href="/rutas">Rutas</FooterLink>
               </div>
-              <div className="flex gap-y-0 gap-x-8 flex-col sm:flex-row">
+              <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">
                 <FooterLink href="https://www.instagram.com/indagamx/">
-                Instagram
-              </FooterLink>
+                  Instagram
+                </FooterLink>
                 <FooterLink href="/nosotras">Nosotras</FooterLink>
               </div>
             </Fade>
           </nav>
-          <Fade delay={350}>
+          <Fade delay={350} triggerOnce>
             <Image
               src={festival_santa_lucia}
-            alt="Festival Santa Lucia"
-            width={217.5}
-            height={60}
-            className="pt-4 md-lg:max-w-[217.5px] max-w-[180px] w-full"
-          />
+              alt="Festival Santa Lucia"
+              width={217.5}
+              height={60}
+              className="w-full max-w-[180px] pt-4 md-lg:max-w-[217.5px]"
+            />
           </Fade>
         </div>
         <div className="flex flex-col gap-3">
-          <Fade delay={450}>
+          <Fade delay={450} triggerOnce>
             <div className="flex flex-col gap-2">
               <Image src={imago_delgado} alt="Indaga" width={33} height={60} />
               Indaga, 2024
             </div>
-            </Fade>
+          </Fade>
         </div>
       </div>
     </footer>

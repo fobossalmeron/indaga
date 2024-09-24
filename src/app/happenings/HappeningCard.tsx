@@ -16,7 +16,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
   return (
     <article className="group flex h-full w-full sm:w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md">
       <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
-        <Fade delay={100}>
+        <Fade delay={100} triggerOnce>
           <Image
             src={image?.url ?? ""}
             alt={`Imagen de ${title}`}

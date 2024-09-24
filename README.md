@@ -6,10 +6,11 @@ Funcionalidades:
 
 Desktop:
 - Cambiar a svg las imágenes de las categorías
+- revisar alto de rutas
 
 Mobile:
-- Móvil de home
 - Móvil de guia + dinámico
+- revisar blobs 
 
 Para finalizar:
 - Subir la guía actualizada en pdf

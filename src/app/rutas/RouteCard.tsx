@@ -17,7 +17,7 @@ export function RouteCard({
   return (
     <article className="flex h-full w-full max-w-[469px] flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 ease-in-out">
       <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
-        <Fade delay={100}>
+        <Fade delay={100} triggerOnce>
           <PrismicNextImage
             fill={true}
             alt=""
