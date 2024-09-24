@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Content } from "@prismicio/client";
 import rutas_blob from "@/assets/img/rutas_blob.svg?url";
 
-export default function RoutesAll({
+export default function RoutesFull({
   routes,
 }: {
   routes: Content.RouteDocument[];
@@ -26,30 +26,25 @@ export default function RoutesAll({
 
   return (
     <>
-      <Fade>
-        <div className="flex justify-center text-ocre">
-          <FraseRutas />
+      <div className="animate-fadeIn2 flex justify-center px-5 text-ocre">
+        <div className="w-full max-w-[284px]">
+          <FraseRutas width="100%" />
         </div>
-        <div className="relative mt-16 flex min-h-[350px] w-full flex-wrap justify-center gap-8">
-          <Fade
-            triggerOnce
-            delay={500}
-            className="absolute -right-[22%] top-1/2"
-          >
-            <Image src={rutas_blob} alt="" aria-hidden="true" />
-          </Fade>
-          <Fade cascade damping={0.1}>
-            {routes &&
-              routes.map((route, index) => (
-                <RouteCard
-                  key={index + "route"}
-                  route={route}
-                  openModal={openModal}
-                />
-              ))}
-          </Fade>
-        </div>
-      </Fade>
+      </div>
+      <div className="relative mt-16 flex min-h-[350px] w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
+        <Fade triggerOnce delay={500} className="absolute -right-[22%] top-1/2">
+          <Image src={rutas_blob} alt="" aria-hidden="true" />
+        </Fade>
+        {routes &&
+          routes.map((route, index) => (
+            <RouteCard
+              key={index + "route"}
+              route={route}
+              openModal={openModal}
+            />
+          ))}
+      </div>
+
       <Modal show={showModal}>
         <div className="flex flex-col items-start gap-6">
           <p className="flex flex-col gap-2">

@@ -16,18 +16,16 @@ export function RouteCard({
   const { category, title, image, description } = route.data;
   return (
     <article className="flex h-full w-full max-w-[469px] flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 ease-in-out">
-      <Fade
-        delay={100}
-        className="relative h-full max-h-[130px] min-h-[130px] w-full bg-gray-200"
-      >
-        <PrismicNextImage
-          fill={true}
-          alt=""
-          field={image}
-          style={{ objectFit: "cover" }}
-        />
-      </Fade>
-
+      <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
+        <Fade delay={100}>
+          <PrismicNextImage
+            fill={true}
+            alt=""
+            field={image}
+            style={{ objectFit: "cover" }}
+          />
+        </Fade>
+      </div>
       <div className="flex h-full flex-col items-start justify-between gap-2 p-5 py-4">
         <Fade delay={250}>
           <div className="flex flex-col items-start gap-2">
@@ -37,12 +35,12 @@ export function RouteCard({
               <PrismicRichText field={description} />
             </div>
           </div>
-          <div className="flex w-full">
-            <Fade delay={350}>
-              <MiniForm openModal={openModal} route={title} />
-            </Fade>
-          </div>
         </Fade>
+        <div className="flex w-full">
+          <Fade delay={350} className="flex w-full">
+            <MiniForm openModal={openModal} route={title} />
+          </Fade>
+        </div>
       </div>
     </article>
   );

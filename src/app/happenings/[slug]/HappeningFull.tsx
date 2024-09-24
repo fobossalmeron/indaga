@@ -8,7 +8,6 @@ import ShareArrow from "@/assets/img/whatsapp.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Content, LinkField } from "@prismicio/client";
-import { Fade } from "react-awesome-reveal";
 
 export default function HappeningsFull({
   event,
@@ -47,7 +46,7 @@ export default function HappeningsFull({
   };
 
   return (
-    <Fade className="px-4">
+    <div className="px-4 animate-fadeIn2">
     <div className="mt-8 sm:mt-16 flex flex-col md:flex-row max-w-[920px] overflow-hidden rounded-3xl bg-white mx-auto">
       <div className="min-h-60 relative w-full md:w-1/2 md:max-w-[460px] bg-gray-200">
         <PrismicNextImage
@@ -90,6 +89,6 @@ export default function HappeningsFull({
         </div>
       </div>
     </div>
-    </Fade>
+    </div>
   );
 }

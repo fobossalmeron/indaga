@@ -1,16 +1,16 @@
 
 ## Pendientes 
 
+Funcionalidades:
+- No se regresa hasta arriba de la pantalla, cuando navegas a una nueva ruta
+
 Desktop:
 - Home blob sticky
 - Cambiar a svg las imágenes de las categorías
 
 Mobile:
 - Móvil de home
-- Móvil de happenings + dinámico
-- Móvil de rutas
 - Móvil de guia + dinámico
-- Móvil de about
 
 Para finalizar:
 - Subir la guía actualizada en pdf

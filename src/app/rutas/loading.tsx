@@ -1,11 +1,8 @@
-"use client";
-
-import { Fade } from "react-awesome-reveal";
 import FraseRutasSkeleton from "@/assets/img/frase_rutas_skeleton.svg";
 
 export default function Loading() {
   return (
-    <Fade>
+    <div className="animate-fadeIn">
       <div className="flex justify-center">
         <FraseRutasSkeleton />
       </div>
@@ -25,6 +22,6 @@ export default function Loading() {
           </div>
         ))}
       </div>
-    </Fade>
+    </div>
   );
 }

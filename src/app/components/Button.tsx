@@ -45,7 +45,7 @@ export const Button = React.memo(({
 Button.displayName = 'Button';
 
 export const ButtonSubmit = ({ text, className, loading }: { text: string, className?: string, loading?: boolean }) => {
-  const buttonClasses = `${BUTTON_STYLES.base} ${BUTTON_STYLES.primary} ${className} min-w-[185px]`;
+  const buttonClasses = `${BUTTON_STYLES.base} ${BUTTON_STYLES.primary} ${BUTTON_STYLES.normal} ${className} min-w-[185px]`;
 
   return (
     <button type="submit" className={buttonClasses} disabled={loading}>

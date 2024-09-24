@@ -6,7 +6,7 @@ import guia_blob from "@/assets/img/guia_blob.svg?url";
 
 export default function GuideAll() {
   return (
-    <>
+    <div className="animate-fadeIn2">
       <CloudCTA full />
       <div className="flex max-w-[850px] flex-wrap items-end justify-center gap-x-6 gap-y-20 py-24">
         {Object.entries(categories).map(([slug, category], index) => (
@@ -21,6 +21,6 @@ export default function GuideAll() {
         ))}
         <Image src={guia_blob} alt="Guía Blob" className="relative" />
       </div>
-    </>
+    </div>
   );
 }

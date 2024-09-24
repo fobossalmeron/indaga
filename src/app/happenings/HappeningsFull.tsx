@@ -13,13 +13,13 @@ export default function HappeningsFull({
   entries: Content.HappeningDocument[];
 }) {
   return (
-    <Fade>
+    <div className="animate-fadeIn2">
       <div className="flex justify-center px-5">
         <div className="w-full max-w-[284px]">
-          <FechasHappenings />
+          <FechasHappenings width="100%"/>
         </div>
       </div>
-      <div className="relative mt-16 flex flex-col sm:flex-row min-h-[350px] w-full flex-wrap justify-center gap-8 px-5">
+      <div className="relative mt-16 flex min-h-[350px] w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
         <Fade triggerOnce delay={500} className="absolute -left-[15%] top-1/2">
           <Image src={blob_happenings} alt="" aria-hidden="true" />
         </Fade>
@@ -32,6 +32,6 @@ export default function HappeningsFull({
             ))}
         </Fade>
       </div>
-    </Fade>
+    </div>
   );
 }

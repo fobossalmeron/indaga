@@ -1,12 +1,8 @@
-"use client";
-
-import { Fade } from "react-awesome-reveal";
 import FechasHappeningsSkeleton from "@/assets/img/fechas_happenings_skeleton.svg";
 
 export default function Loading() {
   return (
-    <Fade>
-      <div className="flex w-full flex-col items-center">
+      <div className="flex w-full flex-col items-center animate-fadeIn">
         <div className="flex h-[153px] w-[284px] justify-center">
           <FechasHappeningsSkeleton />
         </div>
@@ -25,6 +21,5 @@ export default function Loading() {
           ))}
         </div>
       </div>
-    </Fade>
   );
 }

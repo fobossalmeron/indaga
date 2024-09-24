@@ -31,9 +31,9 @@ export const Eyes = () => {
       `}</style>
 
       <svg
-        width="950"
-        height="150"
         viewBox="0 0 950 150"
+        width="100%"
+        height="100%"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

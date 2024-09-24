@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Eyes } from "./Eyes";
 import Logo from "@/assets/img/logotipo.svg";
 import { Button } from "@/app/components/Button";
@@ -12,12 +11,14 @@ export default async function Nosotras() {
 
   return (
     <div className="w-full bg-blue text-[#ECEAEC]">
-      <div className="mt-32 flex w-full flex-col items-center justify-center">
-        <Eyes />
-        <div className="flex max-w-[460px] flex-col items-start gap-6 py-32">
+      <div className="mt-16 sm:mt-32 flex w-full flex-col items-center justify-center">
+        <div className="w-full max-w-[950px] animate-fadeIn">
+          <Eyes />
+        </div>
+        <div className="flex max-w-[460px] flex-col items-start gap-6 py-20 sm:py-32 mx-5 sm:mx-10 animate-fadeIn2">
           <div className="flex flex-col gap-2">
             <Logo width={115} className="" />
-            <h1 className="max-w-[360px] text-5xl">
+            <h1 className="max-w-[360px] text-4xl sm:text-5xl">
               {about.data.title}
             </h1>
           </div>

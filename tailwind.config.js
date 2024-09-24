@@ -3,6 +3,36 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      animation: {
+        fadeIn: 'fadeIn 600ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards',
+        fadeIn2: 'fadeIn2 800ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards',
+        fadeIn3: 'fadeIn3 900ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards',
+        fadeIn4: 'fadeIn4 1100ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards',
+        fadeSimple: 'fadeSimple 600ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards',
+
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn2: {
+          '0%, 25%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn3: {
+          '0%, 40%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn4: {
+          '0%, 65%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeSimple: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
       screens: {
         'xsm': '460px',
         'sm': '640px',

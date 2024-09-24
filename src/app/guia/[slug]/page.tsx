@@ -37,7 +37,7 @@ export default async function Categoria({
     const color = `${categories[params.slug as keyof typeof categories].color}`;
 
     return (
-      <div className="mt-10 flex flex-col">
+      <div className="mt-10 flex flex-col animate-fadeIn2">
         <div className="flex flex-col items-center justify-center gap-4">
           <CategoryChip slug={params.slug} />
         </div>

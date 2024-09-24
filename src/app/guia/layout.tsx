@@ -1,5 +1,4 @@
 import { Header } from "@/app/components/Header";
-import { Fade } from "react-awesome-reveal";
 import guia_icon from "@/assets/img/guia_icon.svg?url";
 
 export default function HappeningsLayout({
