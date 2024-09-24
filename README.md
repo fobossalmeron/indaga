@@ -5,7 +5,6 @@ Funcionalidades:
 - No se regresa hasta arriba de la pantalla, cuando navegas a una nueva ruta
 
 Desktop:
-- Home blob sticky
 - Cambiar a svg las imágenes de las categorías
 
 Mobile:
