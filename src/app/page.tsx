@@ -1,6 +1,5 @@
 import Image from "next/image";
 import festival_santa_lucia from "@/assets/img/festival_santa_lucia.svg?url";
-import Logo from "@/assets/img/logotipo.svg";
 import home_blob from "@/assets/img/home_blob.svg?url";
 import Link from "next/link";
 import HappeningsHomeLink from "@/assets/img/happenings_home_link.svg?unoptimized";

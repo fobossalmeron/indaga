@@ -13,6 +13,8 @@ export const MobileNav = () => {
 
   useEffect(() => {
     setIsOpen(false);
+    window.scrollTo(0, 0);
+    console.log("Se ejecutó la función scroll");
   }, [pathname]);
 
   const toggleMenu = () => {

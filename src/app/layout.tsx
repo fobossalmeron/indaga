@@ -6,7 +6,6 @@ import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
 import { MobileNav } from "@/app/components/navs/MobileNav";
 import Providers from "./ProgressBarProvider";
-
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
 });
@@ -25,16 +24,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
-    <html lang="es" className={`${general_sans.className} font-normal bg-offwhite`}>
+    <html
+      lang="es"
+      className={`${general_sans.className} bg-offwhite font-normal`}
+    >
       <body>
         <Providers>
-        <Nav />
-        <MobileNav />
-        <main className="flex flex-col bg-offwhite text-eerie items-center pt-16 relative">
-          {children}
-        </main>
-        <Footer />
+          <Nav />
+          <MobileNav />
+          <main className="relative flex flex-col items-center pt-16 text-eerie">
+            {children}
+          </main>
+          <Footer />
         </Providers>
       </body>
       <GoogleAnalytics gaId="G-1QH9PC856P" />
