@@ -37,24 +37,24 @@ export default async function Categoria({
     const color = `${categories[params.slug as keyof typeof categories].color}`;
 
     return (
-      <div className="mt-10 flex flex-col animate-fadeIn2">
+      <div className="mt-10 flex animate-fadeIn2 flex-col">
         <div className="flex flex-col items-center justify-center gap-4">
           <CategoryChip slug={params.slug} />
         </div>
-        <div id="img" className="my-8 flex flex-row relative">
-          <div className="relative w-full max-h-[665px] min-w-[375px] h-auto z-1">
+        <div id="img" className="relative mt-20 flex flex-row">
+          <div className="z-1 relative h-auto max-h-[665px] w-full min-w-[375px] animate-fadeIn3">
             <Image
               src={categories[params.slug as keyof typeof categories].bgImage}
               alt={`Imagen de ${params.slug}`}
               width={1032}
               height={774}
-              className="w-auto h-full object-contain"
+              className="h-full w-auto object-contain"
               priority
             />
           </div>
-          <div className="flex flex-col -ml-[30%] z-0">
+          <div className="z-0 -ml-[30%] flex flex-col animate-fadeIn4">
             <div className="grid place-items-center [&>*]:col-start-1 [&>*]:row-start-1">
-              <TextBubble className="text-eerie"/>
+              <TextBubble className="text-eerie" />
               <div className="align ml-32 flex flex-col gap-4 p-8 py-4 text-white">
                 {lugares.map((lugar, index) => (
                   <Place

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
-import festival_santa_lucia from "@/assets/img/festival_santa_lucia.svg?url";
+// import festival_santa_lucia from "@/assets/img/festival_santa_lucia.svg?url";
+import off_alone from "@/assets/img/off_alone.svg?url";
 import imago_delgado from "@/assets/img/imago_delgado.svg?url";
 
 const FooterLink = ({
@@ -22,7 +23,7 @@ export const Footer = () => {
   return (
     <footer
       className={
-        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 pb-10 pt-5 text-xl text-blue sm:px-10 sm:pt-10 md:px-20 md-lg:text-2xl"
+        "z-1 relative flex h-auto w-full flex-col items-center bg-white px-5 pb-16 pt-5 text-xl text-blue sm:px-10 sm:pt-10 md:px-20 md-lg:text-2xl"
       }
     >
       <div className="flex w-full max-w-[1240px] flex-col items-start justify-between gap-32">
@@ -30,7 +31,7 @@ export const Footer = () => {
           <nav className="flex-start align-text-left flex flex-row gap-8 sm:flex-col sm:gap-0">
             <Fade delay={200} triggerOnce>
               <div className="flex flex-col flex-wrap gap-x-8 gap-y-0 sm:flex-row">
-                <FooterLink href="/home">Home</FooterLink>
+                <FooterLink href="/">Home</FooterLink>
                 <FooterLink href="/happenings">Happenings</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
                 <FooterLink href="/rutas">Rutas</FooterLink>
@@ -45,10 +46,10 @@ export const Footer = () => {
           </nav>
           <Fade delay={350} triggerOnce>
             <Image
-              src={festival_santa_lucia}
+              src={off_alone}
               alt="Festival Santa Lucia"
-              width={217.5}
-              height={60}
+              width={70}
+              height={40}
               className="w-full max-w-[180px] pt-4 md-lg:max-w-[217.5px]"
             />
           </Fade>

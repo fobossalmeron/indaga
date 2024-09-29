@@ -5,12 +5,12 @@ import { Fade } from "react-awesome-reveal";
 
 export function Dedication() {
   return (
-    <div className="mb-10 mt-40 flex flex-col items-center justify-center gap-4 sm:gap-8 md:mb-48 md:mt-52">
+    <div className="mb-10 mt-40 flex flex-col items-center justify-center gap-4 sm:gap-4 md:mb-48 md:mt-60">
       <Fade triggerOnce>
-        <p className="text-center text-lg font-medium leading-6 text-[#6F708B] md:text-xl">
-          Con cariño <br /> para Monterrey
+        <p className="md:text-l max-w-72 text-center text-lg font-medium leading-6 text-[#6F708B]">
+          Un homenaje a la riqueza cultural de nuestra ciudad
         </p>
-        <Logo width={118.75} height={22.5} className="text-blue" />
+        <Logo width={95} height={18} className="text-blue" />
       </Fade>
     </div>
   );

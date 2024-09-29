@@ -1,29 +1,36 @@
 import HappeningFull from "./HappeningFull";
 import { createClient } from "@/prismicio";
 import { Content } from "@prismicio/client";
-import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
-import Loading from './loading';
-import { Metadata } from 'next';
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import { asImageSrc, asText } from "@prismicio/helpers";
 import { truncate } from "@/app/utils/truncate";
+import Loading from "./loading";
 
 // Función para generar metadatos
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const client = createClient();
 
   try {
-    const event = await client.getByUID<Content.HappeningDocument>("happening", params.slug);
+    const event = await client.getByUID<Content.HappeningDocument>(
+      "happening",
+      params.slug,
+    );
 
     if (!event) {
       return {
-        title: 'Evento no encontrado',
+        title: "Evento no encontrado",
       };
     }
 
     const title = event.data.title;
-    const description = event.data.description ? truncate(asText(event.data.description), 155) : '';
-
+    const description = event.data.description
+      ? truncate(asText(event.data.description), 155)
+      : "";
 
     return {
       title: title,
@@ -36,21 +43,27 @@ export async function generateMetadata({ params }: { params: { slug: string } })
                   width: 1200,
                   height: 630,
                 }),
-                
               },
             ]
           : [],
       },
     };
   } catch (error) {
-    console.error(`Error al obtener metadatos para el evento ${params.slug}:`, error);
+    console.error(
+      `Error al obtener metadatos para el evento ${params.slug}:`,
+      error,
+    );
     return {
-      title: 'Error al cargar el evento',
+      title: "Error al cargar el evento",
     };
   }
 }
 
-export default async function Happening({ params }: { params: { slug: string } }) {
+export default async function Happening({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const client = createClient();
   console.log("Prismic client fetchOptions:", client.fetchOptions);
 
@@ -63,17 +76,17 @@ export default async function Happening({ params }: { params: { slug: string } }
           cache: "no-store",
           next: { tags: ["prismic", "happenings"] },
         },
-      }
+      },
     );
 
     if (!event) {
       notFound();
     }
+    // return <Loading />;
 
     return (
-      <Suspense fallback={<Loading />}>
-        <HappeningFull event={event} />
-      </Suspense>
+      <HappeningFull event={event} />
+
     );
   } catch (error) {
     console.error(`Error al obtener el evento ${params.slug}:`, error);

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 
 interface ImagenPortalProps {
-  src: StaticImageData;
+  src: StaticImageData | string;
   title: string;
   color: string;
   slug: string;

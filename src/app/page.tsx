@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div className="align-start relative flex w-full bg-offwhite">
       <div className="absolute -top-32 w-full rotate-180 sm:-top-[calc(14%-4rem)] md:sticky md:top-32 md:mt-14 md:h-[500px] md:max-w-[50%] md:rotate-0">
-        <div className="animate-fadeIn relative h-60 w-full md:h-[900px]">
+        <div className="relative h-60 w-full animate-fadeIn md:h-[900px]">
           <Image
             src={home_blob}
             alt="Home Blob"
@@ -51,7 +51,7 @@ export default function Home() {
               height={80}
               className="animate-fadeIn2"
             />
-            <ul className="animate-fadeIn3 flex flex-col items-start justify-center gap-6 text-[#4D4E6A] sm:gap-8">
+            <ul className="flex animate-fadeIn3 flex-col items-start justify-center gap-6 text-[#4D4E6A] sm:gap-8">
               <NavLink
                 href="/happenings"
                 svg={

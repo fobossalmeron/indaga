@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { RouteCard } from "./RouteCard";
 import { Fade } from "react-awesome-reveal";
-import FraseRutas from "@/assets/img/frase_rutas.svg";
 import { Modal } from "@/app/components/Modal";
 import { Button } from "@/app/components/Button";
 import Image from "next/image";
@@ -26,23 +25,20 @@ export default function RoutesFull({
 
   return (
     <>
-      <div className="animate-fadeIn2 flex justify-center px-5 text-ocre">
-        <div className="w-full max-w-[284px]">
-          <FraseRutas width="100%" />
-        </div>
-      </div>
-      <div className="relative mt-16 flex min-h-[350px] w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
+      <div className="relative mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 px-5">
         <Fade triggerOnce delay={500} className="absolute -right-[22%] top-1/2">
           <Image src={rutas_blob} alt="" aria-hidden="true" />
         </Fade>
-        {routes &&
-          routes.map((route, index) => (
+        <Fade cascade damping={0.1}>
+          {routes &&
+            routes.map((route, index) => (
             <RouteCard
               key={index + "route"}
               route={route}
               openModal={openModal}
             />
           ))}
+        </Fade>
       </div>
 
       <Modal show={showModal}>

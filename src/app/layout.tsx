@@ -6,6 +6,7 @@ import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
 import { MobileNav } from "@/app/components/navs/MobileNav";
 import Providers from "./ProgressBarProvider";
+
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
 });
@@ -24,7 +25,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html
       lang="es"
@@ -40,6 +40,7 @@ export default function RootLayout({
           <Footer />
         </Providers>
       </body>
+
       <GoogleAnalytics gaId="G-1QH9PC856P" />
     </html>
   );

@@ -1,16 +1,15 @@
-import { CategoriaProps } from "./categoria.types";
 import Bares from "@/assets/img/bares_g.svg";
 import Musica from "@/assets/img/musica_g.svg";
 import Cafeterias from "@/assets/img/cafeterias_g.svg";
 import Monumentos from "@/assets/img/monumentos_g.svg";
 import Restaurantes from "@/assets/img/restaurantes_g.svg";
 import Museos from "@/assets/img/espacios_art_g.svg";
-import bares from "@/assets/img/bares.png";
-import musica from "@/assets/img/musica.png";
-import cafeterias from "@/assets/img/cafeterias.png";
-import monumentos from "@/assets/img/monumentos.png";
-import restaurantes from "@/assets/img/restaurantes.png";
-import museos from "@/assets/img/museos.png";
+import bares from "@/assets/img/bares.svg?url";
+import musica from "@/assets/img/musica.svg?url";
+import cafeterias from "@/assets/img/cafeterias.svg?url";
+import monumentos from "@/assets/img/monumentos.svg?url";
+import restaurantes from "@/assets/img/restaurantes.svg?url";
+import museos from "@/assets/img/museos.svg?url";
 
 export const categories = {
   "bares-y-cantinas": {

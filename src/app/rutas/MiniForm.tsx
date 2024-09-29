@@ -67,7 +67,7 @@ export default function MiniForm({ openModal, route }: MiniFormProps) {
           />
           <ButtonSubmit 
             className="xsm:rounded-l-none" 
-            text={"Agendar excursión"}
+            text={"Agendar recorrido"}
             loading={isSubmitting}
           />
         </div>

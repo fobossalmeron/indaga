@@ -64,6 +64,7 @@ export const MobileNav = () => {
                 { href: "/happenings", text: "Happenings" },
                 { href: "/guia", text: "Guía" },
                 { href: "/rutas", text: "Rutas" },
+                { href: "/nosotras", text: "Nosotras" },
               ].map(({ href, text }) => (
                 <li key={href}>
                   <NavLink href={href}>{text}</NavLink>
