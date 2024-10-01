@@ -25,7 +25,7 @@ export const MobileNav = () => {
     <>
       <button
         onClick={toggleMenu}
-        className="fixed bottom-5 right-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-fern p-2.5 text-white shadow-md lg:hidden"
+        className="fixed bottom-5 transition-all right-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-fern p-2.5 text-white shadow-md active:bg-[#3C5530] active:scale-95 lg:hidden"
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
       >
         <svg

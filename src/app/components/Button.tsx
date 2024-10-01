@@ -2,8 +2,8 @@ import React from 'react';
 
 const BUTTON_STYLES = {
   base: "px-6 transition-all font-medium rounded-xl flex gap-1.5 items-center justify-center cursor-pointer",
-  primary: "bg-fern text-white hover:bg-[#3C5530]",
-  secondary: "border-2 border-fern text-fern bg-transparent hover:bg-[#CAE47C50]",
+  primary: "bg-fern text-white hover:bg-[#3C5530] active:bg-[#3C5530]",
+  secondary: "border-2 border-fern text-fern bg-transparent hover:bg-[#CAE47C50] active:bg-[#CAE47C50]",
   thin: "py-2",
   normal: "py-2.5",
   fullWidth: "w-full"

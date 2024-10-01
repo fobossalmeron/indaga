@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
+import React from 'react';
 // import festival_santa_lucia from "@/assets/img/festival_santa_lucia.svg?url";
 import off_alone from "@/assets/img/off_alone.svg?url";
 import imago_delgado from "@/assets/img/imago_delgado.svg?url";
@@ -14,8 +15,11 @@ const FooterLink = ({
   href: string;
   children: React.ReactNode;
 }) => (
-  <Link href={href} className="bg-transparent px-0 py-3 hover:underline">
-    {children}
+  <Link href={href} className="bg-transparent px-0 py-3 relative group">
+    <span className="relative">
+      {children}
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue bg-opacity-80 transition-all duration-300 group-hover:w-full group-active:w-full"></span>
+    </span>
   </Link>
 );
 

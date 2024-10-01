@@ -32,9 +32,15 @@ a {
     opacity: 1;
     @apply stroke-blue;
   }
-  &:hover path {
+  &:active path {
     opacity: 1;
     @apply stroke-mindaro;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover path {
+      opacity: 1;
+      @apply stroke-mindaro;
+    }
   }
 }
 
