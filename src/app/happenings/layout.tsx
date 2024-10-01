@@ -1,5 +1,5 @@
 import { Header } from "@/app/components/Header";
-import happening_icon from "@/assets/img/happening_icon.svg?url";
+import happening_icon from "@/assets/img/happening_icon.png";
 
 export default function HappeningsLayout({
   children,

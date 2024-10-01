@@ -53,7 +53,7 @@ export const Footer = () => {
               src={off_alone}
               alt="Festival Santa Lucia"
               width={70}
-              height={40}
+              height={45}
               className="w-full max-w-[180px] pt-4 md-lg:max-w-[217.5px]"
             />
           </Fade>

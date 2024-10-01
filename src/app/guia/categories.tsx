@@ -12,6 +12,12 @@ import restaurantes from "@/assets/img/restaurantes.svg?url";
 import museos from "@/assets/img/museos.svg?url";
 
 export const categories = {
+  cafeterias: {
+    title: "Cafeterías",
+    color: "guiaMustard",
+    image: <Cafeterias />,
+    bgImage: cafeterias,
+  },
   "bares-y-cantinas": {
     title: "Bares & Cantinas",
     color: "guiaOrange",
@@ -23,12 +29,6 @@ export const categories = {
     color: "guiaPurple",
     image: <Musica />,
     bgImage: musica,
-  },
-  cafeterias: {
-    title: "Cafeterías",
-    color: "guiaMustard",
-    image: <Cafeterias />,
-    bgImage: cafeterias,
   },
   "monumentos-historicos": {
     title: "Monumentos Históricos",

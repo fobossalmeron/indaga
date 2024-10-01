@@ -96,7 +96,7 @@ export default function HappeningsFull({
           </div>
         </div>
       </div>
-      <div className="absolute -bottom-1/4 -right-[11%] z-[0] animate-fadeIn4">
+      <div className="absolute -bottom-1/4 -right-[11%] z-[0] animate-fadeIn4 hidden lg:block">
         <Image src={blob_happening} alt="" aria-hidden="true" />
       </div>
     </>

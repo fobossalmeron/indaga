@@ -1,5 +1,5 @@
 import { Header } from "@/app/components/Header";
-import rutas_icon from "@/assets/img/rutas_icon.svg?url";
+import rutas_icon from "@/assets/img/rutas_icon.png";
 
 export default function RutasLayout({
   children,

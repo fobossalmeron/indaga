@@ -7,16 +7,14 @@ import CAR from "@/assets/img/cloud_arrow_right.svg";
 interface CloudCTAProps {
   full?: boolean;
   hoverStroke?: string;
-  hoverFill?: string;
 }
 
 export const CloudCTA: React.FC<CloudCTAProps> = ({
   full = false,
   hoverStroke = "blue",
-  hoverFill = "blue"
 }) => {
   return (
-    <Fade>
+    <div className="animate-fadeIn2">
       <div className="relative flex justify-center text-2xl font-medium">
         {full && (
          <CAL />
@@ -36,6 +34,6 @@ export const CloudCTA: React.FC<CloudCTAProps> = ({
          <CAR />
         )}
       </div>
-    </Fade>
+    </div>
   );
 };

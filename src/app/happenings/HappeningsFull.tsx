@@ -20,7 +20,7 @@ export default function HappeningsFull({
         </div>
       </div>
       <div className="relative mt-16 flex w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
-        <Fade triggerOnce delay={500} className="absolute -left-[15%] top-1/2">
+        <Fade triggerOnce delay={500} className="absolute -left-[15%] top-1/2 hidden lg:block">
           <Image src={blob_happenings} alt="" aria-hidden="true" />
         </Fade>
         <Fade cascade damping={0.1}>

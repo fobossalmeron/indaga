@@ -1,5 +1,5 @@
 import { Header } from "@/app/components/Header";
-import guia_icon from "@/assets/img/guia_icon.svg?url";
+import guia_icon from "@/assets/img/guia_icon.png";
 
 export default function HappeningsLayout({
   children,

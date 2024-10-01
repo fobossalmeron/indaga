@@ -24,7 +24,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
       className={`relative py-2 px-3 rounded-md group text-2xl transition-all`}
     >
       {children}
-      <span className={ ` rounded-lg absolute bottom-0 left-0 h-full w-full bg-current transition-all duration-300 group-hover:opacity-20 group-active:opacity-20 ${isActive ? 'opacity-15' : 'opacity-0'}`}></span>
+      <span className={ ` rounded-lg absolute bottom-0 left-0 h-full w-full bg-current transition-all duration-300 group-hover:opacity-20 group-active:opacity-20 ${isActive ? 'opacity-[12%]' : 'opacity-0'}`}></span>
     </Link>
   );
 };

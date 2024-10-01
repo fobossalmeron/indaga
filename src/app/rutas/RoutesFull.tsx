@@ -26,7 +26,7 @@ export default function RoutesFull({
   return (
     <>
       <div className="relative mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 px-5">
-        <Fade triggerOnce delay={500} className="absolute -right-[22%] top-1/2">
+        <Fade triggerOnce delay={500} className="absolute -right-[22%] top-1/2 z-0 hidden lg:block">
           <Image src={rutas_blob} alt="" aria-hidden="true" />
         </Fade>
         <Fade cascade damping={0.1}>
