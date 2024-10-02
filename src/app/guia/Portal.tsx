@@ -14,39 +14,48 @@ interface ImagenPortalProps {
   className?: string;
 }
 
-export function Portal({ src, title, color, width, slug, className }: ImagenPortalProps) {
+export function Portal({
+  src,
+  title,
+  color,
+  width,
+  slug,
+  className,
+}: ImagenPortalProps) {
   return (
     <Link href={`/guia/${slug}`}>
       <Fade>
-        <div className={`flex flex-col items-center text-${color} group ${className}`}>
-          <div className="grid max-h-[220px] md-lg:max-h-[280px]">
+        <div
+          className={`flex flex-col items-center text-${color} group ${className}`}
+        >
+          <div className="grid h-[140px] md:h-[200px] md-lg:h-[275px]">
             <svg
-              viewBox="0 0 151 276"
+              viewBox="0 0 150 275"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`col-start-1 row-start-1 w-full h-full`}
+              className={`col-start-1 row-start-1 h-full w-auto`}
             >
               <path
                 stroke="currentColor"
                 strokeWidth="7"
-                d="M4.41602 75.4869V271.909H147.333V75.4869C147.333 36.0216 115.34 4.02835 75.8746 4.02835C36.4093 4.02835 4.41602 36.0216 4.41602 75.4869Z"
+                d="M3.5 74.9911V271.5H146.5V74.9911C146.5 35.5082 114.489 3.5 75 3.5C35.5114 3.5 3.5 35.5082 3.5 74.9911Z"
               />
               <path
+                d="M3.5 74.9911V271.5H146.5V74.9911C146.5 35.5082 114.489 3.5 75 3.5C35.5114 3.5 3.5 35.5082 3.5 74.9911Z"
                 fill="currentColor"
-                className="opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                d="M4.41602 75.4869V271.909H147.333V75.4869C147.333 36.0216 115.34 4.02835 75.8746 4.02835C36.4093 4.02835 4.41602 36.0216 4.41602 75.4869Z"
+                className="opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100"
               />
             </svg>
             <Fade
               delay={200}
-              className="col-start-1 row-start-1 self-end justify-self-center relative left-1.5 w-[45%] md-lg:w-[65%]"
+              className="relative left-1.5 col-start-1 row-start-1 h-full w-full self-end justify-self-center"
             >
               <Image
                 src={src}
                 alt={title}
-                width={width ?? 140}
-                height={0}
-                className="pointer-events-none col-start-1 w-full h-full transition-transform duration-300 group-hover:scale-105"
+                fill={true}
+                style={{ objectFit: "contain" }}
+                className="pt-[10%] pointer-events-none col-start-1 h-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Fade>
           </div>

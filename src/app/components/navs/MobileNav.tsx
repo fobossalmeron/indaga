@@ -67,7 +67,7 @@ export const MobileNav = () => {
                 { href: "/nosotras", text: "Nosotras" },
               ].map(({ href, text }) => (
                 <li key={href}>
-                  <NavLink href={href}>{text}</NavLink>
+                  <NavLink onClick={() => toggleMenu()} href={href}>{text}</NavLink>
                 </li>
               ))}
             </ul>
