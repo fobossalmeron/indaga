@@ -1479,6 +1479,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@darkroom.engineering/tempus@npm:^0.0.46":
+  version: 0.0.46
+  resolution: "@darkroom.engineering/tempus@npm:0.0.46"
+  checksum: 10c0/20c48ff5b6a1a0dc1b9af253de3b06ac7d66c6ffefa86a0b2efe06f2a9a96135fd1e7b7ac72e8d347489564521e8ac7aa12e13cb60a1ffd0908cca78b764c584
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.12.0":
   version: 11.12.0
   resolution: "@emotion/babel-plugin@npm:11.12.0"
@@ -5223,6 +5230,7 @@ __metadata:
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.3"
     googleapis: "npm:^144.0.0"
+    lenis: "npm:^1.1.13"
     next: "npm:^14.2.10"
     next-nprogress-bar: "npm:^2.3.13"
     next-share: "npm:^0.27.0"
@@ -5888,6 +5896,23 @@ __metadata:
   dependencies:
     language-subtag-registry: "npm:^0.3.20"
   checksum: 10c0/9ab911213c4bd8bd583c850201c17794e52cb0660d1ab6e32558aadc8324abebf6844e46f92b80a5d600d0fbba7eface2c207bfaf270a1c7fd539e4c3a880bff
+  languageName: node
+  linkType: hard
+
+"lenis@npm:^1.1.13":
+  version: 1.1.13
+  resolution: "lenis@npm:1.1.13"
+  dependencies:
+    "@darkroom.engineering/tempus": "npm:^0.0.46"
+  peerDependencies:
+    react: ">=17.0.0"
+    react-dom: ">=17.0.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/e8af4cd24350f471fc6ef291bb3d5064a1296d9c048daafeaab8bd656a6342fb3f9e3ff25557073a731f0264fa509538b7bed3c3b200c4569621b45af7631340
   languageName: node
   linkType: hard
 

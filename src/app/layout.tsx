@@ -6,6 +6,8 @@ import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
 import { MobileNav } from "@/app/components/navs/MobileNav";
 import Providers from "./ProgressBarProvider";
+import { LenisProvider } from './components/LenisProvider'
+
 
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
@@ -32,12 +34,14 @@ export default function RootLayout({
     >
       <body>
         <Providers>
-          <Nav />
-          <MobileNav />
+          <LenisProvider>
+            <Nav />
+            <MobileNav />
           <main className="relative flex flex-col items-center pt-16 text-eerie">
             {children}
-          </main>
-          <Footer />
+            </main>
+            <Footer />
+          </LenisProvider>
         </Providers>
       </body>
 

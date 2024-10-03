@@ -16,19 +16,19 @@ export function Place({ place, treasure, color, reverse }: PlaceProps) {
   const shouldRotate = useMemo(() => Math.random() < 0.5, []);
 
   return (
-    <Fade>
-      <div className="mb-2 flex flex-row items-center gap-6">
+    <Fade triggerOnce>
+      <div className="mb-2 flex flex-row items-center gap-4 sm:gap-6">
         {treasure ? (
           <Image src={diamond} alt="Treasure Hunt" width={26} height={26} />
         ) : (
           <OffEl
-            className={`h-[26px] w-[26px] text-${color}`}
+            className={`h-[20px] w-[20px] sm:h-[26px] sm:w-[26px] text-${color}`}
             style={{
               transform: reverse ? "rotate(180deg)" : "none",
             }}
           />
         )}
-        <p className="text-4xl">{place}</p>
+        <p className="text-xl md:text-2xl md-lg:text-3xl lg:text-4xl">{place}</p>
       </div>
     </Fade>
   );

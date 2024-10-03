@@ -16,8 +16,8 @@ const rotations = [
 
 export default function GuideAll() {
   return (
-    <div className="flex w-full animate-fadeIn2 flex-col items-center justify-center px-0">
-      <CloudCTA full />
+    <div className="flex w-full animate-fadeIn2 flex-col items-center justify-center px-0 text-blue">
+      <CloudCTA full hoverStroke="fern"/>
       <div className="mt-16 grid w-full max-w-[760px] grid-cols-3 gap-0 py-24 md:gap-x-[10%] md:gap-y-4 md-lg:gap-x-[20%] lg:mt-28">
         {Object.entries(categories).map(([slug, category], index) => (
           <React.Fragment key={slug}>

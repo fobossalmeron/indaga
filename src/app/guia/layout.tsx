@@ -13,7 +13,7 @@ export default function HappeningsLayout({
         subtitle="Espacios endémicos"
         image={guia_icon}
       />
-      <div className="mx-auto flex max-w-[1000px] flex-col pb-24">
+      <div className="mx-auto w-full flex max-w-[1000px] flex-col pb-24">
         {children}
       </div>
     </>
