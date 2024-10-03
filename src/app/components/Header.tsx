@@ -7,7 +7,7 @@ export const Header = ({
 }: {
   title: string;
   subtitle?: string;
-  image?: StaticImageData;
+  image?: StaticImageData | string;
 }) => {
   return (
     <header className="flex animate-fadeIn flex-col items-center gap-4 px-5 pb-5 pt-8 sm:flex-row sm:pt-16">

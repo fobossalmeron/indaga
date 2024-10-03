@@ -10,9 +10,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  experimental: {
-    scrollRestoration: true,
-  },
   webpack(config) {
     // Encuentra la regla existente que maneja las importaciones de SVG
     const fileLoaderRule = config.module.rules.find((rule) =>
