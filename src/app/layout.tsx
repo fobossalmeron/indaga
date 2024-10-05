@@ -7,7 +7,7 @@ import { Footer } from "@/app/components/Footer";
 import { MobileNav } from "@/app/components/navs/MobileNav";
 import Providers from "./ProgressBarProvider";
 import { LenisProvider } from './components/LenisProvider'
-
+import { ScrollToTop } from './components/ScrollToTop'
 
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Off Festival - Indaga",
   description: "Off Festival del Festival Santa Lucía - Indaga",
   openGraph: {
-    images: "/opengraph-image.png",
+    images: "/og-image.png",
   },
 };
 
@@ -35,10 +35,11 @@ export default function RootLayout({
       <body>
         <Providers>
           <LenisProvider>
+            <ScrollToTop />
             <Nav />
             <MobileNav />
-          <main className="relative flex flex-col items-center pt-16 text-eerie">
-            {children}
+            <main className="relative flex flex-col items-center pt-16 text-eerie">
+              {children}
             </main>
             <Footer />
           </LenisProvider>

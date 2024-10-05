@@ -5,7 +5,7 @@ import Link from "next/link";
 import HappeningsHomeLink from "@/assets/img/happenings_home_link.svg?unoptimized";
 import RutasHomeLink from "@/assets/img/rutas_home_link.svg?unoptimized";
 import GuiaHomeLink from "@/assets/img/guia_home_link.svg?unoptimized";
-import { Dedication } from "./Dedication";
+import { Dedication } from "./components/Dedication";
 
 const NavLink = ({
   href,
@@ -28,20 +28,23 @@ const NavLink = ({
 
 export default function Home() {
   return (
-    <div className="align-start relative flex w-full bg-offwhite">
-      <div className="absolute -top-32 w-full rotate-180 sm:-top-[calc(14%-4rem)] md:sticky md:top-32 md:mt-14 md:h-[500px] md:max-w-[50%] md:rotate-0">
+    <div className="align-start relative flex w-full bg-offwhite md:grid md:grid-cols-2">
+      <div
+        id="home-blob"
+        className="absolute -top-32 w-full rotate-180 sm:-top-[calc(14%-4rem)] md:fixed md:top-[9%] 2xl:top-[15%] md:h-[500px] md:max-w-[50%] md:rotate-0"
+      >
         <div className="relative h-60 w-full animate-fadeIn md:h-[900px]">
           <Image
             src={home_blob}
             alt="Home Blob"
             fill
             sizes="50vw"
-            className="object-contain object-right md:object-cover"
+            className="overflow-visible object-contain object-right md:object-cover"
             priority
           />
         </div>
       </div>
-      <div className="flex w-full flex-col items-center justify-start px-5 py-36 sm:px-[10%] md:w-4/5 md:pt-32 lg:pt-40">
+      <div className="flex w-full max-w-[750px] flex-col items-center justify-start px-5 py-36 sm:px-[10%] md:col-start-2 md:pt-32 lg:pt-40">
         <div className="flex flex-col items-start">
           <div className="flex max-w-[240px] flex-col items-start justify-center gap-10 sm:max-w-[100%] md:min-w-[315px]">
             <Image
@@ -79,7 +82,7 @@ export default function Home() {
             </ul>
           </div>
           <p className="animate-fadeIn4 pt-20 text-lg leading-6 text-blue sm:pt-40 md:text-xl">
-            Lo que despierta <br /> cuando el escenario duerme.
+            Lo que despierta <br /> cuando el escenario duerme
           </p>
         </div>
         <Dedication />

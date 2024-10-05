@@ -5,16 +5,26 @@ import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
 import { useNavColor } from "./useNavColor";
 import { Button } from "@/app/components/Button";
+import { useLenis } from 'lenis/react'
+
 
 export const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navColor = useNavColor();
   const pathname = usePathname();
+  const lenis = useLenis(); 
 
   useEffect(() => {
     setIsOpen(false);
-    
   }, [pathname]);
+
+  useEffect(() => {
+    if (isOpen) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
+  }, [isOpen, lenis]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

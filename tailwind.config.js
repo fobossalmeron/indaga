@@ -43,7 +43,7 @@ module.exports = {
         'md-lg': '875px',
         'lg': '1024px',
         'xl': '1280px',
-        '2xl': '1536px',
+        '2xl': '1650px',
       },
       colors: {
         fern: "#527442",
