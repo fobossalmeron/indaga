@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
 import { MobileNav } from "@/app/components/navs/MobileNav";
-import Providers from "./ProgressBarProvider";
-import { LenisProvider } from './components/LenisProvider'
-import { ScrollToTop } from './components/ScrollToTop'
+import { ProgressBarProvider } from "@/app/components/ProgressBarProvider";
+import { LenisProvider } from "@/app/components/LenisProvider";
+import { ScrollToTop } from "@/app/components/ScrollToTop";
 
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Off Festival - Indaga",
   description: "Off Festival del Festival Santa Lucía - Indaga",
   openGraph: {
-    images: "/og-image.png",
+    images: "/opengraph-image.png",
   },
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
       className={`${general_sans.className} bg-offwhite font-normal`}
     >
       <body>
-        <Providers>
+        <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />
             <Nav />
@@ -43,7 +43,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </LenisProvider>
-        </Providers>
+        </ProgressBarProvider>
       </body>
 
       <GoogleAnalytics gaId="G-1QH9PC856P" />

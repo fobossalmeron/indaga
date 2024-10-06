@@ -5,7 +5,7 @@ import Link from "next/link";
 import HappeningsHomeLink from "@/assets/img/happenings_home_link.svg?unoptimized";
 import RutasHomeLink from "@/assets/img/rutas_home_link.svg?unoptimized";
 import GuiaHomeLink from "@/assets/img/guia_home_link.svg?unoptimized";
-import { Dedication } from "./components/Dedication";
+import { Dedication } from "@/app/components/Dedication";
 
 const NavLink = ({
   href,

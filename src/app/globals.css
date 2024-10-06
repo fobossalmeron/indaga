@@ -45,6 +45,12 @@ a {
   }
 }
 
+.prose {
+  p{
+    @apply mb-4;
+  }
+}
+
 .loader {
   width: 20px;
   aspect-ratio: 1;

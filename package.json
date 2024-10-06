@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
-    "@formkit/auto-animate": "^0.8.2",
     "@next/third-parties": "^14.2.3",
     "@prismicio/client": "^7.8.1",
     "@prismicio/helpers": "^2.3.9",
@@ -21,7 +20,6 @@
     "lenis": "^1.1.13",
     "next": "^14.2.10",
     "next-nprogress-bar": "^2.3.13",
-    "next-share": "^0.27.0",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.14",
     "react-dom": "^18.2.0",

@@ -1654,13 +1654,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formkit/auto-animate@npm:^0.8.2":
-  version: 0.8.2
-  resolution: "@formkit/auto-animate@npm:0.8.2"
-  checksum: 10c0/0b24af241c229f37643cd62ea78fd7fddf621c06516cf62452035ea0bf489b6b53068eea47abb40b6bb3653bb91c1efad8b7257014a3559d26ad77b47b5337cb
-  languageName: node
-  linkType: hard
-
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -3600,7 +3593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:2.6.9, debug@npm:^2.1.3":
+"debug@npm:2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
   dependencies:
@@ -5215,7 +5208,6 @@ __metadata:
   resolution: "indaga@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.13.3"
-    "@formkit/auto-animate": "npm:^0.8.2"
     "@next/third-parties": "npm:^14.2.3"
     "@prismicio/client": "npm:^7.8.1"
     "@prismicio/helpers": "npm:^2.3.9"
@@ -5233,7 +5225,6 @@ __metadata:
     lenis: "npm:^1.1.13"
     next: "npm:^14.2.10"
     next-nprogress-bar: "npm:^2.3.13"
-    next-share: "npm:^0.27.0"
     postcss: "npm:^8.4.45"
     prettier: "npm:^3.3.3"
     prettier-plugin-tailwindcss: "npm:^0.6.6"
@@ -5832,15 +5823,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonp@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "jsonp@npm:0.2.1"
-  dependencies:
-    debug: "npm:^2.1.3"
-  checksum: 10c0/744b828f50062cd691d70936c0ee796dc8cb1c78c96327c25c173ae8e2183b82295ec26a99fe3b092cc9b22e08c14a491bf8af639d576615798edbb50ab99f9b
-  languageName: node
-  linkType: hard
-
 "jsx-ast-utils@npm:^2.4.1 || ^3.0.0, jsx-ast-utils@npm:^3.3.5":
   version: 3.3.5
   resolution: "jsx-ast-utils@npm:3.3.5"
@@ -6400,17 +6382,6 @@ __metadata:
   dependencies:
     nprogress: "npm:^0.2.0"
   checksum: 10c0/c72362a28afd25d418dd55a4be4e5c0567a819d38d08fb1acd423ed48882c3bf5c3f6d3f53ba6dabf37f6ffd7852cd7f3f6761ddd0d14bef8dca7425ec92fe6e
-  languageName: node
-  linkType: hard
-
-"next-share@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "next-share@npm:0.27.0"
-  dependencies:
-    jsonp: "npm:^0.2.1"
-  peerDependencies:
-    react: ">=17.0.2"
-  checksum: 10c0/0b1e6a408f1cacf42d4f9d63c31ad52939f8838a6239e46031ea64565483f01528dde730fcccb1a607ba1061a7ff169bdfb33df5ff0d33eec4dba9cd402904e7
   languageName: node
   linkType: hard
 

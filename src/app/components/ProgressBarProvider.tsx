@@ -3,7 +3,7 @@
 
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
+export const ProgressBarProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
@@ -16,5 +16,3 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     </>
   );
 };
-
-export default Providers;
