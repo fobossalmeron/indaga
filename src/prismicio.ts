@@ -10,10 +10,6 @@ export const repositoryName = config.repositoryName
 
 export function createClient(config: prismicNext.CreateClientConfig = {}) {
   return prismic.createClient(repositoryName, {
-    fetchOptions: {
-      cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
-      next: { tags: ['prismic'] },
-    },
     ...config,
   });
 }

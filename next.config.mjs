@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.prismic.io',
+        pathname: '/indaga/**',
+      },
+    ],
+  },
   webpack(config) {
     // Encuentra la regla existente que maneja las importaciones de SVG
     const fileLoaderRule = config.module.rules.find((rule) =>

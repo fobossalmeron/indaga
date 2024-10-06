@@ -1936,12 +1936,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prismicio/client@npm:^7.1.0, @prismicio/client@npm:^7.6.0, @prismicio/client@npm:^7.8.1":
+"@prismicio/client@npm:^7.1.0, @prismicio/client@npm:^7.6.0":
   version: 7.8.1
   resolution: "@prismicio/client@npm:7.8.1"
   dependencies:
     imgix-url-builder: "npm:^0.0.5"
   checksum: 10c0/5a91fd0a61e05c9f41650db09e488166deed72d477c6b4b46fb1b46e3d4358d19f9410ba7e4b65e8c56010b89916eeea6e87886cc24d3dc2020c74168588fe20
+  languageName: node
+  linkType: hard
+
+"@prismicio/client@npm:^7.11.0":
+  version: 7.11.0
+  resolution: "@prismicio/client@npm:7.11.0"
+  dependencies:
+    imgix-url-builder: "npm:^0.0.5"
+  checksum: 10c0/45fb2caaa305504411cbf11a218edc0e8d1977fdaebccdb77f50e43010e1543bf6341fc070143fb293cb4390558edc69527f06993873b6fc95403e8ade487680
   languageName: node
   linkType: hard
 
@@ -1992,9 +2001,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prismicio/next@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "@prismicio/next@npm:1.6.0"
+"@prismicio/next@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "@prismicio/next@npm:1.7.0"
   dependencies:
     "@formatjs/intl-localematcher": "npm:^0.5.2"
     imgix-url-builder: "npm:^0.0.4"
@@ -2003,19 +2012,19 @@ __metadata:
     "@prismicio/client": ^6 || ^7
     next: ^13.4.5 || ^14 || ^15.0.0-rc.0
     react: ^18 || ^19.0.0-rc.0
-  checksum: 10c0/c308bdee19a0e155c7ba498052f51a9264b4405ad92d00b7c314253223874b9c721d113a1cdb375005c90a15fc2fb7ea410f529e720819ea11b916c3ebc22e43
+  checksum: 10c0/88fe70a36bba15fe46cc9cc25bd1f0def73f79f847b9297f10114285e85a65b34df3233832f7da342853d368bb01b515402651f32b8fc13e5429f8375b0ebcf2
   languageName: node
   linkType: hard
 
-"@prismicio/react@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "@prismicio/react@npm:2.8.0"
+"@prismicio/react@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@prismicio/react@npm:2.9.0"
   dependencies:
     "@prismicio/richtext": "npm:^2.1.5"
   peerDependencies:
     "@prismicio/client": ^6 || ^7
     react: ^18 || ^19.0.0-rc.0
-  checksum: 10c0/fc95c78b47386ab853ac895395b3e2908803856640436f93722ff41169907c12368c395cb920ee2b03913436e2fcdde185024413c97c088f6836e8d0bbcd5693
+  checksum: 10c0/48b5f4704a1adee0c6eba8bfee318bdc61860c2814af9fe25cf360f22acb1d41dc6a6c15b087d2629e9a81ac881500d603cf0b3d013b9459f4b9938a03f65d40
   languageName: node
   linkType: hard
 
@@ -5209,10 +5218,10 @@ __metadata:
   dependencies:
     "@emotion/react": "npm:^11.13.3"
     "@next/third-parties": "npm:^14.2.3"
-    "@prismicio/client": "npm:^7.8.1"
+    "@prismicio/client": "npm:^7.11.0"
     "@prismicio/helpers": "npm:^2.3.9"
-    "@prismicio/next": "npm:^1.6.0"
-    "@prismicio/react": "npm:^2.8.0"
+    "@prismicio/next": "npm:^1.7.0"
+    "@prismicio/react": "npm:^2.9.0"
     "@slicemachine/adapter-next": "npm:^0.3.49"
     "@svgr/webpack": "npm:^8.1.0"
     "@types/node": "npm:^20"

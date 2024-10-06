@@ -25,8 +25,7 @@ export default async function Categoria({
         ),
       ],
       fetchOptions: {
-        cache: "no-store",
-        next: { tags: ["prismic", "lugares"] },
+        next: { tags: ["lugar"] },
       },
     });
 

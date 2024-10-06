@@ -72,8 +72,7 @@ export default async function Happening({
       params.slug,
       {
         fetchOptions: {
-          cache: "no-store",
-          next: { tags: ["prismic", "happenings"] },
+          next: { tags: ["happening", `happening-${params.slug}`] },
         },
       },
     );
@@ -82,10 +81,7 @@ export default async function Happening({
       notFound();
     }
 
-    return (
-      <HappeningFull event={event} />
-
-    );
+    return <HappeningFull event={event} />;
   } catch (error) {
     console.error(`Error al obtener el evento ${params.slug}:`, error);
     notFound();

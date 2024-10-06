@@ -9,8 +9,7 @@ export default async function HappeningsAll() {
     "happening",
     {
       fetchOptions: {
-        cache: "no-store",
-        next: { tags: ["prismic", "happenings"] },
+        next: { tags: ["happening"] },
       },
       limit: 100,
       orderings: [

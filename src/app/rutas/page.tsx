@@ -8,8 +8,7 @@ export default async function RoutesAll() {
 
   const routes = await client.getAllByType<Content.RouteDocument>("route", {
     fetchOptions: {
-      cache: "no-store",
-      next: { tags: ["prismic", "route"] },
+      next: { tags: ["route"] },
     },
     limit: 100,
   });
