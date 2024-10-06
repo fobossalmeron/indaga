@@ -1,5 +1,4 @@
 import { Eyes } from "./Eyes";
-import Logo from "@/assets/img/logotipo.svg";
 import { Button } from "@/app/components/Button";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
