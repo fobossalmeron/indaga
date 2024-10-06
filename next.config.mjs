@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    unoptimized: true,
-  },
   webpack(config) {
     // Encuentra la regla existente que maneja las importaciones de SVG
     const fileLoaderRule = config.module.rules.find((rule) =>

@@ -35,3 +35,7 @@ export default async function Nosotras() {
     </div>
   );
 }
+
+
+export const revalidate = 86400; // Revalidar cada 24 horas (86400 segundos)
+

@@ -24,3 +24,5 @@ export default async function HappeningsAll() {
 
   return <HappeningsFull entries={entries} />;
 }
+
+export const revalidate = 3600; // Revalidar cada hora (3600 segundos)

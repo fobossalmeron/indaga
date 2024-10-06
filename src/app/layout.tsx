@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="es"
       className={`${general_sans.className} bg-offwhite font-normal`}
     >
-      <body>
+      <body className="min-h-screen flex flex-col justify-between">
         <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />

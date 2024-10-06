@@ -25,3 +25,5 @@ export default async function RoutesAll() {
     </>
   );
 }
+
+export const revalidate = 3600; // Revalidar cada hora (3600 segundos)

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Button } from "@/app/components/Button";
 import { Content } from "@prismicio/client";
-import { Category } from "../components/Category";
+import { Category } from "@/app/components/Category";
 import { Fade } from "react-awesome-reveal";
 import { formatDate } from "@/app/utils/formatDate";
 import { truncate } from "@/app/utils/truncate";
@@ -16,7 +16,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
   return (
     <article className="group flex h-full w-full sm:w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md active:shadow-md">
       <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
-        <Fade delay={100} triggerOnce>
+        <Fade delay={100} triggerOnce className="h-full absolute w-full">
           <Image
             src={image?.url ?? ""}
             alt={`Imagen de ${title}`}

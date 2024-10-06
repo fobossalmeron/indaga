@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { asImageSrc, asText } from "@prismicio/helpers";
 import { truncate } from "@/app/utils/truncate";
-import Loading from "./loading";
 
 // Función para generar metadatos
 export async function generateMetadata({
@@ -82,7 +81,6 @@ export default async function Happening({
     if (!event) {
       notFound();
     }
-    // return <Loading />;
 
     return (
       <HappeningFull event={event} />
@@ -94,4 +92,4 @@ export default async function Happening({
   }
 }
 
-// Eliminamos la línea de revalidate
+export const revalidate = 3600; // Revalidar cada hora (3600 segundos)

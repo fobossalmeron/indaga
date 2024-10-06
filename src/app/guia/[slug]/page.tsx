@@ -81,3 +81,5 @@ export default async function Categoria({
     notFound();
   }
 }
+
+export const revalidate = 3600; // Revalidar cada hora (3600 segundos)
