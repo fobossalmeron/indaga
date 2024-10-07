@@ -50,11 +50,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   console.log("Iniciando manejador GET");
   try {
-    console.log("Solicitud completa:", {
-      url: request.url,
-      method: request.method,
-      headers: Object.fromEntries(request.headers),
-    });
+    console.log("Solicitud completa:", request);
 
     // Intentar leer el cuerpo de la solicitud
     let body;
@@ -62,23 +58,24 @@ export async function GET(request: NextRequest) {
       body = await request.json();
       console.log("Cuerpo de la solicitud:", body);
     } catch (error) {
-      console.log("No se pudo leer el cuerpo de la solicitud como JSON");
+      console.log("No se pudo leer el cuerpo de la solicitud como JSON:", error);
     }
 
-    console.log("Solicitud completa:", request);
-
-
-    // Buscar información en encabezados personalizados
-    const prismicSecret = request.headers.get('x-prismic-secret');
-    const prismicType = request.headers.get('x-prismic-type');
-
-    console.log("Información de encabezados personalizados:", {
-      prismicSecret: prismicSecret ? 'Presente' : 'Ausente',
-      prismicType
-    });
+    // Si no pudimos leer el cuerpo como JSON, intentemos leerlo como texto
+    if (!body) {
+      try {
+        const textBody = await request.text();
+        console.log("Cuerpo de la solicitud como texto:", textBody);
+        // Intentar parsear el texto como JSON
+        body = JSON.parse(textBody);
+      } catch (error) {
+        console.log("No se pudo leer el cuerpo de la solicitud como texto:", error);
+      }
+    }
 
     // Verificar el secreto
-    if (prismicSecret !== process.env.REVALIDATION_SECRET) {
+    const secret = body?.secret || request.headers.get('x-prismic-secret');
+    if (secret !== process.env.REVALIDATION_SECRET) {
       console.log("Verificación del secreto fallida");
       return NextResponse.json({ message: "Token inválido" }, { status: 401 });
     }
@@ -86,7 +83,7 @@ export async function GET(request: NextRequest) {
     console.log("Secreto verificado correctamente");
 
     // Determinar el tipo de contenido
-    const contentType = prismicType || (body && body.type);
+    const contentType = body?.type || body?.types || request.headers.get('x-prismic-type');
 
     if (!contentType) {
       console.log("Falta el tipo de contenido en la solicitud");
