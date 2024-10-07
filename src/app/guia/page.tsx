@@ -37,7 +37,6 @@ export default function GuideAll() {
               slug={slug}
               src={category.bgImage}
               color={category.color}
-              width={slug === "musica-en-vivo" ? 77 : undefined}
               className={`relative w-full ${rotations[index % rotations.length]}`}
             />
           </React.Fragment>

@@ -16,7 +16,7 @@ export function CategoryChip({ slug }: { slug: string }) {
         <div className="flex h-10 w-10 items-center justify-center [&>*]:h-full [&>*]:w-auto">
           {category.image}
         </div>
-        <span className="text-2xl text-white">{category.title}</span>
+        <h2 className="text-2xl text-white">{category.title}</h2>
       </div>
       <Link href="/guia" className="animate-fadeIn2">
         <Button secondary thin className="gap-3 pl-4 pr-4">

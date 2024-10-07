@@ -17,7 +17,7 @@ export const Header = ({
       <div className="flex flex-col text-center sm:text-start">
         <h1 className="text-3xl sm:text-5xl">{title}</h1>
         {subtitle && (
-          <h2 className="text-xl text-[#505854] sm:text-2xl">{subtitle}</h2>
+          <p className="text-xl text-[#505854] sm:text-2xl">{subtitle}</p>
         )}
       </div>
     </header>

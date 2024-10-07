@@ -10,7 +10,6 @@ interface ImagenPortalProps {
   title: string;
   color: string;
   slug: string;
-  width?: number;
   className?: string;
 }
 
@@ -18,7 +17,6 @@ export function Portal({
   src,
   title,
   color,
-  width,
   slug,
   className,
 }: ImagenPortalProps) {
@@ -59,7 +57,7 @@ export function Portal({
               />
             </Fade>
           </div>
-          <p className="sr-only">{title}</p>
+          <h2 className="sr-only">{title}</h2>
         </div>
       </Fade>
     </Link>

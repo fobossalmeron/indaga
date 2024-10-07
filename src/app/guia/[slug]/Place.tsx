@@ -28,7 +28,7 @@ export function Place({ place, treasure, color, reverse }: PlaceProps) {
             }}
           />
         )}
-        <p className="text-xl md:text-2xl md-lg:text-3xl lg:text-4xl">{place}</p>
+        <h3 className="text-xl md:text-2xl md-lg:text-3xl lg:text-4xl">{place}</h3>
       </div>
     </Fade>
   );
