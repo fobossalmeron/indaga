@@ -4,25 +4,16 @@ import config from "../slicemachine.config.json";
 
 export const repositoryName = config.repositoryName
 
-/**
- * @param config - Configuration for the Prismic client.
- */
-/**
- * Configuración para el cliente de Prismic sin caché.
- */
-const clientConfig: prismic.ClientConfig = {
-  fetchOptions: {
-    cache: "no-store",
-    next: { revalidate: 0 }
-  }
-};
-
-/**
- * @param config - Configuración para el cliente de Prismic.
- */
-export function createClient(config: prismicNext.CreateClientConfig = {}) {
-  return prismic.createClient(repositoryName, {
-    ...clientConfig,
+export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
+  const client = prismic.createClient(repositoryName, {
+    fetchOptions:
+      process.env.NODE_ENV === "production"
+        ? { next: { tags: ["prismic"] }, cache: "force-cache" }
+        : { next: { revalidate: 5 } },
     ...config,
   });
-}
+
+  prismicNext.enableAutoPreviews({ client });
+
+  return client;
+};

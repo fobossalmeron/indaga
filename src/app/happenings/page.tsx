@@ -8,10 +8,7 @@ export default async function HappeningsAll() {
   const entries = await client.getAllByType<Content.HappeningDocument>(
     "happening",
     {
-      fetchOptions: {
-        next: { tags: ["happening"] },
-      },
-      limit: 100,
+      limit: 150,
       orderings: [
         {
           field: "my.happening.date",

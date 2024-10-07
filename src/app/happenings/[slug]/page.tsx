@@ -64,17 +64,11 @@ export default async function Happening({
   params: { slug: string };
 }) {
   const client = createClient();
-  console.log("Prismic client fetchOptions:", client.fetchOptions);
 
   try {
     const event = await client.getByUID<Content.HappeningDocument>(
       "happening",
       params.slug,
-      {
-        fetchOptions: {
-          next: { tags: ["happening", `happening-${params.slug}`] },
-        },
-      },
     );
 
     if (!event) {

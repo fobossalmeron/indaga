@@ -24,9 +24,6 @@ export default async function Categoria({
           categories[params.slug as keyof typeof categories]?.title ?? "",
         ),
       ],
-      fetchOptions: {
-        next: { tags: ["lugar"] },
-      },
     });
 
     if (!Object.keys(categories).includes(params.slug)) {
@@ -44,7 +41,7 @@ export default async function Categoria({
           id="img"
           className="relative mt-10 grid w-full grid-cols-12 grid-rows-[120px_auto] p-2 sm:grid-rows-[100px_auto]"
         >
-          <div className="sm:z-1 relative z-10 col-span-4 col-start-1 sm:col-start-1 row-start-2 w-full animate-fadeIn3 sm:col-span-5">
+          <div className="sm:z-1 relative z-10 col-span-4 col-start-1 row-start-2 w-full animate-fadeIn3 sm:col-span-5 sm:col-start-1">
             <Image
               src={categories[params.slug as keyof typeof categories].bgImage}
               alt={`Imagen de ${params.slug}`}

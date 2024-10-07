@@ -7,9 +7,6 @@ export default async function RoutesAll() {
   const client = createClient();
 
   const routes = await client.getAllByType<Content.RouteDocument>("route", {
-    fetchOptions: {
-      next: { tags: ["route"] },
-    },
     limit: 100,
   });
 
