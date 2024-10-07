@@ -55,36 +55,53 @@ export async function GET(request: NextRequest) {
       method: request.method,
       headers: Object.fromEntries(request.headers),
     });
-    
-    const { searchParams } = new URL(request.url);
-    const secret = searchParams.get('secret');
-    const type = searchParams.get('type');
-    const documentId = searchParams.get('documentId');
 
-    console.log("Parámetros de la solicitud GET:", {
-      type,
-      documentId,
-      secretRecibido: secret ? 'Presente' : 'Ausente'
+    // Intentar leer el cuerpo de la solicitud
+    let body;
+    try {
+      body = await request.json();
+      console.log("Cuerpo de la solicitud:", body);
+    } catch (error) {
+      console.log("No se pudo leer el cuerpo de la solicitud como JSON");
+    }
+
+    console.log("Solicitud completa:", request);
+
+
+    // Buscar información en encabezados personalizados
+    const prismicSecret = request.headers.get('x-prismic-secret');
+    const prismicType = request.headers.get('x-prismic-type');
+
+    console.log("Información de encabezados personalizados:", {
+      prismicSecret: prismicSecret ? 'Presente' : 'Ausente',
+      prismicType
     });
 
-    if (!secret || secret !== process.env.REVALIDATION_SECRET) {
+    // Verificar el secreto
+    if (prismicSecret !== process.env.REVALIDATION_SECRET) {
       console.log("Verificación del secreto fallida");
       return NextResponse.json({ message: "Token inválido" }, { status: 401 });
     }
 
     console.log("Secreto verificado correctamente");
 
-    // Prismic envía 'type' como 'types' en el webhook
-    const contentType = type || searchParams.get('types');
+    // Determinar el tipo de contenido
+    const contentType = prismicType || (body && body.type);
 
     if (!contentType) {
       console.log("Falta el tipo de contenido en la solicitud");
       return NextResponse.json({ message: "Falta el tipo de contenido" }, { status: 400 });
     }
 
-    const result = await handleRevalidation(contentType, documentId || undefined);
-    console.log("Revalidación completada:", result);
-    return NextResponse.json(result);
+    // Realizar la revalidación
+    await revalidateTag(contentType);
+    console.log("Revalidación completada para el tipo:", contentType);
+
+    return NextResponse.json({
+      revalidado: true,
+      ahora: Date.now(),
+      tipoRevalidado: contentType
+    });
   } catch (err) {
     console.error("Error durante la revalidación GET:", err);
     return NextResponse.json({ message: "Error al revalidar" }, { status: 500 });
