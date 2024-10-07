@@ -25,7 +25,7 @@ export default async function Nosotras() {
           </div>
           <div className="pt-3">
             <Link href="/">
-              <Button className="bg-white !text-blue hover:bg-[#DFE2EC] hover:text-blue">
+              <Button className="bg-white !text-blue hover:bg-[#DFE2EC] hover:text-blue active:bg-[#DFE2EC] active:text-blue">
                 Visita el Off Festival
               </Button>
             </Link>

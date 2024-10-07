@@ -13,7 +13,6 @@ interface PlaceProps {
 }
 
 export function Place({ place, treasure, color, reverse }: PlaceProps) {
-  const shouldRotate = useMemo(() => Math.random() < 0.5, []);
 
   return (
     <Fade triggerOnce>
