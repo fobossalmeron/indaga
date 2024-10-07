@@ -41,10 +41,10 @@ export const Footer = () => {
                 <FooterLink href="/rutas">Rutas</FooterLink>
               </div>
               <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">
+                <FooterLink href="/nosotras">Nosotras</FooterLink>
                 <FooterLink href="https://www.instagram.com/indagamx/">
                   Instagram
                 </FooterLink>
-                <FooterLink href="/nosotras">Nosotras</FooterLink>
               </div>
             </Fade>
           </nav>
