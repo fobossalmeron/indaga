@@ -2,6 +2,10 @@ import type { MetadataRoute } from 'next'
 import { categories } from './guia/categories'
 import { createClient } from '@/prismicio'
 
+function formatDate(date: Date): string {
+  return date.toISOString().split('.')[0] + 'Z'
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.indaga.site'
   const currentDate = new Date()
@@ -11,31 +15,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = [
     {
       url: baseUrl,
-      lastModified: currentDate,
+      lastModified: formatDate(currentDate),
       changeFrequency: 'monthly' as const,
       priority: 1,
     },
     {
       url: `${baseUrl}/happenings`,
-      lastModified: currentDate,
+      lastModified: formatDate(currentDate),
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/guia`,
-      lastModified: currentDate,
+      lastModified: formatDate(currentDate),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}/rutas`,
-      lastModified: currentDate,
+      lastModified: formatDate(currentDate),
       changeFrequency: 'weekly' as const,
       priority: 0.5,
     },
     {
       url: `${baseUrl}/nosotras`,
-      lastModified: currentDate,
+      lastModified: formatDate(currentDate),
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
@@ -43,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const categoryPages = Object.keys(categories).map(categorySlug => ({
     url: `${baseUrl}/guia/${categorySlug}`,
-    lastModified: currentDate,
+    lastModified: formatDate(currentDate),
     changeFrequency: 'daily' as const,
     priority: 0.7,
   }))
@@ -58,7 +62,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const happeningPages = happenings.map(happening => ({
     url: `${baseUrl}/happenings/${happening.uid}`,
-    lastModified: happening.last_publication_date || currentDate,
+    lastModified: happening.last_publication_date 
+      ? formatDate(new Date(happening.last_publication_date))
+      : formatDate(currentDate),
     changeFrequency: 'daily' as const,
     priority: 0.8,
   }))

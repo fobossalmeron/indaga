@@ -39,7 +39,7 @@ export default function HappeningsFull({
       : location_url;
 
   const handleShare = () => {
-    const shareText = `Echa un vistazo a este evento: ${title}`;
+    const shareText = `Te invito a: ${title}`;
     const shareUrl = window.location.href;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
       `${shareText} ${shareUrl}`,
