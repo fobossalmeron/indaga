@@ -6,6 +6,7 @@ const NavColor: Record<string, string> = {
   happenings: "fern",
   guia: "blue",
   rutas: "ocre",
+  "treasure-hunt": "blue",
 };
 
 export function useNavColor() {

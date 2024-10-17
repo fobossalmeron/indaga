@@ -95,3 +95,42 @@ html.lenis {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* Audio player */
+.audio-player.rap-container {
+	box-shadow: none;
+  max-width: 100%;
+}
+
+.audio-player.rap-container .rap-slider .rap-progress {
+	background-color: #959595;
+}
+
+.audio-player.rap-container .rap-slider .rap-progress .rap-pin {
+	background-color: #566574;
+	height: 18px;
+	width: 18px;
+	border-radius: 10px;
+}
+
+.audio-player.rap-container .rap-controls .rap-slider .rap-progress .rap-pin {
+	top: -5px;
+}
+
+.audio-player.rap-container .rap-controls .rap-slider {
+	height: 8px;
+	border-radius: 4px;
+}
+
+.audio-player.rap-container .rap-volume .rap-volume-btn.rap-volume-open path {
+	fill: #000;
+}
+
+.audio-player.rap-container .rap-volume .rap-volume-controls {
+	background-color: #e4e4e4;
+}
+
+.audio-player.rap-container .rap-volume .rap-volume-controls .rap-slider,
+.audio-player.rap-container .rap-volume .rap-volume-controls .rap-slider .rap-progress {
+	width: 8px;
+}

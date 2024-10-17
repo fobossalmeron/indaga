@@ -5238,6 +5238,7 @@ __metadata:
     prettier: "npm:^3.3.3"
     prettier-plugin-tailwindcss: "npm:^0.6.6"
     react: "npm:^18.2.0"
+    react-audio-play: "npm:^1.0.2"
     react-awesome-reveal: "npm:^4.2.14"
     react-dom: "npm:^18.2.0"
     react-hook-form: "npm:^7.53.0"
@@ -7232,6 +7233,15 @@ __metadata:
     defu: "npm:^6.1.4"
     destr: "npm:^2.0.3"
   checksum: 10c0/a2ead3b94bf033e35e4ea40d70062a09feddb8f589c3f5a8fe4e9342976974296aee9f6e9e72bd5e78e6ae4b7bc16dc244f63699fd7322c16314e3238db982c9
+  languageName: node
+  linkType: hard
+
+"react-audio-play@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "react-audio-play@npm:1.0.2"
+  peerDependencies:
+    react: ">=17"
+  checksum: 10c0/bb26e414791aca5ec1ad824a05d78cc0a395bf3c654d5df70f920b9d784c42793771ee4cfcb2f19ddc90c81886a36913a1880a2e7ecd881d05275d3743cc1d98
   languageName: node
   linkType: hard
 

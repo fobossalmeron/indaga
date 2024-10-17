@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
-import React from 'react';
+import React from "react";
 // import festival_santa_lucia from "@/assets/img/festival_santa_lucia.svg?url";
 import off_alone from "@/assets/img/off_alone.svg?url";
 import imago_delgado from "@/assets/img/imago_delgado.svg?url";
@@ -15,10 +15,10 @@ const FooterLink = ({
   href: string;
   children: React.ReactNode;
 }) => (
-  <Link href={href} className="bg-transparent px-0 py-3 relative group">
+  <Link href={href} className="group relative bg-transparent px-0 py-3">
     <span className="relative">
       {children}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue bg-opacity-80 transition-all duration-300 group-hover:w-full group-active:w-full"></span>
+      <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-blue bg-opacity-80 transition-all duration-300 group-hover:w-full group-active:w-full"></span>
     </span>
   </Link>
 );
@@ -39,6 +39,7 @@ export const Footer = () => {
                 <FooterLink href="/happenings">Happenings</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
                 <FooterLink href="/rutas">Rutas</FooterLink>
+                <FooterLink href="/treasure-hunt">Treasure Hunt</FooterLink>
               </div>
               <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">
                 <FooterLink href="/nosotras">Nosotras</FooterLink>
