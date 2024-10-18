@@ -1,41 +1,30 @@
-import { Header } from "@/app/components/Header";
+"use client";
+
 import { TSLocation } from "./TSLocation";
-import treasure_hunt_icon from "@/assets/img/hunt_icon.svg?url";
+import { Fade } from "react-awesome-reveal";
 
 const treasureLocations = [
   {
     title: "Seis Tierras",
-    audioSrc: "/audio/seis-tierras.mp3",
+    audioSrc: "/audio/test.ogg",
     logoSrc: "/img/seis-tierras-logo.svg",
-  },
-
-  {
-    title: "Ray Bar",
-    audioSrc: "/audio/ray-bar.mp3",
-    logoSrc: "/img/ray-bar-logo.svg",
   },
   {
     title: "Taller Vegánico",
     audioSrc: "/audio/taller-veganico.mp3",
     logoSrc: "/img/taller-veganico-logo.svg",
   },
+  {
+    title: "Ray Bar",
+    audioSrc: "/audio/ray-bar.mp3",
+    logoSrc: "/img/ray-bar-logo.svg",
+  },
 ];
 
 export default function TreasureHunt() {
-  return (
-    <>
-      <Header
-        title="Treasure Hunt"
-        subtitle="Descubre nuevas historias"
-        image={treasure_hunt_icon}
-      />
-      <div className="mx-auto flex w-full max-w-[1020px] flex-col items-center pb-24">
-        <div className="mx-auto mt-8 w-full max-w-2xl">
-          {treasureLocations.map((location) => (
-            <TSLocation key={location.title} location={location} />
-          ))}
-        </div>
-      </div>
-    </>
-  );
+  return treasureLocations.map((location) => (
+    <Fade cascade damping={0.1} key={location.title}>
+      <TSLocation location={location} />
+    </Fade>
+  ));
 }

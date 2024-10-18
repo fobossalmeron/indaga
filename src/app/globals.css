@@ -46,7 +46,7 @@ a {
 }
 
 .prose {
-  p{
+  p {
     @apply mb-4;
   }
 }
@@ -60,20 +60,90 @@ a {
     l20-1 0.8s infinite linear alternate,
     l20-2 1.6s infinite linear;
 }
-@keyframes l20-1{
-   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
 }
-@keyframes l20-2{ 
-  0%    {transform:scaleY(1)  rotate(0deg)}
-  49.99%{transform:scaleY(1)  rotate(135deg)}
-  50%   {transform:scaleY(-1) rotate(0deg)}
-  100%  {transform:scaleY(-1) rotate(-135deg)}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
 }
 
 html.lenis {
@@ -98,39 +168,66 @@ html.lenis {
 
 /* Audio player */
 .audio-player.rap-container {
-	box-shadow: none;
+  box-shadow: none;
   max-width: 100%;
+  padding: 0;
+  height:unset;
+}
+.audio-player.rap-container .rap-pp-button {
+  @apply bg-blue;
+  padding: 10px;
+  border-radius: 40px;
+  height: 45px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 15px;
+    height: 15px;
+    path {
+      fill: white;
+    }
+  }
 }
 
 .audio-player.rap-container .rap-slider .rap-progress {
-	background-color: #959595;
+  background-color: #959595;
 }
 
 .audio-player.rap-container .rap-slider .rap-progress .rap-pin {
-	background-color: #566574;
-	height: 18px;
-	width: 18px;
-	border-radius: 10px;
+  background-color: #566574;
+  height: 18px;
+  width: 18px;
+  border-radius: 10px;
 }
-
+.audio-player.rap-container .rap-controls {
+  margin-right: 0;
+}
 .audio-player.rap-container .rap-controls .rap-slider .rap-progress .rap-pin {
-	top: -5px;
+  top: -8px;
+  @apply bg-blue;
 }
 
 .audio-player.rap-container .rap-controls .rap-slider {
-	height: 8px;
-	border-radius: 4px;
+  height: 2px;
+  border-radius: 4px;
+  @apply bg-blue;
 }
 
 .audio-player.rap-container .rap-volume .rap-volume-btn.rap-volume-open path {
-	fill: #000;
+  fill: #000;
 }
 
-.audio-player.rap-container .rap-volume .rap-volume-controls {
-	background-color: #e4e4e4;
+.audio-player.rap-container .rap-volume {
+  display: none;
 }
 
 .audio-player.rap-container .rap-volume .rap-volume-controls .rap-slider,
-.audio-player.rap-container .rap-volume .rap-volume-controls .rap-slider .rap-progress {
-	width: 8px;
+.audio-player.rap-container
+  .rap-volume
+  .rap-volume-controls
+  .rap-slider
+  .rap-progress {
+  width: 8px;
 }
