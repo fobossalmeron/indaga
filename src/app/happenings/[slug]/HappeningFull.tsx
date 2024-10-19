@@ -82,31 +82,31 @@ export default function HappeningsFull({
                 <p>@{location_name}</p>
               </PrismicNextLink>
             </div>
-            <div className="dangerous-links leading-5">
-              <PrismicRichText field={description} />
-            </div>
-            <div className="flex flex-col gap-4 mt-6 ">
-              {time && (
-                <div className="relative rounded-xl border-2 border-yellow-200 px-4 py-3">
-                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-yellow-800">
-                    Horarios
+            <div className="mt-3 flex flex-row flex-wrap gap-4">
+              {time && time.length > 0 && (
+                <div className="relative rounded-xl border-2 border-blue px-4 py-3">
+                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-blue">
+                    Horario
                   </h3>
-                  <div className="dangerous-links mt-2 leading-6 text-yellow-700">
+                  <div className="dangerous-links mt-2 leading-6 text-blue">
                     <PrismicRichText field={time} />
                   </div>
                 </div>
               )}
 
-              {cost && (
-                <div className="relative rounded-xl border-2 border-orange-200 px-4 py-3">
-                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-orange-800">
+              {cost && cost.length > 0 && (
+                <div className="relative rounded-xl border-2 border-gray-300 px-4 py-3">
+                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-gray-700">
                     Costo
                   </h3>
-                  <div className="dangerous-links mt-2 leading-6 text-orange-700">
+                  <div className="dangerous-links mt-2 leading-6 text-gray-600">
                     <PrismicRichText field={cost} />
                   </div>
                 </div>
               )}
+            </div>
+            <div className="dangerous-links leading-5">
+              <PrismicRichText field={description} />
             </div>
 
             <div className="flex w-full flex-col gap-2 xsm:flex-row">

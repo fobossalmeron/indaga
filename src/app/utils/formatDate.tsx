@@ -1,8 +1,20 @@
 export const formatDate = (date: string): string => {
-    const transformedDate = new Date(date);
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric' };
-    const formattedDate: string = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(transformedDate);
-    const day: number = transformedDate.getDate();
-    const month: string = String(transformedDate.getMonth() + 1).padStart(2, '0'); // Mes en formato 2 dígitos
-    return `${formattedDate} ${day}.${month}`;
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: 'America/Monterrey',
+    weekday: 'long',
+    day: 'numeric',
+    month: '2-digit',
+    year: 'numeric',
   };
+
+  const [year, month, day] = date.split('-').map(Number);
+  const transformedDate = new Date(year, month - 1, day);
+
+  const formatter = new Intl.DateTimeFormat('es-ES', options);
+  const formattedDate = formatter.format(transformedDate);
+
+  const [weekday, dayMonth] = formattedDate.split(', ');
+  const [formattedDay, formattedMonth] = dayMonth.split('/');
+
+  return `${weekday} ${formattedDay}.${formattedMonth}`;
+};

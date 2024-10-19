@@ -20,6 +20,7 @@ export async function generateMetadata({
       params.slug,
     );
 
+
     if (!event) {
       return {
         title: "Evento no encontrado",
