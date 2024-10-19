@@ -21,6 +21,8 @@ export function RouteCard({
             fill={true}
             alt=""
             field={image}
+            loader={undefined}
+            sizes="(max-width: 640px) 100vw, 50vw"
             style={{ objectFit: "cover" }}
           />
       </div>

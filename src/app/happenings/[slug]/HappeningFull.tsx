@@ -53,10 +53,12 @@ export default function HappeningsFull({
         <div className="mx-auto mt-8 flex max-w-[920px] flex-col overflow-hidden rounded-3xl bg-white sm:mt-16 md:flex-row">
           <div className="relative min-h-60 w-full bg-gray-200 md:w-1/2 md:max-w-[460px]">
             <PrismicNextImage
-              fill={true}
+              fill
               alt=""
               field={image}
-              priority={true}
+              loader={undefined}
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: "cover" }}
             />
           </div>
@@ -96,7 +98,7 @@ export default function HappeningsFull({
           </div>
         </div>
       </div>
-      <div className="absolute -bottom-1/4 -right-[11%] z-[0] animate-fadeIn4 hidden lg:block">
+      <div className="absolute -bottom-1/4 -right-[11%] z-[0] hidden animate-fadeIn4 lg:block">
         <Image src={blob_happening} alt="" aria-hidden="true" />
       </div>
     </>

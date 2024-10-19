@@ -22,6 +22,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
             alt={`Imagen de ${title}`}
             fill={true}
             loading="lazy"
+            sizes="(max-width: 640px) 100vw, 33vw"
             style={{ objectFit: "cover" }}
             className="transition-transform duration-300 group-hover:scale-105 group-active:scale-105"
           />
