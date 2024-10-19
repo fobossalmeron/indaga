@@ -10,7 +10,8 @@
         "type": "Text",
         "config": {
           "label": "Nombre",
-          "placeholder": ""
+          "placeholder": "", 
+          "useAsTitle": true
         }
       },
       "uid": {
@@ -41,6 +42,15 @@
             "Espacios de Arte",
             "Restaurantes"
           ]
+        }
+      },
+      "link": {
+        "type": "Link",
+        "config": {
+          "label": "Link",
+          "placeholder": "https://... ",
+          "allowTargetBlank": true,
+          "select": "web"
         }
       }
     }

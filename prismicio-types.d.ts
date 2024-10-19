@@ -220,6 +220,17 @@ interface LugarDocumentData {
     | "Espacios de Arte"
     | "Restaurantes"
   >;
+
+  /**
+   * Link field in *Lugar*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: A maps, web o instagram
+   * - **API ID Path**: lugar.link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
 }
 
 /**

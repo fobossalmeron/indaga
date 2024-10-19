@@ -8,7 +8,7 @@ import { categories } from "../categories";
 import { CloudCTA } from "../CloudCTA";
 import { Place } from "./Place";
 import { TreasureMessage } from "./TreasureMessage";
-
+import { LinkField } from "@prismicio/client";
 export default async function Categoria({
   params,
 }: {
@@ -65,6 +65,7 @@ export default async function Categoria({
                   place={lugar.data.nombre as string}
                   treasure={lugar.data.treasure_hunt as boolean}
                   color={color}
+                  link={lugar.data.link as LinkField}
                   reverse={index % 2 === 0}
                 />
               ))}

@@ -23,7 +23,10 @@ export default function HappeningsFull({
     location_name,
     location_url,
     date,
+    end_date,
     description,
+    time,
+    cost,
   } = event.data;
 
   const validatedLocationUrl =
@@ -68,8 +71,9 @@ export default function HappeningsFull({
               <h2 className="text-3xl sm:text-4xl">{title}</h2>
             </div>
             <div className="flex flex-col items-start gap-2">
-              <p className="text-2xl capitalize sm:text-4xl">
+              <p className="text-2xl capitalize sm:text-3xl">
                 {formatDate(date ?? "1-1-2024")}
+                {end_date && ` - ${formatDate(end_date)}`}
               </p>
               <PrismicNextLink
                 field={validatedLocationUrl}
@@ -80,6 +84,29 @@ export default function HappeningsFull({
             </div>
             <div className="dangerous-links leading-5">
               <PrismicRichText field={description} />
+            </div>
+            <div className="flex flex-col gap-4 mt-6 ">
+              {time && (
+                <div className="relative rounded-xl border-2 border-yellow-200 px-4 py-3">
+                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-yellow-800">
+                    Horarios
+                  </h3>
+                  <div className="dangerous-links mt-2 leading-6 text-yellow-700">
+                    <PrismicRichText field={time} />
+                  </div>
+                </div>
+              )}
+
+              {cost && (
+                <div className="relative rounded-xl border-2 border-orange-200 px-4 py-3">
+                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-orange-800">
+                    Costo
+                  </h3>
+                  <div className="dangerous-links mt-2 leading-6 text-orange-700">
+                    <PrismicRichText field={cost} />
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex w-full flex-col gap-2 xsm:flex-row">

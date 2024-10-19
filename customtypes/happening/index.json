@@ -10,7 +10,8 @@
         "type": "Text",
         "config": {
           "placeholder": "",
-          "label": "Título"
+          "label": "Título",
+          "useAsTitle": true
         }
       },
       "uid": {
@@ -53,7 +54,7 @@
         "type": "StructuredText",
         "config": {
           "label": "Horario",
-          "placeholder": "12:00hrs ",
+          "placeholder": "12:00hrs",
           "allowTargetBlank": true,
           "multi": "paragraph,strong,em,list-item,o-list-item"
         }

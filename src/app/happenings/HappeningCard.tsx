@@ -5,13 +5,12 @@ import { Content } from "@prismicio/client";
 import { Category } from "@/app/components/Category";
 import { Fade } from "react-awesome-reveal";
 import { formatDate } from "@/app/utils/formatDate";
-import { truncate } from "@/app/utils/truncate";
 
 interface HappeningCardProps
   extends Omit<Content.HappeningDocument, "description"> {}
 
 export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
-  const { category, title, location_name, date, image } = data;
+  const { category, title, location_name, date, image, end_date } = data;
 
   return (
     <article className="group flex h-full w-full flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md active:shadow-md sm:w-[305px]">
@@ -44,8 +43,9 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
           </div>
           <div className="flex flex-col">
             <Fade delay={350}>
-              <p className="mb-4 text-2xl capitalize">
+              <p className="mb-4 text-xl capitalize">
                 {formatDate(date ?? "01/01/2024")}
+                {end_date && ` - ${formatDate(end_date)}`}
               </p>
               <Button fullWidth>Ver evento</Button>
             </Fade>
