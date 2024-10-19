@@ -24,10 +24,6 @@ export const treasureLocations = [
     file: "blackcoffee",
   },
   {
-    title: "Canto",
-    file: "canto",
-  },
-  {
     title: "Cuadro Chico",
     file: "cuadrochico",
   },
@@ -36,20 +32,12 @@ export const treasureLocations = [
     file: "cuartodeservicio",
   },
   {
-    title: "Dolores Canta",
-    file: "dolorescanta",
-  },
-  {
     title: "Gargantúa",
     file: "gargantua",
   },
   {
     title: "Gotxikoa",
     file: "gotxikoa",
-  },
-  {
-    title: "Laszlo",
-    file: "laszlo",
   },
   {
     title: "Liminal",
@@ -76,10 +64,6 @@ export const treasureLocations = [
     file: "saxy",
   },
   {
-    title: "Seis Tierras",
-    file: "seistierras",
-  },
-  {
     title: "La Suculenta",
     file: "suculenta",
   },
@@ -90,10 +74,6 @@ export const treasureLocations = [
   {
     title: "Taller Vegánico",
     file: "tallerveganico",
-  },
-  {
-    title: "Villa Encantada",
-    file: "villaencantada",
   },
   {
     title: "Zig Zag",

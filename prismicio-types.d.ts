@@ -78,7 +78,9 @@ interface HappeningDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  category: prismic.SelectField<"Arte" | "Cultura" | "Música" | "Gastronomía">;
+  category: prismic.SelectField<
+    "Arte" | "Cultura" | "Música" | "Gastronomía" | "Cine"
+  >;
 
   /**
    * Fecha del evento field in *Happening*
@@ -90,6 +92,28 @@ interface HappeningDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#date
    */
   date: prismic.DateField;
+
+  /**
+   * Fecha de finalización field in *Happening*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: Si el evento tiene múltiples días
+   * - **API ID Path**: happening.end_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  end_date: prismic.DateField;
+
+  /**
+   * Horario field in *Happening*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: 12:00hrs
+   * - **API ID Path**: happening.time
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  time: prismic.RichTextField;
 
   /**
    * Descripción field in *Happening*
@@ -123,6 +147,17 @@ interface HappeningDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   location_url: prismic.LinkField;
+
+  /**
+   * Costo field in *Happening*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: $130 pesos
+   * - **API ID Path**: happening.cost
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  cost: prismic.RichTextField;
 }
 
 /**

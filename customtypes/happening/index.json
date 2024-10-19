@@ -32,7 +32,7 @@
         "config": {
           "label": "Categoria",
           "placeholder": "",
-          "options": ["Arte", "Cultura", "Música", "Gastronomía"]
+          "options": ["Arte", "Cultura", "Música", "Gastronomía", "Cine"]
         }
       },
       "date": {
@@ -40,6 +40,22 @@
         "config": {
           "label": "Fecha del evento",
           "placeholder": ""
+        }
+      },
+      "end_date": {
+        "type": "Date",
+        "config": {
+          "label": "Fecha de finalización",
+          "placeholder": "Si el evento tiene múltiples días"
+        }
+      },
+      "time": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Horario",
+          "placeholder": "12:00hrs ",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,list-item,o-list-item"
         }
       },
       "description": {
@@ -65,6 +81,15 @@
           "placeholder": "https://... ",
           "allowTargetBlank": true,
           "select": "web"
+        }
+      },
+      "cost": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Costo",
+          "placeholder": "$130 pesos",
+          "allowTargetBlank": true,
+          "multi": "paragraph,em,list-item,o-list-item,strong"
         }
       }
     }

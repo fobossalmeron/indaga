@@ -14,9 +14,9 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
   const { category, title, location_name, date, image } = data;
 
   return (
-    <article className="group flex h-full w-full sm:w-[305px] flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md active:shadow-md">
+    <article className="group flex h-full w-full flex-col overflow-hidden rounded-3xl bg-white shadow-transparent transition-all duration-300 ease-in-out hover:shadow-md active:shadow-md sm:w-[305px]">
       <div className="relative h-full max-h-[130px] min-h-[130px] w-full overflow-hidden bg-gray-200">
-        <Fade delay={100} triggerOnce className="h-full absolute w-full">
+        <Fade delay={100} triggerOnce className="absolute h-full w-full">
           <Image
             src={image?.url ?? ""}
             alt={`Imagen de ${title}`}
@@ -32,8 +32,13 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
         <Fade delay={250}>
           <div className="flex flex-col items-start gap-2">
             <Category category={category ?? "Arte"} />
-            <h2 className="text-2xl leading-tight">
-              {truncate(title ?? "Error en título", 40)}
+            <h2 
+              className="text-2xl leading-tight 
+                         sm:overflow-hidden sm:max-w-full
+                         sm:[display:-webkit-box] sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]"
+              title={title ?? "Error en título"}
+            >
+              {title ?? "Error en título"}
             </h2>
             <p className="text-blue underline">@{location_name}</p>
           </div>
