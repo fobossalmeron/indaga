@@ -25,7 +25,7 @@ export const categories = {
     bgImage: bares,
   },
   "musica-en-vivo": {
-    title: "Música en Vivo",
+    title: "Música en Vivo", 
     color: "guiaPurple",
     image: <Musica />,
     bgImage: musica,

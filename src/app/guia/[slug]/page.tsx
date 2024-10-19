@@ -26,6 +26,11 @@ export default async function Categoria({
       ],
     });
 
+    // Ordenar los lugares alfabéticamente por nombre
+    const lugaresOrdenados = lugares.sort((a, b) =>
+      (a.data.nombre as string).localeCompare(b.data.nombre as string)
+    );
+
     if (!Object.keys(categories).includes(params.slug)) {
       notFound();
     }
@@ -54,7 +59,7 @@ export default async function Categoria({
           <div className="relative z-0 col-span-12 col-start-1 row-start-2 grid animate-fadeIn4 grid-cols-subgrid place-items-center sm:col-span-8 sm:col-start-5">
             <TextBubble className="col-span-12 col-start-1 row-start-1 h-full w-full min-w-[420px] text-eerie" />
             <div className="align col-span-7 col-start-5 row-start-1 flex flex-col gap-2 py-4 pb-2 text-white sm:col-start-3 md:gap-4 md:pb-4">
-              {lugares.map((lugar, index) => (
+              {lugaresOrdenados.map((lugar, index) => (
                 <Place
                   key={lugar.data.nombre}
                   place={lugar.data.nombre as string}

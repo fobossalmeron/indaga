@@ -181,7 +181,7 @@ interface LugarDocumentData {
     | "Bares & Cantinas"
     | "Monumentos Históricos"
     | "Cafeterías"
-    | "Música en vivo"
+    | "Música en Vivo"
     | "Espacios de Arte"
     | "Restaurantes"
   >;
