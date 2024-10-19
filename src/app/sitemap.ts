@@ -62,9 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const happeningPages = happenings.map(happening => ({
     url: `${baseUrl}/happenings/${happening.uid}`,
-    lastModified: happening.last_publication_date 
-      ? formatDate(new Date(happening.last_publication_date))
-      : formatDate(currentDate),
+    lastModified: formatDate(currentDate),
     changeFrequency: 'daily' as const,
     priority: 0.8,
   }))
