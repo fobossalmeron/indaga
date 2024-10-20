@@ -16,7 +16,7 @@ export const CloudCTA: React.FC<CloudCTAProps> = ({
       <div className="relative flex h-[120px] justify-center text-2xl font-medium text-inherit xsm:h-[150px] md:h-[215px] transition-all duration-300">
         {full && <CAL className="h-full transition-all duration-300" />}
         <a
-          href="/guia.pdf"
+          href="/INDAGA_GUIA_2024v0.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className={`grid place-items-center text-inherit transition-all duration-300 active:scale-95 [&>*]:col-start-1 [&>*]:row-start-1 hover:text-${hoverStroke} active:text-${hoverStroke} group`}
