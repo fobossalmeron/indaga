@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { AudioPlayer } from "react-audio-play";
 import Image from "next/image";
 
 export function TreasureLocation({
   location,
 }: {
-  location: { title: string; file: string };
+  location: { title: string; file: string; spotify: string };
 }) {
   const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
   const [hasRendered, setHasRendered] = useState(false);
@@ -46,18 +45,26 @@ export function TreasureLocation({
         </div>
       </button>
       <div
-        className={`col-span-2 col-start-1 row-start-2 overflow-hidden transition-all duration-500 ease-in-out sm:col-span-1 sm:col-start-2 ${
+        className={`relative col-span-2 col-start-1 row-start-2 overflow-hidden rounded-xl transition-all duration-500 ease-in-out sm:col-span-1 sm:col-start-2 ${
           expandedLocation === location.title
             ? "max-h-[800px] pb-4 pt-2 opacity-100 sm:py-0"
             : "max-h-0 opacity-0"
         }`}
       >
         {(hasRendered || expandedLocation === location.title) && (
-          <AudioPlayer
-            src={`/treasure-hunt/audio/${location.file}.ogg`}
-            className="audio-player w-full max-w-full"
-            backgroundColor="#F4F5F4"
-          />
+          <>
+            <div className="absolute left-0 top-0 z-0 h-[152px] w-full animate-pulse bg-gray-300 mt-2 sm:my-0 rounded-xl"></div>
+            <iframe
+              style={{ borderRadius: "12px" }}
+              src={`https://open.spotify.com/embed/episode/${location.spotify}`}
+              width="100%"
+              height="152"
+              allowFullScreen={false}
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              className="relative z-10 rounded-xl"
+            />
+          </>
         )}
       </div>
     </div>
