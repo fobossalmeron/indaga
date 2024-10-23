@@ -22,7 +22,7 @@ export const treasureLocations = [
   {
     title: "Bengala",
     file: "bengala",
-    spotify: "",
+    spotify: "0wAzxQeSDwHr2Fl2jEfjua",
   },
   {
     title: "Black Coffee",
@@ -47,7 +47,7 @@ export const treasureLocations = [
   {
     title: "Gotxikoa",
     file: "gotxikoa",
-    spotify: "",
+    spotify: "5ao0y0iy9MZdnlJmsMpD9O",
   },
   {
     title: "Liminal",
@@ -92,7 +92,7 @@ export const treasureLocations = [
   {
     title: "Taller Vegánico",
     file: "tallerveganico",
-    spotify: "",
+    spotify: "0bceKjyfzekGfDUsViPMuQ",
   },
   {
     title: "Zig Zag",
