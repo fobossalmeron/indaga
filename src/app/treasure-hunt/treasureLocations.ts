@@ -7,7 +7,7 @@ export const treasureLocations = [
   {
     title: "Armario 916",
     file: "armario916",
-    spotify: "",
+    spotify: "5Dcg8qsNffzdik5tdBd488",
   },
   {
     title: "Bar 1900",
@@ -27,17 +27,17 @@ export const treasureLocations = [
   {
     title: "Black Coffee",
     file: "blackcoffee",
-    spotify: "",
+    spotify: "6900UrPSQgnFbGaf8TYs4S",
   },
   {
     title: "Cuadro Chico",
     file: "cuadrochico",
-    spotify: "",
+    spotify: "28R7vROddQAt9gFf96Vzgs",
   },
   {
     title: "Cuarto de Servicio",
     file: "cuartodeservicio",
-    spotify: "",
+    spotify: "31PbBxOKH1TOgdtfntn0z9",
   },
   {
     title: "Gargantúa",
@@ -52,7 +52,7 @@ export const treasureLocations = [
   {
     title: "Liminal",
     file: "liminal",
-    spotify: "",
+    spotify: "4TflLGurzoj4LnDjlFuk4V",
   },
   {
     title: "Maverick",
@@ -97,6 +97,8 @@ export const treasureLocations = [
   {
     title: "Zig Zag",
     file: "zigzag",
-    spotify: "",
+    spotify: "4Ewf0CsJr51TxpoTgWwS1q",
   },
+  //Fortuita Café, 1JQiE1Hui8r1cCg86SM3vS
+  //Almacen 42, 35YmStMzR1xR4F6N3GmawJ
 ];
