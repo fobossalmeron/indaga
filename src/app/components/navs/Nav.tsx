@@ -35,7 +35,7 @@ export const Nav = () => {
           </ul>
         </nav>
         <div className="hidden xsm:block animate-fadeSimple">
-          <a href="/INDAGA_GUIA_2024v1.pdf" target="_blank">
+          <a href="/INDAGA_GUIA_2024v2.pdf" target="_blank">
             <Button thin>
               Descarga la guía
             </Button>
