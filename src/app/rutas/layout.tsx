@@ -10,8 +10,8 @@ export default function RutasLayout({
     <>
       <Header
         title="Rutas culturales"
-        subtitle="El camino al neoleonés"
-        image={rutas_icon}
+        // subtitle="El camino al neoleonés"
+        // image={rutas_icon}
       />
       <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24 items-center">
         {children}

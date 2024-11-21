@@ -12,7 +12,7 @@ const NavColor: Record<string, string> = {
 export function useNavColor() {
   const pathname = usePathname();
 
-  const color = Object.entries(NavColor).find(([route]) => pathname.includes(route))?.[1] || "eerie";
+  const color = Object.entries(NavColor).find(([route]) => pathname.includes(route))?.[1] || "fern";
 
   return `text-${color}`;
 }

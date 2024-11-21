@@ -15,8 +15,8 @@ const general_sans = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://indaga.site"),
-  title: "Descubre el Off Fest - Indaga",
-  description: "Encuentra eventos y una guía de la ciudad para disfrutar la temporada del Festival Santa Lucía.",
+  title: "Descubre la ciudad - Indaga",
+  description: "Encuentra eventos y una guía de la ciudad para disfrutar la temporada.",
   openGraph: {
     images: "/opengraph-image.png",
   },

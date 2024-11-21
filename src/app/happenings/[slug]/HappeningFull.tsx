@@ -8,8 +8,6 @@ import ShareArrow from "@/assets/img/whatsapp.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Content, LinkField } from "@prismicio/client";
-import blob_happening from "@/assets/img/blob_happening.svg?url";
-import Image from "next/image";
 
 export default function HappeningsFull({
   event,
@@ -51,7 +49,6 @@ export default function HappeningsFull({
   };
 
   return (
-    <>
       <div className="z-10 animate-fadeIn2 px-4">
         <div className="mx-auto mt-8 flex max-w-[920px] flex-col overflow-hidden rounded-3xl bg-white sm:mt-16 md:flex-row">
           <div className="relative min-h-60 w-full bg-gray-200 md:w-1/2 md:max-w-[460px]">
@@ -77,18 +74,18 @@ export default function HappeningsFull({
               </p>
               <PrismicNextLink
                 field={validatedLocationUrl}
-                className="text-lg font-medium text-blue underline sm:text-xl"
+                className="text-lg font-medium text-fern underline sm:text-xl"
               >
                 <p>@{location_name}</p>
               </PrismicNextLink>
             </div>
             <div className="mt-3 flex flex-row flex-wrap gap-4">
               {time && time.length > 0 && (
-                <div className="relative rounded-xl border-2 border-blue px-4 py-3">
-                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-blue">
+                <div className="relative rounded-xl border-2 border-fern px-4 py-3">
+                  <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-fern">
                     Horario
                   </h3>
-                  <div className="dangerous-links mt-2 leading-6 text-blue">
+                  <div className="dangerous-links mt-2 leading-6 text-fern">
                     <PrismicRichText field={time} />
                   </div>
                 </div>
@@ -125,9 +122,5 @@ export default function HappeningsFull({
           </div>
         </div>
       </div>
-      <div className="absolute -bottom-1/4 -right-[11%] z-[0] hidden animate-fadeIn4 lg:block">
-        <Image src={blob_happening} alt="" aria-hidden="true" />
-      </div>
-    </>
   );
 }

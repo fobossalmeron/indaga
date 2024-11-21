@@ -46,7 +46,9 @@ module.exports = {
         '2xl': '1650px',
       },
       colors: {
-        fern: "#527442",
+        fern: "#00808B",
+        indagaBlue: "#00808B",
+        indagaBrown: "#956D4C",
         offwhite: "#F4F5F4",
         ocre: "#DA7829",
         blue: "#465FC0",

@@ -39,7 +39,7 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
             >
               {title ?? "Error en título"}
             </h2>
-            <p className="text-blue underline">@{location_name}</p>
+            <p className="text-indagaBlue underline">@{location_name}</p>
           </div>
           <div className="flex flex-col">
             <Fade delay={350}>

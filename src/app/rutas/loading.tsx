@@ -1,11 +1,6 @@
-import FraseRutasSkeleton from "@/assets/img/frase_rutas_skeleton.svg";
-
 export default function Loading() {
   return (
     <div className="animate-fadeIn">
-      <div className="flex justify-center">
-        <FraseRutasSkeleton />
-      </div>
       <div className="mt-16 flex min-h-[500px] w-full flex-wrap justify-center gap-8 pb-24">
         {[...Array(6)].map((_, index) => (
           <div

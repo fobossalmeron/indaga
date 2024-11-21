@@ -1,11 +1,6 @@
-import FechasHappeningsSkeleton from "@/assets/img/fechas_happenings_skeleton.svg";
-
 export default function Loading() {
   return (
     <div className="flex w-full animate-fadeIn flex-col items-center">
-      <div className="flex h-[153px] w-[284px] justify-center">
-        <FechasHappeningsSkeleton />
-      </div>
       <div className="relative mt-16 flex flex-wrap justify-center gap-8">
         {[...Array(6)].map((_, index) => (
           <div

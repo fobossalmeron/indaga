@@ -13,9 +13,6 @@ export default async function RoutesAll() {
   return (
     <>
       <div className="flex animate-fadeIn2 justify-center px-5 text-ocre">
-        <div className="w-full max-w-[284px]">
-          <FraseRutas width="100%" />
-        </div>
       </div>
       <RoutesFull routes={routes} />
     </>

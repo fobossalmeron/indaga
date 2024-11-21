@@ -4,9 +4,7 @@ import { RouteCard } from "./RouteCard";
 import { Fade } from "react-awesome-reveal";
 import { Modal } from "@/app/components/Modal";
 import { Button } from "@/app/components/Button";
-import Image from "next/image";
 import { Content } from "@prismicio/client";
-import rutas_blob from "@/assets/img/rutas_blob.svg?url";
 
 export default function RoutesFull({
   routes,
@@ -26,10 +24,7 @@ export default function RoutesFull({
   return (
     <>
       <div className="relative mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 px-5">
-        <Fade triggerOnce delay={500} className="absolute -right-[22%] top-1/2 z-0 hidden lg:block">
-          <Image src={rutas_blob} alt="" aria-hidden="true" />
-        </Fade>
-        <Fade cascade damping={0.1}>
+        <Fade>
           {routes &&
             routes.map((route, index) => (
             <RouteCard
