@@ -10,23 +10,21 @@
         "type": "Text",
         "config": {
           "label": "Nombre",
-          "placeholder": "", 
+          "placeholder": "",
           "useAsTitle": true
+        }
+      },
+      "area": {
+        "type": "Text",
+        "config": {
+          "label": "Área de la ciudad",
+          "placeholder": "Centro de monterrey"
         }
       },
       "uid": {
         "type": "UID",
         "config": {
           "label": "UID"
-        }
-      },
-      "treasure_hunt": {
-        "type": "Boolean",
-        "config": {
-          "label": "Treasure Hunt",
-          "placeholder_false": "No",
-          "placeholder_true": "Si",
-          "default_value": false
         }
       },
       "categoria": {
@@ -51,6 +49,24 @@
           "placeholder": "https://... ",
           "allowTargetBlank": true,
           "select": "web"
+        }
+      },
+      "mapLink": {
+        "type": "Link",
+        "config": {
+          "label": "Link de mapa",
+          "placeholder": "Google maps url",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "capsuleLink": {
+        "type": "Link",
+        "config": {
+          "label": "Link de cápsula",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "select": null
         }
       }
     }

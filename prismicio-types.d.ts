@@ -192,16 +192,15 @@ interface LugarDocumentData {
   nombre: prismic.KeyTextField;
 
   /**
-   * Treasure Hunt field in *Lugar*
+   * Área de la ciudad field in *Lugar*
    *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: lugar.treasure_hunt
+   * - **Field Type**: Text
+   * - **Placeholder**: Centro de monterrey
+   * - **API ID Path**: lugar.area
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#boolean
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  treasure_hunt: prismic.BooleanField;
+  area: prismic.KeyTextField;
 
   /**
    * Categoria field in *Lugar*
@@ -225,12 +224,34 @@ interface LugarDocumentData {
    * Link field in *Lugar*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: A maps, web o instagram
+   * - **Placeholder**: https://...
    * - **API ID Path**: lugar.link
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField;
+
+  /**
+   * Link de mapa field in *Lugar*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Google maps url
+   * - **API ID Path**: lugar.mapLink
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  mapLink: prismic.LinkField;
+
+  /**
+   * Link de cápsula field in *Lugar*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lugar.capsuleLink
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  capsuleLink: prismic.LinkField;
 }
 
 /**

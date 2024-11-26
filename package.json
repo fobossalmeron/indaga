@@ -20,10 +20,10 @@
     "lenis": "^1.1.13",
     "next": "^15.0.3",
     "next-nprogress-bar": "^2.3.13",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-audio-play": "^1.0.2",
     "react-awesome-reveal": "^4.2.14",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0"
   },
   "devDependencies": {

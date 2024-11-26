@@ -5440,10 +5440,10 @@ __metadata:
     postcss: "npm:^8.4.45"
     prettier: "npm:^3.3.3"
     prettier-plugin-tailwindcss: "npm:^0.6.6"
-    react: "npm:^18.2.0"
+    react: "npm:^18.3.1"
     react-audio-play: "npm:^1.0.2"
     react-awesome-reveal: "npm:^4.2.14"
-    react-dom: "npm:^18.2.0"
+    react-dom: "npm:^18.3.1"
     react-hook-form: "npm:^7.53.0"
     slice-machine-ui: "npm:^2.7.1"
     tailwindcss: "npm:^3.4.10"
@@ -7471,7 +7471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
+"react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
   dependencies:
@@ -7519,7 +7519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:

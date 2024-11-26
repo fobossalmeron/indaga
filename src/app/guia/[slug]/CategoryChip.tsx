@@ -1,15 +1,12 @@
 "use client";
 
 import { categories } from "../categories";
-import { Button } from "@/app/components/Button";
-import BackArrow from "@/assets/img/back_arrow.svg";
-import Link from "next/link";
 
 export function CategoryChip({ slug }: { slug: string }) {
   const category = categories[slug as keyof typeof categories];
 
   return (
-    <>
+    <div id="category-chip" className="flex flex-col items-start w-full p-6 pt-0 gap-10">
       <div
         className={`flex items-center gap-2 rounded-full bg-${category.color} animate-fadeIn py-3 pl-5 pr-8`}
       >
@@ -18,12 +15,6 @@ export function CategoryChip({ slug }: { slug: string }) {
         </div>
         <h2 className="text-2xl text-white">{category.title}</h2>
       </div>
-      <Link href="/guia" className="animate-fadeIn2">
-        <Button secondary thin className="gap-3 pl-4 pr-4">
-          <BackArrow />
-          Volver a las categorías
-        </Button>
-      </Link>
-    </>
+      </div>
   );
 }

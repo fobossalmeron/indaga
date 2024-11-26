@@ -1,54 +1,65 @@
 "use client";
-import Image from "next/image";
-import OffEl from "@/assets/img/off_el.svg";
-import diamond from "@/assets/img/diamond.svg?url";
 import { Fade } from "react-awesome-reveal";
 import { PrismicNextLink } from "@prismicio/next";
-import { LinkField } from "@prismicio/client";
-
+import { LinkField, isFilled } from "@prismicio/client";
+import { Button } from "@/app/components/Button";
+import MapIcon from "@/assets/img/map.svg";
+import GlobeIcon from "@/assets/img/globe.svg";
 interface PlaceProps {
   place: string;
-  treasure: boolean;
   color: string;
-  reverse?: boolean;
+  area: string;
+  mapLink?: LinkField;
   link?: LinkField;
+  capsuleLink?: LinkField;
 }
 
-export function Place({ place, treasure, color, reverse, link }: PlaceProps) {
-  const content = (
-    <>
-      {treasure ? (
-        <Image src={diamond} alt="Treasure Hunt" width={26} height={26} />
-      ) : (
-        <OffEl
-          className={`h-[20px] w-[20px] sm:h-[26px] sm:w-[26px] text-${color}`}
-          style={{
-            transform: reverse ? "rotate(180deg)" : "none",
-          }}
-        />
-      )}
-      <h3
-        className={`text-xl transition-colors duration-300 md:text-2xl md-lg:text-3xl lg:text-4xl ${link ? `hover:text-${color} active:text-${color}` : ""}`}
-      >
-        {place}
-      </h3>
-    </>
-  );
-
+export function Place({
+  place,
+  color,
+  mapLink,
+  link,
+  area,
+  capsuleLink,
+}: PlaceProps) {
   return (
     <Fade triggerOnce>
-      <div className="mb-2 flex flex-row items-center gap-4 sm:gap-6">
-        {link ? (
-          <PrismicNextLink
-            target="_blank"
-            field={link}
-            className="flex flex-row items-center gap-4 sm:gap-6"
-          >
-            {content}
-          </PrismicNextLink>
-        ) : (
-          content
-        )}
+      <div className="mb-2 flex flex-col items-start rounded-2xl bg-white p-4">
+        <span className="text-lg text-eerie">{area}</span>
+        <h3 className="text-xl transition-colors duration-300 md:text-2xl md-lg:text-3xl lg:text-5xl">
+          {place}
+        </h3>
+        <div className="flex flex-row items-center gap-3 pt-5 w-full">
+          {isFilled.link(mapLink) && (
+            <PrismicNextLink
+              field={mapLink}
+              target="_blank"
+              className={`flex flex-row items-center rounded-full p-2 bg-${color} transition-opacity duration-300 hover:opacity-80 active:opacity-80`}
+            >
+              <MapIcon className="h-8 w-8" />
+            </PrismicNextLink>
+          )}
+          {isFilled.link(link) && (
+            <PrismicNextLink
+              field={link}
+              target="_blank"
+              className="flex flex-row items-center rounded-full bg-eerie p-2 transition-opacity duration-300 hover:opacity-80 active:opacity-80"
+            >
+              <GlobeIcon className="h-8 w-8 translate-x-[1px]" />
+            </PrismicNextLink>
+          )}
+          {isFilled.link(capsuleLink) && (
+            <PrismicNextLink
+              field={capsuleLink}
+              target="_blank"
+              className="flex flex-row items-start w-full"
+            >
+              <Button secondary thin className="w-full">
+                Ver cápsula
+              </Button>
+            </PrismicNextLink>
+          )}
+        </div>
       </div>
     </Fade>
   );

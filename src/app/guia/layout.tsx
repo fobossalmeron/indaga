@@ -9,11 +9,11 @@ export default function HappeningsLayout({
   return (
     <>
       <Header
-        title="Indaga la ciudad"
-        subtitle="Espacios endémicos"
-        image={guia_icon}
+        title="Guía de la ciudad"
+        // subtitle="Espacios endémicos"
+        // image={guia_icon}
       />
-      <div className="mx-auto w-full flex max-w-[1000px] flex-col pb-24">
+      <div className="mx-auto w-full flex max-w-[1300px] flex-col pb-24">
         {children}
       </div>
     </>

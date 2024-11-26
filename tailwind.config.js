@@ -55,6 +55,7 @@ module.exports = {
         eerie: "#212322", 
         mindaro: "#CAE47C",
         guiaOrange: "#FF7434",
+        guiaGreen: "#00E9A4",
         guiaCyan: "#72DFFC",
         guiaMustard: "#F3BB44",
         guiaPurple: "#755EFA",
@@ -71,6 +72,8 @@ module.exports = {
   safelist: [
     'text-guiaOrange',
     'text-fern',
+    'text-guiaGreen',
+    'bg-guiaGreen',
     'group-hover:text-fern',
     'hover:text-guiaOrange',
     'active:text-guiaOrange',
@@ -101,5 +104,11 @@ module.exports = {
     'active:text-guiaPink',
     'hover:fill-guiaPink',
     'bg-guiaPink',
+    'group-hover:-rotate-[6deg]',
+    'group-active:-rotate-[6deg]',
+    'group-hover:rotate-6',
+    'group-active:rotate-6',
+    'group-hover:-rotate-[4deg]',
+    'group-active:-rotate-[4deg]',
   ],
 };
