@@ -72,12 +72,14 @@ export default function HappeningsFull({
                 {formatDate(date ?? "1-1-2024")}
                 {end_date && ` - ${formatDate(end_date)}`}
               </p>
-              <PrismicNextLink
-                field={validatedLocationUrl}
-                className="text-lg font-medium text-fern underline sm:text-xl"
-              >
-                <p>@{location_name}</p>
-              </PrismicNextLink>
+              {location_name && (
+                <PrismicNextLink
+                  field={validatedLocationUrl}
+                  className="text-lg font-medium text-fern underline sm:text-xl"
+                >
+                  <p>@{location_name}</p>
+                </PrismicNextLink>
+              )}
             </div>
             <div className="mt-3 flex flex-row flex-wrap gap-4">
               {time && time.length > 0 && (
@@ -91,7 +93,7 @@ export default function HappeningsFull({
                 </div>
               )}
 
-              {cost && cost.length > 0 && (
+              {cost && cost.length > 0 && cost[0]?.type === 'paragraph' && cost[0]?.text !== "-" && (
                 <div className="relative rounded-xl border-2 border-gray-300 px-4 py-3">
                   <h3 className="absolute -top-2 left-2 bg-white px-2 text-sm font-medium uppercase tracking-wider text-gray-700">
                     Costo

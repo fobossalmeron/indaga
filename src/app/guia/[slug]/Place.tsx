@@ -25,8 +25,8 @@ export function Place({
   return (
     <Fade triggerOnce>
       <div className="mb-2 flex flex-col items-start rounded-2xl bg-white p-4">
-        <span className="text-lg text-eerie">{area}</span>
-        <h3 className="text-xl transition-colors duration-300 md:text-2xl md-lg:text-3xl lg:text-5xl">
+        <span className="text-base md-lg:text-xl text-eerie">{area}</span>
+        <h3 className="transition-colors duration-300 text-2xl sm:text-3xl lg:text-5xl">
           {place}
         </h3>
         <div className="flex flex-row items-center gap-3 pt-5 w-full">
@@ -54,7 +54,7 @@ export function Place({
               target="_blank"
               className="flex flex-row items-start w-full"
             >
-              <Button secondary thin className="w-full">
+              <Button secondary thin className="w-full min-w-[137px]">
                 Ver cápsula
               </Button>
             </PrismicNextLink>

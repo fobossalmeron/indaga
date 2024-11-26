@@ -23,7 +23,7 @@ export default function RoutesFull({
 
   return (
     <>
-      <div className="relative mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 px-5">
+      <div className="relative mt-10 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 px-5">
         <Fade>
           {routes &&
             routes.map((route, index) => (

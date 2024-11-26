@@ -10,19 +10,22 @@ import { Button } from "@/app/components/Button";
 import BackArrow from "@/assets/img/back_arrow.svg";
 import Link from "next/link";
 
-export default async function Categoria({
+type Params = Promise<{ slug: string }>
+
+export default async function GuiaPage({
   params,
 }: {
-  params: { slug: string };
+  params: Params
 }) {
   const client = createClient();
+  const { slug } = await params;
 
   try {
     const lugares = await client.getAllByType("lugar", {
       filters: [
         prismic.filter.at(
           "my.lugar.categoria",
-          categories[params.slug as keyof typeof categories]?.title ?? "",
+          categories[slug as keyof typeof categories]?.title ?? "",
         ),
       ],
     });
@@ -32,15 +35,15 @@ export default async function Categoria({
       (a.data.nombre as string).localeCompare(b.data.nombre as string),
     );
 
-    if (!Object.keys(categories).includes(params.slug)) {
+    if (!Object.keys(categories).includes(slug as keyof typeof categories)) {
       notFound();
     }
 
-    const color = `${categories[params.slug as keyof typeof categories].color}`;
+    const color = `${categories[slug as keyof typeof categories].color}`;
 
     return (
-      <div className="flex max-w-[1020px] animate-fadeIn2 flex-col self-center w-full">
-        <div className="flex flex-col items-start justify-center gap-4 pl-6">
+      <div className="flex w-full max-w-[1020px] animate-fadeIn2 flex-col self-center">
+        <div className="flex flex-col items-center justify-center gap-4 px-6 lg:items-start">
           <Link href="/guia" className="animate-fadeIn2">
             <Button secondary thin className="gap-3 pl-4 pr-4">
               <BackArrow />
@@ -48,19 +51,22 @@ export default async function Categoria({
             </Button>
           </Link>
         </div>
-        <div className="relative mt-10 grid w-full grid-cols-12 grid-rows-[auto] p-2">
-          <div className="sm:z-1 relative z-10 col-span-4 col-start-1 row-start-2 w-full animate-fadeIn3 sm:col-span-6 sm:col-start-1">
-            <CategoryChip slug={params.slug} />
+        <div className="relative mt-5 grid w-full grid-cols-12 grid-rows-[64px_auto] p-5 lg:mt-10">
+          <CategoryChip
+            slug={slug}
+            className="col-span-12 col-start-1 row-start-1 w-full items-center lg:items-start"
+          />
+          <div className="sm:z-1 pointer-events-none relative z-10 col-span-4 col-start-1 row-start-2 hidden w-full animate-fadeIn3 xsm:block sm:col-span-6 sm:col-start-1">
             <Image
-              src={categories[params.slug as keyof typeof categories].bgImage}
-              alt={`Imagen de ${params.slug}`}
+              src={categories[slug as keyof typeof categories].bgImage}
+              alt={`Imagen de ${slug}`}
               width={450}
               className="h-auto w-full object-contain pt-12"
               priority
             />
           </div>
-          <div className="relative z-0 col-span-12 col-start-1 row-start-2 grid animate-fadeIn4 grid-cols-subgrid place-items-end sm:col-span-8 sm:col-start-5">
-            <div className="align col-span-7 col-start-5 row-start-1 flex flex-col gap-2 pb-2 text-eerie sm:col-start-3 md:gap-4 md:pb-4 max-w-[400px]">
+          <div className="relative z-0 col-span-12 col-start-1 row-start-2 row-end-3 grid animate-fadeIn4 grid-cols-subgrid place-items-center sm:col-span-12 sm:col-start-5 sm:place-items-end lg:row-start-1">
+            <div className="align col-span-12 col-start-1 row-start-1 flex max-w-[400px] flex-col gap-2 pb-2 pt-10 text-eerie xsm:col-span-8 xsm:col-start-5 sm:col-start-3 md:gap-4 md:pb-4 lg:pt-0">
               {lugaresOrdenados.map((lugar) => (
                 <Place
                   key={lugar.data.nombre}
@@ -81,7 +87,7 @@ export default async function Categoria({
       </div>
     );
   } catch (error) {
-    console.error(`Error al obtener el evento ${params.slug}:`, error);
+    console.error(`Error al obtener el evento ${slug}:`, error);
     notFound();
   }
 }

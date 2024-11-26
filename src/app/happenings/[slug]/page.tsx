@@ -6,20 +6,22 @@ import { Metadata } from "next";
 import { asImageSrc, asText } from "@prismicio/helpers";
 import { truncate } from "@/app/utils/truncate";
 
+type Params = Promise<{ slug: string }>
+
 // Función para generar metadatos
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Params
 }): Promise<Metadata> {
+  const { slug } = await params;
   const client = createClient();
 
   try {
     const event = await client.getByUID<Content.HappeningDocument>(
       "happening",
-      params.slug,
+      slug,
     );
-
 
     if (!event) {
       return {
@@ -50,7 +52,7 @@ export async function generateMetadata({
     };
   } catch (error) {
     console.error(
-      `Error al obtener metadatos para el evento ${params.slug}:`,
+      `Error al obtener metadatos para el evento ${slug}:`,
       error,
     );
     return {
@@ -62,14 +64,15 @@ export async function generateMetadata({
 export default async function Happening({
   params,
 }: {
-  params: { slug: string };
+  params: Params
 }) {
+  const { slug } = await params;
   const client = createClient();
 
   try {
     const event = await client.getByUID<Content.HappeningDocument>(
       "happening",
-      params.slug,
+      slug,
     );
 
     if (!event) {
@@ -78,7 +81,7 @@ export default async function Happening({
 
     return <HappeningFull event={event} />;
   } catch (error) {
-    console.error(`Error al obtener el evento ${params.slug}:`, error);
+    console.error(`Error al obtener el evento ${slug}:`, error);
     notFound();
   }
 }

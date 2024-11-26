@@ -12,7 +12,7 @@ export default async function HappeningsAll() {
       orderings: [
         {
           field: "my.happening.date",
-          direction: "asc",
+          direction: "desc",
         },
       ],
     },
