@@ -81,11 +81,6 @@ export const MobileNav = () => {
               ))}
             </ul>
           </nav>
-          <div className="mb-10">
-            <Button className="xsm:hidden" onClick={() => setIsOpen(false)}>
-              Descarga la guía
-            </Button>
-          </div>
         </div>
       </div>
     </>

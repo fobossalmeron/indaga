@@ -11,8 +11,6 @@ export default function HappeningsFull({
 }) {
   return (
     <div className="animate-fadeIn2">
-      <div className="flex justify-center px-5">
-      </div>
       <div className="relative mt-10 sm:mt-16 flex w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
         <Fade>
           {entries &&

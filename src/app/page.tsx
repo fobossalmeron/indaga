@@ -12,7 +12,7 @@ const NavLink = ({
   children: React.ReactNode;
 }) => {
   return (
-    <li className="home-link relative text-xl sm:text-2xl md:text-3xl transition-bg duration-300 hover:bg-indagaBlue/15 active:bg-indagaBlue/15 bg-indagaBlue/0 py-2 px-4 rounded-xl -translate-x-4 ">
+    <li className="home-link relative text-2xl md:text-3xl transition-bg duration-300 hover:bg-indagaBlue/15 active:bg-indagaBlue/15 bg-indagaBlue/0 py-2 px-4 rounded-xl -translate-x-4 ">
       <Link href={href}>{children}</Link>
     </li>
   );
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div className="w-full animate-fadeIn bg-[#DAF7FF] text-[#4D4E6A]">
       <div className="align-start relative z-20 flex w-full md:grid md:grid-cols-2">
-        <div className="flex w-full flex-col items-start justify-start px-8 py-36 pt-24 sm:px-[10%] md:col-start-2 md:px-2 md:pt-32 lg:pt-32">
+        <div className="flex w-full flex-col items-start justify-start px-8 py-36 pt-20 sm:pt-24 sm:px-[10%] md:col-start-2 md:px-2 md:pt-32 lg:pt-32">
           <div className="flex flex-col items-start">
             <div className="flex flex-col items-start justify-center gap-12 sm:max-w-[100%] md:min-w-[300px]">
               <div className="flex flex-col items-start gap-5">
@@ -35,7 +35,7 @@ export default function Home() {
                   className="w-[150px] animate-fadeIn2 text-indagaBlue md:w-[170px] lg:w-[200px]"
                 />
               </div>
-              <ul className="flex animate-fadeIn3 flex-col items-start justify-center gap-6 text-[#4D4E6A] sm:gap-8">
+              <ul className="flex animate-fadeIn3 flex-col items-start justify-center gap-5 xsm:gap-6 text-[#4D4E6A] sm:gap-8">
                 <NavLink href="/happenings">Happenings</NavLink>
                 <NavLink href="/guia">Guía de la ciudad</NavLink>
                 <NavLink href="/rutas">Rutas culturales</NavLink>
@@ -70,7 +70,7 @@ export default function Home() {
               encontrar...
             </h1>
           </div>
-          <div className="prose prose-invert">
+          <div className="prose prose-invert text-lg xsm:text-base">
             &ldquo;Inmersos en la cotidianeidad, nos es difícil traspasar nuestra
             acostumbrada mirada a la certidumbre del entorno material al cual
             nos enfrentamos y vivimos día con día. ¿Qué posibilidades de ser se

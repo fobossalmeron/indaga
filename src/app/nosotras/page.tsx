@@ -1,6 +1,4 @@
 import { Eyes } from "./Eyes";
-import { Button } from "@/app/components/Button";
-import Link from "next/link";
 import { createClient } from "@/prismicio";
 import { PrismicRichText } from "@prismicio/react";
 

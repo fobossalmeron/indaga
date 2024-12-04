@@ -49,8 +49,8 @@ export default function HappeningsFull({
   };
 
   return (
-      <div className="z-10 animate-fadeIn2 px-4">
-        <div className="mx-auto mt-8 flex max-w-[920px] flex-col overflow-hidden rounded-3xl bg-white sm:mt-16 md:flex-row">
+      <div className="z-10 animate-fadeIn2 px-5">
+        <div className="mx-auto mt-8 flex max-w-[1020px] flex-col overflow-hidden rounded-3xl bg-white sm:mt-16 md:flex-row">
           <div className="relative min-h-60 w-full bg-gray-200 md:w-1/2 md:max-w-[460px]">
             <PrismicNextImage
               fill

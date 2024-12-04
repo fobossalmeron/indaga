@@ -218,6 +218,7 @@ interface LugarDocumentData {
     | "Música en Vivo"
     | "Espacios de Arte"
     | "Restaurantes"
+    | "Parques"
   >;
 
   /**
