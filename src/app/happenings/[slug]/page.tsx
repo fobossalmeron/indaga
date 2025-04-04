@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: Params
 }): Promise<Metadata> {
   const { slug } = await params;
-  const client = createClient();
+  const client = await createClient();
 
   try {
     const event = await client.getByUID<Content.HappeningDocument>(
@@ -67,7 +67,7 @@ export default async function Happening({
   params: Params
 }) {
   const { slug } = await params;
-  const client = createClient();
+  const client = await createClient();
 
   try {
     const event = await client.getByUID<Content.HappeningDocument>(

@@ -8,7 +8,7 @@ export const Nav = () => {
       className={`fixed left-0 right-0 top-0 z-50 flex h-16 w-full items-center justify-center bg-white px-5 text-indagaBlue sm:px-10 md:px-20`}
     >
       <div className="flex w-full max-w-[1240px] items-center justify-between">
-        <Link href="/" className="w-100 transition-all">
+        <Link href="/" className="transition-all">
           <Logo
             width={95}
             height={18}
@@ -25,6 +25,9 @@ export const Nav = () => {
             </li>
             <li className="hidden lg:block">
               <NavLink href="/rutas">Rutas</NavLink>
+            </li>
+            <li className="hidden lg:block">
+              <NavLink href="/blog">Blog</NavLink>
             </li>
           </ul>
         </nav>

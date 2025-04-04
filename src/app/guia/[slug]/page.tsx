@@ -17,7 +17,7 @@ export default async function GuiaPage({
 }: {
   params: Params
 }) {
-  const client = createClient();
+  const client = await createClient();
   const { slug } = await params;
 
   try {

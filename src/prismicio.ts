@@ -4,7 +4,7 @@ import config from "../slicemachine.config.json";
 
 export const repositoryName = config.repositoryName
 
-export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
+export const createClient = async (config: prismicNext.CreateClientConfig = {}) => {
   const client = prismic.createClient(repositoryName, {
     fetchOptions:
       process.env.NODE_ENV === "production"
@@ -13,7 +13,7 @@ export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
     ...config,
   });
 
-  prismicNext.enableAutoPreviews({ client });
+  await prismicNext.enableAutoPreviews({ client });
 
   return client;
 };

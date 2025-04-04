@@ -3,7 +3,7 @@ import { createClient } from "@/prismicio";
 import { PrismicRichText } from "@prismicio/react";
 
 export default async function Nosotras() {
-  const client = createClient();
+  const client = await createClient();
   const about = await client.getSingle("about");
 
   return (
@@ -26,7 +26,6 @@ export default async function Nosotras() {
     </div>
   );
 }
-
 
 export const revalidate = 86400; // Revalidar cada 24 horas (86400 segundos)
 

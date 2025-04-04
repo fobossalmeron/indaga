@@ -6,7 +6,7 @@ export function CategoryChip({ slug, className }: { slug: string; className?: st
   const category = categories[slug as keyof typeof categories];
 
   return (
-    <div id="category-chip" className={`flex flex-col items-start w-full gap-10 ${className || ''}`}>
+    <div id="category-chip" className={`flex flex-col items-center w-full gap-10 ${className || ''}`}>
       <div
         className={`flex items-center gap-2 rounded-full bg-${category.color} animate-fadeIn py-2 pl-4 pr-6 lg:py-3 lg:pl-5 lg:pr-8`}
       >

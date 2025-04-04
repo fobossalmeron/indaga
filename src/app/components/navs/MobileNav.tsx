@@ -5,14 +5,13 @@ import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
 import { useNavColor } from "./useNavColor";
 import { Button } from "@/app/components/Button";
-import { useLenis } from 'lenis/react'
-
+import { useLenis } from "lenis/react";
 
 export const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navColor = useNavColor();
   const pathname = usePathname();
-  const lenis = useLenis(); 
+  const lenis = useLenis();
 
   useEffect(() => {
     setIsOpen(false);
@@ -34,7 +33,7 @@ export const MobileNav = () => {
     <>
       <button
         onClick={toggleMenu}
-        className="fixed bottom-5 transition-all right-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-fern p-2.5 text-white shadow-md active:bg-[#3C5530] active:scale-95 lg:hidden"
+        className="fixed bottom-5 right-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-fern p-2.5 text-white shadow-md transition-all active:scale-95 active:bg-[#3C5530] lg:hidden"
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
       >
         <svg
@@ -73,10 +72,13 @@ export const MobileNav = () => {
                 { href: "/happenings", text: "Happenings" },
                 { href: "/guia", text: "Guía" },
                 { href: "/rutas", text: "Rutas" },
+                { href: "/blog", text: "Blog" },
                 { href: "/nosotras", text: "Nosotras" },
               ].map(({ href, text }) => (
                 <li key={href}>
-                  <NavLink onClick={() => toggleMenu()} href={href}>{text}</NavLink>
+                  <NavLink onClick={() => toggleMenu()} href={href}>
+                    {text}
+                  </NavLink>
                 </li>
               ))}
             </ul>

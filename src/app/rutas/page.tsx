@@ -4,7 +4,7 @@ import RoutesFull from "./RoutesFull";
 import FraseRutas from "@/assets/img/frase_rutas.svg";
 
 export default async function RoutesAll() {
-  const client = createClient();
+  const client = await createClient();
 
   const routes = await client.getAllByType<Content.RouteDocument>("route", {
     limit: 100,

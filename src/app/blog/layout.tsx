@@ -7,8 +7,8 @@ export default function HappeningsLayout({
 }>) {
   return (
     <>
-      <Header title="Happenings" />
-      <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
+      <Header title="Blog" />
+      <div className="mx-auto flex w-full max-w-[1300px] flex-col pb-24">
         {children}
       </div>
     </>

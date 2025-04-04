@@ -3,7 +3,7 @@ import { Content } from "@prismicio/client";
 import HappeningsFull from "./HappeningsFull";
 
 export default async function HappeningsAll() {
-  const client = createClient();
+  const client = await createClient();
 
   const entries = await client.getAllByType<Content.HappeningDocument>(
     "happening",

@@ -37,6 +37,7 @@ export const Footer = () => {
                 <FooterLink href="/happenings">Happenings</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
                 <FooterLink href="/rutas">Rutas</FooterLink>
+                <FooterLink href="/blog">Blog</FooterLink>
               </div>
               <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">
                 <FooterLink href="/nosotras">Nosotras</FooterLink>
@@ -50,7 +51,7 @@ export const Footer = () => {
         <div className="flex flex-col gap-3">
           <Fade delay={450} triggerOnce>
             <div className="flex flex-col gap-2">
-              <Image src={imago_delgado} alt="Indaga" width={33} height={60}/>
+              <Image src={imago_delgado} alt="Indaga" width={33} height={60} />
               Indaga, 2024
             </div>
           </Fade>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import "@/app/globals.css";
+import "@/app/styles/globals.css";
 import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
 import { MobileNav } from "@/app/components/navs/MobileNav";
