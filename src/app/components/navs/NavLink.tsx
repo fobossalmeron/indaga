@@ -9,11 +9,7 @@ interface NavLinkProps {
   onClick?: () => void; // Función opcional añadida
 }
 
-export const NavLink: React.FC<NavLinkProps> = ({
-  href,
-  children,
-  onClick,
-}) => {
+export function NavLink({ href, children, onClick }: NavLinkProps) {
   const pathname = usePathname();
   const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -35,4 +31,4 @@ export const NavLink: React.FC<NavLinkProps> = ({
       ></span>
     </Link>
   );
-};
+}

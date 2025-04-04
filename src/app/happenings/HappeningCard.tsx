@@ -6,10 +6,11 @@ import { Category } from "@/app/components/Category";
 import { Fade } from "react-awesome-reveal";
 import { formatDate } from "@/app/utils/formatDate";
 
-interface HappeningCardProps
-  extends Omit<Content.HappeningDocument, "description"> {}
-
-export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
+export function HappeningCard({
+  data,
+}: {
+  data: Omit<Content.HappeningDocumentData, "description">;
+}) {
   const { category, title, location_name, date, image, end_date } = data;
 
   return (
@@ -31,10 +32,8 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
         <Fade delay={250}>
           <div className="flex flex-col items-start gap-2">
             <Category category={category ?? "Arte"} />
-            <h2 
-              className="text-2xl leading-tight 
-                         sm:overflow-hidden sm:max-w-full
-                         sm:[display:-webkit-box] sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]"
+            <h2
+              className="text-2xl leading-tight sm:[display:-webkit-box] sm:max-w-full sm:overflow-hidden sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]"
               title={title ?? "Error en título"}
             >
               {title ?? "Error en título"}
@@ -56,4 +55,4 @@ export const HappeningCard: React.FC<HappeningCardProps> = ({ data }) => {
       </div>
     </article>
   );
-};
+}

@@ -6,7 +6,11 @@ export const categoryColors: Record<
   { border: string; bg: string; text: string }
 > = {
   Arte: { border: "#B7F400", bg: "#CAE47C25", text: "#527442" },
-  Gastronomía: { border: "#FF7404", bg: "rgba(255, 116, 4, 0.25)", text: "#B85200" },
+  Gastronomía: {
+    border: "#FF7404",
+    bg: "rgba(255, 116, 4, 0.25)",
+    text: "#B85200",
+  },
   Música: { border: "#527442", bg: "rgba(82, 116, 66, 0.25)", text: "#1A5200" },
   Cultura: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
   Cine: { border: "#FF00FF", bg: "rgba(255, 0, 255, 0.25)", text: "#800080" },
@@ -14,9 +18,11 @@ export const categoryColors: Record<
   "En la ciudad": { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
 };
 
-export const Category: React.FC<{
+export function Category({
+  category,
+}: {
   category: (typeof categories)[number] | (typeof routeCategories)[number];
-}> = ({ category }) => {
+}) {
   const color = categoryColors[category];
 
   return (
@@ -33,4 +39,4 @@ export const Category: React.FC<{
       </span>
     )
   );
-};
+}

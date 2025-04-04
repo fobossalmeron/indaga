@@ -4,6 +4,7 @@ import BlogFull from "./BlogFull";
 
 async function getPosts() {
   const client = await createClient();
+
   return await client.getAllByType<Content.PostDocument>("post", {
     limit: 150,
     orderings: [
@@ -12,6 +13,15 @@ async function getPosts() {
         direction: "desc",
       },
     ],
+    graphQuery: `{
+      post {
+        title
+        meta_description
+        author
+        date
+        hero
+      }
+    }`,
   });
 }
 

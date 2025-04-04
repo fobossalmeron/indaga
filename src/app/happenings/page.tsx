@@ -15,6 +15,15 @@ export default async function HappeningsAll() {
           direction: "desc",
         },
       ],
+      graphQuery: `{
+        happening {
+          title
+          category
+          location_name
+          date
+          image
+        }
+      }`,
     },
   );
 
