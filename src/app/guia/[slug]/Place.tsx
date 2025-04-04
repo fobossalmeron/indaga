@@ -25,11 +25,11 @@ export function Place({
   return (
     <Fade triggerOnce>
       <div className="mb-2 flex flex-col items-start rounded-2xl bg-white p-4">
-        <span className="text-base md-lg:text-xl text-eerie">{area}</span>
-        <h3 className="transition-colors duration-300 text-2xl sm:text-3xl lg:text-5xl">
+        <span className="md-lg:text-xl text-base">{area}</span>
+        <h3 className="text-2xl transition-colors duration-300 sm:text-3xl lg:text-5xl">
           {place}
         </h3>
-        <div className="flex flex-row items-center gap-3 pt-5 w-full">
+        <div className="flex w-full flex-row items-center gap-3 pt-5">
           {isFilled.link(mapLink) && (
             <PrismicNextLink
               field={mapLink}
@@ -43,7 +43,7 @@ export function Place({
             <PrismicNextLink
               field={link}
               target="_blank"
-              className="flex flex-row items-center rounded-full bg-eerie p-2 transition-opacity duration-300 hover:opacity-80 active:opacity-80"
+              className="bg-eerie flex flex-row items-center rounded-full p-2 transition-opacity duration-300 hover:opacity-80 active:opacity-80"
             >
               <GlobeIcon className="h-8 w-8 translate-x-[1px]" />
             </PrismicNextLink>
@@ -52,7 +52,7 @@ export function Place({
             <PrismicNextLink
               field={capsuleLink}
               target="_blank"
-              className="flex flex-row items-start w-full"
+              className="flex w-full flex-row items-start"
             >
               <Button secondary thin className="w-full min-w-[137px]">
                 Ver cápsula

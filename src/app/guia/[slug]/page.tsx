@@ -10,13 +10,9 @@ import { Button } from "@/app/components/Button";
 import BackArrow from "@/assets/img/back_arrow.svg";
 import Link from "next/link";
 
-type Params = Promise<{ slug: string }>
+type Params = Promise<{ slug: string }>;
 
-export default async function GuiaPage({
-  params,
-}: {
-  params: Params
-}) {
+export default async function GuiaPage({ params }: { params: Params }) {
   const client = await createClient();
   const { slug } = await params;
 
@@ -42,10 +38,10 @@ export default async function GuiaPage({
     const color = `${categories[slug as keyof typeof categories].color}`;
 
     return (
-      <div className="flex w-full max-w-[1020px] animate-fadeIn2 flex-col self-center">
+      <div className="animate-fadeIn2 flex w-full max-w-[1020px] flex-col self-center">
         <div className="flex flex-col items-center justify-center gap-4 px-6 lg:items-start">
           <Link href="/guia" className="animate-fadeIn2">
-            <Button secondary thin className="gap-3 pl-4 pr-4">
+            <Button secondary thin className="gap-3 pr-4 pl-4">
               <BackArrow />
               Volver a las categorías
             </Button>
@@ -56,7 +52,7 @@ export default async function GuiaPage({
             slug={slug}
             className="col-span-12 col-start-1 row-start-1 w-full items-center lg:items-start"
           />
-          <div className="sm:z-1 pointer-events-none relative z-10 col-span-4 col-start-1 row-start-2 hidden w-full animate-fadeIn3 xsm:block sm:col-span-6 sm:col-start-1">
+          <div className="animate-fadeIn3 xsm:block pointer-events-none relative z-10 col-span-4 col-start-1 row-start-2 hidden w-full sm:z-1 sm:col-span-6 sm:col-start-1">
             <Image
               src={categories[slug as keyof typeof categories].bgImage}
               alt={`Imagen de ${slug}`}
@@ -65,8 +61,8 @@ export default async function GuiaPage({
               priority
             />
           </div>
-          <div className="relative z-0 col-span-12 col-start-1 row-start-2 row-end-3 grid animate-fadeIn4 grid-cols-subgrid place-items-center sm:col-span-12 sm:col-start-5 sm:place-items-end lg:row-start-1">
-            <div className="align col-span-12 col-start-1 row-start-1 flex max-w-[400px] flex-col gap-2 pb-2 pt-10 text-eerie xsm:col-span-8 xsm:col-start-5 sm:col-start-3 md:gap-4 md:pb-4 lg:pt-0">
+          <div className="animate-fadeIn4 relative z-0 col-span-12 col-start-1 row-start-2 row-end-3 grid grid-cols-subgrid place-items-center sm:col-span-12 sm:col-start-5 sm:place-items-end lg:row-start-1">
+            <div className="align xsm:col-span-8 xsm:col-start-5 col-span-12 col-start-1 row-start-1 flex max-w-[400px] flex-col gap-2 pt-10 pb-2 sm:col-start-3 md:gap-4 md:pb-4 lg:pt-0">
               {lugaresOrdenados.map((lugar) => (
                 <Place
                   key={lugar.data.nombre}

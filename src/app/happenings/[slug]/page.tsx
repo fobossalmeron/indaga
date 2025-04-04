@@ -6,13 +6,10 @@ import { Metadata } from "next";
 import { asImageSrc, asText } from "@prismicio/helpers";
 import { truncate } from "@/app/utils/truncate";
 
-type Params = Promise<{ slug: string }>
-
-// Función para generar metadatos
 export async function generateMetadata({
   params,
 }: {
-  params: Params
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const client = await createClient();
@@ -51,10 +48,7 @@ export async function generateMetadata({
       },
     };
   } catch (error) {
-    console.error(
-      `Error al obtener metadatos para el evento ${slug}:`,
-      error,
-    );
+    console.error(`Error al obtener metadatos para el evento ${slug}:`, error);
     return {
       title: "Error al cargar el evento",
     };
@@ -64,7 +58,7 @@ export async function generateMetadata({
 export default async function Happening({
   params,
 }: {
-  params: Params
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const client = await createClient();

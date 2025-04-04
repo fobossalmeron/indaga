@@ -16,7 +16,8 @@ const general_sans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://indaga.site"),
   title: "Descubre la ciudad - Indaga",
-  description: "Encuentra eventos y una guía de la ciudad para disfrutar la temporada.",
+  description:
+    "Encuentra eventos y una guía de la ciudad para disfrutar la temporada.",
   openGraph: {
     images: "/opengraph-image.png",
   },
@@ -32,13 +33,13 @@ export default function RootLayout({
       lang="es"
       className={`${general_sans.className} bg-offwhite font-normal`}
     >
-      <body className="min-h-screen flex flex-col justify-between">
+      <body className="flex min-h-screen flex-col justify-between">
         <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />
             <Nav />
             <MobileNav />
-            <main className="relative flex flex-col items-center pt-16 text-eerie">
+            <main className="text-notBlack relative flex flex-col items-center pt-16">
               {children}
             </main>
             <Footer />

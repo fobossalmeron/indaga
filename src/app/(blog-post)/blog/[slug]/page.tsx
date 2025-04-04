@@ -6,12 +6,10 @@ import { Metadata } from "next";
 import { asImageSrc } from "@prismicio/helpers";
 import { truncate } from "@/app/utils/truncate";
 
-type Params = Promise<{ slug: string }>;
-
 export async function generateMetadata({
   params,
 }: {
-  params: Params;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const client = await createClient();
@@ -25,7 +23,7 @@ export async function generateMetadata({
       };
     }
 
-    const title = post.data.title;
+    const title = post.data.seo_title;
     const description = post.data.meta_description
       ? truncate(post.data.meta_description, 155)
       : "";
@@ -49,7 +47,7 @@ export async function generateMetadata({
   } catch (error) {
     console.error(
       `Error al obtener metadatos para el artículo ${slug}:`,
-      error
+      error,
     );
     return {
       title: "Error al cargar el artículo",
@@ -60,7 +58,7 @@ export async function generateMetadata({
 export default async function Article({
   params,
 }: {
-  params: Params;
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const client = await createClient();
@@ -79,4 +77,4 @@ export default async function Article({
   }
 }
 
-export const revalidate = 3600; // Revalidar cada hora (3600 segundos) 
+export const revalidate = 3600; // Revalidar cada hora (3600 segundos)

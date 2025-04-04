@@ -31,7 +31,7 @@ export const ArticleCard = ({ post }: { post: Content.PostDocument }) => {
         <div className="flex flex-1 flex-col justify-between gap-2 px-6 py-5 md:pr-10">
           <Fade delay={250}>
             <div className="flex flex-col items-start gap-2">
-              <h2 className="group-hover:text-indagaBlue text-3xl leading-tight text-gray-900 sm:[display:-webkit-box] sm:max-w-full sm:overflow-hidden sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]">
+              <h2 className="group-hover:text-indagaBlue text-3xl leading-tight sm:[display:-webkit-box] sm:max-w-full sm:overflow-hidden sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]">
                 {data.title}
               </h2>
               <p className="line-clamp-2 text-gray-600">

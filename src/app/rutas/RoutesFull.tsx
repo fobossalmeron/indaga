@@ -23,27 +23,27 @@ export default function RoutesFull({
 
   return (
     <>
-      <div className="relative mt-10 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 px-5">
+      <div className="relative mt-10 grid grid-cols-1 gap-8 px-5 sm:mt-16 sm:grid-cols-2">
         <Fade>
           {routes &&
             routes.map((route, index) => (
-            <RouteCard
-              key={index + "route"}
-              route={route}
-              openModal={openModal}
-            />
-          ))}
+              <RouteCard
+                key={index + "route"}
+                route={route}
+                openModal={openModal}
+              />
+            ))}
         </Fade>
       </div>
 
       <Modal show={showModal}>
         <div className="flex flex-col items-start gap-6">
           <p className="flex flex-col gap-2">
-            <span className="text-xl font-medium leading-6 text-eerie">
+            <span className="text-xl leading-6 font-medium">
               No contamos con <br />
               reservas por el momento
             </span>
-            <span className="text-md text-eerie">
+            <span className="text-md">
               Pero te escribiremos en la edición del Festival Santa Lucía en
               Septiembre del 2025
             </span>
