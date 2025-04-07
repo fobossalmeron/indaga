@@ -65,12 +65,98 @@ export default async function Article({
 
   try {
     const post = await client.getByUID<Content.PostDocument>("post", slug);
+    const otherPosts = await client.getAllByType<Content.PostDocument>("post", {
+      limit: 5,
+      orderings: {
+        field: "document.first_publication_date",
+        direction: "desc",
+      },
+      graphQuery: `
+        {
+          post {
+            title
+            uid
+          }
+        }
+      `,
+    });
 
     if (!post) {
       notFound();
     }
 
-    return <ArticleFull post={post} />;
+    // Filtrar el artículo actual de los otros artículos
+    const filteredOtherPosts = otherPosts.filter((p) => p.uid !== slug);
+
+    // Añadir artículos de prueba si filteredOtherPosts está vacío
+    const postsToShow =
+      filteredOtherPosts.length === 0
+        ? ([
+            {
+              id: "articulo-prueba-1",
+              uid: "articulo-prueba-1",
+              type: "post",
+              url: "/blog/articulo-prueba-1",
+              href: "/blog/articulo-prueba-1",
+              tags: [],
+              slugs: ["articulo-prueba-1"],
+              lang: "es-es",
+              alternate_languages: [],
+              first_publication_date: new Date().toISOString(),
+              last_publication_date: new Date().toISOString(),
+              linked_documents: [],
+              data: {
+                hero: {
+                  id: "articulo-prueba-1-hero",
+                  dimensions: { width: 1920, height: 1080 },
+                  alt: "Artículo de Prueba 1",
+                  copyright: null,
+                  url: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1920&auto=format&fit=crop",
+                  edit: { x: 0, y: 0, zoom: 1, background: "#000000" },
+                },
+                title: "El origen de una Gargantúa espacios de cultura",
+                seo_title: "Artículo de Prueba 1",
+                meta_description: "Este es un artículo de prueba",
+                date: new Date().toISOString(),
+                author: "Equipo Indaga",
+                body: [],
+              },
+            },
+            {
+              id: "articulo-prueba-2",
+              uid: "articulo-prueba-2",
+              type: "post",
+              url: "/blog/articulo-prueba-2",
+              href: "/blog/articulo-prueba-2",
+              tags: [],
+              slugs: ["articulo-prueba-2"],
+              lang: "es-es",
+              alternate_languages: [],
+              first_publication_date: new Date().toISOString(),
+              last_publication_date: new Date().toISOString(),
+              linked_documents: [],
+              data: {
+                hero: {
+                  id: "articulo-prueba-2-hero",
+                  dimensions: { width: 1920, height: 1080 },
+                  alt: "Artículo de Prueba 2",
+                  copyright: null,
+                  url: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1920&auto=format&fit=crop",
+                  edit: { x: 0, y: 0, zoom: 1, background: "#000000" },
+                },
+                title:
+                  "El obispado como vínculo cultural de la edad media y el renacimiento",
+                seo_title: "Artículo de Prueba 2",
+                meta_description: "Este es otro artículo de prueba",
+                date: new Date().toISOString(),
+                author: "Equipo Indaga",
+                body: [],
+              },
+            },
+          ] as Content.PostDocument[])
+        : filteredOtherPosts;
+
+    return <ArticleFull post={post} otherPosts={postsToShow} />;
   } catch (error) {
     console.error(`Error al obtener el artículo ${slug}:`, error);
     notFound();

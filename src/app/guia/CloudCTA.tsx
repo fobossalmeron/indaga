@@ -28,7 +28,9 @@ export function CloudCTA({
             className={`h-full w-auto group-hover:text-${hoverStroke} group-active:text-${hoverStroke} text-inherit transition-all duration-300`}
           />
         </a>
-        {full && <CAR className="h-full transition-all duration-300" />}
+        {full && (
+          <CAR className="[&>path]:fill-indagaBlue h-full transition-all duration-300" />
+        )}
       </div>
     </div>
   );
