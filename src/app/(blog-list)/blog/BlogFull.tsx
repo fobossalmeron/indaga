@@ -15,8 +15,6 @@ export default function BlogFull({ posts }: BlogFullProps) {
           {posts.map((post) => (
             <Fade key={post.id} triggerOnce>
               <ArticleCard post={post} />
-              <ArticleCard post={post} />
-              <ArticleCard post={post} />
             </Fade>
           ))}
         </div>
