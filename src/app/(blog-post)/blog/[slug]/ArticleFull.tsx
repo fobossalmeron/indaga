@@ -14,11 +14,14 @@ export default function ArticleFull({
   otherPosts: Content.PostDocument[];
 }) {
   const components: JSXMapSerializer = {
+    strong: ({ children }) => <span className="font-semibold">{children}</span>,
     heading2: ({ children }) => (
-      <h2 className="mt-6 font-sans text-4xl">{children}</h2>
+      <h2 className="mt-6 font-sans text-2xl md:text-4xl">{children}</h2>
     ),
     paragraph: ({ children }) => (
-      <p className="m-0 text-xl leading-[140%]">{children}</p>
+      <p className="m-0 mb-3 text-lg leading-[140%] md:mb-4 md:text-xl">
+        {children}
+      </p>
     ),
     hyperlink: ({ children, node }) => (
       <a
@@ -31,13 +34,13 @@ export default function ArticleFull({
   };
 
   return (
-    <article className="relative mx-auto mb-40 w-full">
-      <header className="animate-fadeIn mx-auto flex w-full max-w-[1020px] flex-col items-center gap-4 px-5 pt-12 pb-5 sm:pt-24 lg:flex-row">
+    <article className="relative mx-auto mb-20 w-full lg:mb-40">
+      <header className="animate-fadeIn mx-auto flex w-full max-w-[1120px] flex-col items-center gap-4 px-5 pt-12 pb-5 sm:pt-24 lg:flex-row">
         <div className="flex flex-col text-center lg:text-start">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="text-4xl md:max-w-[23ch] md:text-5xl lg:text-6xl">
             {post.data.title}
           </h1>
-          <div className="flex items-center space-x-4 py-6 text-lg text-gray-600">
+          <div className="flex items-center justify-center space-x-4 py-6 text-lg text-gray-600 lg:justify-start">
             {post.data.author && (
               <>
                 <span>Por {post.data.author}</span>
@@ -65,24 +68,17 @@ export default function ArticleFull({
         </div>
       )}
 
-      <div className="relative mx-auto flex w-full max-w-[1020px] gap-16">
-        <div className="flex w-full max-w-[635px] flex-col pt-14">
+      <div className="relative mx-auto flex w-full max-w-[1120px] flex-col gap-10 px-5 md:gap-16 lg:flex-row">
+        <div className="mx-auto flex w-full max-w-[635px] flex-col pt-5 sm:pt-8 lg:pt-14">
           <div className="article-content prose prose-lg flex max-w-[635px] flex-col gap-6">
             <PrismicRichText field={post.data.body} components={components} />
           </div>
-          <div className="bg-indagaBrown mt-14 grid h-fit max-w-[635px] grid-cols-2 gap-4 rounded-2xl px-6 py-8 text-white">
-            <p className="margin-0 col-span-1 text-xl">
-              Descarga la guía de Indaga y vive la ciudad como nunca antes.
-            </p>
-            <div className="col-span-1 flex items-center justify-end">
-              <Button className="!text-indagaBrown w-fit bg-white hover:bg-white/80">
-                Descarga la guía
-              </Button>
-            </div>
-          </div>
         </div>
-        <aside className="sticky top-20 w-[350px] self-start pt-14 pr-4">
-          <OtherArticlesCard articles={otherPosts} />
+
+        <aside className="sticky mx-auto w-full self-start md:max-w-[350px] lg:top-20 lg:pt-14 lg:pr-4">
+          {otherPosts?.length > 0 && (
+            <OtherArticlesCard articles={otherPosts} />
+          )}
         </aside>
       </div>
     </article>

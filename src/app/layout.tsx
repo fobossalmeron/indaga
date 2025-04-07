@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${general_sans.className} bg-offwhite font-normal`}
+      className={`${general_sans.className} bg-offWhite font-normal`}
     >
       <body className="flex h-full flex-col justify-between">
         <ProgressBarProvider>

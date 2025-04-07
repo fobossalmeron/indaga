@@ -8,7 +8,7 @@ export function OtherArticlesCard({
   articles: Content.PostDocument[];
 }) {
   return (
-    <div className="flex max-w-[350px] flex-col overflow-hidden rounded-3xl bg-white shadow-md">
+    <div className="flex w-full flex-col overflow-hidden rounded-3xl bg-white">
       <div className="bg-indagaBrown flex items-center gap-3 p-5">
         <Star className="h-8 w-8" />
         <h3 className="text-xl text-white">Explora otros artículos</h3>

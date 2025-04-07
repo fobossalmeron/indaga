@@ -43,6 +43,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: formatDate(currentDate),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
   ]
 
   const categoryPages = Object.keys(categories).map(categorySlug => ({
@@ -67,5 +73,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...categoryPages, ...happeningPages]
+  const blogPosts = await client.getAllByType('post', {
+    orderings: {
+      field: 'my.post.date',
+      direction: 'desc',
+    },
+  })
+
+  const blogPostPages = blogPosts.map(post => ({
+    url: `${baseUrl}/blog/${post.uid}`,
+    lastModified: formatDate(currentDate),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }))
+
+  return [...staticPages, ...categoryPages, ...happeningPages, ...blogPostPages]
 }

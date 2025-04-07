@@ -5,7 +5,7 @@ import { Button } from "@/app/components/Button";
 
 export default function Home() {
   return (
-    <div className="align-start bg-offwhite relative flex w-full md:grid md:grid-cols-2">
+    <div className="align-start bg-offWhite relative flex w-full md:grid md:grid-cols-2">
       <div
         id="home-blob"
         className="absolute -top-32 w-full rotate-180 md:fixed md:top-[9%] md:h-[500px] md:max-w-[50%] md:rotate-0 2xl:top-[15%]"

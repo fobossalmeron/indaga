@@ -54,7 +54,7 @@
       "author": {
         "type": "Text",
         "config": {
-          "label": "Autor",
+          "label": "Autor (opcional)",
           "placeholder": ""
         }
       },

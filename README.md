@@ -1,3 +1,0 @@
-- Sitemap revisar que estén los blogs
-- Banner del final: puede apuntar a otro artículo?
-- Sticky container de la derecha falta

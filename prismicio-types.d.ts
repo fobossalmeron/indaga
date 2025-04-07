@@ -94,7 +94,7 @@ interface HappeningDocumentData {
   date: prismic.DateField;
 
   /**
-   * Fecha de finalización field in *Happening*
+   * Fecha de finalización (opcional) field in *Happening*
    *
    * - **Field Type**: Date
    * - **Placeholder**: Si el evento tiene múltiples días
@@ -105,7 +105,7 @@ interface HappeningDocumentData {
   end_date: prismic.DateField;
 
   /**
-   * Horario field in *Happening*
+   * Horario (opcional) field in *Happening*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: 12:00hrs
@@ -146,10 +146,16 @@ interface HappeningDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  location_url: prismic.LinkField;
+  location_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 
   /**
-   * Costo field in *Happening*
+   * Costo (opcional) field in *Happening*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: $130 pesos
@@ -230,7 +236,7 @@ interface LugarDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.LinkField;
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
    * Link de mapa field in *Lugar*
@@ -241,7 +247,13 @@ interface LugarDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  mapLink: prismic.LinkField;
+  mapLink: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 
   /**
    * Link de cápsula field in *Lugar*
@@ -252,7 +264,13 @@ interface LugarDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  capsuleLink: prismic.LinkField;
+  capsuleLink: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 }
 
 /**
@@ -327,7 +345,7 @@ interface PostDocumentData {
   date: prismic.DateField;
 
   /**
-   * Autor field in *Post*
+   * Autor (opcional) field in *Post*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -462,6 +480,17 @@ declare module "@prismicio/client" {
       repositoryNameOrEndpoint: string,
       options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
+  }
+
+  interface CreateWriteClient {
+    (
+      repositoryNameOrEndpoint: string,
+      options: prismic.WriteClientConfig,
+    ): prismic.WriteClient<AllDocumentTypes>;
+  }
+
+  interface CreateMigration {
+    (): prismic.Migration<AllDocumentTypes>;
   }
 
   namespace Content {

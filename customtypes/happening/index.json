@@ -46,14 +46,14 @@
       "end_date": {
         "type": "Date",
         "config": {
-          "label": "Fecha de finalización",
+          "label": "Fecha de finalización (opcional)",
           "placeholder": "Si el evento tiene múltiples días"
         }
       },
       "time": {
         "type": "StructuredText",
         "config": {
-          "label": "Horario",
+          "label": "Horario (opcional)",
           "placeholder": "12:00hrs",
           "allowTargetBlank": true,
           "multi": "paragraph,strong,em,list-item,o-list-item"
@@ -87,10 +87,10 @@
       "cost": {
         "type": "StructuredText",
         "config": {
-          "label": "Costo",
+          "label": "Costo (opcional)",
           "placeholder": "$130 pesos",
           "allowTargetBlank": true,
-          "multi": "paragraph,em,list-item,o-list-item,strong"
+          "multi": "paragraph,strong,em,list-item,o-list-item"
         }
       }
     }

@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-fern: #00808b;
   --color-indagaBlue: #00808b;
   --color-indagaBrown: #956d4c;
   --color-notBlack: #4d4e6a;
-  --color-offwhite: #f4f5f4;
+  --color-offWhite: #f4f5f4;
+
+  /* Colores de off */
+  --color-fern: #00808b;
   --color-ocre: #da7829;
   --color-blue: #465fc0;
   --color-eerie: #212322;
-  --color-mindaro: #cae47c;
+
+  /* Colores de guia */
   --color-guiaOrange: #ff7434;
   --color-guiaGreen: #00e9a4;
   --color-guiaCyan: #72dffc;
@@ -33,7 +36,7 @@
   /* Pesos de fuente */
   --font-weight-normal: 358;
   --font-weight-medium: 448;
-
+  --font-weight-semibold: 548;
   /* Animaciones */
   --animate-fadeIn: fadeIn 600ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
   --animate-fadeIn2: fadeIn2 800ms cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
@@ -43,144 +46,12 @@
     forwards;
 }
 @layer base {
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .dangerous-links a {
-    @apply text-blue underline;
-  }
-
-  .home-link {
-    path {
-      opacity: 0;
-      transition: all 0.3s ease-in-out;
-    }
-    .default {
-      opacity: 1;
-      @apply stroke-blue;
-    }
-    &:active path {
-      opacity: 1;
-      @apply stroke-mindaro;
-    }
-    @media (hover: hover) and (pointer: fine) {
-      &:hover path {
-        opacity: 1;
-        @apply stroke-mindaro;
-      }
-    }
-  }
-
-  .prose {
-    p {
-      @apply mb-4;
-    }
-  }
-
   .article-content p:first-of-type {
     font-size: 1.75rem !important;
   }
-
-  .loader {
-    width: 20px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 4px solid white;
-    animation:
-      l20-1 0.8s infinite linear alternate,
-      l20-2 1.6s infinite linear;
-  }
-  @keyframes l20-1 {
-    0% {
-      clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
-    }
-    12.5% {
-      clip-path: polygon(
-        50% 50%,
-        0 0,
-        50% 0%,
-        100% 0%,
-        100% 0%,
-        100% 0%,
-        100% 0%
-      );
-    }
-    25% {
-      clip-path: polygon(
-        50% 50%,
-        0 0,
-        50% 0%,
-        100% 0%,
-        100% 100%,
-        100% 100%,
-        100% 100%
-      );
-    }
-    50% {
-      clip-path: polygon(
-        50% 50%,
-        0 0,
-        50% 0%,
-        100% 0%,
-        100% 100%,
-        50% 100%,
-        0% 100%
-      );
-    }
-    62.5% {
-      clip-path: polygon(
-        50% 50%,
-        100% 0,
-        100% 0%,
-        100% 0%,
-        100% 100%,
-        50% 100%,
-        0% 100%
-      );
-    }
-    75% {
-      clip-path: polygon(
-        50% 50%,
-        100% 100%,
-        100% 100%,
-        100% 100%,
-        100% 100%,
-        50% 100%,
-        0% 100%
-      );
-    }
-    100% {
-      clip-path: polygon(
-        50% 50%,
-        50% 100%,
-        50% 100%,
-        50% 100%,
-        50% 100%,
-        50% 100%,
-        0% 100%
-      );
-    }
-  }
-  @keyframes l20-2 {
-    0% {
-      transform: scaleY(1) rotate(0deg);
-    }
-    49.99% {
-      transform: scaleY(1) rotate(135deg);
-    }
-    50% {
-      transform: scaleY(-1) rotate(0deg);
-    }
-    100% {
-      transform: scaleY(-1) rotate(-135deg);
+  @media (max-width: 640px) {
+    .article-content p:first-of-type {
+      font-size: 1.5rem !important;
     }
   }
 
