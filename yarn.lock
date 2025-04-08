@@ -1250,6 +1250,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bprogress/core@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "@bprogress/core@npm:1.3.3"
+  checksum: 10c0/6df83bd2c10052c3e245a9a9b85931e156c34f26d46379e89fa68b97a5b99f86d6db61b9c53de55da1dca3f204be2aba181d48e5b2df42889d0e6db4265a8221
+  languageName: node
+  linkType: hard
+
+"@bprogress/next@npm:^3.2.10":
+  version: 3.2.10
+  resolution: "@bprogress/next@npm:3.2.10"
+  dependencies:
+    "@bprogress/core": "npm:^1.3.3"
+    "@bprogress/react": "npm:^1.2.4"
+  peerDependencies:
+    next: ">=13.0.0"
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10c0/ca177a1e2b04b56447247865b8027923949c27e3d8178aeb01d5e431d2b24ad1ba292325cc755708996d71c3bb53324d35148389f0eff382100ca2c6ff011743
+  languageName: node
+  linkType: hard
+
+"@bprogress/react@npm:^1.2.4":
+  version: 1.2.5
+  resolution: "@bprogress/react@npm:1.2.5"
+  dependencies:
+    "@bprogress/core": "npm:^1.3.3"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10c0/d4e86127cc5284577fb5839e3cdd7fdb6093c897be00fc40deef04159c88d270217c1298eb3a4dc28b02f19bbe9733b78cf479cb408472f96429c79e3116213c
+  languageName: node
+  linkType: hard
+
 "@emnapi/core@npm:^1.4.0":
   version: 1.4.0
   resolution: "@emnapi/core@npm:1.4.0"
@@ -5189,6 +5222,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "indaga@workspace:."
   dependencies:
+    "@bprogress/next": "npm:^3.2.10"
     "@emotion/react": "npm:^11.14.0"
     "@next/third-parties": "npm:^15.2.4"
     "@prismicio/client": "npm:^7.17.1"
@@ -5207,7 +5241,6 @@ __metadata:
     googleapis: "npm:^148.0.0"
     lenis: "npm:^1.2.3"
     next: "npm:^15.2.4"
-    next-nprogress-bar: "npm:^2.4.7"
     prettier: "npm:^3.5.3"
     prettier-plugin-tailwindcss: "npm:^0.6.11"
     react: "npm:^19.1.0"
@@ -6297,15 +6330,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-nprogress-bar@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "next-nprogress-bar@npm:2.4.7"
-  dependencies:
-    nprogress-v2: "npm:^1.0.4"
-  checksum: 10c0/fd4a07b860edeebd7331761a73ca146fd2857feea0bfb36e2d8b467644e5cf9165c1f05f549545a19b695c84b65988e39adf7b11d6945c19d0ad1b4e09fbac41
-  languageName: node
-  linkType: hard
-
 "next@npm:^15.2.4":
   version: 15.2.4
   resolution: "next@npm:15.2.4"
@@ -6460,13 +6484,6 @@ __metadata:
   dependencies:
     path-key: "npm:^4.0.0"
   checksum: 10c0/124df74820c40c2eb9a8612a254ea1d557ddfab1581c3e751f825e3e366d9f00b0d76a3c94ecd8398e7f3eee193018622677e95816e8491f0797b21e30b2deba
-  languageName: node
-  linkType: hard
-
-"nprogress-v2@npm:^1.0.4":
-  version: 1.1.10
-  resolution: "nprogress-v2@npm:1.1.10"
-  checksum: 10c0/1b6ed50e7274ad800ecc4bfe3883ea52ea7e031c3555bc36389bc32ac3ed963dc6ad84ff21a39ca9dfa854e7b1743972448bc6aa5ab1968fa85ca893596e9970
   languageName: node
   linkType: hard
 
