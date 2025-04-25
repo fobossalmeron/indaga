@@ -2,50 +2,53 @@ import type { MetadataRoute } from 'next'
 import { categories } from './guia/categories'
 import { createClient } from '@/prismicio'
 
-function formatDate(date: Date): string {
-  return date.toISOString().split('.')[0] + 'Z'
+function getFechaSegura(): string {
+  const fecha = new Date();
+  // Restamos un día para evitar problemas de zonas horarias
+  fecha.setDate(fecha.getDate() - 1);
+  return fecha.toISOString();
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.indaga.site'
-  const currentDate = new Date()
+  const fechaSegura = getFechaSegura()
 
   const client = await createClient()
 
   const staticPages = [
     {
       url: baseUrl,
-      lastModified: formatDate(currentDate),
+      lastModified: fechaSegura,
       changeFrequency: 'monthly' as const,
       priority: 1,
     },
     {
       url: `${baseUrl}/happenings`,
-      lastModified: formatDate(currentDate),
+      lastModified: fechaSegura,
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/guia`,
-      lastModified: formatDate(currentDate),
+      lastModified: fechaSegura,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}/rutas`,
-      lastModified: formatDate(currentDate),
+      lastModified: fechaSegura,
       changeFrequency: 'weekly' as const,
       priority: 0.5,
     },
     {
       url: `${baseUrl}/nosotras`,
-      lastModified: formatDate(currentDate),
+      lastModified: fechaSegura,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: formatDate(currentDate),
+      lastModified: fechaSegura,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
@@ -53,7 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const categoryPages = Object.keys(categories).map(categorySlug => ({
     url: `${baseUrl}/guia/${categorySlug}`,
-    lastModified: formatDate(currentDate),
+    lastModified: fechaSegura,
     changeFrequency: 'daily' as const,
     priority: 0.7,
   }))
@@ -68,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const happeningPages = happenings.map(happening => ({
     url: `${baseUrl}/happenings/${happening.uid}`,
-    lastModified: formatDate(currentDate),
+    lastModified: fechaSegura,
     changeFrequency: 'daily' as const,
     priority: 0.8,
   }))
@@ -82,7 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogPostPages = blogPosts.map(post => ({
     url: `${baseUrl}/blog/${post.uid}`,
-    lastModified: formatDate(currentDate),
+    lastModified: fechaSegura,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
   }))
