@@ -47,7 +47,7 @@ export default function RootLayout({
         </ProgressBarProvider>
       </body>
 
-      <GoogleAnalytics gaId="G-1QH9PC856P" />
+      <GoogleAnalytics gaId="G-C5EE6QLH20" />
     </html>
   );
 }
