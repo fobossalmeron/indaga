@@ -52,7 +52,7 @@ export const Footer = () => {
           <Fade delay={450} triggerOnce>
             <div className="flex flex-col gap-2">
               <Image src={imago_delgado} alt="Indaga" width={33} height={60} />
-              Indaga, 2024
+              Indaga, {new Date().getFullYear()}
             </div>
           </Fade>
         </div>
