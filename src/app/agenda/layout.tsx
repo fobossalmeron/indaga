@@ -9,7 +9,7 @@ export default function HappeningsLayout({
 }>) {
   return (
     <>
-      <Header title="Happenings">
+      <Header title="Agenda">
         <div className="flex flex-col items-center gap-2">
           <span className="text-lg">¿Organizas un evento?</span>
           <a

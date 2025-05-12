@@ -1,4 +1,4 @@
-import { categories } from "../happenings/happenings.types";
+import { categories } from "../agenda/happenings.types";
 import { routeCategories } from "../rutas/route.types";
 
 export const categoryColors: Record<

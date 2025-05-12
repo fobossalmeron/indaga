@@ -112,7 +112,7 @@ export default function HappeningsFull({
           </div>
 
           <div className="xsm:flex-row flex w-full flex-col gap-2">
-            <Link href={"/happenings"} className="w-full">
+            <Link href={"/agenda"} className="w-full">
               <Button secondary className="w-full">
                 Volver
               </Button>

@@ -15,7 +15,7 @@ export default function HappeningsFull({
         <Fade>
           {entries &&
             entries.map((entry) => (
-              <Link href={`/happenings/${entry.uid}`} key={entry.uid + "link"}>
+              <Link href={`/agenda/${entry.uid}`} key={entry.uid + "link"}>
                 <HappeningCard key={entry.uid} data={entry.data} />
               </Link>
             ))}

@@ -33,7 +33,7 @@ export const MobileNav = () => {
     <>
       <button
         onClick={toggleMenu}
-        className="fixed bottom-5 right-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-fern p-2.5 text-white shadow-md transition-all active:scale-95 active:bg-[#3C5530] lg:hidden"
+        className="bg-fern fixed right-5 bottom-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full p-2.5 text-white shadow-md transition-all active:scale-95 active:bg-[#3C5530] lg:hidden"
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
       >
         <svg
@@ -69,7 +69,7 @@ export const MobileNav = () => {
             <ul className="flex flex-col items-center space-y-6">
               {[
                 { href: "/", text: "Inicio" },
-                { href: "/happenings", text: "Happenings" },
+                { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
                 { href: "/rutas", text: "Rutas" },
                 { href: "/blog", text: "Blog" },

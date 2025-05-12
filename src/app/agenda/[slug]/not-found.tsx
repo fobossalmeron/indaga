@@ -12,7 +12,7 @@ export default function NotFound() {
         <br />
         Revisa que el enlace sea correcto.
       </p>
-      <Link href="/happenings">
+      <Link href="/agenda">
         <Button>Volver a Happenings</Button>
       </Link>
     </div>

@@ -3,11 +3,25 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.prismic.io',
-        pathname: '/indaga/**',
+        protocol: "https",
+        hostname: "images.prismic.io",
+        pathname: "/indaga/**",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/happenings",
+        destination: "/agenda",
+        permanent: true,
+      },
+      {
+        source: "/happenings/:slug",
+        destination: "/agenda/:slug",
+        permanent: true,
+      },
+    ];
   },
   webpack(config) {
     // Encuentra la regla existente que maneja las importaciones de SVG

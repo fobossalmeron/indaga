@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${baseUrl}/happenings`,
+      url: `${baseUrl}/agenda`,
       lastModified: fechaSegura,
       changeFrequency: 'daily' as const,
       priority: 0.9,
@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   const happeningPages = happenings.map(happening => ({
-    url: `${baseUrl}/happenings/${happening.uid}`,
+    url: `${baseUrl}/agenda/${happening.uid}`,
     lastModified: fechaSegura,
     changeFrequency: 'daily' as const,
     priority: 0.8,
