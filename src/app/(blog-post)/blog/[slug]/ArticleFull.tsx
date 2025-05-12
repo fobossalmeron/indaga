@@ -3,7 +3,6 @@ import Image from "next/image";
 import { PrismicRichText } from "@prismicio/react";
 import { formatDate } from "@/app/utils/formatDate";
 import { JSXMapSerializer } from "@prismicio/react";
-import { Button } from "@/app/components/Button";
 import { OtherArticlesCard } from "./OtherArticlesCard";
 
 export default function ArticleFull({

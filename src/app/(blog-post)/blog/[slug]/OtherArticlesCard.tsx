@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Content } from "@prismicio/client";
-import Star from "@/assets/img/star.svg";
+import { Star } from "@/app/components/Star";
 
 export function OtherArticlesCard({
   articles,
