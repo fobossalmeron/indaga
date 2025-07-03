@@ -69,7 +69,7 @@ export default function HappeningsFull({
           </div>
           <div className="flex flex-col items-start gap-2">
             <p className="text-2xl capitalize sm:text-3xl">
-              {formatDate(date ?? "1-1-2024")}
+              {formatDate(date)}
               {end_date && ` - ${formatDate(end_date)}`}
             </p>
             {location_name && (

@@ -47,7 +47,7 @@ export default function ArticleFull({
               </>
             )}
             <time dateTime={post.data.date?.toString() || ""}>
-              Publicado el {formatDate(post.data.date?.toString() || "", true)}
+              Publicado el {formatDate(post.data.date?.toString(), true)}
             </time>
           </div>
         </div>

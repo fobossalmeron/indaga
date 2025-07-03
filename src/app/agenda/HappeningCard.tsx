@@ -45,7 +45,7 @@ export function HappeningCard({
           <div className="flex flex-col">
             <Fade delay={350}>
               <p className="mb-4 text-xl capitalize">
-                {formatDate(date ?? "01/01/2024")}
+                {formatDate(date)}
                 {end_date && ` - ${formatDate(end_date)}`}
               </p>
               <Button fullWidth>Ver evento</Button>
