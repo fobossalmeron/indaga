@@ -14,8 +14,13 @@ export const categoryColors: Record<
   Música: { border: "#527442", bg: "rgba(82, 116, 66, 0.25)", text: "#1A5200" },
   Cultura: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
   Cine: { border: "#FF00FF", bg: "rgba(255, 0, 255, 0.25)", text: "#800080" },
-  "Fuera de la ciudad": { border: "#527442", bg: "#52744225", text: "#1A5200" },
-  "En la ciudad": { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Naturaleza: { border: "#527442", bg: "#52744225", text: "#1A5200" },
+  Historia: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Literatura: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Danza: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Teatro: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Fotografía: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Tour: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
 };
 
 export function Category({

@@ -93,6 +93,30 @@ interface HappeningDocumentData {
   >;
 
   /**
+   * Tipo de evento field in *Happening*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: happening.event_type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  event_type: prismic.SelectField<
+    | "Concierto"
+    | "Taller"
+    | "Diálogo"
+    | "Exposición"
+    | "Curso"
+    | "Fiesta"
+    | "Feria"
+    | "Mercado"
+    | "Proyección"
+    | "Performance"
+    | "Presentación "
+    | "Contemplación"
+  >;
+
+  /**
    * Fecha del evento field in *Happening*
    *
    * - **Field Type**: Date
@@ -174,28 +198,6 @@ interface HappeningDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   cost: prismic.RichTextField;
-
-  /**
-   * Tipo de evento field in *Happening*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: happening.event_type
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  event_type: prismic.SelectField<
-    | "Concierto"
-    | "Taller"
-    | "Diálogo"
-    | "Exposición"
-    | "Curso"
-    | "Fiesta"
-    | "Feria"
-    | "Mercado"
-    | "Proyección"
-    | "Performance"
-  >;
 }
 
 /**

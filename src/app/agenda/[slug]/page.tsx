@@ -4,7 +4,7 @@ import { Content } from "@prismicio/client";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { asImageSrc, asText } from "@prismicio/helpers";
-import { truncate } from "@/app/utils/truncate";
+import { truncate } from "@/utils/truncate";
 
 export async function generateMetadata({
   params,

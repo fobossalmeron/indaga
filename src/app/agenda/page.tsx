@@ -22,6 +22,8 @@ export default async function HappeningsAll() {
           location_name
           date
           image
+          event_type
+
         }
       }`,
     },

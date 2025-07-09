@@ -10,7 +10,7 @@ export default function HappeningsLayout({
 }>) {
   return (
     <AgendaClientProvider>
-      <Header title="Agenda">
+      <Header title="Agenda" subtitle="Tu brújula cultural">
         <div className="flex flex-col items-center gap-2">
           <span className="text-lg">¿Organizas un evento?</span>
           <a

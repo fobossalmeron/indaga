@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/app/components/Button";
+import { Button } from "@/app/components/ui/button";
 import Link from "next/link";
 import { Category } from "../../components/Category";
-import { formatDate } from "@/app/utils/formatDate";
+import { formatDate } from "@/utils/formatDate";
 import ShareArrow from "@/assets/img/whatsapp.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
@@ -110,17 +110,13 @@ export default function HappeningsFull({
           <div className="dangerous-links leading-5">
             <PrismicRichText field={description} />
           </div>
-
-          <div className="xsm:flex-row flex w-full flex-col gap-2">
-            <Link href={"/agenda"} className="w-full">
-              <Button secondary className="w-full">
+          <div className="xsm:grid-cols-2 grid w-full grid-cols-1 gap-2">
+            <Link href={"/agenda"}>
+              <Button variant="outline" className="w-full">
                 Volver
               </Button>
             </Link>
-            <Button
-              className="flex w-full items-center gap-3"
-              onClick={handleShare}
-            >
+            <Button className="w-full" onClick={handleShare}>
               Compartir <ShareArrow width={20} height={20} />
             </Button>
           </div>

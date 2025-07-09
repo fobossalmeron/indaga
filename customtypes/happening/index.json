@@ -48,6 +48,27 @@
           ]
         }
       },
+      "event_type": {
+        "type": "Select",
+        "config": {
+          "label": "Tipo de evento",
+          "placeholder": "",
+          "options": [
+            "Concierto",
+            "Taller",
+            "Diálogo",
+            "Exposición",
+            "Curso",
+            "Fiesta",
+            "Feria",
+            "Mercado",
+            "Proyección",
+            "Performance",
+            "Presentación ",
+            "Contemplación"
+          ]
+        }
+      },
       "date": {
         "type": "Date",
         "config": {
@@ -103,25 +124,6 @@
           "placeholder": "$130 pesos",
           "allowTargetBlank": true,
           "multi": "paragraph,strong,em,list-item,o-list-item"
-        }
-      },
-      "event_type": {
-        "type": "Select",
-        "config": {
-          "label": "Tipo de evento",
-          "placeholder": "",
-          "options": [
-            "Concierto",
-            "Taller",
-            "Diálogo",
-            "Exposición",
-            "Curso",
-            "Fiesta",
-            "Feria",
-            "Mercado",
-            "Proyección",
-            "Performance"
-          ]
         }
       }
     }

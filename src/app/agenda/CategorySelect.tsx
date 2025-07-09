@@ -26,7 +26,7 @@ export function CategorySelect({
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor="category-select" className="text-foreground">
-        Filtrar por categoría
+        Categoría
       </label>
       <Select value={selectedCategory} onValueChange={onSelectCategory}>
         <SelectTrigger id="category-select" className={className}>
