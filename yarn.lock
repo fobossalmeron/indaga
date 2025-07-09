@@ -2404,7 +2404,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.2.3":
+"@radix-ui/react-slot@npm:1.2.3, @radix-ui/react-slot@npm:^1.2.3":
   version: 1.2.3
   resolution: "@radix-ui/react-slot@npm:1.2.3"
   dependencies:
@@ -5735,6 +5735,7 @@ __metadata:
     "@prismicio/next": "npm:^2.0.1"
     "@prismicio/react": "npm:^3.2.0"
     "@radix-ui/react-select": "npm:^2.2.5"
+    "@radix-ui/react-slot": "npm:^1.2.3"
     "@slicemachine/adapter-next": "npm:^0.3.73"
     "@svgr/webpack": "npm:^8.1.0"
     "@tailwindcss/postcss": "npm:^4.1.2"

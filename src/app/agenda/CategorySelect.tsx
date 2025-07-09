@@ -25,7 +25,7 @@ export function CategorySelect({
 }: CategorySelectProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="category-select" className="text-gray-700">
+      <label htmlFor="category-select" className="text-foreground">
         Filtrar por categoría
       </label>
       <Select value={selectedCategory} onValueChange={onSelectCategory}>

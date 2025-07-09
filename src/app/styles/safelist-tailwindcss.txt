@@ -1,8 +1,6 @@
 text-guiaOrange
-text-fern
 text-guiaGreen
 bg-guiaGreen
-group-hover:text-fern
 hover:text-guiaOrange
 active:text-guiaOrange
 hover:fill-guiaOrange

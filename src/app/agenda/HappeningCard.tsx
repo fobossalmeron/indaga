@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/app/components/ui/button";
 import { Content } from "@prismicio/client";
 import { Category } from "@/app/components/Category";
 import { Fade } from "react-awesome-reveal";
@@ -39,7 +39,7 @@ export function HappeningCard({
               {title ?? "Error en título"}
             </h2>
             {location_name && (
-              <p className="text-indagaBlue underline">@{location_name}</p>
+              <p className="text-accent underline">@{location_name}</p>
             )}
           </div>
           <div className="flex flex-col">
@@ -48,7 +48,7 @@ export function HappeningCard({
                 {formatDate(date)}
                 {end_date && ` - ${formatDate(end_date)}`}
               </p>
-              <Button fullWidth>Ver evento</Button>
+              <Button className="w-full">Ver evento</Button>
             </Fade>
           </div>
         </Fade>

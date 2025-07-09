@@ -3,13 +3,11 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
-import { useNavColor } from "./useNavColor";
 import { Button } from "@/app/components/Button";
 import { useLenis } from "lenis/react";
 
 export const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navColor = useNavColor();
   const pathname = usePathname();
   const lenis = useLenis();
 
@@ -33,7 +31,7 @@ export const MobileNav = () => {
     <>
       <button
         onClick={toggleMenu}
-        className="bg-fern fixed right-5 bottom-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full p-2.5 text-white shadow-md transition-all active:scale-95 active:bg-[#3C5530] lg:hidden"
+        className="bg-accent fixed right-5 bottom-5 z-50 flex h-[60px] w-[60px] items-center justify-center rounded-full p-2.5 text-white shadow-md transition-all active:scale-95 active:bg-[#3C5530] lg:hidden"
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
       >
         <svg
@@ -60,7 +58,7 @@ export const MobileNav = () => {
       </button>
 
       <div
-        className={`fixed inset-0 z-40 bg-white ${navColor} pt-16 transition-opacity duration-300 ${
+        className={`text-accent fixed inset-0 z-40 bg-white pt-16 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >

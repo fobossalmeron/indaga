@@ -27,7 +27,7 @@ export default function HappeningsFull({
       : entries.filter((entry) => entry.data.category === selectedCategory);
 
   return (
-    <div className="animate-fadeIn2">
+    <div className="animate-fadeIn2 mt-10 sm:mt-16">
       <div className="mb-4 w-auto px-5">
         <CategorySelect
           categories={categories}
@@ -35,7 +35,7 @@ export default function HappeningsFull({
           onSelectCategory={setSelectedCategory}
         />
       </div>
-      <div className="relative mt-10 flex w-full flex-col flex-wrap justify-center gap-8 px-5 sm:mt-16 sm:flex-row">
+      <div className="relative flex w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
         <Fade>
           {filteredEntries &&
             filteredEntries.map((entry) => (

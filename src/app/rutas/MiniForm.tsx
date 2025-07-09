@@ -21,22 +21,22 @@ export default function MiniForm({ openModal, route }: MiniFormProps) {
   const onSubmit: SubmitHandler<{ email: string }> = async (data) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/submit-email', {
-        method: 'POST',
+      const response = await fetch("/api/submit-email", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...data, route }),
       });
 
       if (response.ok) {
-        console.log('Email y ruta guardados exitosamente');
+        console.log("Email y ruta guardados exitosamente");
         openModal();
       } else {
-        console.error('Error al guardar el email y la ruta');
+        console.error("Error al guardar el email y la ruta");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -48,7 +48,7 @@ export default function MiniForm({ openModal, route }: MiniFormProps) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-full flex-col pt-5"
       >
-        <div className="flex w-full flex-col xsm:flex-row gap-2 xsm:gap-0">
+        <div className="xsm:flex-row xsm:gap-0 flex w-full flex-col gap-2">
           <label className="sr-only" htmlFor="email">
             email
           </label>
@@ -63,10 +63,10 @@ export default function MiniForm({ openModal, route }: MiniFormProps) {
             })}
             type="email"
             placeholder="Tu email"
-            className="w-full rounded-xl xsm:rounded-r-none border border-gray-300 bg-transparent p-2.5 px-5 transition-all duration-300 ease-in-out hover:border-fern hover:shadow-[0_0_10px_rgba(82,116,66,0.5)] active:shadow-[0_0_10px_rgba(82,116,66,0.5)]  focus:border-fern focus:outline-none"
+            className="xsm:rounded-r-none hover:border-accent focus:border-accent w-full rounded-xl border border-gray-300 bg-transparent p-2.5 px-5 transition-all duration-300 ease-in-out hover:shadow-[0_0_10px_rgba(82,116,66,0.5)] focus:outline-none active:shadow-[0_0_10px_rgba(82,116,66,0.5)]"
           />
-          <ButtonSubmit 
-            className="xsm:rounded-l-none" 
+          <ButtonSubmit
+            className="xsm:rounded-l-none"
             text={"Agendar recorrido"}
             loading={isSubmitting}
           />

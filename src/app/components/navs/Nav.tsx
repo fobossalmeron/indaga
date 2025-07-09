@@ -1,12 +1,10 @@
 import Logo from "@/assets/img/logotipo.svg";
 import Link from "next/link";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/app/components/ui/button";
 import { NavLink } from "./NavLink";
 export const Nav = () => {
   return (
-    <nav
-      className={`text-indagaBlue fixed top-0 right-0 left-0 z-50 flex h-16 w-full items-center justify-center bg-white px-5 sm:px-10 md:px-20`}
-    >
+    <nav className="text-accent fixed top-0 right-0 left-0 z-50 flex h-16 w-full items-center justify-center bg-white px-5 sm:px-10 md:px-20">
       <div className="flex w-full max-w-[1240px] items-center justify-between">
         <Link href="/" className="transition-all">
           <Logo
@@ -33,7 +31,7 @@ export const Nav = () => {
         </nav>
         <div className="animate-fadeSimple">
           <a href="/INDAGA_GUIA_2024v2.pdf" target="_blank">
-            <Button thin>Descarga la guía</Button>
+            <Button size="thin">Descarga la guía</Button>
           </a>
         </div>
       </div>

@@ -4,7 +4,7 @@ import CAR from "@/assets/img/cloud_arrow_right.svg";
 
 export function CloudCTA({
   full = false,
-  hoverStroke = "fern",
+  hoverStroke = "accent",
 }: {
   full?: boolean;
   hoverStroke?: string;

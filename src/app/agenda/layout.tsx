@@ -1,5 +1,5 @@
 import { Header } from "@/app/components/Header";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/app/components/ui/button";
 import { Star } from "@/app/components/Star";
 import AgendaClientProvider from "./AgendaClientProvider";
 
@@ -19,10 +19,9 @@ export default function HappeningsLayout({
             rel="noopener noreferrer"
             className="w-full"
           >
-            <Button secondary>
+            <Button variant="outline">
               <span className="flex items-center gap-3">
-                <Star color="#00808b" className="h-5 w-5 md:h-6 md:w-6" />{" "}
-                Súmalo aquí
+                <Star className="text-accent" size={24} /> Súmalo aquí
               </span>
             </Button>
           </a>

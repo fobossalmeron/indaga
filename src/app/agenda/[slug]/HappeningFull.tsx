@@ -75,7 +75,7 @@ export default function HappeningsFull({
             {location_name && (
               <PrismicNextLink
                 field={validatedLocationUrl}
-                className="text-fern text-lg font-medium underline sm:text-xl"
+                className="text-accent text-lg font-medium underline sm:text-xl"
               >
                 <p>@{location_name}</p>
               </PrismicNextLink>
@@ -83,11 +83,11 @@ export default function HappeningsFull({
           </div>
           <div className="mt-3 flex flex-row flex-wrap gap-4">
             {time && time.length > 0 && (
-              <div className="border-fern relative rounded-xl border-2 px-4 py-3">
-                <h3 className="text-fern absolute -top-2 left-2 bg-white px-2 text-sm font-medium tracking-wider uppercase">
+              <div className="border-accent relative rounded-xl border-2 px-4 py-3">
+                <h3 className="text-accent absolute -top-2 left-2 bg-white px-2 text-sm font-medium tracking-wider uppercase">
                   Horario
                 </h3>
-                <div className="dangerous-links text-fern mt-2 leading-6">
+                <div className="dangerous-links text-accent mt-2 leading-6">
                   <PrismicRichText field={time} />
                 </div>
               </div>
