@@ -19,8 +19,7 @@ export const categoryColors: Record<
   Literatura: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
   Danza: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
   Teatro: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
-  Fotografía: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
-  Tour: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
+  Ciudad: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
 };
 
 export function Category({

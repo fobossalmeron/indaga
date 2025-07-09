@@ -88,8 +88,7 @@ interface HappeningDocumentData {
     | "Literatura"
     | "Danza"
     | "Teatro"
-    | "Fotografía"
-    | "Tour"
+    | "Ciudad"
   >;
 
   /**
@@ -114,6 +113,7 @@ interface HappeningDocumentData {
     | "Performance"
     | "Presentación "
     | "Contemplación"
+    | "Recorrido"
   >;
 
   /**

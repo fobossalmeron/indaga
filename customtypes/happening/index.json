@@ -43,8 +43,7 @@
             "Literatura",
             "Danza",
             "Teatro",
-            "Fotografía",
-            "Tour"
+            "Ciudad"
           ]
         }
       },
@@ -65,7 +64,8 @@
             "Proyección",
             "Performance",
             "Presentación ",
-            "Contemplación"
+            "Contemplación",
+            "Recorrido"
           ]
         }
       },
