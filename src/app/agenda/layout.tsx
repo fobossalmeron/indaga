@@ -1,6 +1,7 @@
 import { Header } from "@/app/components/Header";
 import { Button } from "@/app/components/Button";
 import { Star } from "@/app/components/Star";
+import AgendaClientProvider from "./AgendaClientProvider";
 
 export default function HappeningsLayout({
   children,
@@ -8,7 +9,7 @@ export default function HappeningsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <AgendaClientProvider>
       <Header title="Agenda">
         <div className="flex flex-col items-center gap-2">
           <span className="text-lg">¿Organizas un evento?</span>
@@ -30,6 +31,6 @@ export default function HappeningsLayout({
       <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
         {children}
       </div>
-    </>
+    </AgendaClientProvider>
   );
 }
