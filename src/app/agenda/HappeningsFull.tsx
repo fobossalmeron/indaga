@@ -30,6 +30,7 @@ export default function HappeningsFull({
     <div className="animate-fadeIn2 mt-10 sm:mt-16">
       <div className="mb-4 w-auto px-5">
         <CategorySelect
+          className="w-[200px]"
           categories={categories}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}

@@ -79,7 +79,17 @@ interface HappeningDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   category: prismic.SelectField<
-    "Arte" | "Cultura" | "Música" | "Gastronomía" | "Cine"
+    | "Arte"
+    | "Música"
+    | "Gastronomía"
+    | "Cine"
+    | "Naturaleza"
+    | "Historia"
+    | "Literatura"
+    | "Danza"
+    | "Teatro"
+    | "Fotografía"
+    | "Tour"
   >;
 
   /**
@@ -164,6 +174,28 @@ interface HappeningDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   cost: prismic.RichTextField;
+
+  /**
+   * Tipo de evento field in *Happening*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: happening.event_type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  event_type: prismic.SelectField<
+    | "Concierto"
+    | "Taller"
+    | "Diálogo"
+    | "Exposición"
+    | "Curso"
+    | "Fiesta"
+    | "Feria"
+    | "Mercado"
+    | "Proyección"
+    | "Performance"
+  >;
 }
 
 /**
