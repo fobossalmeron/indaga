@@ -2,33 +2,40 @@
 import { Fade } from "react-awesome-reveal";
 import { PrismicNextLink } from "@prismicio/next";
 import { LinkField, isFilled } from "@prismicio/client";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/app/components/ui/button";
 import MapIcon from "@/assets/img/map.svg";
 import GlobeIcon from "@/assets/img/globe.svg";
+import { Category } from "@/app/components/Category";
+
 interface PlaceProps {
-  place: string;
+  title: string;
   color: string;
   area: string;
+  category: string;
   mapLink?: LinkField;
   link?: LinkField;
   capsuleLink?: LinkField;
 }
 
-export function Place({
-  place,
+export function PlaceCard({
+  title,
   color,
   mapLink,
   link,
   area,
   capsuleLink,
+  category,
 }: PlaceProps) {
   return (
     <Fade triggerOnce>
       <div className="mb-2 flex flex-col items-start rounded-2xl bg-white p-4">
-        <span className="md-lg:text-xl text-base">{area}</span>
-        <h3 className="text-2xl transition-colors duration-300 sm:text-3xl lg:text-5xl">
-          {place}
-        </h3>
+        <Category category={category} />
+        <h2
+          className="pt-2 text-2xl leading-tight sm:[display:-webkit-box] sm:max-w-full sm:overflow-hidden sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]"
+          title={title ?? "Error en título"}
+        >
+          {title ?? "Error en título"}
+        </h2>
         <div className="flex w-full flex-row items-center gap-3 pt-5">
           {isFilled.link(mapLink) && (
             <PrismicNextLink
@@ -54,12 +61,17 @@ export function Place({
               target="_blank"
               className="flex w-full flex-row items-start"
             >
-              <Button secondary thin className="w-full min-w-[137px]">
+              <Button
+                variant="outline"
+                size="thin"
+                className="w-full min-w-[137px]"
+              >
                 Ver cápsula
               </Button>
             </PrismicNextLink>
           )}
         </div>
+        <span className="md-lg:text-xl text-base">{area}</span>
       </div>
     </Fade>
   );

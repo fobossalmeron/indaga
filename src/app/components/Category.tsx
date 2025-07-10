@@ -22,12 +22,29 @@ export const categoryColors: Record<
   Ciudad: { border: "#2149E5", bg: "#2149E530", text: "#00209E" },
 };
 
-export function Category({
-  category,
-}: {
-  category: (typeof categories)[number] | (typeof routeCategories)[number];
-}) {
-  const color = categoryColors[category];
+// Colores para categorías de guía
+export const categoryColorsGuia: Record<
+  string,
+  { border: string; bg: string; text: string }
+> = {
+  Cafeterías: { border: "#FFD600", bg: "#FFF9E3", text: "#8A6D00" }, // guiaMustard
+  "Bares & Cantinas": { border: "#FF7404", bg: "#FFF3E3", text: "#B85200" }, // guiaOrange
+  "Música en Vivo": { border: "#A259FF", bg: "#F3E8FF", text: "#5B2A91" }, // guiaPurple
+  "Monumentos Históricos": {
+    border: "#00C2FF",
+    bg: "#E3F8FF",
+    text: "#007A99",
+  }, // guiaCyan
+  Restaurantes: { border: "#FF6F61", bg: "#FFE3E3", text: "#B23A48" }, // guiaSunset
+  Parques: { border: "#00C48C", bg: "#E3FFF3", text: "#007A5A" }, // guiaGreen
+  "Espacios de Arte": { border: "#FF61A6", bg: "#FFE3F1", text: "#B23A7A" }, // guiaPink
+};
+
+export function Category({ category }: { category: string }) {
+  // Buscar primero en los colores de guía, luego en los de agenda/rutas
+  const color =
+    categoryColorsGuia[category] ||
+    categoryColors[category as keyof typeof categoryColors];
 
   return (
     color && (

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { CategoryChip } from "./CategoryChip";
 import Image from "next/image";
 import { categories } from "../categories";
-import { Place } from "./Place";
+import { Place } from "../PlaceCard";
 import { LinkField } from "@prismicio/client";
 import { Button } from "@/app/components/Button";
 import BackArrow from "@/assets/img/back_arrow.svg";
