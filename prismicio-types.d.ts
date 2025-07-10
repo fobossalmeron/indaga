@@ -112,7 +112,6 @@ interface HappeningDocumentData {
     | "Proyección"
     | "Performance"
     | "Presentación "
-    | "Contemplación"
     | "Recorrido"
   >;
 
