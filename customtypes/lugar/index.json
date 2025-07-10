@@ -14,6 +14,13 @@
           "useAsTitle": true
         }
       },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Descripción",
+          "placeholder": "22 caracteres máximo"
+        }
+      },
       "area": {
         "type": "Text",
         "config": {

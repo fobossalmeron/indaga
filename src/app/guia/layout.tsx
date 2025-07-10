@@ -8,7 +8,10 @@ export default function HappeningsLayout({
 }>) {
   return (
     <GuiaClientProvider>
-      <Header title="Guía de la ciudad" subtitle="Espacios endémicos" />
+      <Header
+        title="Guía de la ciudad"
+        subtitle="Explora la curaduría norestense"
+      />
       <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
         {children}
       </div>

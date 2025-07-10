@@ -3,18 +3,20 @@ import { Fade } from "react-awesome-reveal";
 import { PrismicNextLink } from "@prismicio/next";
 import { LinkField, isFilled } from "@prismicio/client";
 import { Button } from "@/app/components/ui/button";
-import MapIcon from "@/assets/img/map.svg";
-import GlobeIcon from "@/assets/img/globe.svg";
 import { Category } from "@/app/components/Category";
+import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 
 interface PlaceProps {
   title: string;
   color: string;
   area: string;
   category: string;
+  categoryIconUrl?: string;
   mapLink?: LinkField;
   link?: LinkField;
   capsuleLink?: LinkField;
+  description?: string;
 }
 
 export function PlaceCard({
@@ -25,53 +27,68 @@ export function PlaceCard({
   area,
   capsuleLink,
   category,
+  categoryIconUrl,
+  description,
 }: PlaceProps) {
   return (
     <Fade triggerOnce>
-      <div className="mb-2 flex flex-col items-start rounded-2xl bg-white p-4">
+      <div className="relative flex flex-col items-start gap-1 overflow-hidden rounded-2xl bg-white p-4">
         <Category category={category} />
-        <h2
-          className="pt-2 text-2xl leading-tight sm:[display:-webkit-box] sm:max-w-full sm:overflow-hidden sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]"
-          title={title ?? "Error en título"}
-        >
-          {title ?? "Error en título"}
-        </h2>
-        <div className="flex w-full flex-row items-center gap-3 pt-5">
-          {isFilled.link(mapLink) && (
-            <PrismicNextLink
-              field={mapLink}
-              target="_blank"
-              className={`flex flex-row items-center rounded-full p-2 bg-${color} transition-opacity duration-300 hover:opacity-80 active:opacity-80`}
-            >
-              <MapIcon className="h-8 w-8" />
-            </PrismicNextLink>
-          )}
+        <div className="mt-2 flex w-full flex-row items-start">
+          <h2
+            className="flex w-auto items-center gap-1 text-2xl leading-tight sm:[display:-webkit-box] sm:max-w-full sm:overflow-hidden sm:[-webkit-box-orient:vertical] sm:[-webkit-line-clamp:2]"
+            title={title ?? "Error en título"}
+          >
+            {title ?? "Error en título"}
+          </h2>
           {isFilled.link(link) && (
             <PrismicNextLink
               field={link}
               target="_blank"
-              className="bg-eerie flex flex-row items-center rounded-full p-2 transition-opacity duration-300 hover:opacity-80 active:opacity-80"
+              className="ml-1"
+              aria-label="Abrir enlace externo"
             >
-              <GlobeIcon className="h-8 w-8 translate-x-[1px]" />
-            </PrismicNextLink>
-          )}
-          {isFilled.link(capsuleLink) && (
-            <PrismicNextLink
-              field={capsuleLink}
-              target="_blank"
-              className="flex w-full flex-row items-start"
-            >
-              <Button
-                variant="outline"
-                size="thin"
-                className="w-full min-w-[137px]"
-              >
-                Ver cápsula
-              </Button>
+              <ExternalLink className="mt-2 ml-1 h-4 w-4 align-text-top" />
             </PrismicNextLink>
           )}
         </div>
-        <span className="md-lg:text-xl text-base">{area}</span>
+        {description && (
+          <div className="flex w-full flex-row items-center gap-3 pt-0 text-base">
+            {description}
+          </div>
+        )}
+        {isFilled.link(mapLink) ? (
+          <PrismicNextLink
+            field={mapLink}
+            target="_blank"
+            className="md-lg:text-base text-primary text-base hover:underline focus:underline"
+          >
+            @{area}
+          </PrismicNextLink>
+        ) : (
+          <span className="md-lg:text-base text-base">@{area}</span>
+        )}
+        {isFilled.link(capsuleLink) && (
+          <PrismicNextLink
+            field={capsuleLink}
+            target="_blank"
+            className="mt-2 flex w-full flex-row items-start"
+          >
+            <Button size="sm" className="w-fit">
+              Ver cápsula
+            </Button>
+          </PrismicNextLink>
+        )}
+        {categoryIconUrl && (
+          <div className="absolute right-5 bottom-0 flex justify-center">
+            <Image
+              src={categoryIconUrl}
+              alt={category}
+              width={51}
+              height={94}
+            />
+          </div>
+        )}
       </div>
     </Fade>
   );

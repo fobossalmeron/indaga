@@ -231,6 +231,17 @@ interface LugarDocumentData {
   nombre: prismic.KeyTextField;
 
   /**
+   * Descripción field in *Lugar*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: 22 caracteres máximo
+   * - **API ID Path**: lugar.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
    * Área de la ciudad field in *Lugar*
    *
    * - **Field Type**: Text

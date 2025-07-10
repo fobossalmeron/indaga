@@ -43,7 +43,7 @@ export default function GuideFull({ lugares }: GuideFullProps) {
   }, [lugares, selectedCategory]);
 
   return (
-    <div className="p-5">
+    <div className="animate-fadeIn2 mt-10 p-5 sm:mt-5">
       <div className="mb-8 flex w-full justify-center lg:justify-start">
         <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
           <GuideCategorySelect
@@ -61,6 +61,13 @@ export default function GuideFull({ lugares }: GuideFullProps) {
           const categoryObj = categoriaKey
             ? categories[categoriaKey]
             : { color: "gray-400", title: categoriaNombre };
+          // Type guard para saber si categoryObj tiene 'iconUrl'
+          function hasIconUrl(obj: any): obj is { iconUrl: string } {
+            return obj && typeof obj === "object" && "iconUrl" in obj;
+          }
+          const categoryIconUrl = hasIconUrl(categoryObj)
+            ? categoryObj.iconUrl
+            : undefined;
           return (
             <div key={lugar.id} className="flex flex-col gap-2">
               <PlaceCard
@@ -71,6 +78,8 @@ export default function GuideFull({ lugares }: GuideFullProps) {
                 link={lugar.data.link}
                 capsuleLink={lugar.data.capsuleLink}
                 category={categoriaNombre}
+                categoryIconUrl={categoryIconUrl}
+                description={lugar.data.description as string}
               />
             </div>
           );
