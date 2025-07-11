@@ -101,7 +101,7 @@ export function PlaceCard({
           <PrismicNextLink
             field={capsuleLink}
             target="_blank"
-            className="mt-2 flex w-full flex-row items-start"
+            className="m-2 flex w-full flex-row items-start"
           >
             <Button size="sm" className="w-fit">
               Ver cápsula
