@@ -57,9 +57,10 @@ const rutasColors: Record<
 
 interface CategoryProps {
   category: string;
+  className?: string;
 }
 
-export function Category({ category }: CategoryProps) {
+export function Category({ category, className }: CategoryProps) {
   // Buscar en los mapeos
   const color = (
     guiaColors as Record<string, { border: string; bg: string; text: string }>
@@ -78,7 +79,7 @@ export function Category({ category }: CategoryProps) {
 
   return (
     <span
-      className="inline-block w-auto rounded-full border px-3 py-1 text-sm"
+      className={`inline-block w-auto rounded-full border px-3 py-1 text-sm${className ? ` ${className}` : ""}`}
       style={{
         borderColor: color.border,
         backgroundColor: color.bg,

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
-  onClick?: () => void; // Función opcional añadida
+  onClick?: () => void;
 }
 
 export function NavLink({ href, children, onClick }: NavLinkProps) {
@@ -27,7 +27,7 @@ export function NavLink({ href, children, onClick }: NavLinkProps) {
     >
       {children}
       <span
-        className={`absolute bottom-0 left-0 h-full w-full rounded-lg bg-current transition-all duration-300 group-hover:opacity-20 group-active:opacity-20 ${isActive ? "opacity-[12%]" : "opacity-0"}`}
+        className={`bg-accent absolute bottom-0 left-0 h-full w-full rounded-lg transition-all duration-300 group-hover:opacity-20 group-active:opacity-20 ${isActive ? "opacity-[12%]" : "opacity-0"}`}
       ></span>
     </Link>
   );

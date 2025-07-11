@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { categories } from './guia/categories'
 import { createClient } from '@/prismicio'
 
 function getFechaSegura(): string {
@@ -54,13 +53,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const categoryPages = Object.keys(categories).map(categorySlug => ({
-    url: `${baseUrl}/guia/${categorySlug}`,
-    lastModified: fechaSegura,
-    changeFrequency: 'daily' as const,
-    priority: 0.7,
-  }))
-
   // Obtener todos los happenings de Prismic
   const happenings = await client.getAllByType('happening', {
     orderings: {
@@ -90,5 +82,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }))
 
-  return [...staticPages, ...categoryPages, ...happeningPages, ...blogPostPages]
+  return [...staticPages, ...happeningPages, ...blogPostPages]
 }
