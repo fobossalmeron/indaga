@@ -7,6 +7,9 @@ import { useMemo } from "react";
 import { CategorySelect } from "./CategorySelect";
 import { EventTypeSelect } from "./EventTypeSelect";
 import { useQueryState } from "nuqs";
+import type { HappeningDocumentData } from "../../../prismicio-types";
+
+type HappeningCategory = NonNullable<HappeningDocumentData["category"]>;
 
 export default function HappeningsFull({
   entries,
@@ -21,8 +24,10 @@ export default function HappeningsFull({
   });
 
   const categories = useMemo(() => {
-    const allCategories = entries.map((entry) => entry.data.category);
-    return [...new Set(allCategories.filter((c) => c !== null))] as string[];
+    const allCategories = entries
+      .map((entry) => entry.data.category)
+      .filter(Boolean) as HappeningCategory[];
+    return [...new Set(allCategories)];
   }, [entries]);
 
   const eventTypes = useMemo(() => {

@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   Select,
   SelectContent,
@@ -8,9 +7,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
+import type { LugarDocumentData } from "../../../prismicio-types";
 
 interface GuideCategorySelectProps {
-  categories: readonly string[];
+  categories: readonly NonNullable<LugarDocumentData["categoria"]>[];
   selectedCategory: string;
   onSelectCategory: (category: string) => void;
   className?: string;

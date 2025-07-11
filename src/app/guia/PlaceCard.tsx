@@ -7,29 +7,37 @@ import { Category } from "@/app/components/Category";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
-interface PlaceProps {
+interface PlaceCardProps {
   title: string;
-  color: string;
   area: string;
+  mapLink: any;
+  link: any;
+  capsuleLink: any;
   category: string;
-  categoryIconUrl?: string;
-  mapLink?: LinkField;
-  link?: LinkField;
-  capsuleLink?: LinkField;
-  description?: string;
+  description: string;
 }
+
+const categoryToIcon: Record<string, string> = {
+  Cafeterías: "/categories/cafeterias.svg",
+  "Bares & Cantinas": "/categories/bares.svg",
+  "Música en Vivo": "/categories/musica.svg",
+  "Monumentos Históricos": "/categories/monumentos.svg",
+  Restaurantes: "/categories/restaurantes.svg",
+  Parques: "/categories/parques.svg",
+  "Espacios de Arte": "/categories/arte.svg",
+};
 
 export function PlaceCard({
   title,
-  color,
+  area,
   mapLink,
   link,
-  area,
   capsuleLink,
   category,
-  categoryIconUrl,
   description,
-}: PlaceProps) {
+}: PlaceCardProps) {
+  const iconPath = categoryToIcon[category] || "/categories/default.svg";
+
   return (
     <Fade triggerOnce>
       <div className="relative flex flex-col items-start gap-1 overflow-hidden rounded-2xl bg-white p-4">
@@ -79,16 +87,9 @@ export function PlaceCard({
             </Button>
           </PrismicNextLink>
         )}
-        {categoryIconUrl && (
-          <div className="absolute right-5 bottom-0 flex justify-center">
-            <Image
-              src={categoryIconUrl}
-              alt={category}
-              width={51}
-              height={94}
-            />
-          </div>
-        )}
+        <div className="absolute right-5 bottom-0 flex justify-center">
+          <Image src={iconPath} alt={category} width={51} height={94} />
+        </div>
       </div>
     </Fade>
   );

@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
   Select,
   SelectContent,
@@ -9,9 +7,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
+import type { HappeningDocumentData } from "../../../prismicio-types";
 
 interface CategorySelectProps {
-  categories: readonly string[];
+  categories: readonly NonNullable<HappeningDocumentData["category"]>[];
   selectedCategory: string;
   onSelectCategory: (category: string) => void;
   className?: string;
