@@ -54,3 +54,20 @@ export const formatDate = (
     return fullDate ? "Fecha no disponible" : "Fecha no disponible";
   }
 };
+
+export function isPastDate(dateString?: string | null) {
+  if (!dateString) return false;
+
+  // Extrae solo la parte de la fecha (YYYY-MM-DD)
+  const [year, month, day] = dateString.split("T")[0].split("-").map(Number);
+
+  // Crea la fecha del evento en local
+  const eventDate = new Date(year, month - 1, day);
+
+  // Crea la fecha de hoy en local
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Compara solo año, mes y día
+  return eventDate.getTime() < today.getTime();
+}

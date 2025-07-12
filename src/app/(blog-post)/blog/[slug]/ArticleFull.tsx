@@ -1,7 +1,7 @@
 import { Content } from "@prismicio/client";
 import Image from "next/image";
 import { PrismicRichText } from "@prismicio/react";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/date-utils";
 import { JSXMapSerializer } from "@prismicio/react";
 import { OtherArticlesCard } from "./OtherArticlesCard";
 

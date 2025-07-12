@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Content } from "@prismicio/client";
 import { Fade } from "react-awesome-reveal";
 import { Button } from "@/app/components/Button";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/date-utils";
 
 export const ArticleCard = ({ post }: { post: Content.PostDocument }) => {
   const { data, uid } = post;

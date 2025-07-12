@@ -3,7 +3,7 @@
 import { Button } from "@/app/components/ui/button";
 import Link from "next/link";
 import { Category } from "../../components/Category";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/date-utils";
 import ShareArrow from "@/assets/img/whatsapp.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
