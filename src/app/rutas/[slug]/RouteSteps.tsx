@@ -8,6 +8,7 @@ interface Step {
   step_capsule_link: { url: string };
   step_category: string;
   step_description: string;
+  step_activity_description: string;
 }
 
 interface RouteStepsProps {
@@ -35,6 +36,13 @@ export function RouteSteps({ steps }: RouteStepsProps) {
             {index < steps.length - 1 && (
               <div className="absolute -left-4 top-10 w-0.5 h-24 bg-gray-200 z-0" />
             )}
+            
+            {/* Descripción de actividad */}
+            <div className="ml-8 mb-4">
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {step.step_activity_description}
+              </p>
+            </div>
             
             {/* PlaceCard */}
             <div className="ml-8">
