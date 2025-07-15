@@ -18,32 +18,23 @@ interface RouteStepsProps {
 export function RouteSteps({ steps }: RouteStepsProps) {
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-        Pasos de la ruta
-      </h2>
-      
       <div className="space-y-6">
         {steps.map((step, index) => (
           <div key={index} className="relative">
             {/* Número del paso */}
-            <div className="absolute -left-4 top-2 z-10">
-              <div className="flex items-center justify-center w-8 h-8 bg-primary text-white rounded-full text-sm font-semibold">
+            <div className="absolute top-0 -left-3 z-10">
+              <div className="text-foreground flex h-8 w-8 items-center justify-center rounded-full bg-[#DAE7FB] text-sm font-semibold">
                 {index + 1}
               </div>
             </div>
-            
-            {/* Línea conectora (excepto en el último paso) */}
-            {index < steps.length - 1 && (
-              <div className="absolute -left-4 top-10 w-0.5 h-24 bg-gray-200 z-0" />
-            )}
-            
+
             {/* Descripción de actividad */}
-            <div className="ml-8 mb-4">
-              <p className="text-gray-700 text-sm leading-relaxed">
+            <div className="mb-6 ml-8">
+              <p className="text-foreground text-base leading-relaxed">
                 {step.step_activity_description}
               </p>
             </div>
-            
+
             {/* PlaceCard */}
             <div className="ml-8">
               <PlaceCard

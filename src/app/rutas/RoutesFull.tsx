@@ -22,7 +22,7 @@ export default function RoutesFull({
   }
 
   return (
-    <>
+    <div className="mx-auto flex w-full max-w-[1020px] flex-col items-center pb-24">
       <div className="relative mt-10 grid grid-cols-1 gap-8 px-5 sm:mt-16 sm:grid-cols-2">
         <Fade>
           {routes &&
@@ -51,6 +51,6 @@ export default function RoutesFull({
           <Button onClick={closeModal}>Entendido</Button>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ interface RouteHeaderProps {
   title: string;
   subtitle: string;
   description: Array<{ type: string; text: string }>;
-  tourBookingUrl: string;
+  tourBookingUrl?: string;
   googleMapsUrl: string;
 }
 
@@ -21,63 +21,50 @@ export function RouteHeader({
   const descriptionText = description?.[0]?.text || "";
 
   return (
-    <div className="space-y-6">
+    <div className="mt-15 w-full space-y-6">
       {/* Botón Volver */}
-      <Link 
-        href="/rutas"
-        className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Volver a rutas
-      </Link>
+      <div className="flex flex-col justify-center">
+        <Link
+          href="/rutas"
+          className="text-primary hover:text-primary/80 mb-2 inline-flex items-center transition-colors"
+        >
+          <Button variant="link" className="gap-2">
+            <ArrowLeft className="h-4 w-4" />
+            Volver a las Rutas
+          </Button>
+        </Link>
 
-      {/* Contenido principal */}
-      <div className="space-y-4">
-        <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            {title}
-          </h1>
-          <p className="text-xl text-gray-600 mb-4">
-            {subtitle}
-          </p>
-          <p className="text-base text-gray-700 leading-relaxed max-w-3xl">
-            {descriptionText}
-          </p>
+        {/* Contenido principal */}
+        <div className="space-y-4">
+          <div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl">{title}</h1>
+            <p className="mt-2 mb-4 text-xl">
+              Ruta de <span className="font-medium">{subtitle}</span> x{" "}
+              <span className="text-accent font-medium">INDAGA</span>
+            </p>
+            <p className="text-foreground max-w-2xl text-lg leading-relaxed">
+              {descriptionText}
+            </p>
+          </div>
         </div>
+      </div>
 
-        {/* Botones de acción */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Button 
-            asChild 
-            size="lg" 
-            className="flex items-center gap-2"
-          >
-            <a 
-              href={tourBookingUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
+      {/* Botones de acción */}
+      <div className="flex flex-col gap-4 sm:flex-row">
+        <Button variant="outline" asChild className="flex items-center gap-2">
+          <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="h-4 w-4" />
+            Abrir en Google Maps
+          </a>
+        </Button>
+        {tourBookingUrl && (
+          <Button asChild className="flex items-center gap-2">
+            <a href={tourBookingUrl} target="_blank" rel="noopener noreferrer">
               <Calendar className="h-4 w-4" />
               Agendar tour
             </a>
           </Button>
-          
-          <Button 
-            variant="outline" 
-            size="lg" 
-            asChild
-            className="flex items-center gap-2"
-          >
-            <a 
-              href={googleMapsUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Abrir en Google Maps
-            </a>
-          </Button>
-        </div>
+        )}
       </div>
     </div>
   );
