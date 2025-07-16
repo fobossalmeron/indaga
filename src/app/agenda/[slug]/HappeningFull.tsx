@@ -9,6 +9,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Content, LinkField } from "@prismicio/client";
 import { PromoterCTA } from "../PromoterCTA";
+import { ArrowLeft } from "lucide-react";
 
 export default function HappeningsFull({
   event,
@@ -50,11 +51,14 @@ export default function HappeningsFull({
   };
 
   return (
-    <div className="animate-fadeIn2 z-10 px-5">
-      <Link href={"/agenda"}>
-        <Button variant="link">Volver a Agenda</Button>
+    <div className="animate-fadeIn2 z-10 mt-10 px-5 sm:mt-12">
+      <Link href="/agenda">
+        <Button variant="outline" className="mb-8 gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Volver a Agenda
+        </Button>
       </Link>
-      <div className="mx-auto mt-8 flex max-w-[1020px] flex-col overflow-hidden rounded-3xl bg-white sm:mt-16 md:flex-row">
+      <div className="mx-auto flex max-w-[1020px] flex-col overflow-hidden rounded-3xl bg-white md:flex-row">
         <div className="relative min-h-60 w-full bg-gray-200 md:w-1/2 md:max-w-[460px]">
           <PrismicNextImage
             fill
