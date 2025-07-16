@@ -24,11 +24,8 @@ export function RouteHeader({
     <div className="mt-15 w-full space-y-6">
       {/* Botón Volver */}
       <div className="flex flex-col justify-center">
-        <Link
-          href="/rutas"
-          className="text-primary hover:text-primary/80 mb-2 inline-flex items-center transition-colors"
-        >
-          <Button variant="link" className="gap-2">
+        <Link href="/rutas">
+          <Button variant="link" className="mb-2 gap-2">
             <ArrowLeft className="h-4 w-4" />
             Volver a las Rutas
           </Button>
