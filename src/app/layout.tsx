@@ -33,13 +33,13 @@ export default function RootLayout({
       lang="es"
       className={`${general_sans.className} bg-offWhite font-normal`}
     >
-      <body className="flex h-full flex-col justify-between">
+      <body className="bg-offWhite flex h-full flex-col justify-between">
         <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />
             <Nav />
             <MobileNav />
-            <main className="text-notBlack relative flex flex-col items-center pt-16">
+            <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
               {children}
             </main>
             <Footer />
