@@ -8,6 +8,8 @@ import { CategorySelect } from "./CategorySelect";
 import { EventTypeSelect } from "./EventTypeSelect";
 import { useQueryState } from "nuqs";
 import type { HappeningDocumentData } from "../../../prismicio-types";
+import { Header } from "@/app/components/Header";
+import { PromoterCTA } from "./PromoterCTA";
 
 type HappeningCategory = NonNullable<HappeningDocumentData["category"]>;
 
@@ -47,42 +49,47 @@ export default function HappeningsFull({
   });
 
   return (
-    <div className="animate-fadeIn2 mt-10 sm:mt-10">
-      <div className="mb-8 flex w-full justify-center px-5 lg:justify-start">
-        <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
-          <CategorySelect
-            className="w-full"
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-          />
-          <EventTypeSelect
-            className="w-full"
-            eventTypes={eventTypes}
-            selectedEventType={selectedEventType}
-            onSelectEventType={setSelectedEventType}
-          />
+    <>
+      <Header title="Agenda" subtitle="Tu brújula cultural">
+        <PromoterCTA />
+      </Header>
+      <div className="animate-fadeIn2 mt-6 sm:mt-10">
+        <div className="mb-4 flex w-full justify-center px-5 sm:mb-8 lg:justify-start">
+          <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
+            <CategorySelect
+              className="w-full"
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
+            <EventTypeSelect
+              className="w-full"
+              eventTypes={eventTypes}
+              selectedEventType={selectedEventType}
+              onSelectEventType={setSelectedEventType}
+            />
+          </div>
+        </div>
+        <div className="relative flex w-full flex-col flex-wrap justify-center gap-4 px-5 sm:flex-row sm:gap-8">
+          {filteredEntries.length === 0 ? (
+            <div className="flex w-full flex-col items-center justify-center py-16 text-center text-gray-500">
+              <span className="mb-2 text-2xl">No se encontraron eventos</span>
+              <span className="text-base">
+                Intenta cambiar la categoría o el tipo de evento.
+              </span>
+            </div>
+          ) : (
+            <Fade>
+              {filteredEntries &&
+                filteredEntries.map((entry) => (
+                  <Link href={`/agenda/${entry.uid}`} key={entry.uid + "link"}>
+                    <HappeningCard key={entry.uid} data={entry.data} />
+                  </Link>
+                ))}
+            </Fade>
+          )}
         </div>
       </div>
-      <div className="relative flex w-full flex-col flex-wrap justify-center gap-8 px-5 sm:flex-row">
-        {filteredEntries.length === 0 ? (
-          <div className="flex w-full flex-col items-center justify-center py-16 text-center text-gray-500">
-            <span className="mb-2 text-2xl">No se encontraron eventos</span>
-            <span className="text-base">
-              Intenta cambiar la categoría o el tipo de evento.
-            </span>
-          </div>
-        ) : (
-          <Fade>
-            {filteredEntries &&
-              filteredEntries.map((entry) => (
-                <Link href={`/agenda/${entry.uid}`} key={entry.uid + "link"}>
-                  <HappeningCard key={entry.uid} data={entry.data} />
-                </Link>
-              ))}
-          </Fade>
-        )}
-      </div>
-    </div>
+    </>
   );
 }

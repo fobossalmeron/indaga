@@ -56,7 +56,7 @@ export function PlaceCard({
             <PrismicNextLink
               field={link}
               target="_blank"
-              className="hover:bg-accent/20 hover:text-accent active:bg-accent/20 active:text-accent w-fit rounded-lg p-2 py-1 transition-colors"
+              className="hover:bg-accent/15 hover:text-accent active:bg-accent/15 active:text-accent w-fit rounded-lg p-2 py-1 transition-colors"
               title={title ?? "Error en título"}
               aria-label={title ?? "Enlace externo"}
             >
@@ -90,7 +90,7 @@ export function PlaceCard({
             <PrismicNextLink
               field={mapLink}
               target="_blank"
-              className="md-lg:text-base text-primary hover:bg-accent/20 active:bg-accent/20 rounded-lg p-2 py-1 text-base transition-colors active:underline"
+              className="md-lg:text-base text-primary hover:bg-accent/15 active:bg-accent/15 rounded-lg p-2 py-1 text-base transition-colors active:underline"
             >
               @{area}
             </PrismicNextLink>

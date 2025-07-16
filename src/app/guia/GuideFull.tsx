@@ -35,8 +35,8 @@ export default function GuideFull({ lugares }: GuideFullProps) {
   }, [lugares, selectedCategory]);
 
   return (
-    <div className="animate-fadeIn2 mt-10 p-5 sm:mt-5">
-      <div className="mb-8 flex w-full justify-center lg:justify-start">
+    <div className="animate-fadeIn2 mt-0 p-5 sm:mt-5">
+      <div className="mb-4 flex w-full justify-center sm:mb-8 lg:justify-start">
         <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
           <GuideCategorySelect
             className="w-full"
@@ -46,7 +46,7 @@ export default function GuideFull({ lugares }: GuideFullProps) {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {filteredLugares.map((lugar) => {
           return (
             <div key={lugar.id} className="flex flex-col gap-2">

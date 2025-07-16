@@ -12,7 +12,7 @@ const NavLink = ({
   children: React.ReactNode;
 }) => {
   return (
-    <li className="home-link transition-bg hover:bg-indagaBlue/15 active:bg-indagaBlue/15 bg-indagaBlue/0 relative -translate-x-4 rounded-xl px-4 py-2 text-2xl duration-300 md:text-3xl">
+    <li className="home-link transition-bg relative -translate-x-4 rounded-xl bg-white/0 px-4 py-2 text-2xl duration-300 hover:bg-white/85 hover:shadow-sm active:bg-white/85 active:shadow-sm md:text-3xl">
       <Link href={href}>{children}</Link>
     </li>
   );
@@ -35,10 +35,10 @@ export default function Home() {
                   className="animate-fadeIn2 text-indagaBlue w-[150px] md:w-[170px] lg:w-[200px]"
                 />
               </div>
-              <ul className="animate-fadeIn3 xsm:gap-6 flex flex-col items-start justify-center gap-5 sm:gap-8">
+              <ul className="animate-fadeIn3 xsm:gap-5 flex flex-col items-start justify-center gap-3 sm:gap-4">
                 <NavLink href="/agenda">Agenda</NavLink>
                 <NavLink href="/guia">Guía de la ciudad</NavLink>
-                <NavLink href="/rutas">Rutas culturales</NavLink>
+                {/* <NavLink href="/rutas">Rutas culturales</NavLink> */}
               </ul>
             </div>
           </div>

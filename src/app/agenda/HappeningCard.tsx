@@ -4,16 +4,7 @@ import { Button } from "@/app/components/ui/button";
 import { Content } from "@prismicio/client";
 import { Category } from "@/app/components/Category";
 import { Fade } from "react-awesome-reveal";
-import { formatDate } from "@/utils/formatDate";
-
-function isPastDate(dateString?: string | null) {
-  if (!dateString) return false;
-  const eventDate = new Date(dateString);
-  const today = new Date();
-  eventDate.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-  return eventDate < today;
-}
+import { formatDate, isPastDate } from "@/utils/date-utils";
 
 export function HappeningCard({
   data,

@@ -21,9 +21,9 @@ export const Nav = () => {
             <li className="hidden lg:block">
               <NavLink href="/guia">Guía</NavLink>
             </li>
-            <li className="hidden lg:block">
+            {/* <li className="hidden lg:block">
               <NavLink href="/rutas">Rutas</NavLink>
-            </li>
+            </li> */}
             <li className="hidden lg:block">
               <NavLink href="/blog">Blog</NavLink>
             </li>
