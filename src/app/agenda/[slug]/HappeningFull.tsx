@@ -51,9 +51,9 @@ export default function HappeningsFull({
   };
 
   return (
-    <div className="animate-fadeIn2 z-10 mt-10 px-5 sm:mt-12">
+    <div className="animate-fadeIn2 z-10 mt-4 px-5 pb-10 sm:mt-12 sm:pb-24">
       <Link href="/agenda">
-        <Button variant="outline" className="mb-8 gap-2">
+        <Button variant="outline" className="mb-4 gap-2 sm:mb-8">
           <ArrowLeft className="h-4 w-4" />
           Volver a Agenda
         </Button>
@@ -125,8 +125,8 @@ export default function HappeningsFull({
           </div>
         </div>
       </div>
-      <div className="mt-20 flex w-full items-center justify-center">
-        <PromoterCTA />
+      <div className="mt-10 flex w-full items-center justify-center sm:mt-20">
+        <PromoterCTA center />
       </div>
     </div>
   );
