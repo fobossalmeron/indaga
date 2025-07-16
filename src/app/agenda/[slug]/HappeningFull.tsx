@@ -8,6 +8,7 @@ import ShareArrow from "@/assets/img/whatsapp.svg";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Content, LinkField } from "@prismicio/client";
+import { PromoterCTA } from "../PromoterCTA";
 
 export default function HappeningsFull({
   event,
@@ -50,6 +51,9 @@ export default function HappeningsFull({
 
   return (
     <div className="animate-fadeIn2 z-10 px-5">
+      <Link href={"/agenda"}>
+        <Button variant="link">Volver a Agenda</Button>
+      </Link>
       <div className="mx-auto mt-8 flex max-w-[1020px] flex-col overflow-hidden rounded-3xl bg-white sm:mt-16 md:flex-row">
         <div className="relative min-h-60 w-full bg-gray-200 md:w-1/2 md:max-w-[460px]">
           <PrismicNextImage
@@ -111,16 +115,14 @@ export default function HappeningsFull({
             <PrismicRichText field={description} />
           </div>
           <div className="xsm:grid-cols-2 grid w-full grid-cols-1 gap-2">
-            <Link href={"/agenda"}>
-              <Button variant="outline" className="w-full">
-                Volver
-              </Button>
-            </Link>
             <Button className="w-full" onClick={handleShare}>
               Compartir <ShareArrow width={20} height={20} />
             </Button>
           </div>
         </div>
+      </div>
+      <div className="mt-20 flex w-full items-center justify-center">
+        <PromoterCTA />
       </div>
     </div>
   );
