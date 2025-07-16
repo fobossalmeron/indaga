@@ -58,7 +58,7 @@ function cleanMapUrl(url: string): string {
 export function RouteMap({ embedUrl }: RouteMapProps) {
   return (
     <div className="w-full min-w-0">
-      <div className="bg-accent relative h-full min-h-[800px] w-full min-w-0 overflow-hidden rounded-xl lg:h-full">
+      <div className="relative h-full min-h-[800px] w-full min-w-0 overflow-hidden rounded-xl bg-[#DAE7FB] lg:h-full">
         <iframe
           src={cleanMapUrl(embedUrl)}
           width="100%"
@@ -66,8 +66,8 @@ export function RouteMap({ embedUrl }: RouteMapProps) {
           style={{
             border: 0,
             minWidth: 0,
-            marginTop: "-50px", // Oculta la barra superior
-            height: "calc(100% + 50px)", // Compensa el margin negativo
+            marginTop: "-65px", // Oculta la barra superior
+            height: "calc(100% + 65px)", // Compensa el margin negativo
           }}
           allowFullScreen
           loading="lazy"

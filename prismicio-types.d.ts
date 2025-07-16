@@ -424,6 +424,31 @@ export type PostDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PostDocumentData>, "post", Lang>;
 
 /**
+ * Item in *Ruta → Paso*
+ */
+export interface RouteDocumentDataStepItem {
+  /**
+   * Descripción del paso field in *Ruta → Paso*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.step[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Lugar (de la guía) field in *Ruta → Paso*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.step[].place
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  place: prismic.ContentRelationshipField<"lugar">;
+}
+
+/**
  * Content for Ruta documents
  */
 interface RouteDocumentData {
@@ -450,17 +475,6 @@ interface RouteDocumentData {
   image: prismic.ImageField<never>;
 
   /**
-   * Categoria field in *Ruta*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: route.category
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  category: prismic.SelectField<"En la ciudad" | "Fuera de la ciudad">;
-
-  /**
    * Descripción field in *Ruta*
    *
    * - **Field Type**: Rich Text
@@ -470,6 +484,73 @@ interface RouteDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * Invitado o featuring field in *Ruta*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Soy Norestense, FISL, Restaurika, etc.
+   * - **API ID Path**: route.featuring
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  featuring: prismic.KeyTextField;
+
+  /**
+   * Embed URL del mapa field in *Ruta*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.embed_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  embed_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Share URL del mapa field in *Ruta*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.share_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  share_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Tour (opcional) field in *Ruta*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.tour
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tour: prismic.ContentRelationshipField<"happening">;
+
+  /**
+   * Paso field in *Ruta*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: route.step[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  step: prismic.GroupField<Simplify<RouteDocumentDataStepItem>>;
 }
 
 /**
@@ -549,6 +630,7 @@ declare module "@prismicio/client" {
       PostDocumentData,
       RouteDocument,
       RouteDocumentData,
+      RouteDocumentDataStepItem,
       AllDocumentTypes,
       ImageSlice,
       ImageSliceVariation,
