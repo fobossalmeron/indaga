@@ -44,6 +44,7 @@ Implementar un sistema de registro y autenticación de usuarios utilizando Bette
 - Soporta múltiples providers de OAuth
 - Tiene buena documentación y TypeScript support
 - Permite customización de UI
+- Tenemos instalado el MCP de supabase
 
 ---
 
