@@ -75,7 +75,7 @@
           "customtypes": ["happening"]
         }
       },
-      "step": {
+      "steps": {
         "type": "Group",
         "config": {
           "label": "Paso",

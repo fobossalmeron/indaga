@@ -426,13 +426,13 @@ export type PostDocument<Lang extends string = string> =
 /**
  * Item in *Ruta → Paso*
  */
-export interface RouteDocumentDataStepItem {
+export interface RouteDocumentDataStepsItem {
   /**
    * Descripción del paso field in *Ruta → Paso*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: route.step[].description
+   * - **API ID Path**: route.steps[].description
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
@@ -442,7 +442,7 @@ export interface RouteDocumentDataStepItem {
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: route.step[].place
+   * - **API ID Path**: route.steps[].place
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   place: prismic.ContentRelationshipField<"lugar">;
@@ -546,11 +546,11 @@ interface RouteDocumentData {
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: route.step[]
+   * - **API ID Path**: route.steps[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  step: prismic.GroupField<Simplify<RouteDocumentDataStepItem>>;
+  steps: prismic.GroupField<Simplify<RouteDocumentDataStepsItem>>;
 }
 
 /**
@@ -630,7 +630,7 @@ declare module "@prismicio/client" {
       PostDocumentData,
       RouteDocument,
       RouteDocumentData,
-      RouteDocumentDataStepItem,
+      RouteDocumentDataStepsItem,
       AllDocumentTypes,
       ImageSlice,
       ImageSliceVariation,

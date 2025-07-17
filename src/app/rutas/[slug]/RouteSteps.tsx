@@ -1,21 +1,16 @@
 import { PlaceCard } from "@/app/guia/PlaceCard";
-
-interface Step {
-  step_title: string;
-  step_area: string;
-  step_map_link: { url: string };
-  step_link: { url: string };
-  step_capsule_link: { url: string };
-  step_category: string;
-  step_description: string;
-  step_activity_description: string;
-}
+import { Content } from "@prismicio/client";
+import { asLink } from "@prismicio/helpers";
 
 interface RouteStepsProps {
-  steps: Step[];
+  steps: Content.RouteDocumentDataStepsItem[];
 }
 
 export function RouteSteps({ steps }: RouteStepsProps) {
+  if (!steps || !Array.isArray(steps)) {
+    return null;
+  }
+
   return (
     <div className="w-full">
       <div className="space-y-6">
@@ -31,21 +26,27 @@ export function RouteSteps({ steps }: RouteStepsProps) {
             {/* Descripción de actividad */}
             <div className="mb-6 ml-8">
               <p className="text-foreground text-base leading-relaxed">
-                {step.step_activity_description}
+                {step.description}
               </p>
             </div>
 
             {/* PlaceCard */}
             <div className="ml-8">
-              <PlaceCard
-                title={step.step_title}
-                area={step.step_area}
-                mapLink={step.step_map_link}
-                link={step.step_link}
-                capsuleLink={step.step_capsule_link}
-                category={step.step_category}
-                description={step.step_description}
-              />
+              {(() => {
+                const place = step.place as unknown as Content.LugarDocument;
+                const capsuleLinkUrl = asLink(place.data?.capsuleLink);
+                return (
+                  <PlaceCard
+                    title={place.data?.nombre || ""}
+                    area={place.data?.area || ""}
+                    mapLink={{ url: asLink(place.data?.mapLink) || "" }}
+                    link={{ url: asLink(place.data?.link) || "" }}
+                    capsuleLink={capsuleLinkUrl ? { url: capsuleLinkUrl } : null}
+                    category={place.data?.categoria || ""}
+                    description={place.data?.description || ""}
+                  />
+                );
+              })()}
             </div>
           </div>
         ))}
