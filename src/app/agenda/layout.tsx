@@ -7,7 +7,7 @@ export default function HappeningsLayout({
 }>) {
   return (
     <AgendaClientProvider>
-      <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
+      <div className="mx-auto flex w-full max-w-[1020px] flex-col">
         {children}
       </div>
     </AgendaClientProvider>

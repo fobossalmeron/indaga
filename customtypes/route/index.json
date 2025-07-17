@@ -28,14 +28,6 @@
           "thumbnails": []
         }
       },
-      "category": {
-        "type": "Select",
-        "config": {
-          "label": "Categoria",
-          "placeholder": "",
-          "options": ["En la ciudad", "Fuera de la ciudad"]
-        }
-      },
       "description": {
         "type": "StructuredText",
         "config": {
@@ -43,6 +35,69 @@
           "placeholder": "",
           "allowTargetBlank": true,
           "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "featuring": {
+        "type": "Text",
+        "config": {
+          "label": "Invitado o featuring",
+          "placeholder": "Soy Norestense, FISL, Restaurika, etc."
+        }
+      },
+      "embed_url": {
+        "type": "Link",
+        "config": {
+          "label": "Embed URL del mapa",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": false,
+          "allowText": false,
+          "repeat": false
+        }
+      },
+      "share_url": {
+        "type": "Link",
+        "config": {
+          "label": "Share URL del mapa",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": false,
+          "allowText": false,
+          "repeat": false
+        }
+      },
+      "tour": {
+        "type": "Link",
+        "config": {
+          "label": "Tour (opcional)",
+          "select": "document",
+          "repeat": false,
+          "customtypes": ["happening"]
+        }
+      },
+      "steps": {
+        "type": "Group",
+        "config": {
+          "label": "Paso",
+          "repeat": true,
+          "fields": {
+            "description": {
+              "type": "Text",
+              "config": {
+                "label": "Descripción del paso",
+                "placeholder": ""
+              }
+            },
+            "place": {
+              "type": "Link",
+              "config": {
+                "label": "Lugar (de la guía)",
+                "select": "document",
+                "repeat": false,
+                "customtypes": ["lugar"]
+              }
+            }
+          }
         }
       }
     }

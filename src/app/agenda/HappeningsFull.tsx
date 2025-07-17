@@ -53,7 +53,7 @@ export default function HappeningsFull({
       <Header title="Agenda" subtitle="Tu brújula cultural">
         <PromoterCTA />
       </Header>
-      <div className="animate-fadeIn2 mt-6 sm:mt-10">
+      <div className="animate-fadeIn2 mt-6 pb-24 sm:mt-10">
         <div className="mb-4 flex w-full justify-center px-5 sm:mb-8 lg:justify-start">
           <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
             <CategorySelect
