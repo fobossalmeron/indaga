@@ -39,9 +39,7 @@ export default function RootLayout({
             <ScrollToTop />
             <Nav />
             <MobileNav />
-            <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
-              {children}
-            </main>
+            {children}
             <Footer />
           </LenisProvider>
         </ProgressBarProvider>

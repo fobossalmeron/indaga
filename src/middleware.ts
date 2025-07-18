@@ -21,7 +21,6 @@ const adminRoutes = [
 // Define auth routes (redirect if already authenticated)
 const authRoutes = [
   '/login',
-  '/register',
 ]
 
 export async function middleware(request: NextRequest) {

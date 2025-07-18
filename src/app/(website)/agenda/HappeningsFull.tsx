@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import { CategorySelect } from "./CategorySelect";
 import { EventTypeSelect } from "./EventTypeSelect";
 import { useQueryState } from "nuqs";
-import type { HappeningDocumentData } from "../../../prismicio-types";
+import type { HappeningDocumentData } from "../../../../prismicio-types";
 import { Header } from "@/app/components/Header";
 import { PromoterCTA } from "./PromoterCTA";
 

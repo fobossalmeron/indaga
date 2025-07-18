@@ -1,72 +1,52 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/app/components/ui/button"
+import { useState } from "react";
+import { Button } from "@/app/components/ui/button";
 
 interface MagicLinkFormProps {
-  mode: "login" | "register"
-  onSubmit: (email: string, fullName?: string) => Promise<void>
-  isLoading: boolean
+  onSubmit: (email: string) => Promise<void>;
+  isLoading: boolean;
 }
 
-export function MagicLinkForm({ mode, onSubmit, isLoading }: MagicLinkFormProps) {
-  const [email, setEmail] = useState("")
-  const [fullName, setFullName] = useState("")
-  const [errors, setErrors] = useState<{ email?: string; fullName?: string }>({})
+export function MagicLinkForm({
+  onSubmit,
+  isLoading,
+}: MagicLinkFormProps) {
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState<{ email?: string }>({});
 
   const validateForm = () => {
-    const newErrors: { email?: string; fullName?: string } = {}
-    
+    const newErrors: { email?: string } = {};
+
     if (!email) {
-      newErrors.email = "El correo electrónico es requerido"
+      newErrors.email = "El correo electrónico es requerido";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Ingresa un correo electrónico válido"
+      newErrors.email = "Ingresa un correo electrónico válido";
     }
-    
-    if (mode === "register" && !fullName.trim()) {
-      newErrors.fullName = "El nombre completo es requerido"
-    }
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!validateForm()) return
-    
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
     try {
-      await onSubmit(email, mode === "register" ? fullName : undefined)
+      await onSubmit(email);
     } catch (error) {
-      console.error("Error submitting form:", error)
+      console.error("Error submitting form:", error);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {mode === "register" && (
-        <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
-            Nombre completo
-          </label>
-          <input
-            id="fullName"
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-            placeholder="Tu nombre completo"
-            disabled={isLoading}
-          />
-          {errors.fullName && (
-            <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
-          )}
-        </div>
-      )}
-      
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+        <label
+          htmlFor="email"
+          className="mb-2 block text-sm font-medium text-gray-700"
+        >
           Correo electrónico
         </label>
         <input
@@ -74,7 +54,7 @@ export function MagicLinkForm({ mode, onSubmit, isLoading }: MagicLinkFormProps)
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-blue-500"
           placeholder="tu@correo.com"
           disabled={isLoading}
         />
@@ -83,25 +63,13 @@ export function MagicLinkForm({ mode, onSubmit, isLoading }: MagicLinkFormProps)
         )}
       </div>
 
-      <Button
-        type="submit"
-        disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isLoading 
-          ? "Enviando..." 
-          : mode === "register" 
-            ? "Crear cuenta"
-            : "Iniciar sesión"
-        }
+      <Button type="submit" disabled={isLoading} className="w-full">
+        {isLoading ? "Enviando..." : "Continuar"}
       </Button>
 
-      <div className="text-sm text-gray-600 text-center">
-        {mode === "register" 
-          ? "Te enviaremos un enlace mágico para crear tu cuenta"
-          : "Te enviaremos un enlace mágico para iniciar sesión"
-        }
+      <div className="text-center text-sm text-gray-600">
+        Te enviaremos un enlace mágico para acceder
       </div>
     </form>
-  )
+  );
 }

@@ -80,24 +80,25 @@ export default betterAuth({
                   <meta name="viewport" content="width=device-width, initial-scale=1">
                   <title>Iniciar sesión en INDAGA</title>
                 </head>
-                <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-                  <div style="text-align: center; margin-bottom: 30px;">
-                    <h1 style="color: #2563eb; margin: 0;">¡Hola!</h1>
-                    <p style="font-size: 18px; color: #666; margin: 10px 0;">Inicia sesión en INDAGA</p>
-                  </div>
-                  
-                  <div style="background: #f8fafc; padding: 30px; border-radius: 12px; margin: 20px 0;">
-                    <p style="margin: 0 0 20px; font-size: 16px;">
+                <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; line-height: 1.6; color: #333; background-color: #edf3fd; margin: 0; padding: 20px;">
+                  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; padding: 40px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                      <h1 style="color: #008a7e; margin: 0; font-weight: normal;">¡Hola!</h1>
+                      <p style="font-size: 18px; color: #4d4e6a; margin: 10px 0;">Inicia sesión en <span style="font-weight: 600;">INDAGA</span></p>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 30px; border-radius: 12px; margin: 20px 0;">
+                    <p style="margin: 0 0 20px; font-size: 16px; color: #4d4e6a;">
                       Haz clic en el siguiente enlace para iniciar sesión en INDAGA:
                     </p>
                     
                     <div style="text-align: center; margin: 30px 0;">
-                      <a href="${url}" style="display: inline-block; padding: 16px 32px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
-                        🔗 Iniciar Sesión
+                      <a href="${url}" style="display: inline-block; padding: 16px 32px; background-color: #008a7e; color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+                        🔗 Iniciar sesión
                       </a>
                     </div>
                     
-                    <p style="margin: 20px 0 0; font-size: 14px; color: #666;">
+                    <p style="margin: 20px 0 0; font-size: 14px; color: #4d4e6a;">
                       ⏰ Este enlace expira en <strong>10 minutos</strong>.
                     </p>
                   </div>
@@ -116,6 +117,7 @@ export default betterAuth({
                     <p style="margin: 5px 0 0; font-size: 12px; color: #9ca3af;">
                       INDAGA - Explora Monterrey como nunca antes
                     </p>
+                  </div>
                   </div>
                 </body>
                 </html>
@@ -150,7 +152,7 @@ export default betterAuth({
       try {
         const result = await userOperations.createUser({
           email: user.email,
-          full_name: user.name || user.email,
+          full_name: user.name || "",
           provider: "magic-link",
         })
         console.log("[onSignUp] Supabase user creation result:", result);

@@ -1,4 +1,4 @@
-import { PlaceCard } from "@/app/guia/PlaceCard";
+import { PlaceCard } from "../../guia/PlaceCard";
 import { Content } from "@prismicio/client";
 import { asLink } from "@prismicio/helpers";
 

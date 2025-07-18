@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
-import type { HappeningDocumentData } from "../../../prismicio-types";
+import type { HappeningDocumentData } from "../../../../prismicio-types";
 
 interface CategorySelectProps {
   categories: readonly NonNullable<HappeningDocumentData["category"]>[];

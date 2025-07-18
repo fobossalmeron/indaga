@@ -1,7 +1,7 @@
 import { createClient } from "@/prismicio";
 import { Content } from "@prismicio/client";
 import RoutesFull from "./RoutesFull";
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 
 export default async function RoutesAll() {
   const client = await createClient();

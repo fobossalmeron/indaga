@@ -1,60 +1,60 @@
 // Admin Dashboard Main Page
 // Created for ULTRATHINK Plan - Agent C
 
-import { redirect } from 'next/navigation'
-import { headers } from 'next/headers'
-import Link from 'next/link'
-import auth from '@/lib/auth'
-import { adminUtils, adminStatsActions } from '@/lib/admin-actions'
-import StatsDashboard from '@/app/components/admin/stats-dashboard'
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import Link from "next/link";
+import auth from "@/lib/auth";
+import { adminUtils, adminStatsActions } from "@/lib/admin-actions";
+import StatsDashboard from "@/app/components/admin/stats-dashboard";
 
 export default async function AdminPage() {
-  console.log('🔍 [ADMIN PAGE] Starting AdminPage function')
-  
+  console.log("🔍 [ADMIN PAGE] Starting AdminPage function");
+
   // Get session
   const session = await auth.api.getSession({
-    headers: await headers()
-  })
+    headers: await headers(),
+  });
 
-  console.log('🔍 [ADMIN PAGE] Session:', session ? 'EXISTS' : 'NULL')
-  console.log('🔍 [ADMIN PAGE] User email:', session?.user?.email)
+  console.log("🔍 [ADMIN PAGE] Session:", session ? "EXISTS" : "NULL");
+  console.log("🔍 [ADMIN PAGE] User email:", session?.user?.email);
 
   // Redirect if not logged in
   if (!session) {
-    console.log('🔍 [ADMIN PAGE] No session, redirecting to login')
-    redirect('/login?redirect=/admin')
+    console.log("🔍 [ADMIN PAGE] No session, redirecting to login");
+    redirect("/login?redirect=/admin");
   }
 
   // Check if user is admin
-  const isAdmin = await adminUtils.isAdmin(session.user.email)
-  console.log('🔍 [ADMIN PAGE] Is admin check result:', isAdmin)
-  
+  const isAdmin = await adminUtils.isAdmin(session.user.email);
+  console.log("🔍 [ADMIN PAGE] Is admin check result:", isAdmin);
+
   if (!isAdmin) {
-    console.log('🔍 [ADMIN PAGE] Not admin, redirecting to /')
-    redirect('/')
+    console.log("🔍 [ADMIN PAGE] Not admin, redirecting to /");
+    redirect("/");
   }
 
-  console.log('🔍 [ADMIN PAGE] Admin check passed, proceeding to render')
+  console.log("🔍 [ADMIN PAGE] Admin check passed, proceeding to render");
 
   // Get dashboard stats
-  const stats = await adminStatsActions.getDashboardStats()
-  const userActivity = await adminStatsActions.getUserActivityStats(30)
-  const scanActivity = await adminStatsActions.getTreasureScanStats(30)
+  const stats = await adminStatsActions.getDashboardStats();
+  const userActivity = await adminStatsActions.getUserActivityStats(30);
+  const scanActivity = await adminStatsActions.getTreasureScanStats(30);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8 pt-26">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="md:flex md:items-center md:justify-between">
           <div className="min-w-0 flex-1">
-            <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+            <h2 className="text-2xl leading-7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
               Panel de Administración INDAGA
             </h2>
             <p className="mt-1 text-sm text-gray-500">
               Gestiona usuarios, treasure hunts y revisa estadísticas
             </p>
           </div>
-          <div className="mt-4 flex md:ml-4 md:mt-0">
+          <div className="mt-4 flex md:mt-0 md:ml-4">
             <div className="text-sm text-gray-500">
               Bienvenido, {session.user.name || session.user.email}
             </div>
@@ -110,8 +110,18 @@ export default async function AdminPage() {
             <div className="p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <svg className="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                  <svg
+                    className="h-8 w-8 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+                    />
                   </svg>
                 </div>
                 <div className="ml-5 w-0 flex-1">
@@ -127,10 +137,12 @@ export default async function AdminPage() {
               </div>
               <div className="mt-4">
                 <div className="text-sm text-gray-500">
-                  • Ver tabla completa de usuarios<br/>
-                  • Filtrar por verificación<br/>
-                  • Exportar datos<br/>
-                  • {stats.recentUsers} nuevos en 7 días
+                  • Ver tabla completa de usuarios
+                  <br />
+                  • Filtrar por verificación
+                  <br />
+                  • Exportar datos
+                  <br />• {stats.recentUsers} nuevos en 7 días
                 </div>
                 <div className="mt-4">
                   <Link
@@ -149,8 +161,18 @@ export default async function AdminPage() {
             <div className="p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <svg className="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  <svg
+                    className="h-8 w-8 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
                   </svg>
                 </div>
                 <div className="ml-5 w-0 flex-1">
@@ -166,10 +188,12 @@ export default async function AdminPage() {
               </div>
               <div className="mt-4">
                 <div className="text-sm text-gray-500">
-                  • Crear nuevos treasure hunts<br/>
-                  • Gestionar tesoros y códigos QR<br/>
-                  • Ver progreso de participantes<br/>
-                  • {stats.totalScans} escaneos totales
+                  • Crear nuevos treasure hunts
+                  <br />
+                  • Gestionar tesoros y códigos QR
+                  <br />
+                  • Ver progreso de participantes
+                  <br />• {stats.totalScans} escaneos totales
                 </div>
                 <div className="mt-4">
                   <Link
@@ -188,8 +212,18 @@ export default async function AdminPage() {
             <div className="p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <svg className="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  <svg
+                    className="h-8 w-8 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
                   </svg>
                 </div>
                 <div className="ml-5 w-0 flex-1">
@@ -205,10 +239,11 @@ export default async function AdminPage() {
               </div>
               <div className="mt-4">
                 <div className="text-sm text-gray-500">
-                  • Eventos guardados: {stats.totalSavedEvents}<br/>
-                  • Lugares guardados: {stats.totalSavedPlaces}<br/>
-                  • Gráficas de actividad<br/>
-                  • Reportes detallados
+                  • Eventos guardados: {stats.totalSavedEvents}
+                  <br />• Lugares guardados: {stats.totalSavedPlaces}
+                  <br />
+                  • Gráficas de actividad
+                  <br />• Reportes detallados
                 </div>
                 <div className="mt-4">
                   <button className="inline-flex items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">
@@ -222,7 +257,7 @@ export default async function AdminPage() {
 
         {/* Detailed Statistics Component */}
         <div className="mt-8">
-          <StatsDashboard 
+          <StatsDashboard
             stats={stats}
             userActivity={userActivity}
             scanActivity={scanActivity}
@@ -230,5 +265,5 @@ export default async function AdminPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
