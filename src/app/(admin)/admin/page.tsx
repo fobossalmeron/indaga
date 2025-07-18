@@ -7,6 +7,8 @@ import Link from "next/link";
 import auth from "@/lib/auth";
 import { adminUtils, adminStatsActions } from "@/lib/admin-actions";
 import StatsDashboard from "@/app/components/admin/stats-dashboard";
+import { Button } from "@/app/components/ui/button";
+import { Users, Trophy, BarChart3, LogOut } from "lucide-react";
 
 export default async function AdminPage() {
   console.log("🔍 [ADMIN PAGE] Starting AdminPage function");
@@ -47,17 +49,23 @@ export default async function AdminPage() {
         {/* Header */}
         <div className="md:flex md:items-center md:justify-between">
           <div className="min-w-0 flex-1">
-            <h2 className="text-2xl leading-7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+            <h2 className="text-2xl leading-7 sm:truncate sm:text-3xl sm:tracking-tight">
               Panel de Administración INDAGA
             </h2>
             <p className="mt-1 text-sm text-gray-500">
               Gestiona usuarios, treasure hunts y revisa estadísticas
             </p>
           </div>
-          <div className="mt-4 flex md:mt-0 md:ml-4">
+          <div className="mt-4 flex items-center gap-4 md:mt-0 md:ml-4">
             <div className="text-sm text-gray-500">
               Bienvenido, {session.user.name || session.user.email}
             </div>
+            <form action="/api/auth/sign-out" method="POST">
+              <Button size="sm" variant="outline" type="submit">
+                <LogOut className="h-4 w-4" />
+                Cerrar sesión
+              </Button>
+            </form>
           </div>
         </div>
 
@@ -110,19 +118,7 @@ export default async function AdminPage() {
             <div className="p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <svg
-                    className="h-8 w-8 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-                    />
-                  </svg>
+                  <Users className="h-8 w-8 text-blue-600" />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
@@ -145,11 +141,10 @@ export default async function AdminPage() {
                   <br />• {stats.recentUsers} nuevos en 7 días
                 </div>
                 <div className="mt-4">
-                  <Link
-                    href="/admin/users"
-                    className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
-                  >
-                    Gestionar Usuarios
+                  <Link href="/admin/users">
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-500">
+                      Gestionar Usuarios
+                    </Button>
                   </Link>
                 </div>
               </div>
@@ -161,19 +156,7 @@ export default async function AdminPage() {
             <div className="p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <svg
-                    className="h-8 w-8 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                    />
-                  </svg>
+                  <Trophy className="h-8 w-8 text-green-600" />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
@@ -196,11 +179,10 @@ export default async function AdminPage() {
                   <br />• {stats.totalScans} escaneos totales
                 </div>
                 <div className="mt-4">
-                  <Link
-                    href="/admin/treasures"
-                    className="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500"
-                  >
-                    Gestionar Treasures
+                  <Link href="/admin/treasures">
+                    <Button size="sm" className="bg-green-600 hover:bg-green-500">
+                      Gestionar Treasures
+                    </Button>
                   </Link>
                 </div>
               </div>
@@ -212,19 +194,7 @@ export default async function AdminPage() {
             <div className="p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <svg
-                    className="h-8 w-8 text-purple-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
-                  </svg>
+                  <BarChart3 className="h-8 w-8 text-purple-600" />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
@@ -246,9 +216,9 @@ export default async function AdminPage() {
                   <br />• Reportes detallados
                 </div>
                 <div className="mt-4">
-                  <button className="inline-flex items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">
+                  <Button size="sm" className="bg-purple-600 hover:bg-purple-500">
                     Ver más abajo
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

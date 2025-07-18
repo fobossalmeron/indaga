@@ -5,7 +5,7 @@ import { Content } from "@prismicio/client";
 import { PlaceCard } from "./PlaceCard";
 import { GuideCategorySelect } from "./GuideCategorySelect";
 import { useQueryState } from "nuqs";
-import type { LugarDocumentData } from "../../../prismicio-types";
+import type { LugarDocumentData } from "../../../../prismicio-types";
 
 type LugarCategoria = NonNullable<LugarDocumentData["categoria"]>;
 

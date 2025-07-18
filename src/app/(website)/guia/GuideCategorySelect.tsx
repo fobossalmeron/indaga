@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
-import type { LugarDocumentData } from "../../../prismicio-types";
+import type { LugarDocumentData } from "../../../../prismicio-types";
 
 interface GuideCategorySelectProps {
   categories: readonly NonNullable<LugarDocumentData["categoria"]>[];
