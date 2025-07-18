@@ -8,8 +8,11 @@ import { supabase, userOperations } from "./supabase"
 import { Resend } from "resend"
 import { Pool } from "pg"
 
-// FIX: Set NODE_TLS_REJECT_UNAUTHORIZED to '0' to allow self-signed certificates in development
-if (process.env.NODE_ENV === 'development') {
+// FIX: Handle SSL certificate issues for Supabase
+// This is necessary for Supabase connections in production
+if (process.env.NODE_ENV === 'production') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+} else if (process.env.NODE_ENV === 'development') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 }
 
@@ -33,6 +36,12 @@ export default betterAuth({
     ssl: {
       rejectUnauthorized: false,
     },
+    // Additional connection options for production
+    ...(process.env.NODE_ENV === 'production' && {
+      connectionTimeoutMillis: 10000,
+      idleTimeoutMillis: 30000,
+      max: 20,
+    }),
   }),
 
   // Email configuration (for Magic Links)

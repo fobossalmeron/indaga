@@ -21,7 +21,13 @@ if (!supabaseAnonKey) {
 }
 
 // Create Supabase client
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true
+  }
+})
 
 // Server-side client (for admin operations)
 export const createServerSupabaseClient = () => {
