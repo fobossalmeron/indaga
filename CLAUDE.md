@@ -1,7 +1,21 @@
-# Al ejecutar planes
+# INDAGA - Instrucciones para Claude
 
-Se consciente de que puede haber varios agentes trabajando al mismo tiempo. Si crees que vas a editar algo que el [PLAN].md dice que va a usar otro de los agentes, primero preguntame.
+## 🚀 Información del Proyecto
 
-Si te atoras con alguno de los pasos, pídeme ayuda antes de encontrar un workaround si este workaround no es una best practice y no lo recomendarías tú
+- **URL**: https://indaga.site
+- **Package Manager**: yarn
+- **Deploy**: Vercel (serverless)
 
-Estamos usando yarn
+## 📋 Protocolo de Trabajo
+
+### Al Ejecutar Planes
+
+- **Coordinación**: Varios agentes pueden trabajar simultáneamente
+- **Conflictos**: Si vas a editar algo que algún [PLAN].md asigna a otro agente, pregunta primero
+- **Problemas**: Si te atoras, pide ayuda antes de usar workarounds que no sean best practices
+
+### Mejores Prácticas
+
+- Seguir las instrucciones de `INDAGA_USERS.md` e `INDAGA_PUBLIC.md`
+- Mantener consistencia con el stack técnico existente
+- Priorizar soluciones serverless-friendly para Vercel

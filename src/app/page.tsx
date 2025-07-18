@@ -38,7 +38,7 @@ export default function Home() {
               <ul className="animate-fadeIn3 xsm:gap-5 flex flex-col items-start justify-center gap-3 sm:gap-4">
                 <NavLink href="/agenda">Agenda</NavLink>
                 <NavLink href="/guia">Guía de la ciudad</NavLink>
-                <NavLink href="/rutas">Rutas culturales</NavLink>
+                {/* <NavLink href="/rutas">Rutas culturales</NavLink> */}
               </ul>
             </div>
           </div>

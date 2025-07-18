@@ -3,15 +3,26 @@
 
 import { betterAuth } from "better-auth"
 import { magicLink } from "better-auth/plugins"
+import { admin } from "better-auth/plugins"
 import { supabase, userOperations } from "./supabase"
+import { Resend } from "resend"
+import { Pool } from "pg"
+
+console.log("--- [auth.ts] Loading ---");
+console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Loaded" : "NOT LOADED");
+
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 // BetterAuth configuration
-export const auth = betterAuth({
+export default betterAuth({
   // Database configuration
-  database: {
-    provider: "postgresql",
-    url: process.env.DATABASE_URL || `postgresql://postgres:${process.env.SUPABASE_SERVICE_ROLE_KEY}@${process.env.NEXT_PUBLIC_SUPABASE_URL?.replace('https://', '')}/postgres`,
-  },
+  database: new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  }),
 
   // Email configuration (for Magic Links)
   emailAndPassword: {
@@ -24,6 +35,15 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24, // 1 day
   },
 
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        input: false, // This is crucial for security
+      },
+    },
+  },
+
   // Secret for session encryption
   secret: process.env.BETTER_AUTH_SECRET!,
 
@@ -32,76 +52,113 @@ export const auth = betterAuth({
 
   // Plugins
   plugins: [
+    admin({
+      impersonationSessionDuration: 60 * 60 * 24, // 24 hours
+    }),
     magicLink({
       // Email configuration will be handled by BetterAuth's default email service
       // In production, configure with your preferred email provider (Resend, SendGrid, etc.)
       sendMagicLink: async ({ email, url, token }) => {
-        // For development, log the magic link
-        if (process.env.NODE_ENV === "development") {
-          console.log("🔗 Magic Link for", email, ":", url)
-          console.log("🔑 Token:", token)
-        }
+        try {
+          // For development, still log the magic link
+          if (process.env.NODE_ENV === "development") {
+            console.log("🔗 Magic Link for", email, ":", url)
+            console.log("🔑 Token:", token)
+          }
 
-        // In production, replace this with your email service
-        // Example with Resend:
-        // await resend.emails.send({
-        //   from: 'INDAGA <noreply@indaga.com>',
-        //   to: email,
-        //   subject: 'Inicia sesión en INDAGA',
-        //   html: `
-        //     <h1>¡Hola!</h1>
-        //     <p>Haz clic en el siguiente enlace para iniciar sesión en INDAGA:</p>
-        //     <a href="${url}" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: white; text-decoration: none; border-radius: 6px;">
-        //       Iniciar Sesión
-        //     </a>
-        //     <p>Este enlace expira en 10 minutos.</p>
-        //     <p>Si no solicitaste este enlace, puedes ignorar este email.</p>
-        //   `
-        // })
+          // Send email with Resend
+          if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== "your_resend_api_key_here") {
+            await resend.emails.send({
+              from: 'INDAGA <noreply@indaga.site>',
+              to: email,
+              subject: 'Inicia sesión en INDAGA',
+              html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                  <meta charset="utf-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+                  <title>Iniciar sesión en INDAGA</title>
+                </head>
+                <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+                  <div style="text-align: center; margin-bottom: 30px;">
+                    <h1 style="color: #2563eb; margin: 0;">¡Hola!</h1>
+                    <p style="font-size: 18px; color: #666; margin: 10px 0;">Inicia sesión en INDAGA</p>
+                  </div>
+                  
+                  <div style="background: #f8fafc; padding: 30px; border-radius: 12px; margin: 20px 0;">
+                    <p style="margin: 0 0 20px; font-size: 16px;">
+                      Haz clic en el siguiente enlace para iniciar sesión en INDAGA:
+                    </p>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                      <a href="${url}" style="display: inline-block; padding: 16px 32px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                        🔗 Iniciar Sesión
+                      </a>
+                    </div>
+                    
+                    <p style="margin: 20px 0 0; font-size: 14px; color: #666;">
+                      ⏰ Este enlace expira en <strong>10 minutos</strong>.
+                    </p>
+                  </div>
+                  
+                  <div style="margin-top: 30px; padding: 20px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <p style="margin: 0; font-size: 14px; color: #92400e;">
+                      🏆 <strong>¡No olvides explorar el Treasure Hunt 2025!</strong><br>
+                      Escanea códigos QR por Monterrey y colecciona tesoros únicos durante el Festival Santa Lucía.
+                    </p>
+                  </div>
+                  
+                  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                    <p style="margin: 0; font-size: 12px; color: #9ca3af;">
+                      Si no solicitaste este enlace, puedes ignorar este email.
+                    </p>
+                    <p style="margin: 5px 0 0; font-size: 12px; color: #9ca3af;">
+                      INDAGA - Explora Monterrey como nunca antes
+                    </p>
+                  </div>
+                </body>
+                </html>
+              `
+            })
+
+            console.log("✅ Magic link email sent successfully to:", email)
+          } else {
+            console.log("⚠️ RESEND_API_KEY not configured, email not sent")
+            console.log("🔗 Magic Link:", url)
+          }
+        } catch (error) {
+          console.error("❌ Error sending magic link email:", error)
+          // Don't throw error to avoid breaking the auth flow
+          // In development, we still log the link
+          if (process.env.NODE_ENV === "development") {
+            console.log("🔗 Fallback Magic Link:", url)
+          }
+        }
       },
-      
+
       // Magic link expiration (10 minutes)
       expiresIn: 10 * 60, // 10 minutes
     }),
   ],
 
-  // User configuration
-  user: {
-    // Additional fields to store in the user table
-    additionalFields: {
-      full_name: {
-        type: "string",
-        required: true,
-      },
-      avatar_url: {
-        type: "string",
-        required: false,
-      },
-      email_verified: {
-        type: "boolean",
-        required: false,
-        defaultValue: false,
-      },
-      provider: {
-        type: "string",
-        required: false,
-        defaultValue: "magic-link",
-      },
-    },
-  },
-
   // Callbacks and hooks
   callbacks: {
     async onSignUp({ user, request }: { user: any; request: any }) {
+      console.log("[onSignUp] Hook triggered for user:", user.email);
       // Create user in Supabase when they sign up
       try {
-        await userOperations.createUser({
+        const result = await userOperations.createUser({
           email: user.email,
           full_name: user.name || user.email,
           provider: "magic-link",
         })
+        console.log("[onSignUp] Supabase user creation result:", result);
+        if (result.error) {
+          console.error("[onSignUp] Error payload from Supabase:", result.error);
+        }
       } catch (error) {
-        console.error("Error creating user in Supabase:", error)
+        console.error("[onSignUp] CATCH BLOCK: Error creating user in Supabase:", error);
       }
     },
 
@@ -138,25 +195,13 @@ export const auth = betterAuth({
     crossSubDomainCookies: {
       enabled: false, // Enable if using subdomains
     },
-    
-    // Generate secure session tokens
-    generateId: () => {
-      return crypto.randomUUID()
+
+    // Database configuration
+    database: {
+      // Generate secure session tokens
+      generateId: () => {
+        return crypto.randomUUID()
+      },
     },
   },
 })
-
-// Type exports for client-side usage
-export type Session = typeof auth.$Infer.Session
-
-// Server-side utilities
-export const getSession = auth.api.getSession
-export const signOut = auth.api.signOut
-
-// Client configuration for better-auth/react
-export const authConfig = {
-  baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  // Add any client-specific configuration here
-}
-
-export default auth

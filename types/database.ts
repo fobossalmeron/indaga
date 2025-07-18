@@ -302,7 +302,18 @@ export type Database = {
 }
 
 // Convenience types for easier usage
-export type User = Database['public']['Tables']['users']['Row']
+export interface User {
+  id: string
+  email: string
+  full_name: string
+  avatar_url: string | null
+  email_verified: boolean | null
+  provider: string | null
+  created_at: string | null
+  updated_at: string | null
+  role?: string | null
+}
+
 export type UserInsert = Database['public']['Tables']['users']['Insert']
 export type UserUpdate = Database['public']['Tables']['users']['Update']
 
@@ -335,7 +346,7 @@ export type TreasureScanWithTreasure = TreasureHunt2025Scan & {
   treasure_hunt_2025_treasures: TreasureHunt2025Treasure
 }
 
-export type UserWithProgress = User & {
+export interface UserWithProgress extends User {
   treasure_hunt_2025_progress?: TreasureHunt2025Progress[]
 }
 

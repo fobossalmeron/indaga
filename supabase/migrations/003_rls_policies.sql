@@ -14,24 +14,22 @@ ALTER TABLE treasure_hunt_2025_progress ENABLE ROW LEVEL SECURITY;
 --
 -- USERS TABLE POLICIES
 --
-
--- Users can read their own profile
+DROP POLICY IF EXISTS "Users can view own profile" ON users;
 CREATE POLICY "Users can view own profile" ON users
     FOR SELECT USING (auth.email() = email);
 
--- Users can update their own profile
+DROP POLICY IF EXISTS "Users can update own profile" ON users;
 CREATE POLICY "Users can update own profile" ON users
     FOR UPDATE USING (auth.email() = email);
 
--- Users can insert their own profile (during registration)
+DROP POLICY IF EXISTS "Users can insert own profile" ON users;
 CREATE POLICY "Users can insert own profile" ON users
     FOR INSERT WITH CHECK (auth.email() = email);
 
 --
 -- SAVED EVENTS TABLE POLICIES
 --
-
--- Users can view their own saved events
+DROP POLICY IF EXISTS "Users can view own saved events" ON saved_events;
 CREATE POLICY "Users can view own saved events" ON saved_events
     FOR SELECT USING (
         EXISTS (
@@ -41,7 +39,7 @@ CREATE POLICY "Users can view own saved events" ON saved_events
         )
     );
 
--- Users can insert their own saved events
+DROP POLICY IF EXISTS "Users can insert own saved events" ON saved_events;
 CREATE POLICY "Users can insert own saved events" ON saved_events
     FOR INSERT WITH CHECK (
         EXISTS (
@@ -51,7 +49,7 @@ CREATE POLICY "Users can insert own saved events" ON saved_events
         )
     );
 
--- Users can delete their own saved events
+DROP POLICY IF EXISTS "Users can delete own saved events" ON saved_events;
 CREATE POLICY "Users can delete own saved events" ON saved_events
     FOR DELETE USING (
         EXISTS (
@@ -64,8 +62,7 @@ CREATE POLICY "Users can delete own saved events" ON saved_events
 --
 -- SAVED PLACES TABLE POLICIES
 --
-
--- Users can view their own saved places
+DROP POLICY IF EXISTS "Users can view own saved places" ON saved_places;
 CREATE POLICY "Users can view own saved places" ON saved_places
     FOR SELECT USING (
         EXISTS (
@@ -75,7 +72,7 @@ CREATE POLICY "Users can view own saved places" ON saved_places
         )
     );
 
--- Users can insert their own saved places
+DROP POLICY IF EXISTS "Users can insert own saved places" ON saved_places;
 CREATE POLICY "Users can insert own saved places" ON saved_places
     FOR INSERT WITH CHECK (
         EXISTS (
@@ -85,7 +82,7 @@ CREATE POLICY "Users can insert own saved places" ON saved_places
         )
     );
 
--- Users can delete their own saved places
+DROP POLICY IF EXISTS "Users can delete own saved places" ON saved_places;
 CREATE POLICY "Users can delete own saved places" ON saved_places
     FOR DELETE USING (
         EXISTS (
@@ -98,8 +95,7 @@ CREATE POLICY "Users can delete own saved places" ON saved_places
 --
 -- TREASURE HUNT SCANS TABLE POLICIES
 --
-
--- Users can view their own scans
+DROP POLICY IF EXISTS "Users can view own treasure scans" ON treasure_hunt_2025_scans;
 CREATE POLICY "Users can view own treasure scans" ON treasure_hunt_2025_scans
     FOR SELECT USING (
         EXISTS (
@@ -109,7 +105,7 @@ CREATE POLICY "Users can view own treasure scans" ON treasure_hunt_2025_scans
         )
     );
 
--- Users can insert their own scans
+DROP POLICY IF EXISTS "Users can insert own treasure scans" ON treasure_hunt_2025_scans;
 CREATE POLICY "Users can insert own treasure scans" ON treasure_hunt_2025_scans
     FOR INSERT WITH CHECK (
         EXISTS (
@@ -122,8 +118,7 @@ CREATE POLICY "Users can insert own treasure scans" ON treasure_hunt_2025_scans
 --
 -- TREASURE HUNT PROGRESS TABLE POLICIES
 --
-
--- Users can view their own progress
+DROP POLICY IF EXISTS "Users can view own treasure progress" ON treasure_hunt_2025_progress;
 CREATE POLICY "Users can view own treasure progress" ON treasure_hunt_2025_progress
     FOR SELECT USING (
         EXISTS (
@@ -133,7 +128,7 @@ CREATE POLICY "Users can view own treasure progress" ON treasure_hunt_2025_progr
         )
     );
 
--- Progress is updated automatically via triggers, but users need insert permission
+DROP POLICY IF EXISTS "Users can insert own treasure progress" ON treasure_hunt_2025_progress;
 CREATE POLICY "Users can insert own treasure progress" ON treasure_hunt_2025_progress
     FOR INSERT WITH CHECK (
         EXISTS (
@@ -143,7 +138,7 @@ CREATE POLICY "Users can insert own treasure progress" ON treasure_hunt_2025_pro
         )
     );
 
--- Allow updates for progress (triggered automatically)
+DROP POLICY IF EXISTS "Users can update own treasure progress" ON treasure_hunt_2025_progress;
 CREATE POLICY "Users can update own treasure progress" ON treasure_hunt_2025_progress
     FOR UPDATE USING (
         EXISTS (
@@ -156,12 +151,11 @@ CREATE POLICY "Users can update own treasure progress" ON treasure_hunt_2025_pro
 --
 -- PUBLIC ACCESS POLICIES (for read-only data)
 --
-
--- Everyone can read treasure hunts (public information)
+DROP POLICY IF EXISTS "Anyone can view treasure hunts" ON treasure_hunts;
 CREATE POLICY "Anyone can view treasure hunts" ON treasure_hunts
     FOR SELECT USING (true);
 
--- Everyone can read treasure hunt treasures (public information)
+DROP POLICY IF EXISTS "Anyone can view treasure hunt treasures" ON treasure_hunt_2025_treasures;
 CREATE POLICY "Anyone can view treasure hunt treasures" ON treasure_hunt_2025_treasures
     FOR SELECT USING (true);
 
@@ -173,42 +167,53 @@ CREATE POLICY "Anyone can view treasure hunt treasures" ON treasure_hunt_2025_tr
 CREATE OR REPLACE FUNCTION is_admin()
 RETURNS BOOLEAN AS $$
 BEGIN
-    -- Check if user has admin role (this can be extended later)
-    -- For now, we'll use a simple email check
-    -- In production, this should use a proper role system
+    -- Check if user has admin role using the role column
     RETURN EXISTS (
         SELECT 1 FROM users 
-        WHERE email = auth.email() 
-        AND email IN ('admin@indaga.com', 'rodrigosalmeron@gmail.com')
+        WHERE id = auth.uid() 
+        AND role = 'admin'
     );
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- Admin can view all users
+-- Assign admin role to specific users
+INSERT INTO users (email, full_name, role, email_verified)
+SELECT 'fobos.salmeron@gmail.com', 'Admin User', 'admin', true
+WHERE NOT EXISTS (
+    SELECT 1 FROM users WHERE email = 'fobos.salmeron@gmail.com'
+);
+
+INSERT INTO users (email, full_name, role, email_verified)
+SELECT 'fmagse@gmail.com', 'Admin User', 'admin', true
+WHERE NOT EXISTS (
+    SELECT 1 FROM users WHERE email = 'fmagse@gmail.com'
+);
+
+DROP POLICY IF EXISTS "Admins can view all users" ON users;
 CREATE POLICY "Admins can view all users" ON users
     FOR SELECT USING (is_admin());
 
--- Admin can view all saved events
+DROP POLICY IF EXISTS "Admins can view all saved events" ON saved_events;
 CREATE POLICY "Admins can view all saved events" ON saved_events
     FOR SELECT USING (is_admin());
 
--- Admin can view all saved places
+DROP POLICY IF EXISTS "Admins can view all saved places" ON saved_places;
 CREATE POLICY "Admins can view all saved places" ON saved_places
     FOR SELECT USING (is_admin());
 
--- Admin can view all treasure scans
+DROP POLICY IF EXISTS "Admins can view all treasure scans" ON treasure_hunt_2025_scans;
 CREATE POLICY "Admins can view all treasure scans" ON treasure_hunt_2025_scans
     FOR SELECT USING (is_admin());
 
--- Admin can view all treasure progress
+DROP POLICY IF EXISTS "Admins can view all treasure progress" ON treasure_hunt_2025_progress;
 CREATE POLICY "Admins can view all treasure progress" ON treasure_hunt_2025_progress
     FOR SELECT USING (is_admin());
 
--- Admin can manage treasure hunts
+DROP POLICY IF EXISTS "Admins can manage treasure hunts" ON treasure_hunts;
 CREATE POLICY "Admins can manage treasure hunts" ON treasure_hunts
     FOR ALL USING (is_admin());
 
--- Admin can manage treasure hunt treasures
+DROP POLICY IF EXISTS "Admins can manage treasure hunt treasures" ON treasure_hunt_2025_treasures;
 CREATE POLICY "Admins can manage treasure hunt treasures" ON treasure_hunt_2025_treasures
     FOR ALL USING (is_admin());
 

@@ -29,10 +29,29 @@ export const Nav = () => {
             </li>
           </ul>
         </nav>
-        <div className="animate-fadeSimple">
-          <a href="/INDAGA_GUIA_2024v2.pdf" target="_blank">
+        <div className="animate-fadeSimple flex gap-2">
+          {/* Botón temporal para poder publicar */}
+          <Link
+            href="/INDAGA_GUIA_2024v2.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button size="thin">Descarga la guía</Button>
-          </a>
+          </Link>
+
+          {/* Login/registro ocultos temporalmente */}
+          {false && (
+            <>
+              <Link href="/login">
+                <Button size="thin" variant="link">
+                  Iniciar sesión
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button size="thin">Regístrate</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
