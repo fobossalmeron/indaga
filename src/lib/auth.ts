@@ -49,6 +49,13 @@ export default betterAuth({
 
   // Base URL
   baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+  
+  // Trusted origins for Better Auth
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://indaga.site", 
+    "https://www.indaga.site"
+  ],
 
   // Plugins
   plugins: [
