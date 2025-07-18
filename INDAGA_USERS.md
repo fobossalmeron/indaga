@@ -104,25 +104,24 @@ Los usuarios escanean códigos QR ubicados en espacios culturales participantes 
 
 ## 📱 Especificación de Funcionalidades
 
-ESTO VA A CAMBIAR PORQUE VAMOS A ESTABLECER UN NUEVO SISTEMA, NO HACER CASO AL ESCANEO DE QR
+### 🔍 **Sistema QR con URLs Públicas**
 
-### 🔍 **QR Scanner (`/qr-scanner`)**
-
-**Funcionalidad Core**: Escaneo de códigos QR en ubicaciones físicas
+**Funcionalidad Core**: QR codes que funcionan con cualquier cámara nativa del teléfono
 
 **Características**:
 
-- Cámara integrada con detección automática
-- Validación en tiempo real del código
-- Feedback inmediato (éxito/error/ya escaneado)
+- URLs públicas escaneables con cualquier app de cámara
+- Códigos descriptivos fáciles de recordar (ej: CAFE-LIMON, PARQUE-FUNDIDORA)
+- Onboarding fluido desde el primer escaneo sin necesidad de abrir la app primero
+- Detección automática de estado de autenticación
 
 **Flujo**:
 
-1. Usuario abre scanner desde dashboard o navegación directa
-2. Enfoca QR → Detección automática
-3. Validación: código válido + geolocalización
-4. Confirmación + animación de tesoro colectado
-5. Redirección a información del lugar + recompensa
+1. Usuario escanea QR → Abre `https://www.indaga.site/2025/t/CODIGO-DESCRIPTIVO`
+2. Sistema detecta si usuario está autenticado
+3. **Si NO está logueado**: Redirect a `/login?scanned=CODIGO` con mensaje de promoción
+4. **Si SÍ está logueado**: Procesa tesoro inmediatamente
+5. Redirect a dashboard con progreso actualizado y notificación de éxito
 
 ---
 

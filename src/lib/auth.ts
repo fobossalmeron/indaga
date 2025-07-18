@@ -181,6 +181,8 @@ export default betterAuth({
     origin: [
       process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
       "http://localhost:3000",
+      "https://indaga.site",
+      "https://www.indaga.site",
     ],
     credentials: true,
   },

@@ -179,7 +179,8 @@ export interface AuthConfig {
 
 // Default Auth Config
 export const DEFAULT_AUTH_CONFIG: AuthConfig = {
-  baseURL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  baseURL: process.env.NEXT_PUBLIC_APP_URL || 
+    (typeof window !== "undefined" ? window.location.origin : 'http://localhost:3000'),
   sessionDuration: 7 * 24 * 60 * 60 * 1000, // 7 days
   magicLinkExpiration: 10 * 60 * 1000, // 10 minutes
   enableRememberEmail: true,
