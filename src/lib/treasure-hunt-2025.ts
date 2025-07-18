@@ -1,4 +1,5 @@
 import { supabase } from './supabase'
+import { createServerSupabaseClient } from './supabase'
 
 export interface TreasureHunt {
   id: string
@@ -80,7 +81,10 @@ export async function getTreasureByCode(code: string): Promise<Treasure | null> 
 }
 
 export async function getUserProgress(userId: string, huntId: string): Promise<TreasureProgress | null> {
-  const { data, error } = await supabase
+  // Usar cliente del servidor para operaciones autenticadas
+  const serverClient = createServerSupabaseClient()
+
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_progress')
     .select('*')
     .eq('user_id', userId)
@@ -96,7 +100,10 @@ export async function getUserProgress(userId: string, huntId: string): Promise<T
 }
 
 export async function createUserProgress(userId: string, huntId: string): Promise<TreasureProgress | null> {
-  const { data, error } = await supabase
+  // Usar cliente del servidor para operaciones autenticadas
+  const serverClient = createServerSupabaseClient()
+
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_progress')
     .insert({
       user_id: userId,
@@ -117,9 +124,9 @@ export async function createUserProgress(userId: string, huntId: string): Promis
 }
 
 export async function updateUserProgress(
-  userId: string, 
-  huntId: string, 
-  treasuresFound: number, 
+  userId: string,
+  huntId: string,
+  treasuresFound: number,
   totalTreasures: number
 ): Promise<TreasureProgress | null> {
   const completionPercentage = (treasuresFound / totalTreasures) * 100
@@ -134,7 +141,10 @@ export async function updateUserProgress(
     updateData.completed_at = new Date().toISOString()
   }
 
-  const { data, error } = await supabase
+  // Usar cliente del servidor para operaciones autenticadas
+  const serverClient = createServerSupabaseClient()
+
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_progress')
     .update(updateData)
     .eq('user_id', userId)
@@ -151,10 +161,13 @@ export async function updateUserProgress(
 }
 
 export async function checkIfTreasureScanned(
-  userId: string, 
+  userId: string,
   treasureId: string
 ): Promise<boolean> {
-  const { data, error } = await supabase
+  // Usar cliente del servidor para operaciones autenticadas
+  const serverClient = createServerSupabaseClient()
+
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_scans')
     .select('id')
     .eq('user_id', userId)
@@ -174,7 +187,10 @@ export async function recordTreasureScan(
   huntId: string,
   treasureId: string
 ): Promise<TreasureScan | null> {
-  const { data, error } = await supabase
+  // Usar cliente del servidor para operaciones autenticadas
+  const serverClient = createServerSupabaseClient()
+
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_scans')
     .insert({
       user_id: userId,
@@ -194,7 +210,10 @@ export async function recordTreasureScan(
 }
 
 export async function getUserScannedTreasures(userId: string, huntId: string): Promise<Treasure[]> {
-  const { data, error } = await supabase
+  // Usar cliente del servidor para operaciones autenticadas
+  const serverClient = createServerSupabaseClient()
+
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_scans')
     .select(`
       treasure_hunt_2025_treasures (
@@ -297,9 +316,9 @@ export async function processTreasureScan(qrCode: string, userId: string): Promi
     // Update user progress
     const newTreasuresFound = (progress.treasures_found || 0) + 1
     const updatedProgress = await updateUserProgress(
-      userId, 
-      hunt.id, 
-      newTreasuresFound, 
+      userId,
+      hunt.id,
+      newTreasuresFound,
       hunt.total_treasures || 25
     )
 

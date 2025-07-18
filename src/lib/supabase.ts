@@ -5,40 +5,37 @@ import { createClient } from '@supabase/supabase-js'
 import type { Database } from '../../types/database'
 
 // Environment variables validation
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl =
+  process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey =
+  process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 if (!supabaseUrl) {
-  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_URL')
+  throw new Error('NEXT_PUBLIC_SUPABASE_URL is not defined')
 }
 
 if (!supabaseAnonKey) {
-  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined')
 }
 
 // Create Supabase client
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-  },
-})
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
 
 // Server-side client (for admin operations)
 export const createServerSupabaseClient = () => {
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-  
+  const serviceRoleKey =
+    process.env.VERCELDB__SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+
   if (!serviceRoleKey) {
-    throw new Error('Missing env.SUPABASE_SERVICE_ROLE_KEY')
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not defined')
   }
 
-  return createClient<Database>(supabaseUrl, serviceRoleKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
+  // The createClient function is overloaded to accept the service role key.
+  // We need to cast it to any to avoid a type error.
+  return createClient<Database>(supabaseUrl, serviceRoleKey as any)
 }
 
 // Type-safe helper functions for common operations
@@ -51,7 +48,7 @@ export const userOperations = {
       .select('*')
       .eq('email', email)
       .single()
-    
+
     return { data, error }
   },
 
@@ -66,7 +63,7 @@ export const userOperations = {
       .insert(userData)
       .select()
       .single()
-    
+
     return { data, error }
   },
 
@@ -81,7 +78,7 @@ export const userOperations = {
       .eq('id', userId)
       .select()
       .single()
-    
+
     return { data, error }
   }
 }
@@ -94,7 +91,7 @@ export const savedEventsOperations = {
       .select('*')
       .eq('user_id', userId)
       .order('saved_at', { ascending: false })
-    
+
     return { data, error }
   },
 
@@ -109,7 +106,7 @@ export const savedEventsOperations = {
       .insert(eventData)
       .select()
       .single()
-    
+
     return { data, error }
   },
 
@@ -119,7 +116,7 @@ export const savedEventsOperations = {
       .delete()
       .eq('user_id', userId)
       .eq('event_id', eventId)
-    
+
     return { error }
   }
 }
@@ -132,7 +129,7 @@ export const savedPlacesOperations = {
       .select('*')
       .eq('user_id', userId)
       .order('saved_at', { ascending: false })
-    
+
     return { data, error }
   },
 
@@ -147,7 +144,7 @@ export const savedPlacesOperations = {
       .insert(placeData)
       .select()
       .single()
-    
+
     return { data, error }
   },
 
@@ -157,7 +154,7 @@ export const savedPlacesOperations = {
       .delete()
       .eq('user_id', userId)
       .eq('place_id', placeId)
-    
+
     return { error }
   }
 }
@@ -170,7 +167,7 @@ export const treasureHuntOperations = {
       .select('*')
       .eq('is_active', true)
       .single()
-    
+
     return { data, error }
   },
 
@@ -180,7 +177,7 @@ export const treasureHuntOperations = {
       .select('*')
       .eq('hunt_id', huntId)
       .order('treasure_name')
-    
+
     return { data, error }
   },
 
@@ -191,7 +188,7 @@ export const treasureHuntOperations = {
       .eq('user_id', userId)
       .eq('hunt_id', huntId)
       .single()
-    
+
     return { data, error }
   },
 
@@ -209,7 +206,7 @@ export const treasureHuntOperations = {
       .eq('user_id', userId)
       .eq('hunt_id', huntId)
       .order('scanned_at', { ascending: false })
-    
+
     return { data, error }
   },
 
@@ -223,7 +220,7 @@ export const treasureHuntOperations = {
       .insert(scanData)
       .select()
       .single()
-    
+
     return { data, error }
   },
 
@@ -233,7 +230,7 @@ export const treasureHuntOperations = {
       .select('*')
       .eq('treasure_code', treasureCode)
       .single()
-    
+
     return { data, error }
   }
 }
@@ -246,25 +243,25 @@ export const adminOperations = {
       .from('users')
       .select('*')
       .order('created_at', { ascending: false })
-    
+
     return { data, error }
   },
 
   async getTreasureHuntStats(huntId: string) {
     const serverClient = createServerSupabaseClient()
-    
+
     // Get total users with progress
     const { data: progressData, error: progressError } = await serverClient
       .from('treasure_hunt_2025_progress')
       .select('*')
       .eq('hunt_id', huntId)
-    
+
     // Get total scans
     const { count: totalScans, error: scansError } = await serverClient
       .from('treasure_hunt_2025_scans')
       .select('*', { count: 'exact' })
       .eq('hunt_id', huntId)
-    
+
     return {
       data: {
         totalUsers: progressData?.length || 0,

@@ -8,8 +8,19 @@ import { supabase, userOperations } from "./supabase"
 import { Resend } from "resend"
 import { Pool } from "pg"
 
-console.log("--- [auth.ts] Loading ---");
-console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Loaded" : "NOT LOADED");
+// FIX: Set NODE_TLS_REJECT_UNAUTHORIZED to '0' to allow self-signed certificates in development
+if (process.env.NODE_ENV === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+}
+
+console.log("--- [auth.ts] Loading ---")
+const vercelDbUrl = process.env.VERCELDB__POSTGRES_URL
+const databaseUrl = process.env.DATABASE_URL
+
+console.log(
+  "DATABASE_URL:",
+  vercelDbUrl || databaseUrl ? "Loaded" : "NOT LOADED"
+)
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -18,7 +29,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export default betterAuth({
   // Database configuration
   database: new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: vercelDbUrl || databaseUrl,
     ssl: {
       rejectUnauthorized: false,
     },
@@ -49,11 +60,11 @@ export default betterAuth({
 
   // Base URL
   baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  
+
   // Trusted origins for Better Auth
   trustedOrigins: [
     "http://localhost:3000",
-    "https://indaga.site", 
+    "https://indaga.site",
     "https://www.indaga.site"
   ],
 
