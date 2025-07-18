@@ -4,11 +4,13 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ProtectedLayout } from "@/app/components/layout/protected-layout";
 import { useAuth } from "@/hooks/use-auth";
+import { useTreasureProgress } from "@/hooks/use-treasure-progress";
 import { TreasureNotification } from "@/app/components/features/treasure-notification";
 import Link from "next/link";
 
 export default function DashboardPage() {
   const { data: session, isPending } = useAuth();
+  const { progress, isLoading: progressLoading } = useTreasureProgress();
   const router = useRouter();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function DashboardPage() {
   const dashboardStats = [
     {
       title: "Tesoros Encontrados",
-      value: "0",
+      value: progressLoading ? "..." : progress.treasuresFound.toString(),
       description: "Festival Santa Lucía 2025",
       href: "/treasures",
       color: "bg-yellow-500",
@@ -49,7 +51,7 @@ export default function DashboardPage() {
     },
     {
       title: "Progreso Hunt",
-      value: "0%",
+      value: progressLoading ? "..." : `${Math.round(progress.completionPercentage)}%`,
       description: "Completado",
       href: "/treasures",
       color: "bg-purple-500",

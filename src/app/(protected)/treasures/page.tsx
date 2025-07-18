@@ -4,11 +4,7 @@ import { useState, useEffect } from 'react'
 import TreasureMap from '@/app/components/features/treasure-map'
 import ProgressTracker from '@/app/components/features/progress-tracker'
 import { Button } from '@/app/components/ui/button'
-import { 
-  getActiveTreasureHunt, 
-  getUserProgress, 
-  getUserScannedTreasures 
-} from '@/lib/treasure-hunt-2025'
+import { useAuth } from '@/hooks/use-auth'
 import type { TreasureHunt, TreasureProgress, Treasure } from '@/lib/treasure-hunt-2025'
 
 interface TreasurePageData {
@@ -21,30 +17,23 @@ export default function TreasuresPage() {
   const [data, setData] = useState<TreasurePageData | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeView, setActiveView] = useState<'progress' | 'map'>('progress')
-
-  // TODO: Get actual user ID from auth session
-  const userId = 'temp-user-id'
+  const { data: session, isPending } = useAuth()
 
   useEffect(() => {
-    loadTreasureData()
-  }, [])
+    if (!isPending && session?.user) {
+      loadTreasureData()
+    } else if (!isPending && !session?.user) {
+      setLoading(false)
+    }
+  }, [session, isPending])
 
   const loadTreasureData = async () => {
     setLoading(true)
     try {
-      const hunt = await getActiveTreasureHunt()
-      
-      if (hunt) {
-        const [progress, scannedTreasures] = await Promise.all([
-          getUserProgress(userId, hunt.id),
-          getUserScannedTreasures(userId, hunt.id)
-        ])
-
-        setData({
-          hunt,
-          progress,
-          scannedTreasures
-        })
+      const response = await fetch('/api/treasure-data')
+      if (response.ok) {
+        const treasureData = await response.json()
+        setData(treasureData)
       } else {
         setData({
           hunt: null,
@@ -166,10 +155,10 @@ export default function TreasuresPage() {
         <div className="mt-8 text-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Button
-              onClick={() => window.location.href = '/qr-scanner'}
+              onClick={() => window.location.href = '/treasure-hunt'}
               className="w-full bg-blue-600 hover:bg-blue-700"
             >
-              Escanear Código QR
+              Ir al Treasure Hunt
             </Button>
             <Button
               onClick={() => window.location.href = '/dashboard'}

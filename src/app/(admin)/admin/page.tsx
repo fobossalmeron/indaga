@@ -44,7 +44,7 @@ export default async function AdminPage() {
   const scanActivity = await adminStatsActions.getTreasureScanStats(30);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 pt-26">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="md:flex md:items-center md:justify-between">
@@ -180,7 +180,10 @@ export default async function AdminPage() {
                 </div>
                 <div className="mt-4">
                   <Link href="/admin/treasures">
-                    <Button size="sm" className="bg-green-600 hover:bg-green-500">
+                    <Button
+                      size="sm"
+                      className="bg-green-600 hover:bg-green-500"
+                    >
                       Gestionar Treasures
                     </Button>
                   </Link>
@@ -216,7 +219,10 @@ export default async function AdminPage() {
                   <br />• Reportes detallados
                 </div>
                 <div className="mt-4">
-                  <Button size="sm" className="bg-purple-600 hover:bg-purple-500">
+                  <Button
+                    size="sm"
+                    className="bg-purple-600 hover:bg-purple-500"
+                  >
                     Ver más abajo
                   </Button>
                 </div>

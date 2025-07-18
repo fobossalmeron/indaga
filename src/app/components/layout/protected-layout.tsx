@@ -25,7 +25,7 @@ export function ProtectedLayout({ children }: ProtectedLayoutProps) {
 
   if (isLoading || isPending) {
     return (
-      <div className="flex min-h-screen items-center justify-center pt-16">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
@@ -39,7 +39,7 @@ export function ProtectedLayout({ children }: ProtectedLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen">
       <nav className="border-b bg-white shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -56,12 +56,6 @@ export function ProtectedLayout({ children }: ProtectedLayoutProps) {
                   className="rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
                 >
                   Dashboard
-                </Link>
-                <Link
-                  href="/treasure-hunt"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
-                >
-                  Escanear QR
                 </Link>
                 <Link
                   href="/treasures"

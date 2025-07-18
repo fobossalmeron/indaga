@@ -16,6 +16,6 @@
 
 ### Mejores Prácticas
 
-- Seguir las instrucciones de `INDAGA_USERS.md` e `INDAGA_PUBLIC.md`
+- El contexto del proyecto está en `INDAGA_USERS.md` e `INDAGA_PUBLIC.md`, siémpre tómalos en cuenta
 - Mantener consistencia con el stack técnico existente
 - Priorizar soluciones serverless-friendly para Vercel
