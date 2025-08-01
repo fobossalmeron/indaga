@@ -32,11 +32,11 @@ export const Nav = () => {
         <div className="animate-fadeSimple flex gap-2">
           {/* Botón temporal para poder publicar */}
           <Link
-            href="/INDAGA_GUIA_2024v2.pdf"
+            href="/ReporteJulio_compressed.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button size="thin">Descarga la guía</Button>
+            <Button size="thin">Descarga el reporte</Button>
           </Link>
 
           {/* Login/registro ocultos temporalmente */}
