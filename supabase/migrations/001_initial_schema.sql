@@ -84,7 +84,7 @@ CREATE TRIGGER update_users_updated_at
 -- Insert default treasure hunt for 2025 (only if it doesn't exist)
 INSERT INTO treasure_hunts (name, year, description, start_date, end_date, is_active, total_treasures)
 SELECT
-    'Festival Santa Lucía 2025',
+    'OFF FST FISL 2025',
     2025,
     'Búsqueda del tesoro durante el Festival Santa Lucía 2025. Explora la ciudad, escanea códigos QR y colecciona tesoros.',
     '2025-12-01 00:00:00+00',

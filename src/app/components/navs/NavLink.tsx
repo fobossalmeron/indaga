@@ -23,7 +23,7 @@ export function NavLink({ href, children, onClick }: NavLinkProps) {
     <Link
       href={href}
       onClick={handleClick}
-      className={`group relative rounded-md px-3 py-2 text-2xl transition-all`}
+      className={`group relative rounded-md px-3 py-2 text-2xl transition-all md:text-xl`}
     >
       {children}
       <span

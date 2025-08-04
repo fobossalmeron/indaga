@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { UserMobileNav } from "@/app/components/navs/UserMobileNav";
 import { UserNav } from "@/app/components/navs/UserNav";
-import { Settings, LogOut } from "lucide-react";
+import { Settings, LogOut, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,7 +37,7 @@ export default function ProtectedLayout({
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="border-primary mx-auto h-12 w-12 animate-spin rounded-full border-b-2"></div>
+          <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
           <p className="text-foreground mt-4">Cargando...</p>
         </div>
       </div>

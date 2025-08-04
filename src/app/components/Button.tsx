@@ -2,9 +2,9 @@ import React from "react";
 
 const BUTTON_STYLES = {
   base: "px-6 transition-all font-medium rounded-xl flex gap-1.5 items-center justify-center cursor-pointer",
-  primary: "bg-accent text-white hover:bg-[#006670] active:bg-[#006670]",
+  primary: "bg-accent text-white hover:bg-accent-600 active:bg-accent-600",
   secondary:
-    "border-2 border-accent text-accent bg-transparent hover:bg-[#00667020] active:bg-[#00667020]",
+    "border-2 border-accent text-accent bg-transparent hover:bg-primary-100 active:bg-primary-100",
   thin: "py-2",
   normal: "py-2.5",
   fullWidth: "w-full",

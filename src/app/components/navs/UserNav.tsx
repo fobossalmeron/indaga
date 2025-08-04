@@ -17,10 +17,10 @@ export const UserNav = () => {
         <nav className="animate-fadeSimple flex items-center gap-7 transition-all">
           <ul className="flex items-center gap-3 transition-all">
             <li className="hidden lg:block">
-              <NavLink href="/guia">Treasure Hunt</NavLink>
+              <NavLink href="/treasures">Treasure Hunt</NavLink>
             </li>
             <li className="hidden lg:block">
-              <NavLink href="/blog">Favoritos</NavLink>
+              <NavLink href="/saved-items">Favoritos</NavLink>
             </li>
           </ul>
         </nav>

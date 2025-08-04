@@ -16,7 +16,7 @@ const FooterLink = ({
   <Link href={href} className="group relative bg-transparent px-0 py-3">
     <span className="relative">
       {children}
-      <span className="bg-accent bg-opacity-80 absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full group-active:w-full"></span>
+      <span className="bg-foreground bg-opacity-80 absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full group-active:w-full"></span>
     </span>
   </Link>
 );
@@ -25,7 +25,7 @@ export const Footer = () => {
   return (
     <footer
       className={
-        "text-accent md-lg:text-2xl relative z-1 flex h-auto w-full flex-col items-center bg-white px-5 pt-5 pb-16 text-xl sm:px-10 sm:pt-10 md:px-20"
+        "text-foreground md-lg:text-xl relative z-1 flex h-auto w-full flex-col items-center bg-white px-5 pt-5 pb-16 text-xl sm:px-10 sm:pt-10 md:px-20"
       }
     >
       <div className="flex w-full max-w-[1240px] flex-col items-start justify-between gap-32">
@@ -36,7 +36,6 @@ export const Footer = () => {
                 <FooterLink href="/">Home</FooterLink>
                 <FooterLink href="/agenda">Agenda</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
-                {/* <FooterLink href="/rutas">Rutas</FooterLink> */}
                 <FooterLink href="/blog">Blog</FooterLink>
               </div>
               <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">

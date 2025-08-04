@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${general_sans.className} bg-offWhite font-normal`}
+      className={`${general_sans.className} bg-background font-normal`}
     >
-      <body className="bg-offWhite flex h-full flex-col justify-between">
+      <body className="bg-background flex h-full flex-col justify-between">
         <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />

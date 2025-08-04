@@ -64,30 +64,22 @@ export default function ProgressTracker({
     return "Gran Aventurero";
   };
 
-  const getAchievementColor = () => {
-    if (treasuresFound === 0) return "text-gray-600";
-    if (treasuresFound < 5) return "text-bronze";
-    if (treasuresFound < 15) return "text-blue-600";
-    if (treasuresFound < 20) return "text-purple-600";
-    return "text-yellow-600";
-  };
-
   return (
     <div className="space-y-6">
       {/* Progress Overview */}
-      <div className="rounded-lg bg-white p-6 shadow-lg">
+      <div className="rounded-lg bg-white p-4 shadow-lg">
         <div className="mb-6 text-center">
           <div
             className={`mb-4 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
               isCompleted
                 ? "bg-green-100 text-green-800"
-                : "bg-blue-100 text-blue-800"
+                : "text-primary bg-primary/10"
             }`}
           >
             {getAchievementLevel()}
           </div>
 
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
+          <h2 className="text-foreground mb-2 text-3xl">
             {treasuresFound} de {totalTreasures} Tesoros
           </h2>
 
@@ -103,7 +95,7 @@ export default function ProgressTracker({
           <div className="h-3 w-full rounded-full bg-gray-200">
             <div
               className={`h-3 rounded-full transition-all duration-500 ease-out ${
-                isCompleted ? "bg-green-500" : "bg-blue-500"
+                isCompleted ? "bg-green-500" : "bg-primary"
               }`}
               style={{ width: `${Math.min(completionPercentage, 100)}%` }}
             />
@@ -111,24 +103,22 @@ export default function ProgressTracker({
         </div>
 
         {/* Stats Grid */}
-        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className="rounded-lg bg-gray-50 p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">
-              {treasuresFound}
-            </div>
-            <div className="text-sm text-gray-600">Encontrados</div>
+        <div className="mb-6 grid grid-cols-3 gap-2 sm:gap-4">
+          <div className="rounded-lg bg-gray-50 p-2 text-start sm:p-4">
+            <div className="text-primary text-3xl">{treasuresFound}</div>
+            <div className="text-foreground text-sm">Encontrados</div>
           </div>
-          <div className="rounded-lg bg-gray-50 p-4 text-center">
-            <div className="text-2xl font-bold text-gray-600">
+          <div className="rounded-lg bg-gray-50 p-2 text-start sm:p-4">
+            <div className="text-3xl text-gray-600">
               {totalTreasures - treasuresFound}
             </div>
-            <div className="text-sm text-gray-600">Restantes</div>
+            <div className="text-foreground text-sm">Restantes</div>
           </div>
-          <div className="rounded-lg bg-gray-50 p-4 text-center">
-            <div className="text-2xl font-bold text-green-600">
+          <div className="rounded-lg bg-gray-50 p-2 text-start sm:p-4">
+            <div className="text-3xl text-green-600">
               {Math.round(completionPercentage)}%
             </div>
-            <div className="text-sm text-gray-600">Completado</div>
+            <div className="text-foreground text-sm">Completado</div>
           </div>
         </div>
 
@@ -147,9 +137,7 @@ export default function ProgressTracker({
 
       {/* Achievements Section */}
       <div className="rounded-lg bg-white p-6 shadow-lg">
-        <h3 className="mb-4 text-xl font-bold text-gray-900">
-          Logros Desbloqueados
-        </h3>
+        <h3 className="text-foreground text-txl mb-4">Logros desbloqueados</h3>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* First Treasure Achievement */}
@@ -167,7 +155,7 @@ export default function ProgressTracker({
                 🏆
               </span>
               <div>
-                <h4 className="font-medium">Primer Tesoro</h4>
+                <h4 className="font-medium">Primer tesoro</h4>
                 <p className="text-sm text-gray-600">
                   Encuentra tu primer tesoro
                 </p>
@@ -221,7 +209,7 @@ export default function ProgressTracker({
                 🎖️
               </span>
               <div>
-                <h4 className="font-medium">Maestro Explorador</h4>
+                <h4 className="font-medium">Maestro explorador</h4>
                 <p className="text-sm text-gray-600">Encuentra 15 tesoros</p>
               </div>
             </div>
@@ -261,47 +249,6 @@ export default function ProgressTracker({
           </div>
         </div>
       </div>
-
-      {/* Recent Treasures */}
-      {scannedTreasures.length > 0 && (
-        <div className="rounded-lg bg-white p-6 shadow-lg">
-          <h3 className="mb-4 text-xl font-bold text-gray-900">
-            Tesoros Recientes
-          </h3>
-
-          <div className="space-y-3">
-            {scannedTreasures.slice(0, 5).map((treasure) => (
-              <div
-                key={treasure.id}
-                className="flex items-center rounded-lg bg-gray-50 p-3"
-              >
-                <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
-                  <span className="font-bold text-blue-600">
-                    {treasure.treasure_code.split("-").pop()}
-                  </span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-medium text-gray-900">
-                    {treasure.treasure_name}
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    {treasure.treasure_description}
-                  </p>
-                </div>
-                <span className="text-green-600">✓</span>
-              </div>
-            ))}
-          </div>
-
-          {scannedTreasures.length > 5 && (
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">
-                Y {scannedTreasures.length - 5} tesoros más...
-              </p>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }

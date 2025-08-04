@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/app/components/ui/dialog";
-import { Check, HelpCircle } from "lucide-react";
+import { Check, HelpCircle, Loader2 } from "lucide-react";
 import type { TreasureHunt, Treasure } from "@/lib/treasure-hunt-2025";
 
 interface TreasureMapProps {
@@ -104,13 +104,11 @@ export default function TreasureMap({
   if (loading) {
     return (
       <div className="py-8 text-center">
-        <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
+        <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
         <p>Cargando mapa de tesoros...</p>
       </div>
     );
   }
-
-  const treasureGroups = groupTreasuresByLocation();
 
   return (
     <div className="space-y-6">
@@ -158,54 +156,6 @@ export default function TreasureMap({
             </button>
           ))}
         </div>
-      </div>
-
-      {/* Treasure Groups */}
-      <div className="space-y-4">
-        {Object.entries(treasureGroups).map(([location, treasures]) => (
-          <div key={location} className="rounded-lg bg-white p-6 shadow-lg">
-            <h4 className="mb-4 text-lg font-bold text-gray-900">
-              {location} ({treasures.filter((t) => t.isScanned).length}/
-              {treasures.length})
-            </h4>
-
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {treasures.map((treasure) => (
-                <div
-                  key={treasure.id}
-                  className={`rounded-lg border p-4 ${
-                    treasure.isScanned
-                      ? "border-green-200 bg-green-50"
-                      : "border-gray-200 bg-gray-50"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <h5 className="font-medium text-gray-900">
-                        {treasure.treasure_name}
-                      </h5>
-                      <p className="mt-1 text-sm text-gray-600">
-                        {treasure.treasure_description}
-                      </p>
-                      <div className="mt-2 text-xs text-gray-500">
-                        Código: {treasure.treasure_code}
-                      </div>
-                    </div>
-                    <div
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold ${
-                        treasure.isScanned
-                          ? "bg-green-500 text-white"
-                          : "bg-gray-300 text-gray-600"
-                      }`}
-                    >
-                      {getTreasureIcon(treasure)}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
 
       {/* Treasure Detail Dialog */}

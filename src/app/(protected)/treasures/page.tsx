@@ -4,6 +4,12 @@ import { useState, useEffect } from "react";
 import TreasureMap from "@/app/components/features/treasure-map";
 import ProgressTracker from "@/app/components/features/progress-tracker";
 import { Button } from "@/app/components/ui/button";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/app/components/ui/tabs";
 import { useAuth } from "@/hooks/use-auth";
 import type {
   TreasureHunt,
@@ -20,7 +26,6 @@ interface TreasurePageData {
 export default function TreasuresPage() {
   const [data, setData] = useState<TreasurePageData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeView, setActiveView] = useState<"progress" | "map">("progress");
   const { data: session, isPending } = useAuth();
 
   useEffect(() => {
@@ -105,63 +110,41 @@ export default function TreasuresPage() {
 
   return (
     <div className="min-h-screen py-4">
-      <div className="mx-auto max-w-4xl px-4">
+      <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-3xl font-bold text-gray-900">
             {data.hunt.name}
           </h1>
-          <p className="text-gray-600">{data.hunt.description}</p>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="mb-6 rounded-lg bg-white shadow-sm">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex">
-              <button
-                onClick={() => setActiveView("progress")}
-                className={`border-b-2 px-6 py-4 text-sm font-medium ${
-                  activeView === "progress"
-                    ? "border-primary text-primary"
-                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                }`}
-              >
-                Mi Progreso
-              </button>
-              <button
-                onClick={() => setActiveView("map")}
-                className={`border-b-2 px-6 py-4 text-sm font-medium ${
-                  activeView === "map"
-                    ? "border-primary text-primary"
-                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                }`}
-              >
-                Mapa de Tesoros
-              </button>
-            </nav>
-          </div>
-        </div>
+        <Tabs defaultValue="progress" className="mb-6">
+          <TabsList className="grid w-full grid-cols-2 bg-white">
+            <TabsTrigger value="progress">Mi progreso</TabsTrigger>
+            <TabsTrigger value="map">Mapa de Tesoros</TabsTrigger>
+          </TabsList>
 
-        {/* Content */}
-        {activeView === "progress" && (
-          <div className="space-y-6">
-            <ProgressTracker
-              hunt={data.hunt}
-              progress={data.progress}
-              scannedTreasures={data.scannedTreasures}
-              onRefresh={loadTreasureData}
-            />
-          </div>
-        )}
+          <TabsContent value="progress" className="mt-6">
+            <div className="space-y-6">
+              <ProgressTracker
+                hunt={data.hunt}
+                progress={data.progress}
+                scannedTreasures={data.scannedTreasures}
+                onRefresh={loadTreasureData}
+              />
+            </div>
+          </TabsContent>
 
-        {activeView === "map" && (
-          <div className="space-y-6">
-            <TreasureMap
-              hunt={data.hunt}
-              scannedTreasures={data.scannedTreasures}
-            />
-          </div>
-        )}
+          <TabsContent value="map" className="mt-6">
+            <div className="space-y-6">
+              <TreasureMap
+                hunt={data.hunt}
+                scannedTreasures={data.scannedTreasures}
+              />
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

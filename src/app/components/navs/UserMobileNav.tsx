@@ -68,7 +68,7 @@ export const UserMobileNav = () => {
               {[
                 { href: "/dashboard", text: "Mi perfil" },
                 { href: "/treasures", text: "Treasure Hunt" },
-                { href: "/saved", text: "Favoritos" },
+                { href: "/saved-items", text: "Favoritos" },
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
               ].map(({ href, text }) => (
