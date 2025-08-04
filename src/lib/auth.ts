@@ -94,7 +94,7 @@ export default betterAuth({
             console.log("🔑 Token:", token)
             
             // Detect if request comes from network IP and adjust URL
-            const host = request?.headers?.get?.('host') || request?.headers?.host;
+            const host = request?.headers?.get?.('host');
             if (host && host.includes('192.168.100.22')) {
               url = url.replace('localhost:3000', '192.168.100.22:3000');
               console.log("🔗 Adjusted Magic Link for network access:", url);
