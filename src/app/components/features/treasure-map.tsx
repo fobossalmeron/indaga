@@ -205,23 +205,6 @@ export default function TreasureMap({
         ))}
       </div>
 
-      {/* Progress Summary */}
-      <div className="rounded-lg bg-blue-50 p-6 text-center">
-        <h4 className="mb-2 text-lg font-bold text-blue-900">
-          ¡Sigue explorando!
-        </h4>
-        <p className="mb-4 text-blue-800">
-          Te faltan {allTreasures.length - scannedTreasures.length} tesoros por
-          descubrir. ¡Explora la ciudad y encuentra los códigos QR!
-        </p>
-        <Button
-          onClick={() => (window.location.href = "/qr-scanner")}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
-          Escanear Código QR
-        </Button>
-      </div>
-
       {/* Treasure Detail Modal */}
       {selectedTreasure && (
         <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black p-4">

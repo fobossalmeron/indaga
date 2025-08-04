@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/app/styles/globals.css";
-import { Nav } from "@/app/components/navs/Nav";
-import { Footer } from "@/app/components/Footer";
-import { MobileNav } from "@/app/components/navs/MobileNav";
 import { ProgressBarProvider } from "@/app/components/ProgressBarProvider";
 import { LenisProvider } from "@/app/components/LenisProvider";
 import { ScrollToTop } from "@/app/components/ScrollToTop";
@@ -37,10 +34,7 @@ export default function RootLayout({
         <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />
-            <Nav />
-            <MobileNav />
             {children}
-            <Footer />
           </LenisProvider>
         </ProgressBarProvider>
       </body>

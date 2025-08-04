@@ -51,7 +51,9 @@ export default function DashboardPage() {
     },
     {
       title: "Progreso Hunt",
-      value: progressLoading ? "..." : `${Math.round(progress.completionPercentage)}%`,
+      value: progressLoading
+        ? "..."
+        : `${Math.round(progress.completionPercentage)}%`,
       description: "Completado",
       href: "/treasures",
       color: "bg-purple-500",
@@ -59,13 +61,6 @@ export default function DashboardPage() {
   ];
 
   const quickActions = [
-    {
-      title: "Escanear QR",
-      description: "Usa la cámara de tu teléfono",
-      href: "/treasure-hunt",
-      icon: "📱",
-      color: "bg-blue-50 hover:bg-blue-100 border-blue-200",
-    },
     {
       title: "Ver Agenda",
       description: "Explora eventos de la ciudad",
@@ -94,7 +89,7 @@ export default function DashboardPage() {
       <div className="space-y-8">
         {/* Treasure Notification */}
         <TreasureNotification />
-        
+
         {/* Welcome Section */}
         <div className="overflow-hidden rounded-lg bg-white shadow">
           <div className="px-6 py-8">
