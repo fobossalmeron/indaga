@@ -10,7 +10,8 @@ export const NavController = () => {
   const { data: session } = useAuth();
 
   // Si el usuario está autenticado, mostrar navegación protegida
-  if (session) {
+  if (session?.user) {
+    console.log("🎯 NavController - showing protected nav");
     return (
       <>
         <ProtectedNav />
