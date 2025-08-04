@@ -1,6 +1,11 @@
+- La nav de protected le faltan links
+- Hacer que la nav salga como un dropdown/popover más fácil de tocar.
+- Quitar el min h screen a /login y a la pantalla de picale al link de tu correo
+- Cambios de diseño de colores en guía y de home
 - Falta poder guardar eventos y lugares de la guía
 - Falta ver en website la lista de los lugares del treasurehunt
 - Falta ver los lugares del treasure hunt desde la vista de logged in y poder saber cuales ya visite, cuales me faltan. Solo ver el código de los que ya visité. Y en lugar de código que se llame palabra secreta.
 - Dejó de jalar el sistema de escaneo, mentira si jala pero revisa está raro. Estaba autenticado y me mandaba a autenticar hasta que ya me autentiqué y todo jala.
 - Cuando ya estás loggeado y escaneas, debes de acabar en tu dashboard con una alerta de que acabas de escanear y TODA la info de este nuevo lugar. No debe irse con un timer como es ahora.
 - Cuando no estás loggeado y escaneas debe ser igual en realidad. no se debe ir y debe traer toda la info
+- treasure-map.tsx ya no se usa quedó de apéndice
