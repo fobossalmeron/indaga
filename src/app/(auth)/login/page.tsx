@@ -6,9 +6,9 @@ import { MagicLinkForm } from "@/app/components/auth/magic-link-form";
 import { useAuth } from "@/hooks/use-auth";
 import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
-import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
-import { MobileNav } from "@/app/components/navs/MobileNav";
+import { WebsiteNav } from "@/app/components/navs/WebsiteNav";
+import { MobileWebsiteNav } from "@/app/components/navs/MobileWebsiteNav";
 
 function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,8 +60,8 @@ function LoginContent() {
   if (showSuccess) {
     return (
       <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
-        <Nav />
-        <MobileNav />
+        <WebsiteNav />
+        <MobileWebsiteNav />
         <div className="flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
           <div className="w-full max-w-md space-y-8">
             <div className="text-center">
@@ -103,8 +103,8 @@ function LoginContent() {
 
   return (
     <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
-      <Nav />
-      <MobileNav />
+      <WebsiteNav />
+      <MobileWebsiteNav />
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4 py-12 sm:px-6 lg:px-8">
         {scannedTreasure && (
           <div className="border-primary/20 bg-primary/10 mt-4 rounded-lg border p-4">

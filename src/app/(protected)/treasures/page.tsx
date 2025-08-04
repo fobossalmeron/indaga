@@ -109,13 +109,11 @@ export default function TreasuresPage() {
   }
 
   return (
-    <div className="min-h-screen py-4">
+    <div className="py-4">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">
-            {data.hunt.name}
-          </h1>
+          <h1 className="text-foreground mb-2 text-3xl">{data.hunt.name}</h1>
         </div>
 
         {/* Navigation Tabs */}

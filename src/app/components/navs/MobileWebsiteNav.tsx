@@ -6,7 +6,7 @@ import { NavLink } from "./NavLink";
 import { Button } from "@/app/components/Button";
 import { useLenis } from "lenis/react";
 
-export const MobileNav = () => {
+export const MobileWebsiteNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const lenis = useLenis();

@@ -114,9 +114,9 @@ export default function TreasureMap({
     <div className="space-y-6">
       {/* Treasure Grid */}
       <div className="rounded-lg bg-white p-6 shadow-lg">
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-gray-900">
-            Todos los Tesoros ({allTreasures.length})
+        <div className="mb-6 flex flex-col items-center justify-between md:flex-row">
+          <h3 className="text-foreground text-xl">
+            Todos los tesoros ({allTreasures.length})
           </h3>
           <div className="text-foreground text-sm">
             {scannedTreasures.length} de {allTreasures.length} encontrados

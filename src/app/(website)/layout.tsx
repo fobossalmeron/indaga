@@ -1,6 +1,4 @@
-import { Nav } from "@/app/components/navs/Nav";
 import { Footer } from "@/app/components/Footer";
-import { MobileNav } from "@/app/components/navs/MobileNav";
 
 export default function WebsiteLayout({
   children,
@@ -8,9 +6,7 @@ export default function WebsiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
-      <Nav />
-      <MobileNav />
+    <main className="text-foreground bg-background relative flex flex-col items-center">
       {children}
       <Footer />
     </main>

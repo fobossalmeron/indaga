@@ -28,21 +28,21 @@ export default function DashboardPage() {
 
   const dashboardStats = [
     {
-      title: "Tesoros Encontrados",
+      title: "Tesoros encontrados",
       value: progressLoading ? "..." : progress.treasuresFound.toString(),
       description: "FISL 2025",
       href: "/treasures",
       color: "bg-yellow-500",
     },
     {
-      title: "Eventos Guardados",
+      title: "Eventos favoritos",
       value: "0",
       description: "En tu agenda personal",
       href: "/saved-items",
       color: "bg-blue-500",
     },
     {
-      title: "Lugares Favoritos",
+      title: "Lugares favoritos",
       value: "0",
       description: "De la guía de la ciudad",
       href: "/saved-items",

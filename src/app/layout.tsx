@@ -5,6 +5,7 @@ import "@/app/styles/globals.css";
 import { ProgressBarProvider } from "@/app/components/ProgressBarProvider";
 import { LenisProvider } from "@/app/components/LenisProvider";
 import { ScrollToTop } from "@/app/components/ScrollToTop";
+import { NavController } from "@/app/components/navs/NavController";
 
 const general_sans = localFont({
   src: "./../assets/fonts/GeneralSans-Variable.woff2",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <ProgressBarProvider>
           <LenisProvider>
             <ScrollToTop />
+            <NavController />
             {children}
           </LenisProvider>
         </ProgressBarProvider>

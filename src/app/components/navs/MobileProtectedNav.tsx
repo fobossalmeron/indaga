@@ -1,15 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { NavLink } from "./NavLink";
 import { Button } from "@/app/components/Button";
 import { useLenis } from "lenis/react";
+import { useAuth } from "@/hooks/use-auth";
+import { LogOut } from "lucide-react";
 
-export const UserMobileNav = () => {
+export const MobileProtectedNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const lenis = useLenis();
+  const { signOut } = useAuth();
 
   useEffect(() => {
     setIsOpen(false);
@@ -25,6 +29,12 @@ export const UserMobileNav = () => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/login");
+    setIsOpen(false);
   };
 
   return (
@@ -66,7 +76,6 @@ export const UserMobileNav = () => {
           <nav>
             <ul className="flex flex-col items-center space-y-6">
               {[
-                { href: "/dashboard", text: "Mi perfil" },
                 { href: "/treasures", text: "Treasure Hunt" },
                 { href: "/saved-items", text: "Favoritos" },
                 { href: "/agenda", text: "Agenda" },

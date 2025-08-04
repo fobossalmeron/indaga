@@ -146,7 +146,7 @@ Los usuarios escanean códigos QR ubicados en espacios culturales participantes 
 
 #### Accesos Rápidos
 
-- Mis lugares/eventos guardados
+- Mis lugares/favoritos (eventos guardados)
 - Recompensas disponibles
 - Configuración de perfil
 
