@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MagicLinkForm } from "@/app/components/auth/magic-link-form";
 import { useAuth } from "@/hooks/use-auth";
-import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
+import { CheckCircle, XCircle, ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Footer } from "@/app/components/Footer";
 import { WebsiteNav } from "@/app/components/navs/WebsiteNav";
@@ -16,7 +16,7 @@ function LoginContent() {
   const [scannedTreasure, setScannedTreasure] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { signIn } = useAuth();
+  const { signIn, data: session, isPending } = useAuth();
 
   useEffect(() => {
     const scanned = searchParams.get("scanned");
@@ -24,6 +24,29 @@ function LoginContent() {
       setScannedTreasure(scanned);
     }
   }, [searchParams]);
+
+  // Redirect if already logged in and has scanned treasure
+  useEffect(() => {
+    console.log("Login redirect effect:", {
+      isPending,
+      session: !!session?.user,
+      scannedTreasure,
+    });
+
+    if (!isPending && session?.user && scannedTreasure) {
+      console.log(
+        "Redirecting to treasure scan:",
+        `/2025/t/${scannedTreasure}`,
+      );
+      router.push(`/2025/t/${scannedTreasure}`);
+    } else if (!isPending && session?.user && !scannedTreasure) {
+      // Already logged in without scanned treasure, go to dashboard
+      const isAdmin = session.user.role === "admin";
+      const redirectPath = isAdmin ? "/admin" : "/dashboard";
+      console.log("Redirecting to dashboard/admin:", redirectPath);
+      router.push(redirectPath);
+    }
+  }, [session, isPending, scannedTreasure, router]);
 
   const handleLogin = async (email: string) => {
     setIsLoading(true);
@@ -57,6 +80,18 @@ function LoginContent() {
     }
   };
 
+  // Show loading while checking auth
+  if (isPending) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
+          <p className="text-gray-600">Verificando autenticación...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (showSuccess) {
     return (
       <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
@@ -76,8 +111,8 @@ function LoginContent() {
                       Te enviamos un enlace mágico a tu correo electrónico.
                     </p>
                     <p className="mt-2 text-base text-green-700">
-                      Haz clic en el enlace para iniciar sesión. El enlace expira
-                      en 10 minutos.
+                      Haz clic en el enlace para iniciar sesión. El enlace
+                      expira en 10 minutos.
                     </p>
                   </div>
                 </div>
@@ -127,7 +162,9 @@ function LoginContent() {
         <div className="w-full max-w-md space-y-8 rounded-lg border bg-white px-6 py-8 shadow-sm">
           <div>
             <div className="text-center">
-              <h2 className="text-foreground mt-6 text-3xl">Acceder a INDAGA</h2>
+              <h2 className="text-foreground mt-6 text-3xl">
+                Acceder a INDAGA
+              </h2>
               <p className="mt-2 text-sm text-gray-600">
                 Ingresa tu email para iniciar sesión o crear tu cuenta
               </p>
