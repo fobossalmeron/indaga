@@ -59,7 +59,7 @@ export default function TreasuresPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen py-8">
         <div className="mx-auto max-w-4xl px-4">
           <div className="py-8 text-center">
             <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
@@ -72,7 +72,7 @@ export default function TreasuresPage() {
 
   if (!data?.hunt) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen py-8">
         <div className="mx-auto max-w-4xl px-4">
           <div className="py-12 text-center">
             <svg
@@ -104,7 +104,7 @@ export default function TreasuresPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen py-4">
       <div className="mx-auto max-w-4xl px-4">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -122,7 +122,7 @@ export default function TreasuresPage() {
                 onClick={() => setActiveView("progress")}
                 className={`border-b-2 px-6 py-4 text-sm font-medium ${
                   activeView === "progress"
-                    ? "border-blue-500 text-blue-600"
+                    ? "border-primary text-primary"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 }`}
               >
@@ -132,7 +132,7 @@ export default function TreasuresPage() {
                 onClick={() => setActiveView("map")}
                 className={`border-b-2 px-6 py-4 text-sm font-medium ${
                   activeView === "map"
-                    ? "border-blue-500 text-blue-600"
+                    ? "border-primary text-primary"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 }`}
               >

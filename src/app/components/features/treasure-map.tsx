@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/app/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/app/components/ui/dialog";
+import { Check, HelpCircle } from "lucide-react";
 import type { TreasureHunt, Treasure } from "@/lib/treasure-hunt-2025";
 
 interface TreasureMapProps {
@@ -73,9 +80,9 @@ export default function TreasureMap({
 
   const getTreasureIcon = (treasure: AllTreasure) => {
     if (treasure.isScanned) {
-      return "✓";
+      return <Check className="h-6 w-6" />;
     }
-    return "?";
+    return <HelpCircle className="h-6 w-6" />;
   };
 
   const groupTreasuresByLocation = () => {
@@ -107,35 +114,29 @@ export default function TreasureMap({
 
   return (
     <div className="space-y-6">
-      {/* Map Legend */}
-      <div className="rounded-lg bg-white p-6 shadow-lg">
-        <h3 className="mb-4 text-xl font-bold text-gray-900">
-          Leyenda del Mapa
-        </h3>
-        <div className="flex flex-wrap gap-4">
-          <div className="flex items-center">
-            <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-600 bg-green-500 font-bold text-white">
-              ✓
-            </div>
-            <span className="text-sm text-gray-600">Tesoro encontrado</span>
-          </div>
-          <div className="flex items-center">
-            <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-gray-200 font-bold text-gray-600">
-              ?
-            </div>
-            <span className="text-sm text-gray-600">Tesoro por descubrir</span>
-          </div>
-        </div>
-      </div>
-
       {/* Treasure Grid */}
       <div className="rounded-lg bg-white p-6 shadow-lg">
         <div className="mb-6 flex items-center justify-between">
           <h3 className="text-xl font-bold text-gray-900">
             Todos los Tesoros ({allTreasures.length})
           </h3>
-          <div className="text-sm text-gray-600">
+          <div className="text-foreground text-sm">
             {scannedTreasures.length} de {allTreasures.length} encontrados
+          </div>
+        </div>
+
+        <div className="mb-4 flex flex-wrap gap-2">
+          <div className="flex items-center">
+            <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full border-1 border-green-600 bg-green-500 text-white">
+              <Check className="h-4 w-4" />
+            </div>
+            <span className="text-foreground text-sm">Encontrado</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center rounded-full">
+              <HelpCircle className="h-7 w-7" strokeWidth={1.2} />
+            </div>
+            <span className="text-foreground text-sm">Por descubrir</span>
           </div>
         </div>
 
@@ -147,7 +148,9 @@ export default function TreasureMap({
               className={`rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 ${getTreasureStatusColor(treasure)}`}
             >
               <div className="text-center">
-                <div className="mb-2 text-2xl">{getTreasureIcon(treasure)}</div>
+                <div className="mb-2 flex justify-center">
+                  {getTreasureIcon(treasure)}
+                </div>
                 <div className="text-xs font-medium">
                   {treasure.treasure_code.split("-").pop()}
                 </div>
@@ -205,26 +208,34 @@ export default function TreasureMap({
         ))}
       </div>
 
-      {/* Treasure Detail Modal */}
-      {selectedTreasure && (
-        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black p-4">
-          <div className="w-full max-w-md rounded-lg bg-white p-6">
-            <div className="mb-4 text-center">
+      {/* Treasure Detail Dialog */}
+      <Dialog
+        open={!!selectedTreasure}
+        onOpenChange={() => setSelectedTreasure(null)}
+      >
+        <DialogContent className="w-full max-w-md">
+          <DialogHeader className="text-center">
+            <div className="mb-4">
               <div
-                className={`mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold ${
-                  selectedTreasure.isScanned
+                className={`mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full ${
+                  selectedTreasure?.isScanned
                     ? "bg-green-500 text-white"
                     : "bg-gray-300 text-gray-600"
                 }`}
               >
-                {getTreasureIcon(selectedTreasure)}
+                {selectedTreasure &&
+                  (selectedTreasure.isScanned ? (
+                    <Check className="h-8 w-8" />
+                  ) : (
+                    <HelpCircle className="h-8 w-8" />
+                  ))}
               </div>
 
-              <h3 className="mb-2 text-xl font-bold text-gray-900">
-                {selectedTreasure.treasure_name}
-              </h3>
+              <DialogTitle className="mb-2 text-xl font-bold text-gray-900">
+                {selectedTreasure?.treasure_name}
+              </DialogTitle>
 
-              {selectedTreasure.isScanned ? (
+              {selectedTreasure?.isScanned ? (
                 <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-sm text-green-800">
                   ¡Encontrado!
                 </span>
@@ -234,38 +245,29 @@ export default function TreasureMap({
                 </span>
               )}
             </div>
+          </DialogHeader>
 
-            <div className="mb-6 space-y-3">
-              <p className="text-gray-600">
-                {selectedTreasure.treasure_description}
-              </p>
+          <div className="mb-6 space-y-3">
+            <p className="text-gray-600">
+              {selectedTreasure?.treasure_description}
+            </p>
 
-              <div className="text-sm text-gray-500">
-                <strong>Código:</strong> {selectedTreasure.treasure_code}
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <Button
-                onClick={() => setSelectedTreasure(null)}
-                variant="outline"
-                className="flex-1"
-              >
-                Cerrar
-              </Button>
-
-              {!selectedTreasure.isScanned && (
-                <Button
-                  onClick={() => (window.location.href = "/qr-scanner")}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700"
-                >
-                  Ir a escanear
-                </Button>
-              )}
+            <div className="text-sm text-gray-500">
+              <strong>Código:</strong> {selectedTreasure?.treasure_code}
             </div>
           </div>
-        </div>
-      )}
+
+          <div className="flex gap-3">
+            <Button
+              onClick={() => setSelectedTreasure(null)}
+              variant="outline"
+              className="flex-1"
+            >
+              Cerrar
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

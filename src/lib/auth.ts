@@ -67,12 +67,13 @@ export default betterAuth({
   // Secret for session encryption
   secret: process.env.BETTER_AUTH_SECRET!,
 
-  // Base URL
+  // Base URL - Dynamic based on request
   baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
 
   // Trusted origins for Better Auth
   trustedOrigins: [
     "http://localhost:3000",
+    "http://192.168.100.22:3000",
     "https://indaga.site",
     "https://www.indaga.site"
   ],
@@ -85,12 +86,19 @@ export default betterAuth({
     magicLink({
       // Email configuration will be handled by BetterAuth's default email service
       // In production, configure with your preferred email provider (Resend, SendGrid, etc.)
-      sendMagicLink: async ({ email, url, token }) => {
+      sendMagicLink: async ({ email, url, token }, request) => {
         try {
           // For development, still log the magic link
           if (process.env.NODE_ENV === "development") {
             console.log("🔗 Magic Link for", email, ":", url)
             console.log("🔑 Token:", token)
+            
+            // Detect if request comes from network IP and adjust URL
+            const host = request?.headers?.get?.('host') || request?.headers?.host;
+            if (host && host.includes('192.168.100.22')) {
+              url = url.replace('localhost:3000', '192.168.100.22:3000');
+              console.log("🔗 Adjusted Magic Link for network access:", url);
+            }
           }
 
           // Send email with Resend
@@ -208,6 +216,7 @@ export default betterAuth({
     origin: [
       process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
       "http://localhost:3000",
+      "http://192.168.100.22:3000",
       "https://indaga.site",
       "https://www.indaga.site",
     ],

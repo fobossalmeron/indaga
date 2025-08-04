@@ -302,21 +302,6 @@ export default function ProgressTracker({
           )}
         </div>
       )}
-
-      {/* Action Buttons */}
-      <div className="flex gap-4">
-        <Button
-          onClick={() => (window.location.href = "/qr-scanner")}
-          className="flex-1 bg-blue-600 hover:bg-blue-700"
-        >
-          Escanear Tesoro
-        </Button>
-        {onRefresh && (
-          <Button onClick={onRefresh} variant="outline" className="px-6">
-            Actualizar
-          </Button>
-        )}
-      </div>
     </div>
   );
 }

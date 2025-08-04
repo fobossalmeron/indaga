@@ -87,13 +87,13 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #edf3fd;
+  --background: #f8f6f2;
   --foreground: #4d4e6a;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #008a7e;
+  --primary: #65468b;
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
