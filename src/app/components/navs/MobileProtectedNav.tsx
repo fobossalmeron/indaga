@@ -76,7 +76,7 @@ export const MobileProtectedNav = () => {
           <nav>
             <ul className="flex flex-col items-center space-y-6">
               {[
-                { href: "/treasures", text: "Treasure Hunt" },
+                { href: "/treasures", text: "Tesoros" },
                 { href: "/saved-items", text: "Favoritos" },
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },

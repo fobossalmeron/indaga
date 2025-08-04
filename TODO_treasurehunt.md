@@ -1,0 +1,3 @@
+- Falta poder guardar eventos y lugares de la guía
+- Falta ver en website la lista de los lugares del treasurehunt
+- Falta ver los lugares del treasure hunt desde la vista de logged in y poder saber cuales ya visite, cuales me faltan. Solo ver el código de los que ya visité. Y en lugar de código que se llame palabra secreta.

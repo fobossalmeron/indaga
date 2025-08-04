@@ -39,7 +39,7 @@ export default function ProtectedLayout({
   }
 
   return (
-    <div className="">
+    <div className="pt-16">
       <main className="mx-auto max-w-7xl px-4 py-6 pt-8 sm:px-6 lg:px-8">
         {children}
       </main>

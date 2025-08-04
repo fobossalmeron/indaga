@@ -5,7 +5,6 @@ import { WebsiteNav } from "./WebsiteNav";
 import { MobileWebsiteNav } from "./MobileWebsiteNav";
 import { ProtectedNav } from "./ProtectedNav";
 import { MobileProtectedNav } from "./MobileProtectedNav";
-import { SecondNavUserData } from "./SecondNavUserData";
 
 export const NavController = () => {
   const { data: session } = useAuth();
@@ -16,7 +15,6 @@ export const NavController = () => {
       <>
         <ProtectedNav />
         <MobileProtectedNav />
-        <SecondNavUserData />
       </>
     );
   }

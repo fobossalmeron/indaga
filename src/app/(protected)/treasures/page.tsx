@@ -1,21 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import TreasureMap from "@/app/components/features/treasure-map";
 import ProgressTracker from "@/app/components/features/progress-tracker";
 import { Button } from "@/app/components/ui/button";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/app/components/ui/tabs";
 import { useAuth } from "@/hooks/use-auth";
 import type {
   TreasureHunt,
   TreasureProgress,
   Treasure,
 } from "@/lib/treasure-hunt-2025";
+import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
 interface TreasurePageData {
   hunt: TreasureHunt | null;
@@ -67,7 +62,7 @@ export default function TreasuresPage() {
       <div className="min-h-screen py-8">
         <div className="mx-auto max-w-4xl px-4">
           <div className="py-8 text-center">
-            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
+            <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
             <p>Cargando datos del treasure hunt...</p>
           </div>
         </div>
@@ -112,37 +107,22 @@ export default function TreasuresPage() {
     <div className="py-4">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-foreground mb-2 text-3xl">{data.hunt.name}</h1>
+        <div className="mb-8 flex flex-col items-center gap-4 text-center">
+          <Image
+            src="/festival_santa_lucia.svg"
+            alt="OFF FST Festival Internacional de Santa Lucia"
+            width={200}
+            height={200}
+          />
         </div>
 
-        {/* Navigation Tabs */}
-        <Tabs defaultValue="progress" className="mb-6">
-          <TabsList className="grid w-full grid-cols-2 bg-white">
-            <TabsTrigger value="progress">Mi progreso</TabsTrigger>
-            <TabsTrigger value="map">Mapa de Tesoros</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="progress" className="mt-6">
-            <div className="space-y-6">
-              <ProgressTracker
-                hunt={data.hunt}
-                progress={data.progress}
-                scannedTreasures={data.scannedTreasures}
-                onRefresh={loadTreasureData}
-              />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="map" className="mt-6">
-            <div className="space-y-6">
-              <TreasureMap
-                hunt={data.hunt}
-                scannedTreasures={data.scannedTreasures}
-              />
-            </div>
-          </TabsContent>
-        </Tabs>
+        {/* Progress Tracker with integrated Treasure Map */}
+        <ProgressTracker
+          hunt={data.hunt}
+          progress={data.progress}
+          scannedTreasures={data.scannedTreasures}
+          onRefresh={loadTreasureData}
+        />
       </div>
     </div>
   );

@@ -28,13 +28,6 @@ export default function DashboardPage() {
 
   const dashboardStats = [
     {
-      title: "Tesoros encontrados",
-      value: progressLoading ? "..." : progress.treasuresFound.toString(),
-      description: "FISL 2025",
-      href: "/treasures",
-      color: "bg-yellow-500",
-    },
-    {
       title: "Eventos favoritos",
       value: "0",
       description: "En tu agenda personal",
@@ -48,24 +41,81 @@ export default function DashboardPage() {
       href: "/saved-items",
       color: "bg-green-500",
     },
-    {
-      title: "Progreso Hunt",
-      value: progressLoading
-        ? "..."
-        : `${Math.round(progress.completionPercentage)}%`,
-      description: "Completado",
-      href: "/treasures",
-      color: "bg-purple-500",
-    },
   ];
 
+  const treasureHuntStats = {
+    treasuresFound: progressLoading
+      ? "..."
+      : progress.treasuresFound.toString(),
+    completionPercentage: progressLoading
+      ? "..."
+      : `${Math.round(progress.completionPercentage)}%`,
+  };
+
   return (
-    <div className="space-y-8">
+    <div className="mx-auto max-w-4xl">
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className="text-foreground mb-2 text-3xl">Mi perfil</h1>
+        <p className="text-foreground">
+          Que gusto verte, {session?.user?.email}
+        </p>
+      </div>
       {/* Treasure Notification */}
       <TreasureNotification />
 
+      {/* Treasure Hunt Card - Spanning 2 columns on mobile */}
+      <Link
+        href="/treasures"
+        className="overflow-hidden rounded-lg border border-yellow-200 bg-gradient-to-br from-yellow-50 to-purple-50 shadow transition-shadow hover:shadow-md"
+      >
+        <div className="overflow-hidden rounded-lg bg-white p-6 shadow transition-shadow hover:shadow-md">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex-shrink-0">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-500 to-purple-500">
+                  <div className="h-6 w-6 rounded-sm bg-white"></div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">
+                  Treasure Hunt
+                </h3>
+                <p className="text-sm text-gray-600">OFF FEST FISL 2025</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-purple-600">
+                {treasureHuntStats.completionPercentage}
+              </div>
+              <div className="text-sm text-gray-500">Completado</div>
+            </div>
+          </div>
+          <div className="mt-4 flex items-center justify-between">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-yellow-600">
+                {treasureHuntStats.treasuresFound}
+              </div>
+              <div className="text-sm text-gray-600">Tesoros encontrados</div>
+            </div>
+            <div className="mx-4 flex-1">
+              <div className="h-2 w-full rounded-full bg-gray-200">
+                <div
+                  className="h-2 rounded-full bg-gradient-to-r from-yellow-500 to-purple-500 transition-all duration-300"
+                  style={{
+                    width: progressLoading
+                      ? "0%"
+                      : `${Math.round(progress.completionPercentage)}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
+
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-6">
         {dashboardStats.map((stat, index) => (
           <Link
             key={index}
