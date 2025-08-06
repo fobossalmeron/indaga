@@ -5,19 +5,15 @@ import { createClient } from '@supabase/supabase-js'
 import type { Database } from '../../types/database'
 
 // Environment variables validation
-const supabaseUrl =
-  process.env.NEXT_PUBLIC_SUPABASE_URL ||
-  process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 if (!supabaseUrl) {
-  throw new Error('NEXT_PUBLIC_SUPABASE_URL is not defined')
+  throw new Error('VERCELDB__NEXT_PUBLIC_SUPABASE_URL is not defined')
 }
 
 if (!supabaseAnonKey) {
-  throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined')
+  throw new Error('VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined')
 }
 
 // Create Supabase client
@@ -31,12 +27,10 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
 
 // Server-side client (for admin operations)
 export const createServerSupabaseClient = () => {
-  const serviceRoleKey =
-    process.env.VERCELDB__SUPABASE_SERVICE_ROLE_KEY ||
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  const serviceRoleKey = process.env.VERCELDB__SUPABASE_SERVICE_ROLE_KEY!
 
   if (!serviceRoleKey) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not defined')
+    throw new Error('VERCELDB__SUPABASE_SERVICE_ROLE_KEY is not defined')
   }
 
   // The createClient function is overloaded to accept the service role key.

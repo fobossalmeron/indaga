@@ -17,12 +17,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 console.log("--- [auth.ts] Loading ---")
-const vercelDbUrl = process.env.VERCELDB__POSTGRES_URL
-const databaseUrl = process.env.DATABASE_URL
+const databaseUrl = process.env.VERCELDB__POSTGRES_PRISMA_URL
 
 console.log(
   "DATABASE_URL:",
-  vercelDbUrl || databaseUrl ? "Loaded" : "NOT LOADED"
+  databaseUrl ? "Loaded" : "NOT LOADED"
 )
 
 // Initialize Resend
@@ -32,7 +31,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export default betterAuth({
   // Database configuration
   database: new Pool({
-    connectionString: vercelDbUrl || databaseUrl,
+    connectionString: databaseUrl,
     ssl: {
       rejectUnauthorized: false,
     },
@@ -92,7 +91,7 @@ export default betterAuth({
           if (process.env.NODE_ENV === "development") {
             console.log("🔗 Magic Link for", email, ":", url)
             console.log("🔑 Token:", token)
-            
+
             // Detect if request comes from network IP and adjust URL
             const host = request?.headers?.get?.('host');
             if (host && host.includes('192.168.100.22')) {

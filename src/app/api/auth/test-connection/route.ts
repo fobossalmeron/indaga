@@ -3,10 +3,9 @@ import { Pool } from 'pg'
 
 export async function GET(request: NextRequest) {
     try {
-        const vercelDbUrl = process.env.VERCELDB__POSTGRES_URL
-        const databaseUrl = process.env.DATABASE_URL
+        const databaseUrl = process.env.VERCELDB__POSTGRES_PRISMA_URL
 
-        if (!vercelDbUrl && !databaseUrl) {
+        if (!databaseUrl) {
             return Response.json({
                 error: 'No database URL configured',
                 success: false
@@ -14,7 +13,7 @@ export async function GET(request: NextRequest) {
         }
 
         const pool = new Pool({
-            connectionString: vercelDbUrl || databaseUrl,
+            connectionString: databaseUrl,
             ssl: {
                 rejectUnauthorized: false,
             },
