@@ -1,9 +1,5 @@
 "use client";
 
-import { TreasureLocation } from "./TreasureLocation";
-import { Fade } from "react-awesome-reveal";
-import { treasureLocations } from "./treasureLocations";
-
 export default function TreasureHunt() {
   return (
     <div>
