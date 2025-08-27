@@ -5,9 +5,12 @@ import { Fade } from "react-awesome-reveal";
 import { treasureLocations } from "./treasureLocations";
 
 export default function TreasureHunt() {
-  return treasureLocations.map((location) => (
-    <Fade cascade damping={0.1} key={location.title}>
-      <TreasureLocation location={location} />
-    </Fade>
-  ));
+  return (
+    <div>
+      <p>
+        Durante la temporada del FISL 2025, INDAGA te invita a participar en su
+        Treasure Hunt
+      </p>
+    </div>
+  );
 }
