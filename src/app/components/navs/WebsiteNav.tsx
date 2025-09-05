@@ -10,7 +10,7 @@ export const WebsiteNav = () => {
           <Logo
             width={95}
             height={18}
-            className="animate-fadeSimple transition-all text-foreground"
+            className="animate-fadeSimple text-foreground transition-all"
           />
         </Link>
         <nav className="animate-fadeSimple flex items-center gap-7 transition-all">
@@ -32,7 +32,7 @@ export const WebsiteNav = () => {
         <div className="animate-fadeSimple flex gap-2">
           {/* Botón temporal para poder publicar */}
           <Link
-            href="/ReporteJulio_compressed.pdf"
+            href="/ReporteAgosto_compressed.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
