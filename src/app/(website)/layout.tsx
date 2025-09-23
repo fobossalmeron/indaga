@@ -6,7 +6,7 @@ export default function WebsiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="text-foreground bg-background relative flex flex-col items-center pt-16">
+    <main className="text-foreground bg-background relative flex flex-col items-center">
       {children}
       <Footer />
     </main>

@@ -7,7 +7,7 @@ export default function HappeningsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex h-full w-screen flex-col items-center">
+    <div className="flex h-full w-screen flex-col items-center pt-16">
       <div className="absolute inset-0 overflow-hidden">
         <PortalBg className="animate-fadeIn absolute top-0 right-0 -z-10 h-auto w-[150vw] translate-x-1/2 pt-40" />
       </div>

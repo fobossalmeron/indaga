@@ -8,12 +8,14 @@ export default function HappeningsLayout({
 }>) {
   return (
     <GuiaClientProvider>
-      <Header
-        title="Guía de la ciudad"
-        subtitle="Explora la curaduría norestense"
-      />
-      <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
-        {children}
+      <div className="pt-16">
+        <Header
+          title="Guía de la ciudad"
+          subtitle="Explora la curaduría norestense"
+        />
+        <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
+          {children}
+        </div>
       </div>
     </GuiaClientProvider>
   );

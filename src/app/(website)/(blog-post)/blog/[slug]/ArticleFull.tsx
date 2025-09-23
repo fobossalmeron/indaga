@@ -33,7 +33,7 @@ export default function ArticleFull({
   };
 
   return (
-    <article className="relative mx-auto mb-20 w-full lg:mb-40">
+    <article className="relative mx-auto mb-20 w-full pt-16 lg:mb-40">
       <header className="animate-fadeIn mx-auto flex w-full max-w-[1120px] flex-col items-center gap-4 px-5 pt-12 pb-5 sm:pt-24 lg:flex-row">
         <div className="flex flex-col text-center lg:text-start">
           <h1 className="text-4xl md:max-w-[23ch] md:text-5xl lg:text-6xl">
