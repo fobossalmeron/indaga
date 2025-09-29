@@ -34,7 +34,9 @@ export default function ProgressTracker({
 }: ProgressTrackerProps) {
   const [allTreasures, setAllTreasures] = useState<AllTreasure[]>([]);
   const [loadingTreasures, setLoadingTreasures] = useState(false);
-  const [selectedTreasure, setSelectedTreasure] = useState<AllTreasure | null>(null);
+  const [selectedTreasure, setSelectedTreasure] = useState<AllTreasure | null>(
+    null,
+  );
 
   // Usar el conteo real de tesoros escaneados en lugar del campo progress
   const treasuresFound = scannedTreasures.length;
@@ -339,7 +341,7 @@ export default function ProgressTracker({
         {loadingTreasures ? (
           <div className="py-8 text-center">
             <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
-            <p>Cargando mapa de tesoros...</p>
+            <p>Cargando tesoros...</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
@@ -354,7 +356,7 @@ export default function ProgressTracker({
                     {getTreasureIcon(treasure)}
                   </div>
                   <div className="text-xs font-medium">
-                    {treasure.treasure_code.split("-").pop()}
+                    {treasure.treasure_name}
                   </div>
                 </div>
               </button>
