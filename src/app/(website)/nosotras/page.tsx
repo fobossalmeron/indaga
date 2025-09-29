@@ -8,7 +8,7 @@ export default async function Nosotras() {
 
   return (
     <>
-      <div className="bg-primary w-full pt-16 text-[#ECEAEC]">
+      <div className="w-full bg-[#5B3F7D] pt-16 text-[#ECEAEC]">
         <div className="flex w-full flex-col items-center justify-center">
           <div className="animate-fadeIn2 mx-5 flex max-w-[460px] flex-col items-start gap-6 py-20 sm:mx-10 sm:py-32">
             <div className="flex flex-col gap-2">

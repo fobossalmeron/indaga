@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/rodrigosalmeron/Sites/indaga/logs/.292282825466b6bb8c6dece700863b2e39c7e208-audit.json",
+    "files": [
+        {
+            "date": 1758831568850,
+            "name": "/Users/rodrigosalmeron/Sites/indaga/logs/mcp-puppeteer-2025-09-25.log",
+            "hash": "6b162e8ca2b41257f11c7ea8525dccee68b97d6592b32a6343eefdc778bf5e5d"
+        },
+        {
+            "date": 1758899026367,
+            "name": "/Users/rodrigosalmeron/Sites/indaga/logs/mcp-puppeteer-2025-09-26.log",
+            "hash": "59be4c167539ce1dfc61d0311b52dc20a0687312d85078e26e7c9b8dd4a6b2ec"
+        }
+    ],
+    "hashType": "sha256"
+}

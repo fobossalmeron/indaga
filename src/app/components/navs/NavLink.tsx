@@ -23,11 +23,11 @@ export function NavLink({ href, children, onClick }: NavLinkProps) {
     <Link
       href={href}
       onClick={handleClick}
-      className={`group relative rounded-md px-3 py-2 text-white mix-blend-difference transition-all md:text-xl`}
+      className={`group relative rounded-md px-3 py-2 mix-blend-difference transition-all md:text-xl`}
     >
       {children}
       <span
-        className={`bg-accent absolute bottom-0 left-0 h-full w-full rounded-lg transition-all duration-300 group-hover:opacity-20 group-active:opacity-20 ${isActive ? "opacity-[12%]" : "opacity-0"}`}
+        className={`absolute bottom-0 left-0 h-full w-full rounded-lg bg-[#a7e198] transition-all duration-300 group-hover:opacity-20 group-active:opacity-20 ${isActive ? "opacity-[12%]" : "opacity-0"}`}
       ></span>
     </Link>
   );

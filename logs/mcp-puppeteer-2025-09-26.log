@@ -1,0 +1,28 @@
+{"arguments":{},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:46.364","tool":"puppeteer_connect_active_tab"}
+{"level":"info","message":"Connecting to existing browser","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:46.381","wsEndpoint":"ws://localhost:9222/devtools/browser/ec02a6cc-f72e-4626-ad15-a4035b49d341"}
+{"level":"debug","message":"Closing existing browser connection","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:46.381"}
+{"level":"debug","message":"Establishing connection to browser","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:46.382"}
+{"level":"info","message":"Successfully connected to browser","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:46.403"}
+{"level":"info","message":"Found active webpage:","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:46.455","title":"Descubre la ciudad - Indaga","url":"http://localhost:3000/agenda"}
+{"arguments":{"url":"http://localhost:3000"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:50.237","tool":"puppeteer_navigate"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:50.237","url":"http://localhost:3000"}
+{"level":"info","message":"Navigation successful","service":"mcp-puppeteer","status":200,"timestamp":"2025-09-26 09:03:51.676","url":"http://localhost:3000"}
+{"arguments":{"name":"homepage_nav"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:03:54.636","tool":"puppeteer_screenshot"}
+{"arguments":{"script":"// Verificar los estilos del botón de registro\nconst registerButton = document.querySelector('a[href=\"/register\"]');\nconst computedStyle = window.getComputedStyle(registerButton);\nconsole.log('Mix blend mode:', computedStyle.mixBlendMode);\nconsole.log('Isolation:', computedStyle.isolation);\nreturn {\n  mixBlendMode: computedStyle.mixBlendMode,\n  isolation: computedStyle.isolation,\n  classList: registerButton.className\n};"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:04:04.490","tool":"puppeteer_evaluate"}
+{"level":"debug","message":"Executing script in browser","scriptLength":423,"service":"mcp-puppeteer","timestamp":"2025-09-26 09:04:04.491"}
+{"hasResult":true,"level":"debug","logCount":2,"message":"Script execution result","resultType":"object","service":"mcp-puppeteer","timestamp":"2025-09-26 09:04:04.494"}
+{"arguments":{"script":"// Verificar el color real del botón\nconst registerLink = document.querySelector('a[href=\"/register\"]');\nconst registerButton = registerLink.querySelector('button');\nconst computedStyle = window.getComputedStyle(registerButton);\nreturn {\n  backgroundColor: computedStyle.backgroundColor,\n  color: computedStyle.color,\n  parentMixBlend: window.getComputedStyle(registerLink.parentElement).mixBlendMode\n};"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:18.947","tool":"puppeteer_evaluate"}
+{"level":"debug","message":"Executing script in browser","scriptLength":403,"service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:18.948"}
+{"hasResult":true,"level":"debug","logCount":0,"message":"Script execution result","resultType":"object","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:18.954"}
+{"arguments":{"script":"// Forzar recarga y verificar de nuevo\nlocation.reload();"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:32.214","tool":"puppeteer_evaluate"}
+{"level":"debug","message":"Executing script in browser","scriptLength":57,"service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:32.215"}
+{"hasResult":false,"level":"debug","logCount":0,"message":"Script execution result","resultType":"undefined","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:32.218"}
+{"arguments":{"name":"homepage_nav_updated"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:35.943","tool":"puppeteer_screenshot"}
+{"arguments":{"script":"location.reload();"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:52.531","tool":"puppeteer_evaluate"}
+{"level":"debug","message":"Executing script in browser","scriptLength":18,"service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:52.540"}
+{"hasResult":false,"level":"debug","logCount":0,"message":"Script execution result","resultType":"undefined","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:52.557"}
+{"arguments":{"name":"homepage_nav_separated"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:05:56.292","tool":"puppeteer_screenshot"}
+{"arguments":{"script":"location.reload();"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:07:02.268","tool":"puppeteer_evaluate"}
+{"level":"debug","message":"Executing script in browser","scriptLength":18,"service":"mcp-puppeteer","timestamp":"2025-09-26 09:07:02.269"}
+{"hasResult":false,"level":"debug","logCount":0,"message":"Script execution result","resultType":"undefined","service":"mcp-puppeteer","timestamp":"2025-09-26 09:07:02.270"}
+{"arguments":{"name":"homepage_nav_fixed_alignment"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-26 09:07:06.564","tool":"puppeteer_screenshot"}
