@@ -1,6 +1,7 @@
--- BetterAuth Required Tables
+-- Migration 003: BetterAuth Integration
+-- Required tables and views for BetterAuth compatibility
 
--- Drop conflicting user table if it exists from a previous bad migration
+-- Drop conflicting user table if it exists from a previous migration
 DROP TABLE IF EXISTS "user" CASCADE;
 
 -- Sessions table
@@ -119,4 +120,4 @@ CREATE OR REPLACE RULE user_delete AS
     DO INSTEAD (
         DELETE FROM "users"
         WHERE id = OLD.id
-    ); 
+    );

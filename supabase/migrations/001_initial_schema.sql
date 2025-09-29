@@ -1,5 +1,5 @@
 -- Migration 001: Initial Schema for INDAGA User System
--- Created for ULTRATHINK Plan - Fase 1
+-- Core tables, extensions, and basic user functionality
 
 -- Enable necessary extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -15,11 +15,11 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     email_verified BOOLEAN DEFAULT FALSE,
     avatar_url TEXT,
-    provider TEXT DEFAULT 'magic-link', -- 'magic-link', OAuth providers in phase 2
+    provider TEXT DEFAULT 'magic-link', -- 'magic-link', OAuth providers
     role TEXT DEFAULT 'user' -- 'user', 'admin'
 );
 
--- Table: saved_events  
+-- Table: saved_events
 -- Users can save events from the agenda
 CREATE TABLE IF NOT EXISTS saved_events (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS saved_events (
 );
 
 -- Table: saved_places
--- Users can save places from the guide  
+-- Users can save places from the guide
 CREATE TABLE IF NOT EXISTS saved_places (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS saved_places (
 -- Master table for treasure hunt campaigns
 CREATE TABLE IF NOT EXISTS treasure_hunts (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name TEXT NOT NULL, -- "Festival Santa Lucía 2025"
+    name TEXT NOT NULL, -- "OFF FST FISL 2025"
     year INTEGER NOT NULL, -- 2025, 2026, etc.
     description TEXT,
     start_date TIMESTAMP WITH TIME ZONE,
@@ -76,21 +76,7 @@ END;
 $$ language 'plpgsql';
 
 DROP TRIGGER IF EXISTS update_users_updated_at ON users;
-CREATE TRIGGER update_users_updated_at 
-    BEFORE UPDATE ON users 
-    FOR EACH ROW 
+CREATE TRIGGER update_users_updated_at
+    BEFORE UPDATE ON users
+    FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
-
--- Insert default treasure hunt for 2025 (only if it doesn't exist)
-INSERT INTO treasure_hunts (name, year, description, start_date, end_date, is_active, total_treasures)
-SELECT
-    'OFF FST FISL 2025',
-    2025,
-    'Búsqueda del tesoro durante el Festival Santa Lucía 2025. Explora la ciudad, escanea códigos QR y colecciona tesoros.',
-    '2025-12-01 00:00:00+00',
-    '2025-12-31 23:59:59+00',
-    true,
-    25
-WHERE NOT EXISTS (
-    SELECT 1 FROM treasure_hunts WHERE name = 'Festival Santa Lucía 2025' AND year = 2025
-);

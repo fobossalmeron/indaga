@@ -50,7 +50,8 @@ export interface TreasureScanResult {
 }
 
 export async function getActiveTreasureHunt(): Promise<TreasureHunt | null> {
-  const { data, error } = await supabase
+  const serverClient = createServerSupabaseClient()
+  const { data, error } = await serverClient
     .from('treasure_hunts')
     .select('*')
     .eq('is_active', true)
@@ -66,7 +67,8 @@ export async function getActiveTreasureHunt(): Promise<TreasureHunt | null> {
 }
 
 export async function getTreasureByCode(code: string): Promise<Treasure | null> {
-  const { data, error } = await supabase
+  const serverClient = createServerSupabaseClient()
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_treasures')
     .select('*')
     .eq('treasure_code', code)

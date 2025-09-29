@@ -59,7 +59,7 @@ export default function TreasuresPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen py-8">
+      <div className="py-8">
         <div className="mx-auto max-w-4xl px-4">
           <div className="py-8 text-center">
             <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
@@ -72,7 +72,7 @@ export default function TreasuresPage() {
 
   if (!data?.hunt) {
     return (
-      <div className="min-h-screen py-8">
+      <div className="py-8">
         <div className="mx-auto max-w-4xl px-4">
           <div className="py-12 text-center">
             <svg
