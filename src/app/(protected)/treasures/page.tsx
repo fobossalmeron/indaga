@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 import ProgressTracker from "@/app/components/features/progress-tracker";
 import { Button } from "@/app/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
@@ -22,6 +24,7 @@ export default function TreasuresPage() {
   const [data, setData] = useState<TreasurePageData | null>(null);
   const [loading, setLoading] = useState(true);
   const { data: session, isPending } = useAuth();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!isPending && session?.user) {
@@ -30,6 +33,20 @@ export default function TreasuresPage() {
       setLoading(false);
     }
   }, [session, isPending]);
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (error === "technical") {
+      toast.error("Algo salió mal. Intenta escanear el código nuevamente.", {
+        duration: 5000,
+        style: {
+          background: "#fef2f2",
+          border: "1px solid #fecaca",
+          color: "#dc2626",
+        },
+      });
+    }
+  }, [searchParams]);
 
   const loadTreasureData = async () => {
     setLoading(true);
@@ -107,13 +124,24 @@ export default function TreasuresPage() {
     <div className="py-4">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
-        <div className="mb-8 flex flex-col items-center gap-4 text-center">
-          <Image
-            src="/festival_santa_lucia.svg"
-            alt="OFF FST Festival Internacional de Santa Lucia"
-            width={200}
-            height={200}
-          />
+        <div className="mb-8 flex w-full flex-col gap-8 text-center md:flex-row md:items-center md:justify-between md:text-left">
+          <div className="flex justify-center md:justify-start">
+            <Image
+              src="/festival_santa_lucia.svg"
+              alt="OFF FST Festival Internacional de Santa Lucia"
+              width={200}
+              height={200}
+            />
+          </div>
+          {session?.user?.email && (
+            <div className="text-center md:text-right">
+              <p className="text-base leading-tight md:text-lg">
+                Hola,
+                <br />
+                <span className="text-gray-600">{session.user.email}</span>
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Progress Tracker with integrated Treasure Map */}
@@ -122,6 +150,7 @@ export default function TreasuresPage() {
           progress={data.progress}
           scannedTreasures={data.scannedTreasures}
           onRefresh={loadTreasureData}
+          scannedCode={searchParams.get("scanned")}
         />
       </div>
     </div>

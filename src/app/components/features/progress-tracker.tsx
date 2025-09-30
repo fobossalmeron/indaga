@@ -24,6 +24,7 @@ interface ProgressTrackerProps {
   progress: TreasureProgress | null;
   scannedTreasures: Treasure[];
   onRefresh?: () => void;
+  scannedCode?: string | null;
 }
 
 export default function ProgressTracker({
@@ -31,6 +32,7 @@ export default function ProgressTracker({
   progress,
   scannedTreasures,
   onRefresh,
+  scannedCode,
 }: ProgressTrackerProps) {
   const [allTreasures, setAllTreasures] = useState<AllTreasure[]>([]);
   const [loadingTreasures, setLoadingTreasures] = useState(false);
@@ -46,7 +48,7 @@ export default function ProgressTracker({
 
   useEffect(() => {
     loadAllTreasures();
-  }, [hunt.id, scannedTreasures]);
+  }, [hunt.id, scannedTreasures, scannedCode]);
 
   const loadAllTreasures = async () => {
     setLoadingTreasures(true);
@@ -73,6 +75,15 @@ export default function ProgressTracker({
       setLoadingTreasures(false);
     }
   };
+
+  useEffect(() => {
+    if (scannedCode && allTreasures.length > 0) {
+      const treasure = allTreasures.find(t => t.treasure_code === scannedCode);
+      if (treasure) {
+        setSelectedTreasure(treasure);
+      }
+    }
+  }, [scannedCode, allTreasures]);
 
   const getTreasureStatusColor = (treasure: AllTreasure) => {
     if (treasure.isScanned) {

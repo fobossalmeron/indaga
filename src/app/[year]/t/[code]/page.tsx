@@ -45,11 +45,11 @@ export default function TreasureLanding({ params: paramsPromise }: TreasureLandi
           if (result.redirect) {
             router.push(result.redirect)
           } else {
-            router.push('/dashboard?treasure=error&message=Error%20inesperado')
+            router.push('/treasures?scanned=unknown&error=technical')
           }
         } catch (error) {
           console.error('Error processing treasure scan:', error)
-          router.push('/dashboard?treasure=error&message=Error%20interno')
+          router.push('/treasures?scanned=unknown&error=technical')
         }
       }
     }

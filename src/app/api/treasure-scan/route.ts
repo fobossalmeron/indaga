@@ -16,24 +16,23 @@ export async function POST(request: NextRequest) {
     const result = await processTreasureScan(code, userId)
     
     if (result.success) {
-      const redirectParam = result.alreadyScanned ? 'already-found' : 'found'
-      return NextResponse.json({ 
-        success: true, 
-        redirect: `/dashboard?treasure=${redirectParam}`,
-        message: result.message 
+      return NextResponse.json({
+        success: true,
+        redirect: `/treasures?scanned=${code}`,
+        message: result.message
       })
     } else {
-      return NextResponse.json({ 
-        success: false, 
-        redirect: `/dashboard?treasure=error&message=${encodeURIComponent(result.message || 'Error desconocido')}`,
-        message: result.message 
+      return NextResponse.json({
+        success: false,
+        redirect: `/treasures?scanned=${code}&error=technical`,
+        message: result.message
       })
     }
   } catch (error) {
     console.error('Error processing treasure scan:', error)
     return NextResponse.json({ 
       success: false, 
-      redirect: '/dashboard?treasure=error&message=Error%20interno',
+      redirect: '/treasures?scanned=unknown&error=technical',
       message: 'Error interno' 
     }, { status: 500 })
   }
