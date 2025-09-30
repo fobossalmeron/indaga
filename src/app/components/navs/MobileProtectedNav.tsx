@@ -77,9 +77,9 @@ export const MobileProtectedNav = () => {
             <ul className="flex flex-col items-center space-y-6">
               {[
                 { href: "/treasures", text: "Tesoros" },
-                { href: "/saved-items", text: "Favoritos" },
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
+                { href: "/blog", text: "Blog" },
               ].map(({ href, text }) => (
                 <li key={href}>
                   <NavLink onClick={() => toggleMenu()} href={href}>

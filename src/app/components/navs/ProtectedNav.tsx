@@ -12,7 +12,7 @@ import {
 } from "@/app/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/use-auth";
 import { useRouter } from "next/navigation";
-import { Settings, LogOut } from "lucide-react";
+import { User, LogOut } from "lucide-react";
 
 export const ProtectedNav = () => {
   const { data: session, signOut } = useAuth();
@@ -55,7 +55,7 @@ export const ProtectedNav = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                  <Settings className="h-4 w-4" />
+                  <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
