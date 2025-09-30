@@ -243,7 +243,7 @@ export async function getUserScannedTreasures(userId: string, huntId: string): P
 export async function processTreasureScan(qrCode: string, userId: string): Promise<TreasureScanResult> {
   try {
     // Validate QR code format (should be descriptive format like "CAFE-LIMON")
-    if (!/^[A-Z-]+$/.test(qrCode)) {
+    if (!/^[A-Z0-9-]+$/.test(qrCode)) {
       return {
         success: false,
         message: 'Este código QR no es válido para la búsqueda del tesoro 2025.'

@@ -51,7 +51,7 @@ BEGIN
     (hunt_2025_id, 'THE-BERRY-BORER', 'The Berry Borer', ''),
     (hunt_2025_id, 'MONTECOYOTE', 'Montecoyote', ''),
     (hunt_2025_id, 'CAFE-ESOTERICO', 'Café Esotérico', ''),
-    (hunt_2025_id, 'CASA-VERNACULA', 'Casa Vernacula', ''),
+    (hunt_2025_id, 'CASA-VERNACULA', 'Casa Vernácula', ''),
     (hunt_2025_id, 'SITIO-CENTRO', 'Sitio Centro', ''),
     (hunt_2025_id, 'CHIPINQUE', 'Chipinque', ''),
     (hunt_2025_id, 'YOKOTAN', 'Yokotan', ''),
