@@ -31,14 +31,14 @@ export const ProtectedNav = () => {
           </Link>
           <nav className="animate-fadeSimple flex items-center gap-7 transition-all">
             <ul className="flex items-center gap-3 transition-all">
-              <li className="hidden lg:block">
+              {/* <li className="hidden lg:block">
                 <NavLink href="/dashboard">Mi perfil</NavLink>
-              </li>
-              <li className="hidden lg:block">
+              </li> */}
+              {/* <li className="hidden lg:block">
                 <NavLink href="/saved-items">Favoritos</NavLink>
-              </li>
+              </li> */}
               <li className="hidden lg:block">
-                <NavLink href="/treasures">Tesoros</NavLink>
+                <NavLink href="/treasures">Mis Tesoros</NavLink>
               </li>
               <li className="hidden lg:block">
                 <NavLink href="/agenda">Agenda</NavLink>

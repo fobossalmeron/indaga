@@ -115,7 +115,7 @@ export default function DashboardPage() {
       </Link>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-6">
+      {/* <div className="grid grid-cols-2 gap-6">
         {dashboardStats.map((stat, index) => (
           <Link
             key={index}
@@ -148,7 +148,7 @@ export default function DashboardPage() {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

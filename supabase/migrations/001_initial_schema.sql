@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS users (
     email_verified BOOLEAN DEFAULT FALSE,
     avatar_url TEXT,
     provider TEXT DEFAULT 'magic-link', -- 'magic-link', OAuth providers
-    role TEXT DEFAULT 'user' -- 'user', 'admin'
+    role TEXT DEFAULT 'user', -- 'user', 'admin'
+    banned BOOLEAN DEFAULT FALSE
 );
 
 -- Table: saved_events
