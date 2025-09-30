@@ -41,7 +41,7 @@ BEGIN
     (hunt_2025_id, 'CUADROCHICO-CAFE', 'Cuadrochico Café', 'Afecto', 'https://maps.app.goo.gl/tgNpBy2cSqFVNuSW7'),
     (hunt_2025_id, 'RAY-BAR', 'Ray Bar', 'Balta', 'https://maps.app.goo.gl/593fyfBQ28ZKHTh18'),
     (hunt_2025_id, 'SUCULENTA-FONDITA-CULTURAL', 'Suculenta Fondita Cultural', 'Solidaria', 'https://maps.app.goo.gl/tPCgZUL6FWyKDTYu6'),
-    (hunt_2025_id, 'PANUCO-COFFEE-BAR', 'Panuco Coffee Bar', 'Tónicos', 'https://maps.app.goo.gl/FToFyh2WBoWHnyGS7'),
+    (hunt_2025_id, 'PANUCO-COFFEE-BAR', 'Pánuco Coffee Bar', 'Tónicos', 'https://maps.app.goo.gl/FToFyh2WBoWHnyGS7'),
     (hunt_2025_id, 'BARVIN', 'Barvin', 'Vinilos', 'https://maps.app.goo.gl/iGWwXLo25raQEwpk7'),
     (hunt_2025_id, 'PUNTO-Y-COMA', 'Punto y Coma', 'Pausa', 'https://maps.app.goo.gl/Lv1yc6qG7ZAZL4zRA'),
     (hunt_2025_id, 'ALMACEN-42', 'Almacén 42', 'Malta', 'https://maps.app.goo.gl/4wSRmEGxHWw62BGr7'),
