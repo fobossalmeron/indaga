@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/app/components/ui/dialog";
-import { Check, HelpCircle, Loader2 } from "lucide-react";
+import { Check, HelpCircle, Loader2, Map } from "lucide-react";
 import type {
   TreasureHunt,
   TreasureProgress,
@@ -349,7 +349,7 @@ export default function ProgressTracker({
               <button
                 key={treasure.id}
                 onClick={() => setSelectedTreasure(treasure)}
-                className={`rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 ${getTreasureStatusColor(treasure)}`}
+                className={`cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 ${getTreasureStatusColor(treasure)}`}
               >
                 <div className="text-center">
                   <div className="mb-2 flex justify-center">
@@ -370,11 +370,11 @@ export default function ProgressTracker({
         open={!!selectedTreasure}
         onOpenChange={() => setSelectedTreasure(null)}
       >
-        <DialogContent className="w-full max-w-md">
-          <DialogHeader className="text-center">
-            <div className="mb-4">
+        <DialogContent className="w-full !max-w-[400px] rounded-3xl">
+          <DialogHeader>
+            <div className="mb-4 flex items-start gap-4">
               <div
-                className={`mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full ${
+                className={`flex h-14 w-14 items-center justify-center rounded-full ${
                   selectedTreasure?.isScanned
                     ? "bg-green-500 text-white"
                     : "bg-gray-300 text-gray-600"
@@ -388,29 +388,59 @@ export default function ProgressTracker({
                   ))}
               </div>
 
-              <DialogTitle className="mb-2 text-xl font-bold text-gray-900">
-                {selectedTreasure?.treasure_name}
-              </DialogTitle>
+              <div className="flex-1 text-left">
+                <DialogTitle className="mb-2 text-xl font-medium text-gray-900">
+                  {selectedTreasure?.treasure_name}
+                </DialogTitle>
 
-              {selectedTreasure?.isScanned ? (
-                <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-sm text-green-800">
-                  ¡Encontrado!
-                </span>
-              ) : (
-                <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-800">
-                  Por descubrir
-                </span>
-              )}
+                {selectedTreasure?.isScanned ? (
+                  <span className="inline-block rounded-full border-1 border-green-500 bg-green-100 px-3 py-1 text-sm text-green-800">
+                    ¡Encontrado!
+                  </span>
+                ) : (
+                  <span className="inline-block rounded-full border-1 border-gray-400 bg-gray-100 px-3 py-1 text-sm text-gray-800">
+                    Por descubrir
+                  </span>
+                )}
+              </div>
             </div>
           </DialogHeader>
 
-          <div className="mb-6 space-y-3">
-            <p className="text-gray-600">
-              {selectedTreasure?.treasure_description}
-            </p>
-
-            <div className="text-sm text-gray-500">
-              <strong>Código:</strong> {selectedTreasure?.treasure_code}
+          <div className="mb-6 space-y-4">
+            <div className="text-center">
+              {selectedTreasure?.isScanned ? (
+                <>
+                  <div className="mb-2 text-sm font-medium text-gray-600">
+                    Palabra secreta:
+                  </div>
+                  <div className="bg-primary/10 border-primary/20 mx-auto rounded-lg border-2 px-6 py-4">
+                    <div className="text-primary text-3xl font-medium tracking-wider">
+                      {selectedTreasure?.treasure_secret}
+                    </div>
+                  </div>
+                  <p className="mt-3 text-xs text-gray-500">
+                    Muestra esta palabra para recibir tu tesoro
+                  </p>
+                </>
+              ) : (
+                <>
+                  <a
+                    href={selectedTreasure?.treasure_location_maps_url || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mx-auto block rounded-lg border-2 border-blue-200 bg-blue-50 px-6 py-4 transition-colors hover:bg-blue-100"
+                  >
+                    <Map className="mx-auto mb-2 h-8 w-8 text-blue-600" />
+                    <div className="text-sm font-medium text-blue-600">
+                      Ver en el mapa
+                    </div>
+                  </a>
+                  <p className="mt-3 text-xs text-gray-500">
+                    Encuentra este lugar y escanea el QR para revelar la palabra
+                    secreta
+                  </p>
+                </>
+              )}
             </div>
           </div>
 

@@ -160,7 +160,8 @@ export type Database = {
           id: string
           location_coordinates: unknown | null
           treasure_code: string
-          treasure_description: string | null
+          treasure_secret: string
+          treasure_location_maps_url: string | null
           treasure_name: string
         }
         Insert: {
@@ -169,7 +170,8 @@ export type Database = {
           id?: string
           location_coordinates?: unknown | null
           treasure_code: string
-          treasure_description?: string | null
+          treasure_secret: string
+          treasure_location_maps_url?: string | null
           treasure_name: string
         }
         Update: {
@@ -178,7 +180,8 @@ export type Database = {
           id?: string
           location_coordinates?: unknown | null
           treasure_code?: string
-          treasure_description?: string | null
+          treasure_secret: string
+          treasure_location_maps_url?: string | null
           treasure_name?: string
         }
         Relationships: [

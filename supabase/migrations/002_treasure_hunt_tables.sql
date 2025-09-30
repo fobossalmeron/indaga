@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS treasure_hunt_2025_treasures (
     hunt_id UUID NOT NULL REFERENCES treasure_hunts(id) ON DELETE CASCADE,
     treasure_code TEXT UNIQUE NOT NULL, -- código único del QR
     treasure_name TEXT NOT NULL, -- nombre del lugar/tesoro
-    treasure_description TEXT,
+    treasure_secret TEXT,
+    treasure_location_maps_url TEXT,
     location_coordinates POINT, -- coordenadas del lugar (opcional)
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

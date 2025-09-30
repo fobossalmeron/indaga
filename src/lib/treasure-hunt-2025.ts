@@ -18,7 +18,8 @@ export interface Treasure {
   hunt_id: string
   treasure_code: string
   treasure_name: string
-  treasure_description: string | null
+  treasure_secret: string
+  treasure_location_maps_url: string | null
   location_coordinates: any | null
   created_at: string | null
 }
@@ -223,7 +224,8 @@ export async function getUserScannedTreasures(userId: string, huntId: string): P
         hunt_id,
         treasure_code,
         treasure_name,
-        treasure_description,
+        treasure_secret,
+        treasure_location_maps_url,
         location_coordinates,
         created_at
       )
