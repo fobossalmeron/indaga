@@ -41,12 +41,6 @@ export function TreasureNotification({ className = "" }: TreasureNotificationPro
           break;
       }
 
-      // Auto-dismiss after 10 seconds
-      const timer = setTimeout(() => {
-        setNotification(null);
-      }, 10000);
-
-      return () => clearTimeout(timer);
     }
   }, [searchParams]);
 

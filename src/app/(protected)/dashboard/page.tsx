@@ -55,7 +55,7 @@ export default function DashboardPage() {
   return (
     <div className="mx-auto max-w-4xl">
       {/* Header */}
-      <div className="mb-8 text-center">
+      <div className="mt-8 mb-8 text-center">
         <h1 className="text-foreground mb-2 text-3xl">Mi perfil</h1>
         <p className="text-foreground">
           Que gusto verte, {session?.user?.email}
@@ -65,10 +65,7 @@ export default function DashboardPage() {
       <TreasureNotification />
 
       {/* Treasure Hunt Card - Spanning 2 columns on mobile */}
-      <Link
-        href="/treasures"
-        className="overflow-hidden rounded-lg border border-yellow-200 bg-gradient-to-br from-yellow-50 to-purple-50 shadow transition-shadow hover:shadow-md"
-      >
+      <Link href="/treasures">
         <div className="overflow-hidden rounded-lg bg-white p-6 shadow transition-shadow hover:shadow-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -115,7 +112,7 @@ export default function DashboardPage() {
       </Link>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-6">
+      {/* <div className="grid grid-cols-2 gap-6">
         {dashboardStats.map((stat, index) => (
           <Link
             key={index}
@@ -148,7 +145,7 @@ export default function DashboardPage() {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

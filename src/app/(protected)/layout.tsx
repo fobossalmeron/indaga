@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
+import { Toaster } from "sonner";
 
 export default function ProtectedLayout({
   children,
@@ -43,6 +44,7 @@ export default function ProtectedLayout({
       <main className="mx-auto max-w-7xl px-4 py-6 pt-8 sm:px-6 lg:px-8">
         {children}
       </main>
+      <Toaster />
     </div>
   );
 }

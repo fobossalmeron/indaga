@@ -18,7 +18,8 @@ export interface Treasure {
   hunt_id: string
   treasure_code: string
   treasure_name: string
-  treasure_description: string | null
+  treasure_secret: string
+  treasure_location_maps_url: string | null
   location_coordinates: any | null
   created_at: string | null
 }
@@ -50,7 +51,8 @@ export interface TreasureScanResult {
 }
 
 export async function getActiveTreasureHunt(): Promise<TreasureHunt | null> {
-  const { data, error } = await supabase
+  const serverClient = createServerSupabaseClient()
+  const { data, error } = await serverClient
     .from('treasure_hunts')
     .select('*')
     .eq('is_active', true)
@@ -66,7 +68,8 @@ export async function getActiveTreasureHunt(): Promise<TreasureHunt | null> {
 }
 
 export async function getTreasureByCode(code: string): Promise<Treasure | null> {
-  const { data, error } = await supabase
+  const serverClient = createServerSupabaseClient()
+  const { data, error } = await serverClient
     .from('treasure_hunt_2025_treasures')
     .select('*')
     .eq('treasure_code', code)
@@ -221,7 +224,8 @@ export async function getUserScannedTreasures(userId: string, huntId: string): P
         hunt_id,
         treasure_code,
         treasure_name,
-        treasure_description,
+        treasure_secret,
+        treasure_location_maps_url,
         location_coordinates,
         created_at
       )
@@ -241,7 +245,7 @@ export async function getUserScannedTreasures(userId: string, huntId: string): P
 export async function processTreasureScan(qrCode: string, userId: string): Promise<TreasureScanResult> {
   try {
     // Validate QR code format (should be descriptive format like "CAFE-LIMON")
-    if (!/^[A-Z-]+$/.test(qrCode)) {
+    if (!/^[A-Z0-9-]+$/.test(qrCode)) {
       return {
         success: false,
         message: 'Este código QR no es válido para la búsqueda del tesoro 2025.'

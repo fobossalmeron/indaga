@@ -33,8 +33,8 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
   const [newTreasure, setNewTreasure] = useState({
     treasure_code: '',
     treasure_name: '',
-    treasure_description: '',
-    location_coordinates: ''
+    treasure_secret: '',
+    treasure_location_maps_url: ''
   })
 
   // Fetch hunt details
@@ -98,8 +98,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
     try {
       await adminTreasureActions.addTreasure({
         hunt_id: selectedHunt,
-        ...newTreasure,
-        location_coordinates: newTreasure.location_coordinates || undefined
+        ...newTreasure
       })
       
       // Refresh hunt details
@@ -109,8 +108,8 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
       setNewTreasure({
         treasure_code: '',
         treasure_name: '',
-        treasure_description: '',
-        location_coordinates: ''
+        treasure_secret: '',
+        treasure_location_maps_url: ''
       })
       alert('Tesoro añadido exitosamente!')
     } catch (error) {
@@ -296,9 +295,9 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                                     {treasure.treasure_code}
                                   </span>
                                 </p>
-                                {treasure.treasure_description && (
+                                {treasure.treasure_secret && (
                                   <p className="text-xs text-gray-600 mt-2">
-                                    {treasure.treasure_description}
+                                    <span className="font-medium">Palabra secreta:</span> {treasure.treasure_secret}
                                   </p>
                                 )}
                               </div>
@@ -475,13 +474,27 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Descripción
+                    Palabra Secreta *
                   </label>
-                  <textarea
-                    value={newTreasure.treasure_description}
-                    onChange={(e) => setNewTreasure({ ...newTreasure, treasure_description: e.target.value })}
-                    rows={3}
-                    placeholder="Descripción del lugar o tesoro..."
+                  <input
+                    type="text"
+                    value={newTreasure.treasure_secret}
+                    onChange={(e) => setNewTreasure({ ...newTreasure, treasure_secret: e.target.value })}
+                    placeholder="Palabra clave del tesoro (ej: Alquimia, Circuito)..."
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    URL de Google Maps
+                  </label>
+                  <input
+                    type="url"
+                    value={newTreasure.treasure_location_maps_url}
+                    onChange={(e) => setNewTreasure({ ...newTreasure, treasure_location_maps_url: e.target.value })}
+                    placeholder="https://maps.app.goo.gl/..."
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>

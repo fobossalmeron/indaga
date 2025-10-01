@@ -6,6 +6,7 @@ import type {
   User,
   TreasureHunt,
   TreasureHunt2025Treasure,
+  TreasureHunt2025TreasureUpdate,
   TreasureHunt2025Scan,
   TreasureHunt2025Progress,
   UserWithProgress,
@@ -210,8 +211,8 @@ export const adminTreasureActions = {
     hunt_id: string
     treasure_code: string
     treasure_name: string
-    treasure_description?: string
-    location_coordinates?: any
+    treasure_secret: string
+    treasure_location_maps_url?: string
   }) {
     const { data, error } = await supabase
       .from('treasure_hunt_2025_treasures')
@@ -227,7 +228,7 @@ export const adminTreasureActions = {
   },
 
   // Update treasure
-  async updateTreasure(treasureId: string, updates: Partial<TreasureHunt2025Treasure>) {
+  async updateTreasure(treasureId: string, updates: TreasureHunt2025TreasureUpdate) {
     const { data, error } = await supabase
       .from('treasure_hunt_2025_treasures')
       .update(updates)
@@ -464,7 +465,8 @@ export const adminUtils = {
       treasures: huntData.treasure_hunt_2025_treasures?.map((t: any) => ({
         name: t.treasure_name,
         code: t.treasure_code,
-        description: t.treasure_description,
+        secret: t.treasure_secret,
+        maps_url: t.treasure_location_maps_url,
         scan_count: huntData.treasure_hunt_2025_scans?.filter((s: any) => s.treasure_id === t.id).length || 0
       })) || []
     }

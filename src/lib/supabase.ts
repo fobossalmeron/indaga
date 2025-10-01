@@ -199,7 +199,8 @@ export const treasureHuntOperations = {
         *,
         treasure_hunt_2025_treasures (
           treasure_name,
-          treasure_description,
+          treasure_secret,
+          treasure_location_maps_url,
           treasure_code
         )
       `)

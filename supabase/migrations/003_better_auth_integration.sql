@@ -1,6 +1,7 @@
--- BetterAuth Required Tables
+-- Migration 003: BetterAuth Integration
+-- Required tables and views for BetterAuth compatibility
 
--- Drop conflicting user table if it exists from a previous bad migration
+-- Drop conflicting user table if it exists from a previous migration
 DROP TABLE IF EXISTS "user" CASCADE;
 
 -- Sessions table
@@ -62,7 +63,8 @@ SELECT
     email_verified AS "emailVerified",
     avatar_url AS "avatarUrl",
     provider,
-    role
+    role,
+    banned
 FROM "users";
 
 -- Since views in PostgreSQL are not updatable by default,
@@ -73,7 +75,7 @@ FROM "users";
 CREATE OR REPLACE RULE user_insert AS
     ON INSERT TO "user"
     DO INSTEAD (
-        INSERT INTO "users" (id, email, full_name, created_at, updated_at, email_verified, avatar_url, provider, role)
+        INSERT INTO "users" (id, email, full_name, created_at, updated_at, email_verified, avatar_url, provider, role, banned)
         VALUES (
             NEW.id,
             NEW.email,
@@ -83,7 +85,8 @@ CREATE OR REPLACE RULE user_insert AS
             NEW."emailVerified",
             NEW."avatarUrl",
             NEW.provider,
-            NEW.role
+            NEW.role,
+            NEW.banned
         )
         RETURNING
             id,
@@ -94,7 +97,8 @@ CREATE OR REPLACE RULE user_insert AS
             email_verified AS "emailVerified",
             avatar_url AS "avatarUrl",
             provider,
-            role
+            role,
+            banned
     );
 
 -- Rule for UPDATEs on the "user" view
@@ -109,7 +113,8 @@ CREATE OR REPLACE RULE user_update AS
             email_verified = NEW."emailVerified",
             avatar_url = NEW."avatarUrl",
             provider = NEW.provider,
-            role = NEW.role
+            role = NEW.role,
+            banned = NEW.banned
         WHERE id = OLD.id
     );
 
@@ -119,4 +124,4 @@ CREATE OR REPLACE RULE user_delete AS
     DO INSTEAD (
         DELETE FROM "users"
         WHERE id = OLD.id
-    ); 
+    );

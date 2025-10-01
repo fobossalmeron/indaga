@@ -12,7 +12,7 @@ import {
 } from "@/app/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/use-auth";
 import { useRouter } from "next/navigation";
-import { Settings, LogOut } from "lucide-react";
+import { User, LogOut } from "lucide-react";
 
 export const ProtectedNav = () => {
   const { data: session, signOut } = useAuth();
@@ -31,14 +31,14 @@ export const ProtectedNav = () => {
           </Link>
           <nav className="animate-fadeSimple flex items-center gap-7 transition-all">
             <ul className="flex items-center gap-3 transition-all">
-              <li className="hidden lg:block">
+              {/* <li className="hidden lg:block">
                 <NavLink href="/dashboard">Mi perfil</NavLink>
-              </li>
-              <li className="hidden lg:block">
+              </li> */}
+              {/* <li className="hidden lg:block">
                 <NavLink href="/saved-items">Favoritos</NavLink>
-              </li>
+              </li> */}
               <li className="hidden lg:block">
-                <NavLink href="/treasures">Tesoros</NavLink>
+                <NavLink href="/treasures">Mis Tesoros</NavLink>
               </li>
               <li className="hidden lg:block">
                 <NavLink href="/agenda">Agenda</NavLink>
@@ -55,7 +55,7 @@ export const ProtectedNav = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                  <Settings className="h-4 w-4" />
+                  <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

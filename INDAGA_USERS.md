@@ -263,7 +263,7 @@ saved_places: id, user_id, place_id, place_name, place_category, saved_at
 
 ```sql
 treasure_hunts: id, name, year, description, start_date, end_date, is_active, total_treasures, created_at
-treasure_hunt_2025_treasures: id, hunt_id, treasure_code, treasure_name, treasure_description, location_coordinates, created_at
+treasure_hunt_2025_treasures: id, hunt_id, treasure_code, treasure_name, treasure_secret, treasure_location_maps_url, location_coordinates, created_at
 treasure_hunt_2025_scans: id, user_id, hunt_id, treasure_id, scanned_at
 treasure_hunt_2025_progress: id, user_id, hunt_id, treasures_found, completion_percentage, started_at, completed_at
 ```
