@@ -11,11 +11,12 @@ export async function GET(request: NextRequest) {
       return Response.json({ user: null }, { status: 200 })
     }
     
-    return Response.json({ 
+    return Response.json({
       user: {
         email: session.user.email,
         id: session.user.id,
-        name: session.user.name
+        name: session.user.name,
+        role: session.user.role
       }
     })
   } catch (error) {

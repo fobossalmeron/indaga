@@ -43,16 +43,12 @@ export const WebsiteNav = () => {
         href="/login"
         className="animate-fadeSimple fixed top-0 right-34 z-50 flex h-16 items-center justify-end px-2 mix-blend-difference sm:right-40 md:right-48"
       >
-        <Button
-          size="thin"
-          variant="link"
-          className="font-normal text-[#a7e198]"
-        >
+        <Button size="thin" variant="link" className="text-[#a7e198]">
           Iniciar sesión
         </Button>
       </Link>
       <Link
-        href="/register"
+        href="/login"
         className="animate-fadeSimple fixed top-0 right-5 z-50 flex h-16 items-center justify-end px-2 sm:right-10 md:right-20"
       >
         <Button size="thin" className="border-1 border-white/20">

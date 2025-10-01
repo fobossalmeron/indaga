@@ -8,10 +8,7 @@ interface MagicLinkFormProps {
   isLoading: boolean;
 }
 
-export function MagicLinkForm({
-  onSubmit,
-  isLoading,
-}: MagicLinkFormProps) {
+export function MagicLinkForm({ onSubmit, isLoading }: MagicLinkFormProps) {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<{ email?: string }>({});
 
@@ -68,7 +65,7 @@ export function MagicLinkForm({
       </Button>
 
       <div className="text-center text-sm text-gray-600">
-        Te enviaremos un enlace mágico para acceder
+        Te enviaremos un enlace a tu correo para acceder
       </div>
     </form>
   );

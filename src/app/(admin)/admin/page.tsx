@@ -58,14 +58,8 @@ export default async function AdminPage() {
           </div>
           <div className="mt-4 flex items-center gap-4 md:mt-0 md:ml-4">
             <div className="text-sm text-gray-500">
-              Bienvenido, {session.user.name || session.user.email}
+              Bienvenido, {session.user.email}
             </div>
-            <form action="/api/auth/sign-out" method="POST">
-              <Button size="sm" variant="outline" type="submit">
-                <LogOut className="h-4 w-4" />
-                Cerrar sesión
-              </Button>
-            </form>
           </div>
         </div>
 
