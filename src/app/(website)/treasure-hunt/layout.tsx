@@ -1,4 +1,5 @@
 import { Header } from "@/app/components/Header";
+import Off from "@/assets/img/off_alone.svg";
 
 export default function TreasureHuntLayout({
   children,
@@ -6,15 +7,11 @@ export default function TreasureHuntLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Header
-        title="Treasure Hunt"
-      />
-      <div className="mx-auto flex w-full flex-col items-center pb-24">
-        <div className="mx-auto mt-8 w-full max-w-fit animate-fadeIn2 px-5">
-          {children}
-        </div>
-      </div>
-    </>
+    <div className="mx-auto flex w-full max-w-[1020px] flex-col pt-16">
+      <Header title="Treasure Hunt">
+        <Off className="align-self-start h-16" />
+      </Header>
+      {children}
+    </div>
   );
 }

@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/rodrigosalmeron/Sites/indaga/logs/.292282825466b6bb8c6dece700863b2e39c7e208-audit.json",
+    "files": [
+        {
+            "date": 1759296012949,
+            "name": "/Users/rodrigosalmeron/Sites/indaga/logs/mcp-puppeteer-2025-09-30.log",
+            "hash": "992d5d4ff4a647e78d62c6c2cf35c5c3ccae54176f6d243416494975c15ac7a1"
+        }
+    ],
+    "hashType": "sha256"
+}

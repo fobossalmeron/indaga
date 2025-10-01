@@ -11,13 +11,13 @@ export default async function RoutesAll() {
   });
 
   return (
-    <>
+    <div className="pt-16">
       <Header
         title="Rutas culturales"
         subtitle="Recorridos únicos por Indaga y amigos"
       />
       <RoutesFull routes={routes} />
-    </>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ export function OtherArticlesCard({
 }) {
   return (
     <div className="flex w-full flex-col overflow-hidden rounded-3xl bg-white">
-      <div className="bg-indagaBrown flex items-center gap-3 p-5">
+      <div className="bg-primary flex items-center gap-3 p-5">
         <Star className="h-8 w-8 text-yellow-200" />
         <h3 className="text-xl text-white">Explora otros artículos</h3>
       </div>
@@ -18,7 +18,7 @@ export function OtherArticlesCard({
           <Link
             key={article.uid}
             href={`/blog/${article.uid}`}
-            className="text-indagaBrown hover:text-indagaBrown/80 text-lg underline"
+            className="text-primary hover:text-primary/80 text-lg underline"
           >
             {article.data.title}
           </Link>

@@ -1,4 +1,3 @@
-import { Eyes } from "./Eyes";
 import { createClient } from "@/prismicio";
 import { PrismicRichText } from "@prismicio/react";
 
