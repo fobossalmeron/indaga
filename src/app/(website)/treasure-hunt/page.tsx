@@ -1,51 +1,41 @@
-"use client";
+import PublicTreasureGrid from "@/app/components/features/PublicTreasureGrid";
+import { getActiveTreasureHunt } from "@/lib/treasure-hunt-2025";
+import { createServerSupabaseClient } from "@/lib/supabase";
+import TreasureHuntFull from "./TreasureHuntFull";
 
-import Link from "next/link";
-import { UserPlus, ScanLine, Star, ArrowRight } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
-import SantaLucia from "@/assets/img/festival_santa_lucia.svg";
+async function getTreasures() {
+  try {
+    const hunt = await getActiveTreasureHunt();
+    if (!hunt) {
+      return [];
+    }
 
-export default function TreasureHunt() {
+    const serverClient = createServerSupabaseClient();
+    const { data: allTreasures, error } = await serverClient
+      .from("treasure_hunt_2025_treasures")
+      .select("id, treasure_code, treasure_name, treasure_location_maps_url")
+      .eq("hunt_id", hunt.id)
+      .order("treasure_code", { ascending: true });
+
+    if (error) {
+      console.error("Error fetching public treasures:", error);
+      return [];
+    }
+
+    return allTreasures;
+  } catch (error) {
+    console.error("Error in getTreasures:", error);
+    return [];
+  }
+}
+
+export default async function TreasureHunt() {
+  const treasures = await getTreasures();
+
   return (
     <div className="flex flex-col px-5 pb-24">
-      <p className="max-w-[35ch] pt-12 text-2xl">
-        Durante la temporada del FISL 2025, INDAGA te invita a participar en su{" "}
-        <span className="rounded-lg bg-white px-2 py-1">Treasure Hunt</span>
-      </p>
-
-      <div className="mt-12 flex items-center justify-start gap-4">
-        <div className="flex flex-col items-center gap-2">
-          <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
-            <UserPlus className="text-primary h-8 w-8" />
-          </div>
-          <p className="text-sm font-medium">Regístrate</p>
-        </div>
-
-        <ArrowRight className="text-muted-foreground h-6 w-6" />
-
-        <div className="flex flex-col items-center gap-2">
-          <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
-            <ScanLine className="text-primary h-8 w-8" />
-          </div>
-          <p className="text-sm font-medium">Escanea</p>
-        </div>
-
-        <ArrowRight className="text-muted-foreground h-6 w-6" />
-
-        <div className="flex flex-col items-center gap-2">
-          <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
-            <Star className="text-primary h-8 w-8" />
-          </div>
-          <p className="text-sm font-medium">Colecciona</p>
-        </div>
-      </div>
-
-      <div className="mt-8 flex">
-        <Button asChild>
-          <Link href="/login">Regístrate</Link>
-        </Button>
-      </div>
-      <SantaLucia className="animate-fadeIn2 text-foreground mt-12 w-full max-w-[170px]" />
+      <TreasureHuntFull />
+      <PublicTreasureGrid treasures={treasures} />
     </div>
   );
 }
