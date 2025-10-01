@@ -14,13 +14,10 @@ export default function Home() {
 
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden px-12 pt-40 pb-20">
           <RightPanel className="absolute top-0 right-0 bottom-0 left-0 min-h-full min-w-full" />
-          <div
-            id="perros"
-            className="relative flex h-full max-w-[450px] flex-col items-center justify-between"
-          >
+          <div className="relative flex h-full max-w-[450px] flex-col items-center justify-between">
             <div className="flex flex-col gap-8">
               <Logo className="animate-fadeIn2 text-foreground w-full" />
-              <p className="text-[1.375rem] leading-[1.2]">
+              <p className="text-lg leading-[1.2] md:text-[1.375rem]">
                 Bienvenidx a tu brújula cultural, revisa nuestra agenda para
                 enterarte de los eventos de la semana. Nuestra guía para conocer
                 la ciudad.
@@ -28,12 +25,12 @@ export default function Home() {
             </div>
             <div className="flex flex-col gap-4">
               <SantaLucia className="animate-fadeIn2 text-foreground w-full max-w-[45%]" />
-              <p className="text-[1.375rem]">
+              <p className="text-lg md:text-[1.375rem]">
                 Durante la temporada del FISL 2025, INDAGA te invita a
                 participar en su{" "}
                 <Link
                   href="/treasure-hunt"
-                  className="rounded-md bg-[#F4E953] px-2 py-1"
+                  className="rounded-md bg-white px-1 py-1 md:bg-[#F4E953] md:px-2 md:py-1"
                 >
                   Treasure Hunt
                 </Link>

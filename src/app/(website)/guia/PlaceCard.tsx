@@ -9,12 +9,13 @@ import { ExternalLink } from "lucide-react";
 
 interface PlaceCardProps {
   title: string;
-  area: string;
+  area?: string;
   mapLink: any;
-  link: any;
-  capsuleLink: any;
-  category: string;
-  description: string;
+  link?: any;
+  capsuleLink?: any;
+  category?: string;
+  description?: string;
+  className?: string;
 }
 
 const categoryToIcon: Record<string, string> = {
@@ -43,14 +44,17 @@ export function PlaceCard({
   capsuleLink,
   category,
   description,
+  className,
 }: PlaceCardProps) {
   const isCardLinked = isFilled.link(link);
   const [titleStart, titleEnd] = splitTitle(title ?? "Error en título");
 
   return (
     <Fade triggerOnce>
-      <div className="relative flex flex-col items-start gap-0 overflow-hidden rounded-2xl bg-white p-2">
-        <Category category={category} className="mt-2 ml-2" />
+      <div
+        className={`relative flex flex-col items-start gap-0 overflow-hidden rounded-2xl bg-white p-2 ${className}`}
+      >
+        {category && <Category category={category} className="mt-2 ml-2" />}
         <div className="mt-1 flex w-full flex-row items-start pr-16">
           {isCardLinked ? (
             <PrismicNextLink
@@ -85,18 +89,18 @@ export function PlaceCard({
             {description}
           </div>
         )}
-        {area &&
-          (isFilled.link(mapLink) ? (
-            <PrismicNextLink
-              field={mapLink}
-              target="_blank"
-              className="md-lg:text-base text-primary hover:bg-accent/15 active:bg-accent/15 rounded-lg p-2 py-1 text-base transition-colors active:underline"
-            >
-              @{area}
-            </PrismicNextLink>
-          ) : (
-            <span className="md-lg:text-base text-base">@{area}</span>
-          ))}
+        {isFilled.link(mapLink) && (
+          <PrismicNextLink
+            field={mapLink}
+            target="_blank"
+            className="md-lg:text-base text-primary hover:bg-accent/15 active:bg-accent/15 rounded-lg p-2 py-1 text-base transition-colors active:underline"
+          >
+            {area ? `@${area}` : "Ver ubicación"}
+          </PrismicNextLink>
+        )}
+        {!isFilled.link(mapLink) && area && (
+          <span className="md-lg:text-base p-2 py-1 text-base">@{area}</span>
+        )}
         {isFilled.link(capsuleLink) && (
           <PrismicNextLink
             field={capsuleLink}
@@ -108,14 +112,16 @@ export function PlaceCard({
             </Button>
           </PrismicNextLink>
         )}
-        <div className="absolute right-5 bottom-0 flex justify-center">
-          <Image
-            src={`/categories/${categoryToIcon[category] || "arte.svg"}`}
-            alt={category}
-            width={51}
-            height={94}
-          />
-        </div>
+        {category && (
+          <div className="absolute right-5 bottom-0 flex justify-center">
+            <Image
+              src={`/categories/${categoryToIcon[category] || "arte.svg"}`}
+              alt={category}
+              width={51}
+              height={94}
+            />
+          </div>
+        )}
       </div>
     </Fade>
   );

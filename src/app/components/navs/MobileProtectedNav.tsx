@@ -3,10 +3,8 @@
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { NavLink } from "./NavLink";
-import { Button } from "@/app/components/Button";
 import { useLenis } from "lenis/react";
 import { useAuth } from "@/hooks/use-auth";
-import { LogOut } from "lucide-react";
 
 export const MobileProtectedNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +74,7 @@ export const MobileProtectedNav = () => {
           <nav>
             <ul className="flex flex-col items-center space-y-6">
               {[
-                { href: "/treasures", text: "Tesoros" },
+                { href: "/treasures", text: "Mis Tesoros" },
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
                 { href: "/blog", text: "Blog" },

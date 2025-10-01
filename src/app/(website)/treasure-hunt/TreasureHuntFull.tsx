@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function TreasureHuntFull() {
   return (
-    <div className="">
-      <p className="max-w-[35ch] pt-12 text-2xl">
+    <div className="animate-fadeIn2">
+      <p className="max-w-[35ch] pt-2 text-xl md:pt-12 md:text-2xl">
         Durante la temporada del FISL 2025, INDAGA te invita a participar en su{" "}
         <span className="rounded-lg bg-white px-2 py-1">Treasure Hunt</span>
       </p>
@@ -44,7 +44,7 @@ export default function TreasureHuntFull() {
         </Button>
       </div>
 
-      <SantaLucia className="animate-fadeIn2 text-foreground mt-12 w-full max-w-[170px]" />
+      <SantaLucia className="text-foreground mt-12 w-full max-w-[170px]" />
     </div>
   );
 }

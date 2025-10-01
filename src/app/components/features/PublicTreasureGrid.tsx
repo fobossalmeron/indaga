@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PlaceCard } from "@/app/(website)/guia/PlaceCard";
 import { Button } from "@/app/components/ui/button";
 import {
   Dialog,
@@ -29,7 +30,7 @@ export default function PublicTreasureGrid({
 
   return (
     <>
-      <div className="mt-12 space-y-6">
+      <div className="animate-fadeIn3 mt-12 space-y-6">
         <div className="text-center">
           <h3 className="text-foreground text-2xl font-medium">
             Ubicaciones del Treasure Hunt
@@ -39,22 +40,19 @@ export default function PublicTreasureGrid({
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {treasures.map((treasure) => (
-            <button
+            <div
               key={treasure.id}
               onClick={() => setSelectedTreasure(treasure)}
-              className="cursor-pointer rounded-lg border-2 border-gray-300 bg-gray-200 p-4 text-gray-600 transition-all duration-200 hover:scale-105"
+              className="cursor-pointer"
             >
-              <div className="text-center">
-                <div className="mb-2 flex justify-center">
-                  <HelpCircle className="h-6 w-6" />
-                </div>
-                <div className="text-xs font-medium">
-                  {treasure.treasure_name}
-                </div>
-              </div>
-            </button>
+              <PlaceCard
+                title={treasure.treasure_name}
+                mapLink={{ url: treasure.treasure_location_maps_url }}
+                className="active:border-primary border-2 border-transparent transition-colors"
+              />
+            </div>
           ))}
         </div>
       </div>
