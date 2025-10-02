@@ -78,6 +78,8 @@ export const MobileProtectedNav = () => {
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
                 { href: "/blog", text: "Blog" },
+                { href: "/rutas", text: "Rutas" },
+                { href: "/nosotras", text: "Nosotras" },
               ].map(({ href, text }) => (
                 <li key={href}>
                   <NavLink onClick={() => toggleMenu()} href={href}>

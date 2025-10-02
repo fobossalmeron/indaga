@@ -17,21 +17,21 @@ export function RouteSteps({ steps }: RouteStepsProps) {
         {steps.map((step, index) => (
           <div key={index} className="relative">
             {/* Número del paso */}
-            <div className="absolute top-0 -left-3 z-10">
+            <div className="top-0 -left-3 z-10 md:absolute">
               <div className="text-foreground flex h-8 w-8 items-center justify-center rounded-full bg-[#DAE7FB] text-sm font-semibold">
                 {index + 1}
               </div>
             </div>
 
             {/* Descripción de actividad */}
-            <div className="mb-6 ml-8">
+            <div className="mb-3 md:mb-6 md:ml-8">
               <p className="text-foreground text-base leading-relaxed">
                 {step.description}
               </p>
             </div>
 
             {/* PlaceCard */}
-            <div className="ml-8">
+            <div className="md:ml-8">
               {(() => {
                 const place = step.place as unknown as Content.LugarDocument;
                 const capsuleLinkUrl = asLink(place.data?.capsuleLink);
@@ -41,7 +41,9 @@ export function RouteSteps({ steps }: RouteStepsProps) {
                     area={place.data?.area || ""}
                     mapLink={{ url: asLink(place.data?.mapLink) || "" }}
                     link={{ url: asLink(place.data?.link) || "" }}
-                    capsuleLink={capsuleLinkUrl ? { url: capsuleLinkUrl } : null}
+                    capsuleLink={
+                      capsuleLinkUrl ? { url: capsuleLinkUrl } : null
+                    }
                     category={place.data?.categoria || ""}
                     description={place.data?.description || ""}
                   />

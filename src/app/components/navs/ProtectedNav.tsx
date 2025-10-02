@@ -47,7 +47,7 @@ export const ProtectedNav = () => {
                 <NavLink href="/guia">Guía</NavLink>
               </li>
               <li className="hidden lg:block">
-                <NavLink href="/blog">Blog</NavLink>
+                <NavLink href="/rutas">Rutas</NavLink>
               </li>
             </ul>
           </nav>

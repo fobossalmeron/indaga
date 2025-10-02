@@ -25,9 +25,9 @@ export const WebsiteNav = () => {
               <li className="hidden lg:block">
                 <NavLink href="/guia">Guía</NavLink>
               </li>
-              {/* <li className="hidden lg:block">
+              <li className="hidden lg:block">
                 <NavLink href="/rutas">Rutas</NavLink>
-              </li> */}
+              </li>
               <li className="hidden lg:block">
                 <NavLink href="/treasure-hunt">Treasure Hunt</NavLink>
               </li>

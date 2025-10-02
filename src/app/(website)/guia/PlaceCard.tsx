@@ -48,7 +48,7 @@ export function PlaceCard({
   className,
   grayscale = false,
 }: PlaceCardProps) {
-  const isCardLinked = isFilled.link(link);
+  const isCardLinked = isFilled.link(link) && link.url !== "";
   const [titleStart, titleEnd] = splitTitle(title ?? "Error en título");
 
   return (
@@ -97,7 +97,7 @@ export function PlaceCard({
             {description}
           </div>
         )}
-        {isFilled.link(mapLink) && (
+        {isFilled.link(mapLink) && mapLink.url !== "" && (
           <PrismicNextLink
             field={mapLink}
             target="_blank"
@@ -106,10 +106,10 @@ export function PlaceCard({
             {area ? `@${area}` : "Ver ubicación"}
           </PrismicNextLink>
         )}
-        {!isFilled.link(mapLink) && area && (
+        {!(isFilled.link(mapLink) && mapLink.url !== "") && area && (
           <span className="md-lg:text-base p-2 py-1 text-base">@{area}</span>
         )}
-        {isFilled.link(capsuleLink) && (
+        {isFilled.link(capsuleLink) && capsuleLink.url !== "" && (
           <PrismicNextLink
             field={capsuleLink}
             target="_blank"

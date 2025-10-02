@@ -20,13 +20,13 @@ export default function RouteFull({ route }: RouteFullProps) {
           src={asImageSrc(route.data.image)}
           alt={route.data.title || "Imagen de ruta"}
           width={1200}
-          height={180}
-          className="h-[180px] w-full object-cover"
+          height={300}
+          className="h-[300px] w-full object-cover"
           quality={95}
           priority
         />
       )}
-      <div className="mx-auto flex w-full max-w-[1020px] flex-col items-center pb-24">
+      <div className="mx-auto flex w-full max-w-[1020px] flex-col items-center px-5 pb-24">
         <RouteHeader
           title={route.data.title || ""}
           subtitle={route.data.featuring || ""}

@@ -21,11 +21,11 @@ export function RouteHeader({
   const descriptionText = description?.[0]?.text || "";
 
   return (
-    <div className="mt-15 w-full space-y-6">
+    <div className="mt-8 w-full space-y-6 md:mt-15">
       {/* Botón Volver */}
       <div className="flex flex-col justify-center">
         <Link href="/rutas">
-          <Button variant="link" className="mb-2 gap-2">
+          <Button variant="link" className="mb-2 gap-2 !pl-0">
             <ArrowLeft className="h-4 w-4" />
             Volver a las Rutas
           </Button>
@@ -34,12 +34,12 @@ export function RouteHeader({
         {/* Contenido principal */}
         <div className="space-y-4">
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl">{title}</h1>
-            <p className="mt-2 mb-4 text-xl">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl">{title}</h1>
+            <p className="mt-2 mb-4 text-lg md:text-xl">
               Ruta de <span className="font-medium">{subtitle}</span> x{" "}
               <span className="text-accent font-medium">INDAGA</span>
             </p>
-            <p className="text-foreground max-w-2xl text-lg leading-relaxed">
+            <p className="text-foreground max-w-2xl text-base leading-relaxed md:text-lg">
               {descriptionText}
             </p>
           </div>

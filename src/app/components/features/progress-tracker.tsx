@@ -78,7 +78,9 @@ export default function ProgressTracker({
 
   useEffect(() => {
     if (scannedCode && allTreasures.length > 0) {
-      const treasure = allTreasures.find(t => t.treasure_code === scannedCode);
+      const treasure = allTreasures.find(
+        (t) => t.treasure_code === scannedCode,
+      );
       if (treasure) {
         setSelectedTreasure(treasure);
       }
@@ -129,12 +131,12 @@ export default function ProgressTracker({
   };
 
   const getAchievementLevel = () => {
-    if (treasuresFound === 0) return "Explorador Novato";
-    if (treasuresFound < 5) return "Cazador de Tesoros";
-    if (treasuresFound < 15) return "Aventurero Experimentado";
-    if (treasuresFound < 20) return "Maestro Explorador";
+    if (treasuresFound === 0) return "Exploradorx Novatx";
+    if (treasuresFound < 5) return "Cazadorx de Tesoros";
+    if (treasuresFound < 15) return "Aventurerx Experimentadx";
+    if (treasuresFound < 20) return "Maestrx Exploradorx";
     if (isCompleted) return "Leyenda de INDAGA";
-    return "Gran Aventurero";
+    return "Gran Aventurerx";
   };
 
   return (

@@ -37,7 +37,7 @@ export const Footer = () => {
                 <FooterLink href="/agenda">Agenda</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
                 <FooterLink href="/blog">Blog</FooterLink>
-                {/* <FooterLink href="/rutas">Rutas</FooterLink> */}
+                <FooterLink href="/rutas">Rutas</FooterLink>
               </div>
               <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">
                 <FooterLink href="/treasure-hunt">Treasure Hunt</FooterLink>
