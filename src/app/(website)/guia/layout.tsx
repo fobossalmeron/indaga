@@ -11,7 +11,7 @@ export default function HappeningsLayout({
       <div className="pt-16">
         <Header
           title="Guía de la ciudad"
-          subtitle="Explora la curaduría norestense"
+          subtitle="Descubre los lugares más especiales"
         />
         <div className="mx-auto flex w-full max-w-[1020px] flex-col pb-24">
           {children}

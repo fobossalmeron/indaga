@@ -17,11 +17,12 @@ export default function RouteFull({ route }: RouteFullProps) {
     <div className="mx-auto flex w-full flex-col items-center">
       {route.data.image?.url && (
         <Image
-          src={asImageSrc(route.data.image, { width: 1200, height: 180 })}
+          src={asImageSrc(route.data.image)}
           alt={route.data.title || "Imagen de ruta"}
           width={1200}
           height={180}
           className="h-[180px] w-full object-cover"
+          quality={95}
           priority
         />
       )}

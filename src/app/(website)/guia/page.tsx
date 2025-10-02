@@ -18,6 +18,7 @@ export default async function GuiaAll() {
           nombre
           area
           categoria
+          description
           link
           mapLink
           capsuleLink

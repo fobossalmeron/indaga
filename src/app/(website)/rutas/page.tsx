@@ -14,7 +14,7 @@ export default async function RoutesAll() {
     <div className="pt-16">
       <Header
         title="Rutas culturales"
-        subtitle="Recorridos únicos por Indaga y amigos"
+        subtitle="Recorridos únicos por INDAGA y amigxs"
       />
       <RoutesFull routes={routes} />
     </div>

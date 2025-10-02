@@ -1,0 +1,10 @@
+{"arguments":{},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:11.824","tool":"puppeteer_connect_active_tab"}
+{"0":"n","1":"p","2":"x","level":"info","message":"Launching browser with config:","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:11.830"}
+{"level":"info","message":"Browser launched successfully","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:14.189"}
+{"level":"info","message":"Connecting to existing browser","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:14.205","wsEndpoint":"ws://localhost:9222/devtools/browser/ec02a6cc-f72e-4626-ad15-a4035b49d341"}
+{"level":"debug","message":"Establishing connection to browser","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:14.205"}
+{"level":"info","message":"Successfully connected to browser","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:14.228"}
+{"level":"info","message":"Found active webpage:","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:14.318","title":"Descubre la ciudad - Indaga","url":"http://localhost:3000/login?callbackUrl=%2Ftreasures"}
+{"arguments":{"url":"http://localhost:3000/guia"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:16.923","tool":"puppeteer_navigate"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:16.923","url":"http://localhost:3000/guia"}
+{"error":"net::ERR_CONNECTION_REFUSED at http://localhost:3000/guia","level":"error","message":"Navigation failed","service":"mcp-puppeteer","timestamp":"2025-10-01 21:59:17.040","url":"http://localhost:3000/guia"}

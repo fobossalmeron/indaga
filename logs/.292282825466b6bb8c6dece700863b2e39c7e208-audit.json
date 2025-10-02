@@ -9,6 +9,11 @@
             "date": 1759296012949,
             "name": "/Users/rodrigosalmeron/Sites/indaga/logs/mcp-puppeteer-2025-09-30.log",
             "hash": "992d5d4ff4a647e78d62c6c2cf35c5c3ccae54176f6d243416494975c15ac7a1"
+        },
+        {
+            "date": 1759377551828,
+            "name": "/Users/rodrigosalmeron/Sites/indaga/logs/mcp-puppeteer-2025-10-01.log",
+            "hash": "27534e441ca0c3b9ceddced063acdddc354557d726260d4f7c9a86e61566e723"
         }
     ],
     "hashType": "sha256"

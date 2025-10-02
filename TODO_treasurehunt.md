@@ -1,4 +1,2 @@
-- Página de Treasure Hunt: mobile
-- Inicio: mobile
 - Nav Protected debe tener el mismo efecto que la otra nav
 - Hacer que la nav salga como un dropdown/popover más fácil de tocar.

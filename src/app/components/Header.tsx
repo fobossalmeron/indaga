@@ -12,7 +12,7 @@ export function Header({ title, subtitle, children }: HeaderProps) {
       <div
         className={
           children
-            ? "flex w-full flex-row items-center justify-between gap-4 text-start md:gap-8"
+            ? "flex w-full flex-row items-start justify-between gap-4 text-start md:gap-8"
             : "flex w-full flex-col text-start"
         }
       >
@@ -20,7 +20,9 @@ export function Header({ title, subtitle, children }: HeaderProps) {
           <h1 className="text-2xl font-medium md:text-5xl md:font-normal lg:text-6xl">
             {title}
           </h1>
-          {subtitle && <h2 className="text-base md:text-2xl">{subtitle}</h2>}
+          {subtitle && (
+            <h2 className="max-w-[38ch] text-base md:text-2xl">{subtitle}</h2>
+          )}
         </div>
         {children ? children : null}
       </div>

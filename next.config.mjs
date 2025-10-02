@@ -7,6 +7,10 @@ const nextConfig = {
         hostname: "images.prismic.io",
         pathname: "/indaga/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
   async redirects() {
