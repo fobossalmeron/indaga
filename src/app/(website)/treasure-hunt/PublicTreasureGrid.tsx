@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { PlaceCard } from "@/app/(website)/guia/PlaceCard";
 import { Button } from "@/app/components/ui/button";
 import {
@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/app/components/ui/dialog";
 import { HelpCircle, Map } from "lucide-react";
+import Blob from "@/assets/img/blob_happening.svg";
 
 interface PublicTreasure {
   id: string;
@@ -43,21 +44,25 @@ export default function PublicTreasureGrid({
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {treasures.map((treasure) => (
-            <div
-              key={treasure.id}
-              onClick={() => setSelectedTreasure(treasure)}
-              className="cursor-pointer"
-            >
-              <PlaceCard
-                title={treasure.treasure_name}
-                mapLink={{ url: treasure.treasure_location_maps_url }}
-                link={{ url: treasure.treasure_website }}
-                category={treasure.treasure_category || undefined}
-                className="active:border-primary hover:border-primary border-2 border-transparent transition-colors"
-                grayscale={true}
-              />
-            </div>
+          {treasures.map((treasure, index) => (
+            <Fragment key={treasure.id}>
+              {index === 3 && (
+                <Blob className="align-self-end mb-4 block h-20 w-auto justify-self-end lg:hidden" />
+              )}
+              <div
+                onClick={() => setSelectedTreasure(treasure)}
+                className="cursor-pointer"
+              >
+                <PlaceCard
+                  title={treasure.treasure_name}
+                  mapLink={{ url: treasure.treasure_location_maps_url }}
+                  link={{ url: treasure.treasure_website }}
+                  category={treasure.treasure_category || undefined}
+                  className="active:border-primary hover:border-primary border-2 border-transparent transition-colors"
+                  grayscale={true}
+                />
+              </div>
+            </Fragment>
           ))}
         </div>
       </div>

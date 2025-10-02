@@ -50,7 +50,7 @@ export default function HappeningsFull({
 
   return (
     <>
-      <Header title="Agenda" subtitle="Tu brújula cultural">
+      <Header title="Agenda" subtitle="Lo que sucede en la ciudad">
         <PromoterCTA />
       </Header>
       <div className="animate-fadeIn2 mt-6 pb-24 sm:mt-10">

@@ -93,7 +93,7 @@ export function PlaceCard({
           )}
         </div>
         {description && (
-          <div className="flex w-full flex-row items-center gap-3 pt-0 pl-2 text-base">
+          <div className="flex w-full flex-row items-center gap-3 pt-0 pr-[74px] pl-2 text-sm">
             {description}
           </div>
         )}

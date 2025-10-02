@@ -18,22 +18,22 @@ export default function Home() {
             <div className="flex flex-col gap-8">
               <Logo className="animate-fadeIn2 text-foreground w-full" />
               <p className="text-lg leading-[1.2] md:text-[1.375rem]">
-                Bienvenidx a tu brújula cultural, revisa nuestra agenda para
-                enterarte de los eventos de la semana. Nuestra guía para conocer
-                la ciudad.
+                Tu brújula cultural, el punto de encuentro con lo local, lo
+                profundo y con sustancia
               </p>
             </div>
             <div className="flex flex-col gap-4">
               <SantaLucia className="animate-fadeIn2 text-foreground w-full max-w-[45%]" />
-              <p className="text-lg md:text-[1.375rem]">
-                Durante la temporada del FISL 2025, INDAGA te invita a
-                participar en su{" "}
+              <p className="text-lg md:text-[1.120rem]">
+                Durante la temporada del FISL 2025, te invitamos a participar en
+                el{" "}
                 <Link
                   href="/treasure-hunt"
-                  className="rounded-md bg-white px-1 py-1 md:bg-[#F4E953] md:px-2 md:py-1"
+                  className="rounded-md bg-[#F4E953] px-1 py-1 md:px-2 md:py-1"
                 >
                   Treasure Hunt
-                </Link>
+                </Link>{" "}
+                más grande de la ciudad
               </p>
             </div>
           </div>
