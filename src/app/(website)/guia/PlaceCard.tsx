@@ -16,6 +16,7 @@ interface PlaceCardProps {
   category?: string;
   description?: string;
   className?: string;
+  grayscale?: boolean;
 }
 
 const categoryToIcon: Record<string, string> = {
@@ -45,6 +46,7 @@ export function PlaceCard({
   category,
   description,
   className,
+  grayscale = false,
 }: PlaceCardProps) {
   const isCardLinked = isFilled.link(link);
   const [titleStart, titleEnd] = splitTitle(title ?? "Error en título");
@@ -54,7 +56,13 @@ export function PlaceCard({
       <div
         className={`relative flex flex-col items-start gap-0 overflow-hidden rounded-2xl bg-white p-2 ${className}`}
       >
-        {category && <Category category={category} className="mt-2 ml-2" />}
+        {category && (
+          <Category
+            category={category}
+            className="mt-2 ml-2"
+            grayscale={grayscale}
+          />
+        )}
         <div className="mt-1 flex w-full flex-row items-start pr-16">
           {isCardLinked ? (
             <PrismicNextLink
@@ -119,6 +127,7 @@ export function PlaceCard({
               alt={category}
               width={51}
               height={94}
+              className={grayscale ? "hidden" : ""}
             />
           </div>
         )}

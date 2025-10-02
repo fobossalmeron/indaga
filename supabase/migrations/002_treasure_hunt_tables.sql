@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS treasure_hunt_2025_treasures (
     treasure_name TEXT NOT NULL, -- nombre del lugar/tesoro
     treasure_secret TEXT,
     treasure_location_maps_url TEXT,
+    treasure_website TEXT, -- link externo del lugar (Instagram, etc)
+    treasure_category TEXT, -- categoría del tesoro (Cafeterías, Bares & Cantinas, etc)
     location_coordinates POINT, -- coordenadas del lugar (opcional)
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

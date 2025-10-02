@@ -12,7 +12,7 @@ export function Header({ title, subtitle, children }: HeaderProps) {
       <div
         className={
           children
-            ? "flex w-full flex-row items-center gap-4 text-start md:gap-8"
+            ? "flex w-full flex-row items-center justify-between gap-4 text-start md:gap-8"
             : "flex w-full flex-col text-start"
         }
       >

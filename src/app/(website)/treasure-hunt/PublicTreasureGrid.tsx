@@ -16,6 +16,8 @@ interface PublicTreasure {
   treasure_code: string;
   treasure_name: string;
   treasure_location_maps_url: string | null;
+  treasure_website: string | null;
+  treasure_category: string | null;
 }
 
 interface PublicTreasureGridProps {
@@ -50,7 +52,10 @@ export default function PublicTreasureGrid({
               <PlaceCard
                 title={treasure.treasure_name}
                 mapLink={{ url: treasure.treasure_location_maps_url }}
-                className="active:border-primary border-2 border-transparent transition-colors"
+                link={{ url: treasure.treasure_website }}
+                category={treasure.treasure_category || undefined}
+                className="active:border-primary hover:border-primary border-2 border-transparent transition-colors"
+                grayscale={true}
               />
             </div>
           ))}
@@ -87,10 +92,10 @@ export default function PublicTreasureGrid({
                 href={selectedTreasure?.treasure_location_maps_url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mx-auto block rounded-lg border-2 border-blue-200 bg-blue-50 px-6 py-4 transition-colors hover:bg-blue-100"
+                className="border-primary/20 bg-primary/5 hover:bg-primary/10 mx-auto block rounded-lg border-2 px-6 py-4 transition-colors"
               >
-                <Map className="mx-auto mb-2 h-8 w-8 text-blue-600" />
-                <div className="text-sm font-medium text-blue-600">
+                <Map className="text-primary mx-auto mb-2 h-8 w-8" />
+                <div className="text-primary text-sm font-medium">
                   Ver en el mapa
                 </div>
               </a>

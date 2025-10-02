@@ -163,6 +163,8 @@ export type Database = {
           treasure_secret: string
           treasure_location_maps_url: string | null
           treasure_name: string
+          treasure_website: string | null
+          treasure_category: string | null
         }
         Insert: {
           created_at?: string | null
@@ -173,6 +175,8 @@ export type Database = {
           treasure_secret: string
           treasure_location_maps_url?: string | null
           treasure_name: string
+          treasure_website?: string | null
+          treasure_category?: string | null
         }
         Update: {
           created_at?: string | null
@@ -183,6 +187,8 @@ export type Database = {
           treasure_secret: string
           treasure_location_maps_url?: string | null
           treasure_name?: string
+          treasure_website?: string | null
+          treasure_category?: string | null
         }
         Relationships: [
           {

@@ -58,9 +58,14 @@ const rutasColors: Record<
 interface CategoryProps {
   category: string;
   className?: string;
+  grayscale?: boolean;
 }
 
-export function Category({ category, className }: CategoryProps) {
+export function Category({
+  category,
+  className,
+  grayscale = false,
+}: CategoryProps) {
   // Buscar en los mapeos
   const color = (
     guiaColors as Record<string, { border: string; bg: string; text: string }>
@@ -77,13 +82,21 @@ export function Category({ category, className }: CategoryProps) {
       text: "#374151",
     };
 
+  const grayscaleColors = {
+    border: "#aaaeb5",
+    bg: "#F3F4F6",
+    text: "#535863",
+  };
+
+  const finalColor = grayscale ? grayscaleColors : color;
+
   return (
     <span
       className={`inline-block w-auto rounded-full border px-3 py-1 text-sm${className ? ` ${className}` : ""}`}
       style={{
-        borderColor: color.border,
-        backgroundColor: color.bg,
-        color: color.text,
+        borderColor: finalColor.border,
+        backgroundColor: finalColor.bg,
+        color: finalColor.text,
       }}
     >
       {category}
