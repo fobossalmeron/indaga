@@ -32,9 +32,8 @@ export default function TreasureHuntFull() {
         </div>
       </div>
       <p className="mt-8 max-w-[45ch] text-lg leading-[1.3]">
-        Durante la temporada del FISL 2025,{" "}
-        <span className="font-medium">INDAGA</span> te invita a participar en el
-        Treasure Hunt más grande de la ciudad
+        Cada rincón guarda una sorpresa, conoce nuevos espacios, regresa a tus
+        favoritos y colecciona los tesoros que tenemos para ti
       </p>
       <div className="mt-8 flex">
         <Button asChild>

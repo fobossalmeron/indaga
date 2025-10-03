@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
-import { Button } from "@/app/components/Button";
 import { useLenis } from "lenis/react";
 
 export const MobileWebsiteNav = () => {
