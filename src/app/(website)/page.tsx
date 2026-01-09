@@ -22,7 +22,7 @@ export default function Home() {
                 profundo y con sustancia
               </p>
             </div>
-            <div className="flex flex-col gap-4">
+            {/* <div className="flex flex-col gap-4">
               <SantaLucia className="animate-fadeIn2 text-foreground w-full max-w-[45%]" />
               <p className="text-lg leading-tight md:text-[1.120rem]">
                 Durante la temporada del FISL 2025, te invitamos a participar en
@@ -32,7 +32,7 @@ export default function Home() {
                 </Link>{" "}
                 más grande de la ciudad
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
