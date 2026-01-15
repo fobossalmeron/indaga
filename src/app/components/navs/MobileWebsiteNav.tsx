@@ -69,7 +69,7 @@ export const MobileWebsiteNav = () => {
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
                 { href: "/blog", text: "Blog" },
-                { href: "/rutas", text: "Rutas" },
+                // { href: "/rutas", text: "Rutas" },
                 { href: "/treasure-hunt", text: "Treasure Hunt" },
                 { href: "/nosotras", text: "Nosotras" },
               ].map(({ href, text }) => (

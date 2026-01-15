@@ -46,9 +46,9 @@ export const ProtectedNav = () => {
               <li className="hidden lg:block">
                 <NavLink href="/guia">Guía</NavLink>
               </li>
-              <li className="hidden lg:block">
+              {/* <li className="hidden lg:block">
                 <NavLink href="/rutas">Rutas</NavLink>
-              </li>
+              </li> */}
             </ul>
           </nav>
           <div className="animate-fadeSimple flex gap-2">
