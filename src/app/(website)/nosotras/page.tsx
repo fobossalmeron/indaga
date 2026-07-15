@@ -16,7 +16,13 @@ export default async function Nosotras() {
               </h1>
             </div>
             <div className="prose prose-invert">
-              <PrismicRichText field={about.data.text} />
+              Indaga ha podido tomar diversas formas a partir del deseo de conocer cada vez más el espacio que habitamos, empezamos por nuestra ciudad: Monterrey, NL. 
+<br/><br/>
+Cada encuentro, recorrido e historia nos deja ver que siempre se ha tratado del acto de preservar. Somos lo que somos porque el acto de preservar ha sido esencial en el desarrollo de las civilizaciones. El concepto se puede sentir lejos pero está al alcance de todos, todo el tiempo.
+<br/><br/>
+Queremos reconocer a quienes nunca lo han olvidado y recordárselo a quien también
+quiera ser parte de esto. Queremos seguir explorando todo lo que puede ser el acto
+preservar y compartir el asombro de descubrirlo..
             </div>
           </div>
         </div>

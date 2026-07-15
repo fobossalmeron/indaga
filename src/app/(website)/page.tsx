@@ -18,8 +18,8 @@ export default function Home() {
             <div className="flex flex-col gap-8">
               <Logo className="animate-fadeIn2 text-foreground w-full" />
               <p className="text-lg leading-tight md:text-[1.375rem]">
-                Tu brújula cultural, el punto de encuentro con lo local, lo
-                profundo y con sustancia
+               Hemos estado construyendo una plataforma de difusión cultural que une prácticas de preservación de ~lo humano a através de distintas manifestaciones {"{culturales}"}. <br/> <br/>
+Una herramienta que funciona desde lo virtual para enriquecer las experiencias que tenemos fuera de la pantalla.
               </p>
             </div>
             {/* <div className="flex flex-col gap-4">
