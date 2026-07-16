@@ -3,6 +3,8 @@ import { createServerSupabaseClient } from "@/lib/supabase";
 import TreasureHuntFull from "./TreasureHuntFull";
 import PublicTreasureGrid from "./PublicTreasureGrid";
 
+export const dynamic = "force-dynamic";
+
 async function getTreasures() {
   try {
     const hunt = await getActiveTreasureHunt();

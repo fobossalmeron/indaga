@@ -5,29 +5,35 @@ import { createClient } from '@supabase/supabase-js'
 import type { Database } from '../../types/database'
 
 // Environment variables validation
-const supabaseUrl = process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-if (!supabaseUrl) {
-  throw new Error('VERCELDB__NEXT_PUBLIC_SUPABASE_URL is not defined')
-}
-
-if (!supabaseAnonKey) {
-  throw new Error('VERCELDB__NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined')
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    'Supabase public configuration is missing. Supabase calls will fail at runtime until env vars are configured.'
+  )
 }
 
 // Create Supabase client
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true
+export const supabase = createClient<Database>(
+  supabaseUrl || 'http://127.0.0.1:54321',
+  supabaseAnonKey || 'supabase-anon-key-not-configured',
+  {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    }
   }
-})
+)
 
 // Server-side client (for admin operations)
 export const createServerSupabaseClient = () => {
-  const serviceRoleKey = process.env.VERCELDB__SUPABASE_SERVICE_ROLE_KEY!
+  const serviceRoleKey = process.env.VERCELDB__SUPABASE_SERVICE_ROLE_KEY
+
+  if (!supabaseUrl) {
+    throw new Error('VERCELDB__NEXT_PUBLIC_SUPABASE_URL is not defined')
+  }
 
   if (!serviceRoleKey) {
     throw new Error('VERCELDB__SUPABASE_SERVICE_ROLE_KEY is not defined')

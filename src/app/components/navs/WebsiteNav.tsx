@@ -33,19 +33,19 @@ export const WebsiteNav = () => {
               </li>
             </ul>
           </nav>
-          <Link
+          {/* <Link
             href="/login"
             className="animate-fadeSimple hidden -translate-x-30 md:block"
           >
             <Button size="thin" variant="link" className="text-[#a7e198]">
               Iniciar sesión
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex h-16 px-5 md:px-8 lg:px-10">
         <div className="mx-auto flex w-full max-w-[1240px] items-center justify-end">
-          <Link
+          {/* <Link
             href="/login"
             className="animate-fadeSimple pointer-events-auto"
           >
@@ -55,7 +55,7 @@ export const WebsiteNav = () => {
             >
               Regístrate
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="fixed top-0 right-0 left-0 z-40 h-32 -translate-y-16 backdrop-blur-lg"></div>
