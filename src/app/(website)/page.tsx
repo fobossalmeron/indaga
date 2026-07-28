@@ -18,7 +18,7 @@ export default function Home() {
             <div className="flex flex-col gap-8">
               <Logo className="animate-fadeIn2 text-foreground w-full" />
               <p className="text-lg leading-tight md:text-[1.375rem]">
-               Hemos estado construyendo una plataforma de difusión cultural que une prácticas de preservación de ~lo humano a através de distintas manifestaciones {"{culturales}"}. <br/> <br/>
+               Hemos estado construyendo una plataforma de difusión cultural que une distintas prácticas de preservación de ~lo humano a através de distintas manifestaciones culturales. <br/> <br/>
 Una herramienta que funciona desde lo virtual para enriquecer las experiencias que tenemos fuera de la pantalla.
               </p>
             </div>
