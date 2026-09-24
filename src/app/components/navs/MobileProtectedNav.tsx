@@ -77,7 +77,7 @@ export const MobileProtectedNav = () => {
                 { href: "/treasures", text: "Mis Tesoros" },
                 { href: "/agenda", text: "Agenda" },
                 { href: "/guia", text: "Guía" },
-                { href: "/blog", text: "Blog" },
+                { href: "/archivo", text: "Archivo" },
                 // { href: "/rutas", text: "Rutas" },
                 { href: "/nosotras", text: "Nosotras" },
               ].map(({ href, text }) => (

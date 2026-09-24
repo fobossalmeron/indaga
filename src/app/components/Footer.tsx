@@ -36,7 +36,7 @@ export const Footer = () => {
                 <FooterLink href="/">Home</FooterLink>
                 <FooterLink href="/agenda">Agenda</FooterLink>
                 <FooterLink href="/guia">Guía</FooterLink>
-                <FooterLink href="/blog">Blog</FooterLink>
+                <FooterLink href="/archivo">Archivo</FooterLink>
                 {/* <FooterLink href="/rutas">Rutas</FooterLink> */}
               </div>
               <div className="flex flex-col gap-x-8 gap-y-0 sm:flex-row">

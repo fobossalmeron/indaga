@@ -10,8 +10,8 @@ export default function NotFound() {
       <p className="mb-8 text-lg">
         Lo sentimos, no pudimos encontrar el artículo que estás buscando.
       </p>
-      <Link href="/blog">
-        <Button>Volver al Blog</Button>
+      <Link href="/archivo">
+        <Button>Volver al Archivo</Button>
       </Link>
     </div>
   );

@@ -2,10 +2,13 @@ import * as prismic from "@prismicio/client";
 import * as prismicNext from "@prismicio/next";
 import config from "../slicemachine.config.json";
 
-export const repositoryName = config.repositoryName
+export const repositoryName = config.repositoryName;
 
-export const createClient = async (config: prismicNext.CreateClientConfig = {}) => {
+export const createClient = async (
+  config: prismicNext.CreateClientConfig = {},
+) => {
   const client = prismic.createClient(repositoryName, {
+    routes: [{ type: "post", path: "/archivo/:uid" }],
     fetchOptions:
       process.env.NODE_ENV === "production"
         ? { next: { tags: ["prismic"] }, cache: "force-cache" }

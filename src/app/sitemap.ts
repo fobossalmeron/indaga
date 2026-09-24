@@ -46,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/archivo`,
       lastModified: fechaSegura,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
@@ -76,7 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   const blogPostPages = blogPosts.map(post => ({
-    url: `${baseUrl}/blog/${post.uid}`,
+    url: `${baseUrl}/archivo/${post.uid}`,
     lastModified: fechaSegura,
     changeFrequency: 'weekly' as const,
     priority: 0.9,

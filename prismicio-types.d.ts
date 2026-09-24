@@ -330,11 +330,11 @@ export type LugarDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<LugarDocumentData>, "lugar", Lang>;
 
 /**
- * Content for Post documents
+ * Content for Archivo documents
  */
 interface PostDocumentData {
   /**
-   * Portada field in *Post*
+   * Portada field in *Archivo*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -345,7 +345,7 @@ interface PostDocumentData {
   hero: prismic.ImageField<never>;
 
   /**
-   * Titulo (H1) field in *Post*
+   * Titulo (H1) field in *Archivo*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -356,7 +356,41 @@ interface PostDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Título SEO field in *Post*
+   * Tipo de publicación field in *Archivo*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Ensayo
+   * - **API ID Path**: post.article_type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  article_type: prismic.SelectField<"Conversación" | "Ensayo", "filled">;
+
+  /**
+   * Introducción (opcional) field in *Archivo*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Una breve presentación antes del video y del cuerpo del artículo.
+   * - **API ID Path**: post.introduction
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  introduction: prismic.RichTextField;
+
+  /**
+   * Video (opcional) field in *Archivo*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: Enlace de YouTube o Vimeo
+   * - **API ID Path**: post.video
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  video: prismic.EmbedField;
+
+  /**
+   * Título SEO field in *Archivo*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -367,7 +401,7 @@ interface PostDocumentData {
   seo_title: prismic.KeyTextField;
 
   /**
-   * Descripción SEO field in *Post*
+   * Descripción SEO field in *Archivo*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -378,7 +412,7 @@ interface PostDocumentData {
   meta_description: prismic.KeyTextField;
 
   /**
-   * Fecha de publicación field in *Post*
+   * Fecha de publicación field in *Archivo*
    *
    * - **Field Type**: Date
    * - **Placeholder**: *None*
@@ -389,7 +423,7 @@ interface PostDocumentData {
   date: prismic.DateField;
 
   /**
-   * Autor (opcional) field in *Post*
+   * Autor (opcional) field in *Archivo*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -400,7 +434,7 @@ interface PostDocumentData {
   author: prismic.KeyTextField;
 
   /**
-   * Cuerpo de texto field in *Post*
+   * Cuerpo de texto field in *Archivo*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -412,7 +446,7 @@ interface PostDocumentData {
 }
 
 /**
- * Post document from Prismic
+ * Archivo document from Prismic
  *
  * - **API ID**: `post`
  * - **Repeatable**: `true`

@@ -55,6 +55,14 @@ const rutasColors: Record<
   "Fuera de la ciudad": { border: "#00C48C", bg: "#E3FFF3", text: "#007A5A" },
 };
 
+const archiveColors: Record<
+  string,
+  { border: string; bg: string; text: string }
+> = {
+  Conversación: { border: "#4d4e6a", bg: "#F3F4F6", text: "#4d4e6a" },
+  Ensayo: { border: "#4d4e6a", bg: "#F3F4F6", text: "#4d4e6a" },
+};
+
 interface CategoryProps {
   category: string;
   className?: string;
@@ -76,7 +84,8 @@ export function Category({
         { border: string; bg: string; text: string }
       >
     )[category] ||
-    rutasColors[category] || {
+    rutasColors[category] ||
+    archiveColors[category] || {
       border: "#E5E7EB",
       bg: "#F3F4F6",
       text: "#374151",

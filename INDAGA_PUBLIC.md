@@ -131,20 +131,22 @@ Todo el contenido público se gestiona a través de **Prismic**, garantizando:
 
 ---
 
-### 📝 **Blog (`/blog`)**
+### 📝 **Archivo (`/archivo`)**
 
 **Propósito**: Contenido editorial y artículos del colectivo
 
 **Funcionalidades**:
 
 - Índice de artículos con preview
-- Categorización por temas
+- Filtro por tipo: Conversación o Ensayo
 
-**Artículos Individuales** (`/blog/[articulo]`):
+**Artículos Individuales** (`/archivo/[articulo]`):
 
 - Contenido largo-forma con rich media
 - Autor y fecha de publicación
-- Relacionados/recomendados
+- Encabezado según el tipo, introducción y video opcionales
+
+Reutiliza el tipo `post` de Prismic. Las URLs anteriores de `/blog` redirigen a Archivo. Ver `docs/archivo.md` para los campos y la sincronización del modelo.
 
 ---
 
