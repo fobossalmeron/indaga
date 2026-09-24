@@ -6,7 +6,7 @@
 
 Este PRD define el sistema completo de usuarios registrados de INDAGA, incluyendo autenticación, dashboards, treasure hunt urbano y panel de administración. Estas funcionalidades transforman la experiencia estática del sitio público en una plataforma interactiva gamificada.
 
-> **⚠️ Nota Importante**: Este documento NO incluye el sitio web público (home, agenda, rutas, guía, blog, nosotros). Para esas funcionalidades, consultar **`INDAGA_PUBLIC.md`**.
+> **⚠️ Nota Importante**: Este documento NO incluye el sitio web público (home, agenda, rutas, guía, archivo, nosotros). Para esas funcionalidades, consultar **`INDAGA_PUBLIC.md`**.
 
 ---
 

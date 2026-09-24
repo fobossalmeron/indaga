@@ -17,7 +17,7 @@ export function ArticleCard({ post }: { post: ArchivePost }) {
     >
       <article className="flex h-full flex-col overflow-hidden rounded-[22px] bg-white transition-shadow hover:shadow-md">
         {data.hero.url && (
-          <div className="relative h-[130px] overflow-hidden sm:h-[105px]">
+          <div className="relative h-[130px] overflow-hidden bg-gray-200 sm:h-[105px]">
             <Image
               src={data.hero.url}
               alt={data.hero.alt || ""}

@@ -29,7 +29,7 @@ export default function ArticleFull({ post }: { post: Content.PostDocument }) {
   const { data } = post;
 
   return (
-    <article className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-start gap-x-16 px-5 pt-32 pb-24 sm:pt-[182px] sm:pb-48 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)]">
+    <article className="motion-safe:animate-fadeIn mx-auto grid w-full max-w-[1240px] grid-cols-1 items-start gap-x-16 px-5 pt-32 pb-24 motion-safe:[animation-duration:300ms] sm:pt-[182px] sm:pb-48 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)]">
       <header className="lg:pt-6">
         <p className="mb-3 text-sm font-medium tracking-[0.16em] uppercase sm:text-lg">
           {getArchiveEyebrow(data.article_type)}
@@ -45,7 +45,7 @@ export default function ArticleFull({ post }: { post: Content.PostDocument }) {
         </div>
       </header>
       {data.hero.url && (
-        <div className="relative mt-8 aspect-[440/280] overflow-hidden rounded-xl lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">
+        <div className="relative mt-8 aspect-[440/280] overflow-hidden rounded-xl bg-gray-200 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">
           <Image
             src={data.hero.url}
             alt={data.hero.alt || ""}

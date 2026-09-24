@@ -68,19 +68,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  const blogPosts = await client.getAllByType('post', {
+  const archivePosts = await client.getAllByType('post', {
     orderings: {
       field: 'my.post.date',
       direction: 'desc',
     },
   })
 
-  const blogPostPages = blogPosts.map(post => ({
+  const archivePostPages = archivePosts.map(post => ({
     url: `${baseUrl}/archivo/${post.uid}`,
     lastModified: fechaSegura,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
   }))
 
-  return [...staticPages, ...happeningPages, ...blogPostPages]
+  return [...staticPages, ...happeningPages, ...archivePostPages]
 }

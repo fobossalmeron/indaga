@@ -71,7 +71,7 @@ Todo el contenido público se gestiona a través de **Prismic**, garantizando:
 **Elementos Clave**:
 
 - Diseño visual atractivo que refleje la identidad cultural
-- Navegación intuitiva hacia agenda, rutas, guía y blog
+- Navegación intuitiva hacia agenda, rutas, guía y archivo
 - Optimización mobile-first
 
 ---
@@ -170,7 +170,7 @@ Header Navigation:
 ├── Agenda
 ├── Rutas
 ├── Guía
-├── Blog
+├── Archivo
 ├── Nosotros
 └── Iniciar Sesión (→ INDAGA_USERS.md)
 

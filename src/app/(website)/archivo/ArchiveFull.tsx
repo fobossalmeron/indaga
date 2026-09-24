@@ -25,7 +25,10 @@ export default function ArchiveFull({ posts }: { posts: ArchivePost[] }) {
   );
 
   return (
-    <section aria-label="Publicaciones del archivo" className="mt-10 sm:mt-16">
+    <section
+      aria-label="Publicaciones del archivo"
+      className="motion-safe:animate-fadeIn mt-10 motion-safe:[animation-duration:300ms] sm:mt-16"
+    >
       <Select
         value={category}
         onValueChange={(value) => setCategory(value as typeof category)}
