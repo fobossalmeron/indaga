@@ -1,9 +1,6 @@
 "use client";
 
-// Stats Dashboard Component for Admin Panel
-// Created for ULTRATHINK Plan - Agent C
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface StatsData {
   totalUsers: number;
@@ -26,226 +23,113 @@ interface StatsDashboardProps {
   stats: StatsData;
   userActivity: ActivityData[];
   scanActivity: ActivityData[];
+  participantScope?: boolean;
+  scopeLabel?: string;
 }
 
-export default function StatsDashboard({
-  stats,
-  userActivity,
-  scanActivity,
-}: StatsDashboardProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "users" | "activity">(
-    "overview",
-  );
-
-  // Simple chart data formatting
-  const formatChartData = (data: ActivityData[], key: "users" | "scans") => {
-    return data.map((item) => ({
-      date: new Date(item.date).toLocaleDateString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-      }),
-      value: item[key] || 0,
-    }));
-  };
-
-  const userChartData = formatChartData(userActivity, "users");
-  const scanChartData = formatChartData(scanActivity, "scans");
-
-  // Simple SVG chart component
-  const SimpleChart = ({
-    data,
-    color = "#3B82F6",
-    title,
-    height = 200,
-  }: {
-    data: { date: string; value: number }[];
-    color?: string;
-    title: string;
-    height?: number;
-  }) => {
-    if (data.length === 0)
-      return <div className="text-gray-500">Sin datos</div>;
-
-    const maxValue = Math.max(...data.map((d) => d.value));
-    const width = 600;
-    const padding = 40;
-
-    return (
-      <div className="rounded-lg bg-white p-6 shadow">
-        <h3 className="mb-4 text-lg font-medium text-gray-900">{title}</h3>
-        <svg width={width} height={height + padding * 2} className="w-full">
-          {/* Grid lines */}
-          {[0, 0.25, 0.5, 0.75, 1].map((fraction, i) => (
-            <g key={i}>
-              <line
-                x1={padding}
-                y1={padding + height * fraction}
-                x2={width - padding}
-                y2={padding + height * fraction}
-                stroke="#E5E7EB"
-                strokeWidth={1}
-              />
-              <text
-                x={padding - 10}
-                y={padding + height * fraction + 5}
-                textAnchor="end"
-                fontSize="12"
-                fill="#6B7280"
-              >
-                {Math.round(maxValue * (1 - fraction))}
-              </text>
-            </g>
-          ))}
-
-          {/* Chart line */}
-          <polyline
-            points={data
-              .map((item, index) => {
-                const x =
-                  padding + (index / (data.length - 1)) * (width - padding * 2);
-                const y = padding + height - (item.value / maxValue) * height;
-                return `${x},${y}`;
-              })
-              .join(" ")}
-            fill="none"
-            stroke={color}
-            strokeWidth={2}
-          />
-
-          {/* Data points */}
-          {data.map((item, index) => {
-            const x =
-              padding + (index / (data.length - 1)) * (width - padding * 2);
-            const y = padding + height - (item.value / maxValue) * height;
-            return <circle key={index} cx={x} cy={y} r={4} fill={color} />;
-          })}
-
-          {/* X-axis labels */}
-          {data
-            .filter((_, i) => i % Math.ceil(data.length / 8) === 0)
-            .map((item, index, filtered) => {
-              const originalIndex = data.findIndex((d) => d.date === item.date);
-              const x =
-                padding +
-                (originalIndex / (data.length - 1)) * (width - padding * 2);
-              return (
-                <text
-                  key={originalIndex}
-                  x={x}
-                  y={height + padding + 20}
-                  textAnchor="middle"
-                  fontSize="12"
-                  fill="#6B7280"
-                >
-                  {item.date}
-                </text>
-              );
-            })}
-        </svg>
-      </div>
-    );
-  };
+export function SimpleChart({
+  data,
+  color = "#3B82F6",
+  title,
+}: {
+  data: { date: string; value: number }[];
+  color?: string;
+  title: string;
+}) {
+  const maxValue = Math.max(1, ...data.map((point) => point.value));
+  const width = 600;
+  const height = 200;
+  const padding = 40;
+  const pointX = (index: number) => data.length <= 1 ? width / 2 : padding + index / (data.length - 1) * (width - padding * 2);
+  const pointY = (value: number) => padding + height - value / maxValue * height;
 
   return (
-    <div className="rounded-lg bg-white shadow">
-      {/* Tabs */}
+    <div className="min-w-0 rounded-lg border border-gray-100 bg-white p-3 sm:p-6">
+      <h3 className="mb-4 text-lg font-medium text-gray-900">{title}</h3>
+      {data.length === 0 ? <p className="py-12 text-center text-gray-500">Sin actividad en este período</p> : (
+        <svg viewBox={`0 0 ${width} ${height + padding * 2}`} className="block h-auto w-full max-w-full" role="img" aria-label={title}>
+          <title>{title}</title>
+          {[0, 0.25, 0.5, 0.75, 1].map((fraction) => (
+            <g key={fraction}>
+              <line x1={padding} y1={padding + height * fraction} x2={width - padding} y2={padding + height * fraction} stroke="#E5E7EB" />
+              <text x={padding - 10} y={padding + height * fraction + 5} textAnchor="end" fontSize="12" fill="#6B7280">{Number((maxValue * (1 - fraction)).toFixed(1))}</text>
+            </g>
+          ))}
+          <polyline points={data.map((item, index) => `${pointX(index)},${pointY(item.value)}`).join(" ")} fill="none" stroke={color} strokeWidth={2} />
+          {data.map((item, index) => (
+            <g key={`${item.date}-${index}`}>
+              <circle cx={pointX(index)} cy={pointY(item.value)} r={4} fill={color}><title>{`${item.date}: ${item.value}`}</title></circle>
+              {index % Math.ceil(data.length / 8) === 0 && <text x={pointX(index)} y={height + padding + 20} textAnchor="middle" fontSize="12" fill="#6B7280">{item.date}</text>}
+            </g>
+          ))}
+        </svg>
+      )}
+    </div>
+  );
+}
+
+export default function StatsDashboard({ stats, userActivity, scanActivity, participantScope = false, scopeLabel = "Todas las ediciones" }: StatsDashboardProps) {
+  const [activeTab, setActiveTab] = useState<"overview" | "users" | "activity">("overview");
+  const formatChartData = (data: ActivityData[], key: "users" | "scans") => data.map((item) => ({
+    date: new Date(`${item.date.slice(0, 10)}T12:00:00Z`).toLocaleDateString("es-MX", { day: "2-digit", month: "2-digit", timeZone: "UTC" }),
+    value: item[key] || 0,
+  }));
+  const userChartData = formatChartData(userActivity, "users");
+  const scanChartData = formatChartData(scanActivity, "scans");
+  const periodUsers = userChartData.reduce((sum, day) => sum + day.value, 0);
+  const periodScans = scanChartData.reduce((sum, day) => sum + day.value, 0);
+  const average = (total: number) => (total / 30).toLocaleString("es-MX", { maximumFractionDigits: 1 });
+  const cohortLabel = participantScope ? "De participantes de esta edición" : "De todos los usuarios de INDAGA";
+
+  return (
+    <div className="min-w-0 rounded-lg bg-white shadow">
       <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8 px-6" aria-label="Tabs">
-          {[
-            { key: "overview", name: "Resumen General" },
-            { key: "users", name: "Análisis de Usuarios" },
-            { key: "activity", name: "Actividad de Treasure Hunt" },
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
-              className={`border-b-2 px-1 py-4 text-sm font-medium ${
-                activeTab === tab.key
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-              }`}
-            >
-              {tab.name}
-            </button>
+        <nav className="-mb-px flex max-w-full gap-6 overflow-x-auto px-4 sm:px-6" aria-label="Secciones de estadísticas">
+          {([
+            { key: "overview", name: "Resumen" },
+            { key: "users", name: participantScope ? "Registros de participantes" : "Registros de usuarios" },
+            { key: "activity", name: "Escaneos QR" },
+          ] as const).map((tab) => (
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)} aria-current={activeTab === tab.key ? "page" : undefined} className={`shrink-0 whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium ${activeTab === tab.key ? "border-indigo-500 text-indigo-600" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"}`}>{tab.name}</button>
           ))}
         </nav>
       </div>
 
-      {/* Tab Content */}
-      <div className="p-6">
+      <div className="min-w-0 p-4 sm:p-6">
+        <p className="mb-6 text-sm text-gray-500">{scopeLabel}</p>
         {activeTab === "overview" && (
           <div className="space-y-6">
             <div>
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
-                Métricas Principales
-              </h3>
+              <h2 className="mb-4 text-lg font-medium text-gray-900">Métricas principales</h2>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <div className="rounded-lg bg-blue-50 p-4">
-                  <div className="text-2xl font-bold text-blue-600">
-                    {stats.totalUsers.toLocaleString()}
-                  </div>
-                  <div className="text-sm text-blue-800">Usuarios Totales</div>
-                  <div className="mt-1 text-xs text-blue-600">
-                    +{stats.recentUsers} en 7 días
-                  </div>
+                  <p className="text-2xl font-bold text-blue-600">{stats.totalUsers.toLocaleString()}</p>
+                  <p className="text-sm text-blue-800">{participantScope ? "Participantes únicos" : "Usuarios totales"}</p>
+                  <p className="mt-1 text-xs text-blue-600">{stats.recentUsers} cuentas creadas en los últimos 7 días</p>
                 </div>
-
                 <div className="rounded-lg bg-green-50 p-4">
-                  <div className="text-2xl font-bold text-green-600">
-                    {stats.verificationRate}%
-                  </div>
-                  <div className="text-sm text-green-800">
-                    Tasa de Verificación
-                  </div>
-                  <div className="mt-1 text-xs text-green-600">
-                    {stats.verifiedUsers} verificados
-                  </div>
+                  <p className="text-2xl font-bold text-green-600">{stats.verificationRate}%</p>
+                  <p className="text-sm text-green-800">Tasa de verificación</p>
+                  <p className="mt-1 text-xs text-green-600">{stats.verifiedUsers} correos verificados</p>
                 </div>
-
                 <div className="rounded-lg bg-purple-50 p-4">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {stats.totalScans.toLocaleString()}
-                  </div>
-                  <div className="text-sm text-purple-800">Escaneos QR</div>
-                  <div className="mt-1 text-xs text-purple-600">
-                    Treasure Hunt 2025
-                  </div>
+                  <p className="text-2xl font-bold text-purple-600">{stats.totalScans.toLocaleString()}</p>
+                  <p className="text-sm text-purple-800">Escaneos QR</p>
+                  <p className="mt-1 text-xs text-purple-600">{participantScope ? "De esta edición" : "De todas las ediciones"}</p>
                 </div>
-
                 <div className="rounded-lg bg-orange-50 p-4">
-                  <div className="text-2xl font-bold text-orange-600">
-                    {stats.activeTreasureHunts}
-                  </div>
-                  <div className="text-sm text-orange-800">Hunts Activos</div>
-                  <div className="mt-1 text-xs text-orange-600">En curso</div>
+                  <p className="text-2xl font-bold text-orange-600">{participantScope ? (stats.activeTreasureHunts ? "Sí" : "No") : stats.activeTreasureHunts}</p>
+                  <p className="text-sm text-orange-800">{participantScope ? "Edición activa" : "Treasure Hunts activos"}</p>
+                  <p className="mt-1 text-xs text-orange-600">Habilitados y dentro de sus fechas</p>
                 </div>
               </div>
             </div>
-
             <div>
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
-                Contenido Guardado
-              </h3>
+              <h2 className="mb-4 text-lg font-medium text-gray-900">Contenido guardado</h2>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <div className="text-xl font-semibold text-gray-900">
-                    {stats.totalSavedEvents.toLocaleString()}
-                  </div>
-                  <div className="text-sm text-gray-600">Eventos favoritos</div>
-                  <div className="mt-1 text-xs text-gray-500">
-                    Por usuarios registrados
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <div className="text-xl font-semibold text-gray-900">
-                    {stats.totalSavedPlaces.toLocaleString()}
-                  </div>
-                  <div className="text-sm text-gray-600">Lugares favoritos</div>
-                  <div className="mt-1 text-xs text-gray-500">
-                    De la guía INDAGA
-                  </div>
-                </div>
+                {[{ label: "Eventos favoritos", count: stats.totalSavedEvents }, { label: "Lugares favoritos", count: stats.totalSavedPlaces }].map((metric) => (
+                  <div key={metric.label} className="rounded-lg bg-gray-50 p-4"><p className="text-xl font-semibold text-gray-900">{metric.count.toLocaleString()}</p><p className="text-sm text-gray-600">{metric.label}</p><p className="mt-1 text-xs text-gray-500">{cohortLabel}</p></div>
+                ))}
               </div>
             </div>
           </div>
@@ -254,52 +138,14 @@ export default function StatsDashboard({
         {activeTab === "users" && (
           <div className="space-y-6">
             <div>
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
-                Registros de Usuarios (Últimos 30 días)
-              </h3>
-              <SimpleChart
-                data={userChartData}
-                color="#3B82F6"
-                title="Nuevos Usuarios por Día"
-              />
+              <h2 className="mb-2 text-lg font-medium text-gray-900">Registro de cuentas · Últimos 30 días</h2>
+              <p className="mb-4 text-sm text-gray-600">{participantScope ? "Fecha de creación de las cuentas de quienes ya registraron al menos una visita en esta edición. No representa la fecha de su primera visita." : "Fecha de creación de las cuentas de INDAGA."} Los días de las gráficas se agrupan en UTC.</p>
+              <SimpleChart data={userChartData} title="Cuentas creadas por día" />
             </div>
-
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <div className="rounded-lg bg-blue-50 p-4">
-                <div className="text-lg font-semibold text-blue-600">
-                  Crecimiento
-                </div>
-                <div className="mt-2 text-sm text-blue-800">
-                  Promedio:{" "}
-                  {Math.round(
-                    userActivity.reduce(
-                      (sum, day) => sum + (day.users || 0),
-                      0,
-                    ) / userActivity.length,
-                  )}{" "}
-                  usuarios/día
-                </div>
-              </div>
-
-              <div className="rounded-lg bg-green-50 p-4">
-                <div className="text-lg font-semibold text-green-600">
-                  Pico Máximo
-                </div>
-                <div className="mt-2 text-sm text-green-800">
-                  {Math.max(...userActivity.map((d) => d.users || 0))} usuarios
-                  en un día
-                </div>
-              </div>
-
-              <div className="rounded-lg bg-purple-50 p-4">
-                <div className="text-lg font-semibold text-purple-600">
-                  Total Período
-                </div>
-                <div className="mt-2 text-sm text-purple-800">
-                  {userActivity.reduce((sum, day) => sum + (day.users || 0), 0)}{" "}
-                  nuevos usuarios
-                </div>
-              </div>
+              <div className="rounded-lg bg-blue-50 p-4"><h3 className="font-medium text-blue-700">Promedio diario</h3><p className="mt-2 text-sm text-blue-800">{average(periodUsers)} cuentas/día</p></div>
+              <div className="rounded-lg bg-green-50 p-4"><h3 className="font-medium text-green-700">Día con más registros</h3><p className="mt-2 text-sm text-green-800">{Math.max(0, ...userChartData.map(day => day.value))} cuentas</p></div>
+              <div className="rounded-lg bg-purple-50 p-4"><h3 className="font-medium text-purple-700">Total del período</h3><p className="mt-2 text-sm text-purple-800">{periodUsers} cuentas creadas</p></div>
             </div>
           </div>
         )}
@@ -307,82 +153,14 @@ export default function StatsDashboard({
         {activeTab === "activity" && (
           <div className="space-y-6">
             <div>
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
-                Actividad de Treasure Hunt (Últimos 30 días)
-              </h3>
-              <SimpleChart
-                data={scanChartData}
-                color="#10B981"
-                title="Escaneos QR por Día"
-              />
+              <h2 className="mb-2 text-lg font-medium text-gray-900">Escaneos QR · Últimos 30 días</h2>
+              <p className="mb-4 text-sm text-gray-600">{participantScope ? "Visitas registradas en esta edición." : "Visitas registradas en todas las ediciones."} Los días de las gráficas se agrupan en UTC.</p>
+              <SimpleChart data={scanChartData} color="#10B981" title="Escaneos QR por día" />
             </div>
-
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <div className="rounded-lg bg-green-50 p-4">
-                <div className="text-lg font-semibold text-green-600">
-                  Engagement
-                </div>
-                <div className="mt-2 text-sm text-green-800">
-                  Promedio:{" "}
-                  {Math.round(
-                    scanActivity.reduce(
-                      (sum, day) => sum + (day.scans || 0),
-                      0,
-                    ) / scanActivity.length,
-                  )}{" "}
-                  escaneos/día
-                </div>
-              </div>
-
-              <div className="rounded-lg bg-blue-50 p-4">
-                <div className="text-lg font-semibold text-blue-600">
-                  Día Más Activo
-                </div>
-                <div className="mt-2 text-sm text-blue-800">
-                  {Math.max(...scanActivity.map((d) => d.scans || 0))} escaneos
-                  máximos
-                </div>
-              </div>
-
-              <div className="rounded-lg bg-purple-50 p-4">
-                <div className="text-lg font-semibold text-purple-600">
-                  Total Escaneos
-                </div>
-                <div className="mt-2 text-sm text-purple-800">
-                  {scanActivity.reduce((sum, day) => sum + (day.scans || 0), 0)}{" "}
-                  en 30 días
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-yellow-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div className="ml-3">
-                  <h3 className="text-sm font-medium text-yellow-800">
-                    Sugerencia para Mejorar Engagement
-                  </h3>
-                  <div className="mt-2 text-sm text-yellow-700">
-                    <p>
-                      Considera lanzar campañas promocionales cuando la
-                      actividad baje o crear nuevos treasure hunts temáticos
-                      para mantener el interés de los usuarios.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <div className="rounded-lg bg-green-50 p-4"><h3 className="font-medium text-green-700">Promedio diario</h3><p className="mt-2 text-sm text-green-800">{average(periodScans)} escaneos/día</p></div>
+              <div className="rounded-lg bg-blue-50 p-4"><h3 className="font-medium text-blue-700">Día con más actividad</h3><p className="mt-2 text-sm text-blue-800">{Math.max(0, ...scanChartData.map(day => day.value))} escaneos</p></div>
+              <div className="rounded-lg bg-purple-50 p-4"><h3 className="font-medium text-purple-700">Total del período</h3><p className="mt-2 text-sm text-purple-800">{periodScans} escaneos en 30 días</p></div>
             </div>
           </div>
         )}

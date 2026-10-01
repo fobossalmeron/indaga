@@ -1,5 +1,5 @@
-import { supabase } from './supabase'
 import { createServerSupabaseClient } from './supabase'
+import { CURRENT_HUNT_YEAR, getHuntAvailability, isPublicTreasureCode, parseHuntYear, toPublicTreasureCode, toStoredTreasureCode } from './treasure-hunt-config'
 
 export interface TreasureHunt {
   id: string
@@ -19,6 +19,8 @@ export interface Treasure {
   treasure_code: string
   treasure_name: string
   treasure_secret: string
+  treasure_category: string | null
+  treasure_website: string | null
   treasure_location_maps_url: string | null
   location_coordinates: any | null
   created_at: string | null
@@ -50,295 +52,115 @@ export interface TreasureScanResult {
   progress?: TreasureProgress
 }
 
-export async function getActiveTreasureHunt(): Promise<TreasureHunt | null> {
-  const serverClient = createServerSupabaseClient()
-  const { data, error } = await serverClient
-    .from('treasure_hunts')
-    .select('*')
-    .eq('is_active', true)
-    .eq('year', 2025)
-    .single()
-
-  if (error) {
-    console.error('Error fetching active treasure hunt:', error)
-    return null
-  }
-
+// The physical table names are retained for compatibility; hunt_id separates editions.
+export async function getTreasureHunt(year = CURRENT_HUNT_YEAR): Promise<TreasureHunt | null> {
+  if (!parseHuntYear(year)) return null
+  const { data, error } = await createServerSupabaseClient()
+    .from('treasure_hunts').select('*').eq('year', year).maybeSingle()
+  if (error) throw error
   return data
 }
 
-export async function getTreasureByCode(code: string): Promise<Treasure | null> {
-  const serverClient = createServerSupabaseClient()
-  const { data, error } = await serverClient
-    .from('treasure_hunt_2025_treasures')
-    .select('*')
-    .eq('treasure_code', code)
-    .single()
+export async function getActiveTreasureHunt(year = CURRENT_HUNT_YEAR): Promise<TreasureHunt | null> {
+  const hunt = await getTreasureHunt(year)
+  return hunt?.is_active ? hunt : null
+}
 
-  if (error) {
-    console.error('Error fetching treasure by code:', error)
-    return null
-  }
+function publicTreasure<T extends { treasure_code: string }>(treasure: T, year: number): T {
+  return { ...treasure, treasure_code: toPublicTreasureCode(year, treasure.treasure_code) }
+}
 
-  return data
+export async function getTreasureByCode(code: string, year = CURRENT_HUNT_YEAR): Promise<Treasure | null> {
+  if (!isPublicTreasureCode(code) || !parseHuntYear(year)) return null
+  const hunt = await getTreasureHunt(year)
+  if (!hunt) return null
+  const { data, error } = await createServerSupabaseClient()
+    .from('treasure_hunt_2025_treasures').select('*')
+    .eq('hunt_id', hunt.id).eq('treasure_code', toStoredTreasureCode(year, code)).maybeSingle()
+  if (error) throw error
+  return data ? publicTreasure(data, year) : null
+}
+
+export async function getHuntTreasures(huntId: string, year: number): Promise<Treasure[]> {
+  const { data, error } = await createServerSupabaseClient()
+    .from('treasure_hunt_2025_treasures').select('*')
+    .eq('hunt_id', huntId).order('treasure_name')
+  if (error) throw error
+  return data.map(treasure => publicTreasure(treasure, year))
 }
 
 export async function getUserProgress(userId: string, huntId: string): Promise<TreasureProgress | null> {
-  // Usar cliente del servidor para operaciones autenticadas
-  const serverClient = createServerSupabaseClient()
-
-  const { data, error } = await serverClient
-    .from('treasure_hunt_2025_progress')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('hunt_id', huntId)
-    .single()
-
-  if (error && error.code !== 'PGRST116') { // Not found error is ok
-    console.error('Error fetching user progress:', error)
-    return null
-  }
-
+  const { data, error } = await createServerSupabaseClient()
+    .from('treasure_hunt_2025_progress').select('*')
+    .eq('user_id', userId).eq('hunt_id', huntId).maybeSingle()
+  if (error) throw error
   return data
 }
 
-export async function createUserProgress(userId: string, huntId: string): Promise<TreasureProgress | null> {
-  // Usar cliente del servidor para operaciones autenticadas
-  const serverClient = createServerSupabaseClient()
-
-  const { data, error } = await serverClient
-    .from('treasure_hunt_2025_progress')
-    .insert({
-      user_id: userId,
-      hunt_id: huntId,
-      treasures_found: 0,
-      completion_percentage: 0,
-      started_at: new Date().toISOString(),
-    })
-    .select()
-    .single()
-
-  if (error) {
-    console.error('Error creating user progress:', error)
-    return null
-  }
-
-  return data
-}
-
-export async function updateUserProgress(
-  userId: string,
-  huntId: string,
-  treasuresFound: number,
-  totalTreasures: number
-): Promise<TreasureProgress | null> {
-  const completionPercentage = (treasuresFound / totalTreasures) * 100
-  const isCompleted = completionPercentage >= 100
-
-  const updateData: any = {
-    treasures_found: treasuresFound,
-    completion_percentage: completionPercentage,
-  }
-
-  if (isCompleted) {
-    updateData.completed_at = new Date().toISOString()
-  }
-
-  // Usar cliente del servidor para operaciones autenticadas
-  const serverClient = createServerSupabaseClient()
-
-  const { data, error } = await serverClient
-    .from('treasure_hunt_2025_progress')
-    .update(updateData)
-    .eq('user_id', userId)
-    .eq('hunt_id', huntId)
-    .select()
-    .single()
-
-  if (error) {
-    console.error('Error updating user progress:', error)
-    return null
-  }
-
-  return data
-}
-
-export async function checkIfTreasureScanned(
-  userId: string,
-  treasureId: string
-): Promise<boolean> {
-  // Usar cliente del servidor para operaciones autenticadas
-  const serverClient = createServerSupabaseClient()
-
-  const { data, error } = await serverClient
+export async function getUserScannedTreasures(userId: string, huntId: string, year = CURRENT_HUNT_YEAR): Promise<Treasure[]> {
+  const { data, error } = await createServerSupabaseClient()
     .from('treasure_hunt_2025_scans')
-    .select('id')
-    .eq('user_id', userId)
-    .eq('treasure_id', treasureId)
-    .single()
-
-  if (error && error.code !== 'PGRST116') { // Not found error is ok
-    console.error('Error checking if treasure scanned:', error)
-    return false
-  }
-
-  return !!data
-}
-
-export async function recordTreasureScan(
-  userId: string,
-  huntId: string,
-  treasureId: string
-): Promise<TreasureScan | null> {
-  // Usar cliente del servidor para operaciones autenticadas
-  const serverClient = createServerSupabaseClient()
-
-  const { data, error } = await serverClient
-    .from('treasure_hunt_2025_scans')
-    .insert({
-      user_id: userId,
-      hunt_id: huntId,
-      treasure_id: treasureId,
-      scanned_at: new Date().toISOString(),
-    })
-    .select()
-    .single()
-
-  if (error) {
-    console.error('Error recording treasure scan:', error)
-    return null
-  }
-
-  return data
-}
-
-export async function getUserScannedTreasures(userId: string, huntId: string): Promise<Treasure[]> {
-  // Usar cliente del servidor para operaciones autenticadas
-  const serverClient = createServerSupabaseClient()
-
-  const { data, error } = await serverClient
-    .from('treasure_hunt_2025_scans')
-    .select(`
-      treasure_hunt_2025_treasures (
-        id,
-        hunt_id,
-        treasure_code,
-        treasure_name,
-        treasure_secret,
-        treasure_location_maps_url,
-        location_coordinates,
-        created_at
-      )
-    `)
-    .eq('user_id', userId)
-    .eq('hunt_id', huntId)
+    .select('treasure_hunt_2025_treasures(*)')
+    .eq('user_id', userId).eq('hunt_id', huntId)
     .order('scanned_at', { ascending: false })
-
-  if (error) {
-    console.error('Error fetching user scanned treasures:', error)
-    return []
-  }
-
-  return data.map(item => item.treasure_hunt_2025_treasures).filter(Boolean) as Treasure[]
+  if (error) throw error
+  return data.flatMap(item => {
+    const treasure = item.treasure_hunt_2025_treasures
+    return treasure && treasure.hunt_id === huntId ? [publicTreasure(treasure, year)] : []
+  })
 }
 
-export async function processTreasureScan(qrCode: string, userId: string): Promise<TreasureScanResult> {
+export async function getAvailableTreasureHunts(userId: string): Promise<TreasureHunt[]> {
+  const client = createServerSupabaseClient()
+  const [hunts, progress, scans] = await Promise.all([
+    client.from('treasure_hunts').select('*').in('year', [2025, 2026]).order('year', { ascending: false }),
+    client.from('treasure_hunt_2025_progress').select('hunt_id').eq('user_id', userId),
+    client.from('treasure_hunt_2025_scans').select('hunt_id').eq('user_id', userId),
+  ])
+  if (hunts.error || progress.error || scans.error) throw hunts.error || progress.error || scans.error
+  const participated = new Set([...progress.data, ...scans.data].map(row => row.hunt_id))
+  return hunts.data.filter(hunt => hunt.year === CURRENT_HUNT_YEAR || participated.has(hunt.id))
+}
+
+export async function processTreasureScan(qrCode: string, userId: string, year = CURRENT_HUNT_YEAR): Promise<TreasureScanResult> {
   try {
-    // Validate QR code format (should be descriptive format like "CAFE-LIMON")
-    if (!/^[A-Z0-9-]+$/.test(qrCode)) {
-      return {
-        success: false,
-        message: 'Este código QR no es válido para la búsqueda del tesoro 2025.'
-      }
+    if (!parseHuntYear(year) || !isPublicTreasureCode(qrCode)) {
+      return { success: false, message: 'Este código QR o edición no es válido.' }
+    }
+    const hunt = await getTreasureHunt(year)
+    if (!hunt) return { success: false, message: 'No se encontró esta búsqueda del tesoro.' }
+    const availability = getHuntAvailability(hunt)
+    const messages = {
+      upcoming: 'La búsqueda del tesoro aún no ha comenzado.',
+      ended: 'La búsqueda del tesoro ha terminado. Puedes consultar tu historial.',
+      inactive: 'Esta búsqueda del tesoro aún no está activa.',
+    }
+    if (availability !== 'open') return { success: false, message: messages[availability] }
+
+    const treasure = await getTreasureByCode(qrCode, year)
+    if (!treasure || treasure.hunt_id !== hunt.id) {
+      return { success: false, message: 'Código de tesoro no encontrado en esta edición.' }
     }
 
-    // Get active treasure hunt
-    const hunt = await getActiveTreasureHunt()
-    if (!hunt) {
-      return {
-        success: false,
-        message: 'No hay una búsqueda del tesoro activa en este momento.'
-      }
-    }
-
-    // Check if hunt is within date range
-    const now = new Date()
-    if (hunt.start_date && new Date(hunt.start_date) > now) {
-      return {
-        success: false,
-        message: 'La búsqueda del tesoro aún no ha comenzado.'
-      }
-    }
-    if (hunt.end_date && new Date(hunt.end_date) < now) {
-      return {
-        success: false,
-        message: 'La búsqueda del tesoro ha terminado.'
-      }
-    }
-
-    // Find treasure by code
-    const treasure = await getTreasureByCode(qrCode)
-    if (!treasure) {
-      return {
-        success: false,
-        message: 'Código de tesoro no encontrado.'
-      }
-    }
-
-    // Check if user already scanned this treasure
-    const alreadyScanned = await checkIfTreasureScanned(userId, treasure.id)
-    if (alreadyScanned) {
-      return {
-        success: true,
-        treasure,
-        alreadyScanned: true,
-        message: 'Ya habías encontrado este tesoro anteriormente.'
-      }
-    }
-
-    // Get or create user progress
-    let progress = await getUserProgress(userId, hunt.id)
-    if (!progress) {
-      progress = await createUserProgress(userId, hunt.id)
-      if (!progress) {
-        return {
-          success: false,
-          message: 'Error al inicializar el progreso del usuario.'
-        }
-      }
-    }
-
-    // Record the scan
-    const scan = await recordTreasureScan(userId, hunt.id, treasure.id)
-    if (!scan) {
-      return {
-        success: false,
-        message: 'Error al registrar el escaneo del tesoro.'
-      }
-    }
-
-    // Update user progress
-    const newTreasuresFound = (progress.treasures_found || 0) + 1
-    const updatedProgress = await updateUserProgress(
-      userId,
-      hunt.id,
-      newTreasuresFound,
-      hunt.total_treasures || 25
-    )
-
+    // The unique constraint handles repeat and concurrent scans. The database trigger
+    // is the sole writer of progress, so a visit cannot increment the counter twice.
+    const { error } = await createServerSupabaseClient()
+      .from('treasure_hunt_2025_scans')
+      .insert({ user_id: userId, hunt_id: hunt.id, treasure_id: treasure.id })
+    if (error && error.code !== '23505') throw error
+    const alreadyScanned = error?.code === '23505'
+    const progress = await getUserProgress(userId, hunt.id)
     return {
       success: true,
       treasure,
-      alreadyScanned: false,
-      progress: updatedProgress || progress,
-      message: `¡Tesoro encontrado! Llevas ${newTreasuresFound} de ${hunt.total_treasures} tesoros.`
+      alreadyScanned,
+      progress: progress || undefined,
+      message: alreadyScanned
+        ? 'Ya habías encontrado este tesoro anteriormente.'
+        : `¡Tesoro encontrado! Llevas ${progress?.treasures_found ?? 1} de ${hunt.total_treasures} tesoros.`,
     }
-
   } catch (error) {
     console.error('Error processing treasure scan:', error)
-    return {
-      success: false,
-      message: 'Error interno al procesar el código QR.'
-    }
+    return { success: false, message: 'Error interno al procesar el código QR.' }
   }
 }

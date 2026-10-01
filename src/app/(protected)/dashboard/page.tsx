@@ -78,7 +78,7 @@ export default function DashboardPage() {
                 <h3 className="text-xl font-bold text-gray-900">
                   Treasure Hunt
                 </h3>
-                <p className="text-sm text-gray-600">OFF FEST FISL 2025</p>
+                <p className="text-sm text-gray-600">TREASURE HUNT 2026</p>
               </div>
             </div>
             <div className="text-right">

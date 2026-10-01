@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from './use-auth'
+import { CURRENT_HUNT_YEAR } from '@/lib/treasure-hunt-config'
 
 interface TreasureProgress {
   treasuresFound: number
@@ -7,11 +8,11 @@ interface TreasureProgress {
   totalTreasures: number
 }
 
-export function useTreasureProgress() {
+export function useTreasureProgress(year = CURRENT_HUNT_YEAR) {
   const [progress, setProgress] = useState<TreasureProgress>({
     treasuresFound: 0,
     completionPercentage: 0,
-    totalTreasures: 25
+    totalTreasures: 0
   })
   const [isLoading, setIsLoading] = useState(true)
   const { data: session } = useAuth()
@@ -24,7 +25,7 @@ export function useTreasureProgress() {
       }
 
       try {
-        const response = await fetch('/api/treasure-progress')
+        const response = await fetch(`/api/treasure-progress?year=${year}`)
         if (response.ok) {
           const data = await response.json()
           setProgress(data)
@@ -37,7 +38,7 @@ export function useTreasureProgress() {
     }
 
     fetchProgress()
-  }, [session])
+  }, [session, year])
 
   return { progress, isLoading }
 }

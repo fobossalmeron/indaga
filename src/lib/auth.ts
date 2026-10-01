@@ -7,6 +7,8 @@ import { admin } from "better-auth/plugins"
 import { supabase, userOperations } from "./supabase"
 import { Resend } from "resend"
 import { Pool } from "pg"
+import { CURRENT_HUNT_YEAR } from "./treasure-hunt-config"
+import { getAuthTrustedOrigins } from "./auth-origins"
 
 // FIX: Handle SSL certificate issues for Supabase
 // This is necessary for Supabase connections in production
@@ -18,6 +20,8 @@ if (process.env.NODE_ENV === 'production') {
 
 console.log("--- [auth.ts] Loading ---")
 const databaseUrl = process.env.VERCELDB__POSTGRES_PRISMA_URL
+const authBaseURL = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+const trustedOrigins = getAuthTrustedOrigins(authBaseURL)
 
 console.log(
   "DATABASE_URL:",
@@ -32,6 +36,9 @@ export default betterAuth({
   // Database configuration
   database: new Pool({
     connectionString: databaseUrl,
+    // The restored Supabase role has an empty search_path. Better Auth uses
+    // unqualified table names, so select the schema on every pooled connection.
+    options: '-c search_path=public',
     ssl: {
       rejectUnauthorized: false,
     },
@@ -55,6 +62,16 @@ export default betterAuth({
   },
 
   user: {
+    // Write directly to the existing table: the legacy "user" view cannot
+    // satisfy UPDATE ... RETURNING when verifying a magic-link email.
+    modelName: "users",
+    fields: {
+      name: "full_name",
+      emailVerified: "email_verified",
+      image: "avatar_url",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
     additionalFields: {
       role: {
         type: "string",
@@ -66,16 +83,11 @@ export default betterAuth({
   // Secret for session encryption
   secret: process.env.BETTER_AUTH_SECRET!,
 
-  // Base URL - Dynamic based on request
-  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+  // Magic links and relative callbacks share this canonical origin.
+  baseURL: authBaseURL,
 
   // Trusted origins for Better Auth
-  trustedOrigins: [
-    "http://localhost:3000",
-    "http://192.168.100.22:3000",
-    "https://indaga.site",
-    "https://www.indaga.site"
-  ],
+  trustedOrigins,
 
   // Plugins
   plugins: [
@@ -139,7 +151,7 @@ export default betterAuth({
                   
                   <div style="margin-top: 30px; padding: 20px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
                     <p style="margin: 0; font-size: 14px; color: #92400e;">
-                      🏆 <strong>¡No olvides explorar el Treasure Hunt 2025!</strong><br>
+                      🏆 <strong>¡No olvides explorar el Treasure Hunt ${CURRENT_HUNT_YEAR}!</strong><br>
                       Escanea códigos QR por Monterrey y colecciona tesoros únicos durante el Festival Santa Lucía.
                     </p>
                   </div>
@@ -212,13 +224,7 @@ export default betterAuth({
 
   // Allowed origins
   cors: {
-    origin: [
-      process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-      "http://localhost:3000",
-      "http://192.168.100.22:3000",
-      "https://indaga.site",
-      "https://www.indaga.site",
-    ],
+    origin: trustedOrigins,
     credentials: true,
   },
 

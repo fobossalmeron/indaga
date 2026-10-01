@@ -1,158 +1,86 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { toast } from "sonner";
+import { useRouter, useSearchParams } from "next/navigation";
 import ProgressTracker from "@/app/components/features/progress-tracker";
-import { Button } from "@/app/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
-import type {
-  TreasureHunt,
-  TreasureProgress,
-  Treasure,
-} from "@/lib/treasure-hunt-2025";
+import { CURRENT_HUNT_YEAR, getHuntAvailability, parseHuntYear } from "@/lib/treasure-hunt-config";
+import type { TreasureHunt, TreasureProgress, Treasure } from "@/lib/treasure-hunt-2025";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
 
 interface TreasurePageData {
   hunt: TreasureHunt | null;
   progress: TreasureProgress | null;
   scannedTreasures: Treasure[];
+  allTreasures: Treasure[];
+  availableHunts: TreasureHunt[];
 }
 
 export default function TreasuresPage() {
   const [data, setData] = useState<TreasurePageData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const { data: session, isPending } = useAuth();
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const userId = session?.user?.id;
+  const year = parseHuntYear(searchParams.get("year"));
 
   useEffect(() => {
-    if (!isPending && session?.user) {
-      loadTreasureData();
-    } else if (!isPending && !session?.user) {
-      setLoading(false);
+    if (isPending || !userId || !year) {
+      if (!isPending) setLoading(false);
+      return;
     }
-  }, [session, isPending]);
-
-  useEffect(() => {
-    const error = searchParams.get("error");
-    if (error === "technical") {
-      toast.error("Algo salió mal. Intenta escanear el código nuevamente.", {
-        duration: 5000,
-        style: {
-          background: "#fef2f2",
-          border: "1px solid #fecaca",
-          color: "#dc2626",
-        },
-      });
-    }
-  }, [searchParams]);
-
-  const loadTreasureData = async () => {
+    const controller = new AbortController();
     setLoading(true);
-    try {
-      const response = await fetch("/api/treasure-data");
-      if (response.ok) {
-        const treasureData = await response.json();
-        setData(treasureData);
-      } else {
-        setData({
-          hunt: null,
-          progress: null,
-          scannedTreasures: [],
-        });
-      }
-    } catch (error) {
-      console.error("Error loading treasure data:", error);
-      setData({
-        hunt: null,
-        progress: null,
-        scannedTreasures: [],
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+    setLoadError(false);
+    setData(null);
+    fetch(`/api/treasure-data?year=${year}`, { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("No se pudo cargar esta edición");
+        setData(await response.json());
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") setLoadError(true);
+      })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false); });
+    return () => controller.abort();
+  }, [userId, isPending, year]);
 
-  if (loading) {
-    return (
-      <div className="py-8">
-        <div className="mx-auto max-w-4xl px-4">
-          <div className="py-8 text-center">
-            <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
-            <p>Cargando datos del treasure hunt...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (loading || isPending) return <div className="py-12 text-center"><Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" /><p>Cargando Treasure Hunt...</p></div>;
 
-  if (!data?.hunt) {
-    return (
-      <div className="py-8">
-        <div className="mx-auto max-w-4xl px-4">
-          <div className="py-12 text-center">
-            <svg
-              className="mx-auto mb-4 h-16 w-16 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <h3 className="mb-2 text-lg font-medium text-gray-900">
-              No hay treasure hunt activo
-            </h3>
-            <p className="mb-6 text-gray-600">
-              En este momento no hay ninguna búsqueda del tesoro disponible.
-            </p>
-            <Button onClick={() => (window.location.href = "/dashboard")}>
-              Volver al Dashboard
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const status = data?.hunt ? getHuntAvailability(data.hunt) : null;
+  const scanError = searchParams.get("error");
+  const message = searchParams.get("message");
 
   return (
-    <div className="py-4">
-      <div className="mx-auto max-w-4xl">
-        {/* Header */}
-        <div className="mb-8 flex w-full flex-col gap-8 text-center md:flex-row md:items-center md:justify-between md:text-left">
-          <div className="flex justify-center md:justify-start">
-            <Image
-              src="/festival_santa_lucia.svg"
-              alt="OFF FST Festival Internacional de Santa Lucia"
-              width={200}
-              height={200}
-            />
-          </div>
-          {session?.user?.email && (
-            <div className="text-center md:text-right">
-              <p className="text-base leading-tight md:text-lg">
-                Hola,
-                <br />
-                <span className="text-gray-600">{session.user.email}</span>
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Progress Tracker with integrated Treasure Map */}
-        <ProgressTracker
-          hunt={data.hunt}
-          progress={data.progress}
-          scannedTreasures={data.scannedTreasures}
-          onRefresh={loadTreasureData}
-          scannedCode={searchParams.get("scanned")}
-        />
+    <div className="py-4"><div className="mx-auto max-w-4xl">
+      <div className="mb-8 flex w-full flex-col gap-8 text-center md:flex-row md:items-center md:justify-between md:text-left">
+        <Image src="/festival_santa_lucia.svg" alt="Festival Internacional de Santa Lucía" width={200} height={200} className="mx-auto md:mx-0" />
+        {session?.user?.email && <p className="text-base md:text-right">Hola,<br /><span className="text-gray-600">{session.user.email}</span></p>}
       </div>
-    </div>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-2xl">TREASURE HUNT {year || CURRENT_HUNT_YEAR}</h1>
+        <div className="flex items-center gap-2 text-sm">
+          <label htmlFor="treasure-edition">Edición</label>
+          <Select value={String(year || CURRENT_HUNT_YEAR)} onValueChange={(value) => router.push(`/treasures?year=${value}`)}>
+            <SelectTrigger id="treasure-edition" aria-label="Edición del Treasure Hunt" className="bg-white">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {(data?.availableHunts?.length ? data.availableHunts : [{ id: "current", year: CURRENT_HUNT_YEAR }]).map((hunt) => <SelectItem key={hunt.id} value={String(hunt.year)}>{hunt.year}{hunt.year < CURRENT_HUNT_YEAR ? " · Historial" : ""}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+      {status === "ended" && <p className="mb-6 rounded-lg bg-gray-100 p-4">Esta edición terminó. Consulta aquí tu historial de visitas y logros.</p>}
+      {status === "upcoming" && <p className="mb-6 rounded-lg bg-blue-50 p-4">La edición todavía no comienza. Las visitas se registran desde el 30 de septiembre de 2026 a las 23:00, hora de Monterrey.</p>}
+      {status === "inactive" && <p className="mb-6 rounded-lg bg-blue-50 p-4">Esta edición está en preparación. El registro de visitas aún no está habilitado.</p>}
+      {scanError && <p role="alert" className="mb-6 rounded-lg bg-red-50 p-4 text-red-700">{message || (scanError === "technical" ? "No se pudo registrar la visita. Intenta escanear el QR nuevamente." : "No se pudo registrar esta visita. Revisa la edición y sus fechas.")}</p>}
+      {loadError ? <p role="alert">No se pudo cargar esta edición. Recarga la página para intentar de nuevo.</p> : !data?.hunt ? <p>Esta edición no está disponible.</p> :
+        <ProgressTracker key={data.hunt.id} hunt={data.hunt} progress={data.progress} scannedTreasures={data.scannedTreasures} treasures={data.allTreasures} scannedCode={searchParams.get("scanned")} />}
+    </div></div>
   );
 }

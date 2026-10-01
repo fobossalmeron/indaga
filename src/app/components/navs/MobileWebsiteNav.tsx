@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/app/components/ui/button";
 import { NavLink } from "./NavLink";
 import { useLenis } from "lenis/react";
 
@@ -81,6 +83,14 @@ export const MobileWebsiteNav = () => {
               ))}
             </ul>
           </nav>
+          <div className="hidden items-center gap-5">
+            <Link href="/login" onClick={() => setIsOpen(false)} className="text-sm underline underline-offset-4">
+              Iniciar sesión
+            </Link>
+            <Button asChild size="thin">
+              <Link href="/login" onClick={() => setIsOpen(false)}>Regístrate</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </>

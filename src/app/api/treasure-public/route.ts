@@ -1,41 +1,18 @@
-import { NextResponse } from 'next/server'
-import { getActiveTreasureHunt } from '@/lib/treasure-hunt-2025'
-import { createServerSupabaseClient } from '@/lib/supabase'
+import { NextRequest, NextResponse } from 'next/server'
+import { getHuntTreasures, getTreasureHunt } from '@/lib/treasure-hunt-2025'
+import { parseHuntYear } from '@/lib/treasure-hunt-config'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    // Obtener treasure hunt activo
-    const hunt = await getActiveTreasureHunt()
-    if (!hunt) {
-      return NextResponse.json({
-        error: 'No hay una búsqueda del tesoro activa'
-      }, { status: 404 })
-    }
-
-    // Obtener todos los tesoros (datos públicos solamente)
-    const serverClient = createServerSupabaseClient()
-    const { data: allTreasures, error } = await serverClient
-      .from('treasure_hunt_2025_treasures')
-      .select('id, treasure_code, treasure_name, treasure_location_maps_url')
-      .eq('hunt_id', hunt.id)
-      .order('treasure_code', { ascending: true })
-
-    if (error) {
-      console.error('Error fetching public treasures:', error)
-      return NextResponse.json({
-        error: 'Error al obtener los tesoros'
-      }, { status: 500 })
-    }
-
-    return NextResponse.json({
-      treasures: allTreasures,
-      totalTreasures: allTreasures.length
-    })
-
+    const year = parseHuntYear(request.nextUrl.searchParams.get('year'))
+    if (!year) return NextResponse.json({ error: 'Edición inválida' }, { status: 400 })
+    const hunt = await getTreasureHunt(year)
+    if (!hunt) return NextResponse.json({ error: 'No se encontró esta edición' }, { status: 404 })
+    const allTreasures = await getHuntTreasures(hunt.id, year)
+    const treasures = allTreasures.map(({ treasure_secret, ...treasure }) => treasure)
+    return NextResponse.json({ hunt, treasures, totalTreasures: treasures.length })
   } catch (error) {
     console.error('Error fetching public treasure data:', error)
-    return NextResponse.json({
-      error: 'Error interno del servidor'
-    }, { status: 500 })
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
   }
 }

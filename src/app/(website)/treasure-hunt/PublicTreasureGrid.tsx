@@ -23,10 +23,12 @@ interface PublicTreasure {
 
 interface PublicTreasureGridProps {
   treasures: PublicTreasure[];
+  year: number;
+  historical: boolean;
 }
 
 export default function PublicTreasureGrid({
-  treasures,
+  treasures, year, historical,
 }: PublicTreasureGridProps) {
   const [selectedTreasure, setSelectedTreasure] =
     useState<PublicTreasure | null>(null);
@@ -39,7 +41,7 @@ export default function PublicTreasureGrid({
             Ubicaciones participantes
           </h3>
           <p className="mt-2 text-gray-600">
-            {treasures.length} tesoros esperando ser descubiertos
+            {treasures.length} lugares · Edición {year}
           </p>
         </div>
 
@@ -55,10 +57,11 @@ export default function PublicTreasureGrid({
               >
                 <PlaceCard
                   title={treasure.treasure_name}
-                  mapLink={{ url: treasure.treasure_location_maps_url }}
-                  link={{ url: treasure.treasure_website }}
+                  mapLink={treasure.treasure_location_maps_url ? { link_type: "Web", url: treasure.treasure_location_maps_url } : undefined}
+                  link={treasure.treasure_website ? { link_type: "Web", url: treasure.treasure_website } : undefined}
                   category={treasure.treasure_category || undefined}
                   className="active:border-primary hover:border-primary border-2 border-transparent transition-colors"
+                  description={`Edición ${year}`}
                   grayscale={true}
                 />
               </div>
@@ -85,7 +88,7 @@ export default function PublicTreasureGrid({
                 </DialogTitle>
 
                 <span className="inline-block rounded-full border-1 border-gray-400 bg-gray-100 px-3 py-1 text-sm text-gray-800">
-                  Por descubrir
+                  {historical ? `Historial ${year}` : `Por descubrir · ${year}`}
                 </span>
               </div>
             </div>
@@ -93,8 +96,8 @@ export default function PublicTreasureGrid({
 
           <div className="mb-6 space-y-4">
             <div className="text-center">
-              <a
-                href={selectedTreasure?.treasure_location_maps_url || "#"}
+              {selectedTreasure?.treasure_location_maps_url ? <a
+                href={selectedTreasure.treasure_location_maps_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-primary/20 bg-primary/5 hover:bg-primary/10 mx-auto block rounded-lg border-2 px-6 py-4 transition-colors"
@@ -103,10 +106,10 @@ export default function PublicTreasureGrid({
                 <div className="text-primary text-sm font-medium">
                   Ver en el mapa
                 </div>
-              </a>
+              </a> : <p className="text-sm text-gray-500">Google Maps próximamente</p>}
+              {selectedTreasure?.treasure_website ? <a href={selectedTreasure.treasure_website} target="_blank" rel="noopener noreferrer" className="mt-4 block text-primary underline">Instagram / web</a> : <p className="mt-4 text-sm text-gray-500">Instagram / web próximamente</p>}
               <p className="mt-3 text-xs text-gray-500">
-                Encuentra este lugar y escanea el QR para revelar la palabra
-                secreta
+                {historical ? "Esta edición terminó. Consulta tus visitas iniciando sesión." : "Visita este lugar y escanea su QR para registrar tu visita."}
               </p>
             </div>
           </div>

@@ -1,0 +1,354 @@
+{
+  "year": 2026,
+  "name": "TREASURE HUNT 2026",
+  "description": "Búsqueda del tesoro durante el Festival Internacional de Santa Lucía. Visita los 49 lugares participantes y colecciona sus tesoros.",
+  "start_date": "2026-10-01T05:00:00.000Z",
+  "end_date": "2026-12-02T06:00:00.000Z",
+  "public_origin": "https://www.indaga.site",
+  "treasure_secret": "ENCONTRADO",
+  "venues": [
+    {
+      "code": "ALMACEN-42",
+      "name": "Almacén 42",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/almacen42/",
+      "maps_url": "https://maps.app.goo.gl/U3vptpjroUKLp8JP6"
+    },
+    {
+      "code": "APARATO",
+      "name": "Aparato",
+      "category": "Música en Vivo",
+      "website": "https://www.instagram.com/aparatocontenedor/",
+      "maps_url": "https://maps.app.goo.gl/iVc5cEQSk17okqqGA"
+    },
+    {
+      "code": "ARDE-ARTE",
+      "name": "Arde Arte",
+      "category": "Espacios de Arte",
+      "website": "https://www.instagram.com/ardearte__/",
+      "maps_url": "https://maps.app.goo.gl/yXZQEjxQr9yCWGCQ8"
+    },
+    {
+      "code": "ASAMBLEA",
+      "name": "Asamblea",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/asambleacafe/",
+      "maps_url": "https://maps.app.goo.gl/S5RxuKxPCgppDTkd6"
+    },
+    {
+      "code": "BAR-1900",
+      "name": "Bar 1900",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/bar1900mty/",
+      "maps_url": "https://maps.app.goo.gl/Ye6Cx67zMitGqXwK6"
+    },
+    {
+      "code": "BARVIN",
+      "name": "Barvin",
+      "category": "Restaurantes",
+      "website": "https://www.instagram.com/barvinbarvinbarvin/",
+      "maps_url": "https://maps.app.goo.gl/kqG3PQpBFrSErkSE6"
+    },
+    {
+      "code": "BELMONTE",
+      "name": "Belmonte",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/cafe.belmonte.bar/",
+      "maps_url": "https://maps.app.goo.gl/eDdciZ186v4PJsR8A"
+    },
+    {
+      "code": "BENGALA",
+      "name": "Bengala",
+      "category": "Compras locales",
+      "website": "https://www.instagram.com/bengala____mx/",
+      "maps_url": "https://maps.app.goo.gl/ZyostFkQayVYYtTt6"
+    },
+    {
+      "code": "BIENTEVEO",
+      "name": "Bienteveo",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/bienteveocafe/",
+      "maps_url": "https://maps.app.goo.gl/EEnddKrxFQvQjTDA8"
+    },
+    {
+      "code": "BLUM-CAFE",
+      "name": "Blum Café",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/blumbistro/",
+      "maps_url": "https://maps.app.goo.gl/5b6gxsYbyLLAY9dC9"
+    },
+    {
+      "code": "BORRADOS-DESTILERIA",
+      "name": "Borrados Destilería",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/borradosdestileria/",
+      "maps_url": "https://maps.app.goo.gl/Q1gEyhFLd1JLBwDR7"
+    },
+    {
+      "code": "CAFE-ESOTERICO",
+      "name": "Café Esotérico",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/esotericocafe/",
+      "maps_url": "https://maps.app.goo.gl/9ky6rqRwCTMaSvnx8"
+    },
+    {
+      "code": "CAFE-LIMON",
+      "name": "Café Limón",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/cafe_limon/",
+      "maps_url": "https://maps.app.goo.gl/a4NY5ZzzFMGrcsAJ9"
+    },
+    {
+      "code": "CASA-VERNACULA",
+      "name": "Casa Vernácula",
+      "category": "Espacios de Arte",
+      "website": "https://www.instagram.com/casa.vernacula2024/",
+      "maps_url": "https://maps.app.goo.gl/tJ6gnx7mpgSzY46R9"
+    },
+    {
+      "code": "CERVECERIA-FAUSTO",
+      "name": "Cervecería Fausto",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/cerveceriafausto/",
+      "maps_url": "https://maps.app.goo.gl/Ag78THQkkuReEJBy8"
+    },
+    {
+      "code": "COFFEE-WITH-ALIENS",
+      "name": "Coffee with Aliens",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/meetthealiens/",
+      "maps_url": "https://maps.app.goo.gl/omuZkcX2awUN6Ja47"
+    },
+    {
+      "code": "COMANDO-CAFE",
+      "name": "Comando Café",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/comandocafe/",
+      "maps_url": "https://maps.app.goo.gl/9nyiekqK9bVtkju79"
+    },
+    {
+      "code": "CRACK-COFFEE-LAB",
+      "name": "Crack Coffee Lab",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/crackcoffeelab/",
+      "maps_url": "https://maps.app.goo.gl/9oZfS3jadQpTPdMZ9"
+    },
+    {
+      "code": "CUADROCHICO-CAFE",
+      "name": "Cuadrochico Café",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/cuadrochicocafe/",
+      "maps_url": "https://maps.app.goo.gl/yW2DpniaMyvtWAEx9"
+    },
+    {
+      "code": "CUARTO-DE-SERVICIO",
+      "name": "Cuarto de Servicio",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/cuarto_de_servicio/",
+      "maps_url": "https://maps.app.goo.gl/nN7L1MTajfiRxS5q9"
+    },
+    {
+      "code": "FORTUITA",
+      "name": "Fortuita",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/fortuita.cafe/",
+      "maps_url": "https://maps.app.goo.gl/JRtgXxgh5W7YYtwNA"
+    },
+    {
+      "code": "GALERIA-ARTE-ACTUAL",
+      "name": "Galería Arte Actual",
+      "category": "Espacios de Arte",
+      "website": "https://www.instagram.com/arteactualmx/",
+      "maps_url": "https://maps.app.goo.gl/u9V346gPvywBcvHw9"
+    },
+    {
+      "code": "GALERIA-GOTXIKOA",
+      "name": "Galería Gotxikoa",
+      "category": "Espacios de Arte",
+      "website": "https://www.instagram.com/galeriagotxikoa/",
+      "maps_url": "https://maps.app.goo.gl/YHYrNywEYSNGSTwd7"
+    },
+    {
+      "code": "GARGANTUA",
+      "name": "Gargantúa",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/gargantuaespaciocultural/",
+      "maps_url": "https://maps.app.goo.gl/am4h8dT5kZGdp9xy7"
+    },
+    {
+      "code": "JABALINA",
+      "name": "Jabalina",
+      "category": "Restaurantes",
+      "website": "https://www.instagram.com/jabalinamx/",
+      "maps_url": "https://maps.app.goo.gl/YDtzGrSHVBuKrWAx9"
+    },
+    {
+      "code": "JUN-CAFE",
+      "name": "Jun Café",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/juncafesdemexico/",
+      "maps_url": "https://maps.app.goo.gl/qUgxiZqsVvRjsJ2R6"
+    },
+    {
+      "code": "LAS-DUNAS-RECORD-CAFE",
+      "name": "Las Dunas Record Café",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/lasdunas_records/",
+      "maps_url": "https://maps.app.goo.gl/XfJFrKGMjyrTRk2B7"
+    },
+    {
+      "code": "LIMINAL-904",
+      "name": "Liminal 904",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/liminal.904/",
+      "maps_url": "https://maps.app.goo.gl/1gPMHkjyWbgqvWhU9"
+    },
+    {
+      "code": "MARNE-GALERIA",
+      "name": "Marne Galería",
+      "category": "Espacios de Arte",
+      "website": "https://marnestudios.com/",
+      "maps_url": "https://maps.app.goo.gl/VDWGtTw9S5UEAxvr7?g_st=ipc"
+    },
+    {
+      "code": "MAUT",
+      "name": "MAUT",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/maut.mx/",
+      "maps_url": "https://maps.app.goo.gl/6jzGFoz5LUmLKsaj7"
+    },
+    {
+      "code": "MAVERICK",
+      "name": "Maverick",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/maverick.mty/",
+      "maps_url": "https://maps.app.goo.gl/iWW4pvB7Jp2QtPRe7"
+    },
+    {
+      "code": "MEMO-LOCAL",
+      "name": "Memo Local",
+      "category": "Música en Vivo",
+      "website": "https://www.instagram.com/memolocal/",
+      "maps_url": "https://maps.app.goo.gl/FC9YUGEYJ3BDSaDcA"
+    },
+    {
+      "code": "MONTECOYOTE",
+      "name": "Montecoyote",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/montecoyote/",
+      "maps_url": "https://maps.app.goo.gl/uiP52vVqLp5LSb327"
+    },
+    {
+      "code": "MUSIC-LAB",
+      "name": "Music Lab",
+      "category": "Compras locales",
+      "website": "https://www.instagram.com/musiclabmx/",
+      "maps_url": "https://maps.app.goo.gl/FpSn4JMzMsM9yDs28"
+    },
+    {
+      "code": "NODRIZA-ESTUDIO",
+      "name": "Nodriza Estudio",
+      "category": "Música en Vivo",
+      "website": "https://www.instagram.com/nodrizaestudio/",
+      "maps_url": "https://maps.app.goo.gl/QRQogNxvVw6Tv1yE9"
+    },
+    {
+      "code": "PANUCO-COFFEE-BAR",
+      "name": "Pánuco Coffee Bar",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/panucocoffeebar/",
+      "maps_url": "https://maps.app.goo.gl/TXyrnTpm2VPovkAS8"
+    },
+    {
+      "code": "PUNTO-Y-COMA",
+      "name": "Punto y Coma",
+      "category": "Compras locales",
+      "website": "https://www.instagram.com/puntocomamty/",
+      "maps_url": "https://maps.app.goo.gl/use7hcSZG9795UAo9"
+    },
+    {
+      "code": "RAY-BAR",
+      "name": "Ray Bar",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/raybar1955/",
+      "maps_url": "https://maps.app.goo.gl/xfRheCxqUzYN5mRk7"
+    },
+    {
+      "code": "REGULAR",
+      "name": "Regular",
+      "category": "Cafeterías",
+      "website": "https://www.instagram.com/regularcoffeeandbooks/",
+      "maps_url": "https://maps.app.goo.gl/7AHgyfaeDou6KjXb8"
+    },
+    {
+      "code": "SAXY",
+      "name": "Saxy",
+      "category": "Música en Vivo",
+      "website": "https://www.instagram.com/saxyjazzclub/",
+      "maps_url": "https://maps.app.goo.gl/ZaHmTdtzSVZNrvJJA"
+    },
+    {
+      "code": "SITIO-CENTRO",
+      "name": "Sitio Centro",
+      "category": "Espacios de Arte",
+      "website": "https://www.instagram.com/sitio_centro/",
+      "maps_url": "https://maps.app.goo.gl/2fdv1ZP7SKT81nwW6"
+    },
+    {
+      "code": "SUCULENTA-FONDITA-CULTURAL",
+      "name": "Suculenta Fondita Cultural",
+      "category": "Restaurantes",
+      "website": "https://www.instagram.com/suculenta_fondita_cultural/",
+      "maps_url": "https://maps.app.goo.gl/SVKrKn7KxzPS4UAq7"
+    },
+    {
+      "code": "TALLER-1010",
+      "name": "Taller 10/10",
+      "category": "Espacios de Arte",
+      "website": "https://www.instagram.com/taller1010/",
+      "maps_url": "https://maps.app.goo.gl/j6CVaEWUR396uGQG9"
+    },
+    {
+      "code": "TRIANA",
+      "name": "Triana",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/trianamty/",
+      "maps_url": "https://maps.app.goo.gl/5yVYdgzYGPZCeZSe7"
+    },
+    {
+      "code": "TROPICO-MARKET",
+      "name": "Trópico Market",
+      "category": "Compras locales",
+      "website": "https://www.instagram.com/tropico.market/",
+      "maps_url": "https://maps.app.goo.gl/7piEocxBit7HpbTR9"
+    },
+    {
+      "code": "UNCULTURED",
+      "name": "Uncultured Press",
+      "category": "Compras locales",
+      "website": "https://www.instagram.com/unculturedpress/",
+      "maps_url": "https://maps.app.goo.gl/dUoa7dwh4nxw3Cw88"
+    },
+    {
+      "code": "VERNACULO",
+      "name": "Vernáculo",
+      "category": "Restaurantes",
+      "website": "https://www.instagram.com/vernaculonl/",
+      "maps_url": "https://maps.app.goo.gl/RZdfy1jypEM2M3Nz8"
+    },
+    {
+      "code": "YOKOTAN",
+      "name": "Yokot'an",
+      "category": "Restaurantes",
+      "website": "https://www.instagram.com/yokotanmx/",
+      "maps_url": "https://maps.app.goo.gl/3mqfrvPUZWjLFybS8"
+    },
+    {
+      "code": "ZIG-ZAG",
+      "name": "Zig Zag",
+      "category": "Bares & Cantinas",
+      "website": "https://www.instagram.com/zig_zag_mx/",
+      "maps_url": "https://maps.app.goo.gl/C6xyvHBfRYCLMduo9"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/app/components/ui/button";
 import {
   Dialog,
@@ -8,12 +8,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/app/components/ui/dialog";
-import { Check, HelpCircle, Loader2, Map } from "lucide-react";
+import { Check, HelpCircle, Map } from "lucide-react";
 import type {
   TreasureHunt,
   TreasureProgress,
   Treasure,
 } from "@/lib/treasure-hunt-2025";
+
+import { getHuntAvailability } from "@/lib/treasure-hunt-config";
 
 interface AllTreasure extends Treasure {
   isScanned: boolean;
@@ -23,7 +25,7 @@ interface ProgressTrackerProps {
   hunt: TreasureHunt;
   progress: TreasureProgress | null;
   scannedTreasures: Treasure[];
-  onRefresh?: () => void;
+  treasures: Treasure[];
   scannedCode?: string | null;
 }
 
@@ -31,50 +33,19 @@ export default function ProgressTracker({
   hunt,
   progress,
   scannedTreasures,
-  onRefresh,
+  treasures,
   scannedCode,
 }: ProgressTrackerProps) {
-  const [allTreasures, setAllTreasures] = useState<AllTreasure[]>([]);
-  const [loadingTreasures, setLoadingTreasures] = useState(false);
-  const [selectedTreasure, setSelectedTreasure] = useState<AllTreasure | null>(
-    null,
-  );
-
-  // Usar el conteo real de tesoros escaneados en lugar del campo progress
+  const [selectedTreasure, setSelectedTreasure] = useState<AllTreasure | null>(null);
+  const allTreasures = useMemo(() => {
+    const scannedIds = new Set(scannedTreasures.map((treasure) => treasure.id));
+    return treasures.map((treasure) => ({ ...treasure, isScanned: scannedIds.has(treasure.id) }));
+  }, [treasures, scannedTreasures]);
   const treasuresFound = scannedTreasures.length;
-  const totalTreasures = hunt.total_treasures || 25;
-  const completionPercentage = (treasuresFound / totalTreasures) * 100;
-  const isCompleted = completionPercentage >= 100;
-
-  useEffect(() => {
-    loadAllTreasures();
-  }, [hunt.id, scannedTreasures, scannedCode]);
-
-  const loadAllTreasures = async () => {
-    setLoadingTreasures(true);
-    try {
-      const response = await fetch("/api/treasure-data");
-      if (!response.ok) {
-        throw new Error("Error al cargar los datos del treasure hunt");
-      }
-
-      const { allTreasures } = await response.json();
-
-      // Mark which treasures have been scanned usando los props
-      const scannedIds = new Set(scannedTreasures.map((t: any) => t.id));
-
-      const treasuresWithStatus = allTreasures.map((treasure: any) => ({
-        ...treasure,
-        isScanned: scannedIds.has(treasure.id),
-      }));
-
-      setAllTreasures(treasuresWithStatus);
-    } catch (error) {
-      console.error("Error in loadAllTreasures:", error);
-    } finally {
-      setLoadingTreasures(false);
-    }
-  };
+  const totalTreasures = hunt.total_treasures || treasures.length;
+  const completionPercentage = totalTreasures > 0 ? (treasuresFound / totalTreasures) * 100 : 0;
+  const isCompleted = totalTreasures > 0 && treasuresFound >= totalTreasures;
+  const isHistorical = hunt.year === 2025 || getHuntAvailability(hunt) === "ended";
 
   useEffect(() => {
     if (scannedCode && allTreasures.length > 0) {
@@ -115,6 +86,7 @@ export default function ProgressTracker({
   };
 
   const getProgressMessage = () => {
+    if (isHistorical) return "Tu progreso guardado en esta edición";
     if (isCompleted) {
       return "¡Felicidades! Has completado la búsqueda del tesoro";
     }
@@ -155,7 +127,7 @@ export default function ProgressTracker({
           </div>
 
           <h2 className="text-foreground mb-2 text-3xl">
-            {treasuresFound} de {totalTreasures} Tesoros
+            {treasuresFound} de {totalTreasures} Tesoros · {hunt.year}
           </h2>
 
           <p className="mb-4 text-gray-600">{getProgressMessage()}</p>
@@ -329,7 +301,7 @@ export default function ProgressTracker({
       <div className="rounded-lg bg-white p-6 shadow-lg">
         <div className="mb-6 flex flex-col items-center justify-between md:flex-row">
           <h3 className="text-foreground text-xl">
-            Todos los tesoros ({allTreasures.length})
+            Tesoros {hunt.year} ({allTreasures.length})
           </h3>
           <div className="text-foreground text-sm">
             {scannedTreasures.length} de {allTreasures.length} encontrados
@@ -351,12 +323,6 @@ export default function ProgressTracker({
           </div>
         </div>
 
-        {loadingTreasures ? (
-          <div className="py-8 text-center">
-            <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
-            <p>Cargando tesoros...</p>
-          </div>
-        ) : (
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
             {allTreasures.map((treasure) => (
               <button
@@ -371,11 +337,11 @@ export default function ProgressTracker({
                   <div className="text-xs font-medium">
                     {treasure.treasure_name}
                   </div>
+                  <span className="text-xs opacity-75">{hunt.year}</span>
                 </div>
               </button>
             ))}
           </div>
-        )}
       </div>
 
       {/* Treasure Detail Dialog */}
@@ -405,6 +371,7 @@ export default function ProgressTracker({
                 <DialogTitle className="mb-2 text-xl font-medium text-gray-900">
                   {selectedTreasure?.treasure_name}
                 </DialogTitle>
+                <p className="mb-2 text-sm text-gray-500">Edición {hunt.year}{isHistorical ? " · Historial" : ""}</p>
 
                 {selectedTreasure?.isScanned ? (
                   <span className="inline-block rounded-full border-1 border-green-500 bg-green-100 px-3 py-1 text-sm text-green-800">
@@ -423,37 +390,18 @@ export default function ProgressTracker({
             <div className="text-center">
               {selectedTreasure?.isScanned ? (
                 <>
-                  <div className="mb-2 text-sm font-medium text-gray-600">
-                    Palabra secreta:
-                  </div>
-                  <div className="bg-primary/10 border-primary/20 mx-auto rounded-lg border-2 px-6 py-4">
-                    <div className="text-primary text-3xl font-medium tracking-wider">
-                      {selectedTreasure?.treasure_secret}
-                    </div>
-                  </div>
-                  <p className="mt-3 text-xs text-gray-500">
-                    Muestra esta palabra para recibir tu tesoro
-                  </p>
+                  {hunt.year === 2025 && <div className="bg-primary/10 border-primary/20 rounded-lg border-2 px-6 py-4"><p className="text-sm text-gray-600">Palabra de esta visita</p><p className="text-primary text-3xl">{selectedTreasure.treasure_secret}</p></div>}
+                  <p className="mt-3 text-base font-medium">{isHistorical ? "Visita registrada en tu historial" : "Muestra esta pantalla para recibir tu tesoro"}</p>
                 </>
               ) : (
-                <>
-                  <a
-                    href={selectedTreasure?.treasure_location_maps_url || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mx-auto block rounded-lg border-2 border-blue-200 bg-blue-50 px-6 py-4 transition-colors hover:bg-blue-100"
-                  >
-                    <Map className="mx-auto mb-2 h-8 w-8 text-blue-600" />
-                    <div className="text-sm font-medium text-blue-600">
-                      Ver en el mapa
-                    </div>
-                  </a>
-                  <p className="mt-3 text-xs text-gray-500">
-                    Encuentra este lugar y escanea el QR para revelar la palabra
-                    secreta
-                  </p>
-                </>
+                <p className="mb-4 text-sm text-gray-600">{isHistorical ? "No registraste una visita a este lugar en esta edición." : "Visita este lugar y escanea su QR para registrar tu visita."}</p>
               )}
+              {selectedTreasure?.treasure_location_maps_url ? (
+                <a href={selectedTreasure.treasure_location_maps_url} target="_blank" rel="noopener noreferrer" className="mx-auto mt-4 block rounded-lg border-2 border-blue-200 bg-blue-50 px-6 py-4">
+                  <Map className="mx-auto mb-2 h-8 w-8 text-blue-600" /><span className="text-sm font-medium text-blue-600">Ver en el mapa</span>
+                </a>
+              ) : <p className="mt-4 text-xs text-gray-500">Google Maps próximamente</p>}
+              {selectedTreasure?.treasure_website ? <a href={selectedTreasure.treasure_website} target="_blank" rel="noopener noreferrer" className="mt-3 block text-sm text-primary underline">Instagram / web</a> : <p className="mt-3 text-xs text-gray-500">Instagram / web próximamente</p>}
             </div>
           </div>
 

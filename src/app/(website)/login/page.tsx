@@ -8,44 +8,25 @@ import { EmailSentSuccess } from "@/app/components/auth/EmailSentSuccess";
 import { TreasureHuntBanner } from "@/app/components/auth/TreasureHuntBanner";
 import { AuthLoadingSpinner } from "@/app/components/auth/AuthLoadingSpinner";
 import { Loader2 } from "lucide-react";
+import { parseHuntYear, treasurePath } from "@/lib/treasure-hunt-config";
 
 function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [scannedTreasure, setScannedTreasure] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signIn, data: session, isPending } = useAuth();
 
-  useEffect(() => {
-    const scanned = searchParams.get("scanned");
-    if (scanned) {
-      setScannedTreasure(scanned);
-    }
-  }, [searchParams]);
+  const scannedTreasure = searchParams.get("scanned");
+  // A legacy login link with only a code belongs to 2025.
+  const year = parseHuntYear(searchParams.get("year"), scannedTreasure ? 2025 : 2026);
+  const scanPath = scannedTreasure && year ? treasurePath(year, scannedTreasure) : null;
 
-  // Redirect if already logged in and has scanned treasure
   useEffect(() => {
-    console.log("Login redirect effect:", {
-      isPending,
-      session: !!session?.user,
-      scannedTreasure,
-    });
-
-    if (!isPending && session?.user && scannedTreasure) {
-      console.log(
-        "Redirecting to treasure scan:",
-        `/2025/t/${scannedTreasure}`,
-      );
-      router.push(`/2025/t/${scannedTreasure}`);
-    } else if (!isPending && session?.user && !scannedTreasure) {
-      // Already logged in without scanned treasure, go to dashboard
-      const isAdmin = session.user.role === "admin";
-      const redirectPath = isAdmin ? "/admin" : "/treasures";
-      console.log("Redirecting to dashboard/admin:", redirectPath);
-      router.push(redirectPath);
+    if (!isPending && session?.user) {
+      router.replace(scanPath || (session.user.role === "admin" ? "/admin" : "/treasures"));
     }
-  }, [session, isPending, scannedTreasure, router]);
+  }, [session, isPending, scanPath, router]);
 
   const handleLogin = async (email: string) => {
     setIsLoading(true);
@@ -55,9 +36,9 @@ function LoginContent() {
       const isAdmin = adminEmails.includes(email.toLowerCase());
 
       let callbackURL: string;
-      if (scannedTreasure) {
+      if (scanPath) {
         // Si viene de QR, redirect para procesar el treasure
-        callbackURL = `/2025/t/${scannedTreasure}`;
+        callbackURL = scanPath;
       } else {
         // Flujo normal
         callbackURL = isAdmin ? "/admin" : "/treasures";
@@ -68,9 +49,8 @@ function LoginContent() {
         callbackURL,
       });
 
-      if (result.data) {
-        setShowSuccess(true);
-      }
+      if (result.error) throw new Error(result.error.message || "No se pudo enviar el enlace");
+      if (result.data) setShowSuccess(true);
     } catch (error: any) {
       console.error("Login error:", error);
       alert("Error al enviar el enlace mágico. Intenta de nuevo.");
@@ -90,7 +70,7 @@ function LoginContent() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4 py-12 sm:px-6 lg:px-8">
       {scannedTreasure && (
-        <TreasureHuntBanner treasureName={scannedTreasure} />
+        <TreasureHuntBanner treasureName={scannedTreasure} year={year || 2026} />
       )}
       <div className="w-full max-w-md space-y-8 rounded-lg border bg-white px-6 py-8 shadow-sm">
         <div>

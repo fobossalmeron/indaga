@@ -1,46 +1,25 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUserId } from '@/lib/auth-utils'
-import { getUserProgress, getActiveTreasureHunt, getUserScannedTreasures } from '@/lib/treasure-hunt-2025'
+import { getTreasureHunt, getUserScannedTreasures } from '@/lib/treasure-hunt-2025'
+import { parseHuntYear } from '@/lib/treasure-hunt-config'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const userId = await getCurrentUserId()
-    if (!userId) {
-      return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
-    }
-
-    // Obtener hunt activo
-    const hunt = await getActiveTreasureHunt()
-    if (!hunt) {
-      return NextResponse.json({
-        treasuresFound: 0,
-        completionPercentage: 0,
-        totalTreasures: 25
-      })
-    }
-
-    // Obtener progreso del usuario
-    const progress = await getUserProgress(userId, hunt.id)
-
-    // Obtener tesoros escaneados reales para contar correctamente
-    const scannedTreasures = await getUserScannedTreasures(userId, hunt.id)
-    const actualTreasuresFound = scannedTreasures.length
-
-    // Calcular porcentaje de completado basado en tesoros reales
-    const totalTreasures = hunt.total_treasures || 25
-    const actualCompletionPercentage = (actualTreasuresFound / totalTreasures) * 100
-
+    if (!userId) return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
+    const year = parseHuntYear(request.nextUrl.searchParams.get('year'))
+    if (!year) return NextResponse.json({ error: 'Edición inválida' }, { status: 400 })
+    const hunt = await getTreasureHunt(year)
+    if (!hunt) return NextResponse.json({ error: 'No se encontró esta edición' }, { status: 404 })
+    const scannedTreasures = await getUserScannedTreasures(userId, hunt.id, year)
+    const totalTreasures = hunt.total_treasures ?? 0
     return NextResponse.json({
-      treasuresFound: actualTreasuresFound,
-      completionPercentage: actualCompletionPercentage,
-      totalTreasures: totalTreasures
+      year, treasuresFound: scannedTreasures.length,
+      completionPercentage: totalTreasures ? scannedTreasures.length / totalTreasures * 100 : 0,
+      totalTreasures,
     })
   } catch (error) {
     console.error('Error fetching treasure progress:', error)
-    return NextResponse.json({
-      treasuresFound: 0,
-      completionPercentage: 0,
-      totalTreasures: 25
-    })
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
   }
 }

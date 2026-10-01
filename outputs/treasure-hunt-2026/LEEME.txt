@@ -1,0 +1,16 @@
+TREASURE HUNT 2026 — 49 códigos QR
+
+Dominio: https://www.indaga.site
+Formato de enlace: /2026/t/CODIGO
+
+SVG: vector recomendado para imprenta; fondo blanco y margen incluidos.
+PNG: copia de alta resolución; cada módulo mide 24 píxeles.
+Mantener el margen blanco, proporción cuadrada y contraste negro/blanco.
+No recortar ni superponer logos sobre el código.
+Cada nombre de archivo identifica el lugar en manifest.csv / manifest.json.
+Los 49 PNG se verifican con un lector QR independiente al generarse.
+
+Los QR pueden imprimirse ahora. Para registrar visitas, primero publicar
+la aplicación 2026 y activar la campaña en la base de datos.
+Las visitas se habilitan desde el 30 de septiembre de 2026 a las 23:00
+hasta terminar el 1 de diciembre de 2026, en horario de Monterrey.

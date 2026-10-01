@@ -5,7 +5,8 @@ import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import auth from '@/lib/auth'
-import { adminUtils, adminTreasureActions } from '@/lib/admin-actions'
+import { adminUtils } from '@/lib/admin-actions'
+import * as adminTreasureActions from '@/lib/admin-treasure-actions'
 import TreasureManager from '@/app/components/admin/treasure-manager'
 
 export default async function AdminTreasuresPage() {
@@ -21,7 +22,7 @@ export default async function AdminTreasuresPage() {
 
   // Check if user is admin
   const isAdmin = await adminUtils.isAdmin(session.user.email)
-  
+
   if (!isAdmin) {
     redirect('/')
   }
@@ -78,7 +79,7 @@ export default async function AdminTreasuresPage() {
                 Total Tesoros
               </dt>
               <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-                {hunts.reduce((sum, hunt) => sum + ((hunt as any).treasure_hunt_2025_treasures?.count || 0), 0)}
+                {hunts.reduce((sum, hunt) => sum + ((hunt as any).treasure_hunt_2025_treasures?.[0]?.count || 0), 0)}
               </dd>
             </div>
 
@@ -87,7 +88,7 @@ export default async function AdminTreasuresPage() {
                 Participantes Activos
               </dt>
               <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-                {hunts.reduce((sum, hunt) => sum + ((hunt as any).treasure_hunt_2025_progress?.count || 0), 0)}
+                {hunts.reduce((sum, hunt) => sum + ((hunt as any).treasure_hunt_2025_progress?.[0]?.count || 0), 0)}
               </dd>
             </div>
           </div>
@@ -104,14 +105,10 @@ export default async function AdminTreasuresPage() {
               </div>
               <div className="ml-3 flex-1 md:flex md:justify-between">
                 <p className="text-sm text-blue-700">
-                  <strong>Instrucciones:</strong> Para crear códigos QR para los tesoros, puedes usar herramientas como QR Code Generator con la URL: 
-                  <code className="bg-white px-1 rounded">https://indaga.com/qr/{`{treasure_code}`}</code>
+                  <strong>Instrucciones:</strong> Para crear códigos QR para los tesoros, puedes usar herramientas como QR Code Generator con la URL:
+                  <code className="bg-white px-1 rounded">/{`{año}`}/t/{`{código público}`}</code>
                 </p>
-                <p className="mt-3 text-sm md:ml-6 md:mt-0">
-                  <a href="#" className="whitespace-nowrap font-medium text-blue-700 hover:text-blue-600">
-                    Guía completa →
-                  </a>
-                </p>
+
               </div>
             </div>
           </div>
@@ -129,7 +126,7 @@ export default async function AdminTreasuresPage() {
               <h3 className="text-lg font-medium text-gray-900 mb-4">
                 Actividad Reciente
               </h3>
-              
+
               <div className="space-y-4">
                 {hunts.length > 0 ? (
                   hunts.map((hunt, index) => (
@@ -143,14 +140,14 @@ export default async function AdminTreasuresPage() {
                             {hunt.name}
                           </p>
                           <p className="text-xs text-gray-500">
-                            {(hunt as any).treasure_hunt_2025_treasures?.count || 0} tesoros • 
-                            {(hunt as any).treasure_hunt_2025_scans?.count || 0} escaneos totales
+                            {(hunt as any).treasure_hunt_2025_treasures?.[0]?.count || 0} tesoros •
+                            {(hunt as any).treasure_hunt_2025_scans?.[0]?.count || 0} escaneos totales
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="text-sm text-gray-900">
-                          {(hunt as any).treasure_hunt_2025_progress?.count || 0} participantes
+                          {(hunt as any).treasure_hunt_2025_progress?.[0]?.count || 0} participantes
                         </p>
                         <p className="text-xs text-gray-500">
                           Año {hunt.year}

@@ -27,12 +27,12 @@ export default async function AdminUsersPage() {
   }
 
   // Get initial users data
-  const initialData = await adminUserActions.getAllUsers({
+  const [initialData, summary] = await Promise.all([adminUserActions.getAllUsers({
     page: 1,
     limit: 10,
     sortBy: 'created_at',
     sortOrder: 'desc'
-  })
+  }), adminUserActions.getUserSummary()])
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -67,7 +67,7 @@ export default async function AdminUsersPage() {
                 Total de Usuarios
               </dt>
               <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-                {initialData.total.toLocaleString()}
+                {summary.totalUsers.toLocaleString()}
               </dd>
             </div>
 
@@ -76,7 +76,7 @@ export default async function AdminUsersPage() {
                 Usuarios Verificados
               </dt>
               <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-                {initialData.users.filter(u => u.email_verified).length}
+                {summary.verifiedUsers.toLocaleString()}
               </dd>
             </div>
 
@@ -85,7 +85,7 @@ export default async function AdminUsersPage() {
                 Con Actividad TH
               </dt>
               <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-                {initialData.users.filter(u => u.treasure_hunt_2025_progress?.length).length}
+                {summary.activeTreasureUsers.toLocaleString()}
               </dd>
             </div>
 
@@ -94,11 +94,7 @@ export default async function AdminUsersPage() {
                 Registros Hoy
               </dt>
               <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-                {initialData.users.filter(u => {
-                  const today = new Date().toDateString()
-                  const userDate = new Date(u.created_at || '').toDateString()
-                  return today === userDate
-                }).length}
+                {summary.registeredToday.toLocaleString()}
               </dd>
             </div>
           </div>

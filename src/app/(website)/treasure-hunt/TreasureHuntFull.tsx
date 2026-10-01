@@ -2,7 +2,7 @@ import { UserPlus, ScanLine, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import Link from "next/link";
 
-export default function TreasureHuntFull() {
+export default function TreasureHuntFull({ year }: { year: number }) {
   return (
     <div className="animate-fadeIn2">
       <div className="mt-8 flex items-center justify-start gap-4">
@@ -37,7 +37,7 @@ export default function TreasureHuntFull() {
       </p>
       <div className="mt-8 flex">
         <Button asChild>
-          <Link href="/login">Regístrate</Link>
+          <Link href={`/login?year=${year}`}>Regístrate</Link>
         </Button>
       </div>
     </div>

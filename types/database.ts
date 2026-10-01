@@ -364,3 +364,9 @@ export type TreasureHuntWithStats = TreasureHunt & {
   total_scans?: number
   completion_rate?: number
 }
+// Application names are edition-neutral; physical tables remain shared by hunt_id.
+export type Treasure = TreasureHunt2025Treasure
+export type TreasureInsert = TreasureHunt2025TreasureInsert
+export type TreasureUpdate = TreasureHunt2025TreasureUpdate
+export type TreasureScan = TreasureHunt2025Scan
+export type TreasureProgress = TreasureHunt2025Progress

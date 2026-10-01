@@ -1,237 +1,90 @@
-// Admin Dashboard Main Page
-// Created for ULTRATHINK Plan - Agent C
-
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { headers } from "next/headers";
 import Link from "next/link";
 import auth from "@/lib/auth";
 import { adminUtils, adminStatsActions } from "@/lib/admin-actions";
+import { getAllTreasureHunts } from "@/lib/admin-treasure-actions";
 import StatsDashboard from "@/app/components/admin/stats-dashboard";
+import HuntFilter from "@/app/components/admin/hunt-filter";
 import { Button } from "@/app/components/ui/button";
-import { Users, Trophy, BarChart3, LogOut } from "lucide-react";
+import { Users, Trophy, BarChart3 } from "lucide-react";
 
-export default async function AdminPage() {
-  console.log("🔍 [ADMIN PAGE] Starting AdminPage function");
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ hunt?: string | string[] }> }) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) redirect("/login?redirect=/admin");
+  if (!(await adminUtils.isAdmin(session.user.email))) redirect("/");
 
-  // Get session
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  console.log("🔍 [ADMIN PAGE] Session:", session ? "EXISTS" : "NULL");
-  console.log("🔍 [ADMIN PAGE] User email:", session?.user?.email);
-
-  // Redirect if not logged in
-  if (!session) {
-    console.log("🔍 [ADMIN PAGE] No session, redirecting to login");
-    redirect("/login?redirect=/admin");
-  }
-
-  // Check if user is admin
-  const isAdmin = await adminUtils.isAdmin(session.user.email);
-  console.log("🔍 [ADMIN PAGE] Is admin check result:", isAdmin);
-
-  if (!isAdmin) {
-    console.log("🔍 [ADMIN PAGE] Not admin, redirecting to /");
-    redirect("/");
-  }
-
-  console.log("🔍 [ADMIN PAGE] Admin check passed, proceeding to render");
-
-  // Get dashboard stats
-  const stats = await adminStatsActions.getDashboardStats();
-  const userActivity = await adminStatsActions.getUserActivityStats(30);
-  const scanActivity = await adminStatsActions.getTreasureScanStats(30);
+  const hunts = await getAllTreasureHunts();
+  const { hunt } = await searchParams;
+  if (Array.isArray(hunt)) notFound();
+  const selectedHunt = hunt ? hunts.find((item) => item.id === hunt) : undefined;
+  if (hunt && !selectedHunt) notFound();
+  const huntId = selectedHunt?.id;
+  const [stats, userActivity, scanActivity] = await Promise.all([
+    adminStatsActions.getDashboardStats(huntId),
+    adminStatsActions.getUserActivityStats(30, huntId),
+    adminStatsActions.getTreasureScanStats(30, huntId),
+  ]);
+  const participantScope = !!selectedHunt;
 
   return (
     <div className="min-h-screen py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="md:flex md:items-center md:justify-between">
+        <div className="flex min-w-0 flex-col justify-between gap-4 md:flex-row md:items-start">
           <div className="min-w-0 flex-1">
-            <h2 className="text-2xl leading-7 sm:truncate sm:text-3xl sm:tracking-tight">
-              Panel de Administración INDAGA
-            </h2>
-            <p className="mt-1 text-sm text-gray-500">
-              Gestiona usuarios, treasure hunts y revisa estadísticas
-            </p>
+            <h1 className="text-2xl leading-7 sm:text-3xl">Panel de Administración INDAGA</h1>
+            <p className="mt-2 text-sm text-gray-500">Gestiona usuarios, treasure hunts y revisa estadísticas.</p>
           </div>
-          <div className="mt-4 flex items-center gap-4 md:mt-0 md:ml-4">
-            <div className="text-sm text-gray-500">
-              Bienvenido, {session.user.email}
-            </div>
-          </div>
+          <p className="break-all text-sm text-gray-500">{session.user.email}</p>
         </div>
 
-        {/* Quick Stats Cards */}
+        <section className="mt-8 rounded-lg bg-white p-5 shadow" aria-label="Alcance de las estadísticas">
+          <HuntFilter hunts={hunts} selectedHuntId={huntId} />
+          <p className="mt-2 text-sm text-gray-600">
+            {selectedHunt
+              ? `${selectedHunt.name}: participantes únicos con al menos una visita registrada en esta edición. Verificación, favoritos y registros corresponden a esas personas; los escaneos corresponden únicamente a esta edición.`
+              : "Todos: usuarios y favoritos de toda INDAGA, y escaneos de todas las ediciones. Cada usuario se cuenta una sola vez."}
+          </p>
+        </section>
+
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="truncate text-sm font-medium text-gray-500">
-              Usuarios Totales
-            </dt>
-            <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {stats.totalUsers.toLocaleString()}
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="truncate text-sm font-medium text-gray-500">
-              Usuarios Verificados
-            </dt>
-            <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {stats.verifiedUsers.toLocaleString()}
-            </dd>
-            <div className="mt-1 text-sm text-gray-500">
-              {stats.verificationRate}% de verificación
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="truncate text-sm font-medium text-gray-500">
-              Escaneos QR Totales
-            </dt>
-            <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {stats.totalScans.toLocaleString()}
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="truncate text-sm font-medium text-gray-500">
-              Treasure Hunts Activos
-            </dt>
-            <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {stats.activeTreasureHunts}
-            </dd>
-          </div>
+          {[
+            { title: participantScope ? "Participantes de la edición" : "Usuarios totales", value: stats.totalUsers.toLocaleString() },
+            { title: participantScope ? "Participantes verificados" : "Usuarios verificados", value: stats.verifiedUsers.toLocaleString(), detail: `${stats.verificationRate}% de verificación` },
+            { title: participantScope ? "Escaneos de la edición" : "Escaneos QR totales", value: stats.totalScans.toLocaleString() },
+            { title: participantScope ? "Edición activa" : "Treasure Hunts activos", value: participantScope ? (stats.activeTreasureHunts ? "Sí" : "No") : stats.activeTreasureHunts, detail: "Habilitados y dentro de sus fechas" },
+          ].map((metric) => (
+            <dl key={metric.title} className="min-w-0 rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt className="text-sm font-medium text-gray-500">{metric.title}</dt>
+              <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{metric.value}</dd>
+              {metric.detail && <dd className="mt-1 text-sm text-gray-500">{metric.detail}</dd>}
+            </dl>
+          ))}
         </div>
 
-        {/* Navigation Cards */}
         <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Users Management */}
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            <div className="p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Users className="h-8 w-8 text-blue-600" />
-                </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="truncate text-sm font-medium text-gray-500">
-                      Gestión de Usuarios
-                    </dt>
-                    <dd className="text-lg font-medium text-gray-900">
-                      {stats.totalUsers} usuarios registrados
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="text-sm text-gray-500">
-                  • Ver tabla completa de usuarios
-                  <br />
-                  • Filtrar por verificación
-                  <br />
-                  • Exportar datos
-                  <br />• {stats.recentUsers} nuevos en 7 días
-                </div>
-                <div className="mt-4">
-                  <Link href="/admin/users">
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-500">
-                      Gestionar Usuarios
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow">
+            <Users className="mb-4 h-8 w-8 text-blue-600" />
+            <h2 className="text-lg font-medium">Gestión de usuarios</h2>
+            <p className="mt-2 text-sm text-gray-600">Consulta, filtra y exporta la tabla global de usuarios de INDAGA.</p>
+            <Button asChild size="sm" className="mt-4 bg-blue-600 hover:bg-blue-500"><Link href="/admin/users">Gestionar usuarios</Link></Button>
           </div>
-
-          {/* Treasure Hunt Management */}
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            <div className="p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Trophy className="h-8 w-8 text-green-600" />
-                </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="truncate text-sm font-medium text-gray-500">
-                      Treasure Hunts
-                    </dt>
-                    <dd className="text-lg font-medium text-gray-900">
-                      {stats.activeTreasureHunts} hunts activos
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="text-sm text-gray-500">
-                  • Crear nuevos treasure hunts
-                  <br />
-                  • Gestionar tesoros y códigos QR
-                  <br />
-                  • Ver progreso de participantes
-                  <br />• {stats.totalScans} escaneos totales
-                </div>
-                <div className="mt-4">
-                  <Link href="/admin/treasures">
-                    <Button
-                      size="sm"
-                      className="bg-green-600 hover:bg-green-500"
-                    >
-                      Gestionar Treasures
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow">
+            <Trophy className="mb-4 h-8 w-8 text-green-600" />
+            <h2 className="text-lg font-medium">Treasure Hunts</h2>
+            <p className="mt-2 text-sm text-gray-600">Gestiona las ediciones, sus lugares y los códigos QR.</p>
+            <Button asChild size="sm" className="mt-4 bg-green-600 hover:bg-green-500"><Link href="/admin/treasures">Gestionar Treasure Hunts</Link></Button>
           </div>
-
-          {/* Analytics */}
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            <div className="p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <BarChart3 className="h-8 w-8 text-purple-600" />
-                </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="truncate text-sm font-medium text-gray-500">
-                      Estadísticas Avanzadas
-                    </dt>
-                    <dd className="text-lg font-medium text-gray-900">
-                      Analytics completos
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="text-sm text-gray-500">
-                  • Eventos guardados: {stats.totalSavedEvents}
-                  <br />• Lugares guardados: {stats.totalSavedPlaces}
-                  <br />
-                  • Gráficas de actividad
-                  <br />• Reportes detallados
-                </div>
-                <div className="mt-4">
-                  <Button
-                    size="sm"
-                    className="bg-purple-600 hover:bg-purple-500"
-                  >
-                    Ver más abajo
-                  </Button>
-                </div>
-              </div>
-            </div>
+          <div className="min-w-0 rounded-lg bg-white p-6 shadow">
+            <BarChart3 className="mb-4 h-8 w-8 text-purple-600" />
+            <h2 className="text-lg font-medium">Estadísticas</h2>
+            <p className="mt-2 text-sm text-gray-600">Eventos guardados: {stats.totalSavedEvents}<br />Lugares guardados: {stats.totalSavedPlaces}</p>
+            <Button asChild size="sm" className="mt-4 bg-purple-600 hover:bg-purple-500"><a href="#estadisticas">Ver estadísticas</a></Button>
           </div>
         </div>
 
-        {/* Detailed Statistics Component */}
-        <div className="mt-8">
-          <StatsDashboard
-            stats={stats}
-            userActivity={userActivity}
-            scanActivity={scanActivity}
-          />
+        <div className="mt-8 scroll-mt-20" id="estadisticas">
+          <StatsDashboard stats={stats} userActivity={userActivity} scanActivity={scanActivity} participantScope={participantScope} scopeLabel={selectedHunt?.name || "Todas las ediciones"} />
         </div>
       </div>
     </div>

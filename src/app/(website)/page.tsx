@@ -25,7 +25,7 @@ Una herramienta que funciona desde lo virtual para enriquecer las experiencias q
             {/* <div className="flex flex-col gap-4">
               <SantaLucia className="animate-fadeIn2 text-foreground w-full max-w-[45%]" />
               <p className="text-lg leading-tight md:text-[1.120rem]">
-                Durante la temporada del FISL 2025, te invitamos a participar en
+                Durante la temporada del FISL 2026, te invitamos a participar en
                 el{" "}
                 <Link href="/treasure-hunt" className="rounded-md underline">
                   Treasure Hunt

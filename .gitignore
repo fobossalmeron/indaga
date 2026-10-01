@@ -41,3 +41,6 @@ next-env.d.ts
 
 # puppeteer logs
 /logs/mcp-puppeteer-*.log
+
+# Private database backups
+/.local-backups/

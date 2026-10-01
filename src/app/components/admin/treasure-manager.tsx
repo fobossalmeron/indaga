@@ -4,7 +4,8 @@
 // Created for ULTRATHINK Plan - Agent C
 
 import { useState, useEffect } from 'react'
-import { adminTreasureActions } from '@/lib/admin-actions'
+import * as adminTreasureActions from '@/lib/admin-treasure-actions'
+import { toPublicTreasureCode, treasurePath } from '@/lib/treasure-hunt-config'
 import type { TreasureHunt, TreasureHunt2025Treasure } from '../../../../types/database'
 
 interface TreasureManagerProps {
@@ -18,6 +19,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
   const [loading, setLoading] = useState(false)
   const [showCreateHunt, setShowCreateHunt] = useState(false)
   const [showCreateTreasure, setShowCreateTreasure] = useState(false)
+  const [editingTreasureId, setEditingTreasureId] = useState<string | null>(null)
 
   // New hunt form state
   const [newHunt, setNewHunt] = useState({
@@ -34,7 +36,9 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
     treasure_code: '',
     treasure_name: '',
     treasure_secret: '',
-    treasure_location_maps_url: ''
+    treasure_location_maps_url: '',
+    treasure_website: '',
+    treasure_category: ''
   })
 
   // Fetch hunt details
@@ -91,16 +95,21 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
   // Add treasure to hunt
   const handleCreateTreasure = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!selectedHunt) return
+    if (!selectedHunt || !huntDetails) return
     
     setLoading(true)
     
     try {
-      await adminTreasureActions.addTreasure({
-        hunt_id: selectedHunt,
-        ...newTreasure
-      })
-      
+      if (editingTreasureId) {
+        await adminTreasureActions.updateTreasure(editingTreasureId, newTreasure)
+      } else {
+        await adminTreasureActions.addTreasure({
+          hunt_id: selectedHunt,
+          ...newTreasure,
+          treasure_secret: huntDetails.year === 2026 ? 'ENCONTRADO' : newTreasure.treasure_secret
+        })
+      }
+
       // Refresh hunt details
       await fetchHuntDetails(selectedHunt)
       
@@ -109,12 +118,15 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
         treasure_code: '',
         treasure_name: '',
         treasure_secret: '',
-        treasure_location_maps_url: ''
+        treasure_location_maps_url: '',
+    treasure_website: '',
+    treasure_category: ''
       })
-      alert('Tesoro añadido exitosamente!')
+      setEditingTreasureId(null)
+      alert('Tesoro guardado exitosamente!')
     } catch (error) {
       console.error('Error adding treasure:', error)
-      alert('Error al añadir el tesoro')
+      alert(error instanceof Error ? error.message : 'Error al guardar el tesoro')
     } finally {
       setLoading(false)
     }
@@ -191,7 +203,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                           Año {hunt.year}
                         </p>
                         <p className="text-xs text-gray-500 mt-1">
-                          {hunt.treasure_hunt_2025_treasures?.length || 0} tesoros
+                          {hunt.treasure_hunt_2025_treasures?.[0]?.count || 0} tesoros
                         </p>
                       </div>
                       <div className="flex flex-col items-end space-y-1">
@@ -203,13 +215,14 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                           {hunt.is_active ? 'Activo' : 'Inactivo'}
                         </span>
                         <button
+                          disabled={hunt.year === 2025}
                           onClick={(e) => {
                             e.stopPropagation()
                             handleToggleHuntStatus(hunt.id, hunt.is_active)
                           }}
                           className="text-xs text-indigo-600 hover:text-indigo-900"
                         >
-                          {hunt.is_active ? 'Desactivar' : 'Activar'}
+                          {hunt.year === 2025 ? 'Historial' : hunt.is_active ? 'Desactivar' : 'Activar'}
                         </button>
                       </div>
                     </div>
@@ -260,7 +273,12 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                       </div>
                     </div>
                     <button
-                      onClick={() => setShowCreateTreasure(true)}
+                      disabled={huntDetails.year === 2025 || huntDetails.treasure_hunt_2025_treasures?.length >= huntDetails.total_treasures}
+                      onClick={() => {
+                        setEditingTreasureId(null)
+                        setNewTreasure({ treasure_code: '', treasure_name: '', treasure_secret: '', treasure_location_maps_url: '', treasure_website: '', treasure_category: '' })
+                        setShowCreateTreasure(true)
+                      }}
                       className="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500"
                     >
                       Añadir Tesoro
@@ -292,10 +310,10 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                                 </h5>
                                 <p className="text-xs text-gray-500 mt-1">
                                   Código: <span className="font-mono bg-gray-100 px-1 rounded">
-                                    {treasure.treasure_code}
+                                    {toPublicTreasureCode(huntDetails.year, treasure.treasure_code)}
                                   </span>
                                 </p>
-                                {treasure.treasure_secret && (
+                                {huntDetails.year === 2025 && treasure.treasure_secret && (
                                   <p className="text-xs text-gray-600 mt-2">
                                     <span className="font-medium">Palabra secreta:</span> {treasure.treasure_secret}
                                   </p>
@@ -306,8 +324,13 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                                   {scanCount} escaneos
                                 </div>
                                 <div className="text-xs text-gray-500">
-                                  QR: {treasure.treasure_code}
+                                  QR: {treasurePath(huntDetails.year, treasure.treasure_code)}
                                 </div>
+                                {huntDetails.year === 2026 && <button className="mt-2 text-sm text-indigo-600 underline" onClick={() => {
+                                  setEditingTreasureId(treasure.id)
+                                  setNewTreasure({ treasure_code: toPublicTreasureCode(huntDetails.year, treasure.treasure_code), treasure_name: treasure.treasure_name, treasure_secret: '', treasure_location_maps_url: treasure.treasure_location_maps_url || '', treasure_website: treasure.treasure_website || '', treasure_category: treasure.treasure_category || '' })
+                                  setShowCreateTreasure(true)
+                                }}>Editar lugar / enlaces</button>}
                               </div>
                             </div>
                           </div>
@@ -341,7 +364,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
       {/* Create Hunt Modal */}
       {showCreateHunt && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full">
+          <div className="bg-white rounded-lg max-w-md w-full max-h-[90dvh] overflow-y-auto">
             <form onSubmit={handleCreateHunt} className="p-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4">
                 Crear Nuevo Treasure Hunt
@@ -437,10 +460,10 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
       {/* Create Treasure Modal */}
       {showCreateTreasure && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full">
+          <div className="bg-white rounded-lg max-w-md w-full max-h-[90dvh] overflow-y-auto">
             <form onSubmit={handleCreateTreasure} className="p-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4">
-                Añadir Tesoro
+                {editingTreasureId ? 'Editar lugar' : 'Añadir Tesoro'}
               </h3>
               
               <div className="space-y-4">
@@ -451,9 +474,11 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                   <input
                     type="text"
                     required
+                    disabled={!!editingTreasureId}
                     value={newTreasure.treasure_code}
                     onChange={(e) => setNewTreasure({ ...newTreasure, treasure_code: e.target.value })}
-                    placeholder="Ej: TREASURE_001"
+                    placeholder="Ej: CAFE-LIMON"
+                    pattern="[A-Za-z0-9]+(-[A-Za-z0-9]+)*"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -472,7 +497,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                   />
                 </div>
 
-                <div>
+                {huntDetails?.year !== 2026 && <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Palabra Secreta *
                   </label>
@@ -484,7 +509,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     required
                   />
-                </div>
+                </div>}
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
@@ -500,6 +525,10 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                 </div>
               </div>
 
+              <div className="mt-4 space-y-4">
+                <label className="block text-sm">Instagram / web<input type="url" value={newTreasure.treasure_website} onChange={event => setNewTreasure({ ...newTreasure, treasure_website: event.target.value })} className="mt-1 block w-full rounded-md border p-2" /></label>
+                <label className="block text-sm">Categoría<select value={newTreasure.treasure_category} onChange={event => setNewTreasure({ ...newTreasure, treasure_category: event.target.value })} className="mt-1 block w-full rounded-md border p-2"><option value="">Selecciona categoría</option>{['Cafeterías', 'Restaurantes', 'Bares & Cantinas', 'Espacios de Arte', 'Música en Vivo', 'Compras locales'].map(category => <option key={category}>{category}</option>)}</select></label>
+              </div>
               <div className="mt-6 flex justify-end space-x-3">
                 <button
                   type="button"
@@ -513,7 +542,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                   disabled={loading}
                   className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-500 disabled:opacity-50"
                 >
-                  {loading ? 'Añadiendo...' : 'Añadir Tesoro'}
+                  {loading ? 'Guardando...' : 'Guardar Tesoro'}
                 </button>
               </div>
             </form>

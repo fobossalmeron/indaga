@@ -1,4 +1,4 @@
-# INDAGA - Instrucciones para Claude
+# INDAGA - Instrucciones para agentes
 
 ## 🚀 Información del Proyecto
 

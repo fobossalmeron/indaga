@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import imago_delgado from "@/assets/img/imago_delgado.svg?url";
 
 const FooterLink = ({
@@ -22,6 +22,13 @@ const FooterLink = ({
 );
 
 export const Footer = () => {
+  const [contactHref, setContactHref] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Keep the complete address out of the initial HTML for basic scraper protection.
+    setContactHref(`mailto:${["indagamxmx", "gmail.com"].join("@")}`);
+  }, []);
+
   return (
     <footer
       className={
@@ -43,6 +50,7 @@ export const Footer = () => {
                 <FooterLink href="/treasure-hunt">Treasure Hunt</FooterLink>
 
                 <FooterLink href="/nosotras">Nosotras</FooterLink>
+                {contactHref && <FooterLink href={contactHref}>Contact</FooterLink>}
                 <FooterLink href="https://www.instagram.com/indagamx/">
                   Instagram
                 </FooterLink>

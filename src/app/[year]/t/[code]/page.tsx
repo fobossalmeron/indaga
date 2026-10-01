@@ -1,69 +1,58 @@
-"use client"
+"use client";
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/use-auth'
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/use-auth";
+import { parseHuntYear } from "@/lib/treasure-hunt-config";
 
 interface TreasureLandingProps {
-  params: Promise<{
-    year: string
-    code: string
-  }>
+  params: Promise<{ year: string; code: string }>;
 }
 
-export default function TreasureLanding({ params: paramsPromise }: TreasureLandingProps) {
-  const router = useRouter()
-  const { data: session, isPending } = useAuth()
-  
+export default function TreasureLanding({ params }: TreasureLandingProps) {
+  const router = useRouter();
+  const { data: session, isPending } = useAuth();
+  const processing = useRef(false);
+
   useEffect(() => {
-    async function handleTreasureScan() {
-      const params = await paramsPromise
-      
-      // Validar que el año sea 2025 (por ahora)
-      if (params.year !== '2025') {
-        router.push('/dashboard')
-        return
+    if (isPending || processing.current) return;
+    processing.current = true;
+    async function scan() {
+      const { year: rawYear, code } = await params;
+      const year = parseHuntYear(rawYear);
+      if (!year) {
+        router.replace("/treasures?error=invalid-year");
+        return;
       }
-
-      // Si NO está logueado: redirect con parámetro ?scanned
-      if (!isPending && !session?.user) {
-        router.push(`/login?scanned=${params.code}`)
-        return
+      if (!session?.user) {
+        router.replace(`/login?year=${year}&scanned=${encodeURIComponent(code)}`);
+        return;
       }
-
-      // Si está autenticado, procesar el scan
-      if (!isPending && session?.user) {
-        try {
-          const response = await fetch('/api/treasure-scan', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code: params.code })
-          })
-          
-          const result = await response.json()
-          
-          if (result.redirect) {
-            router.push(result.redirect)
-          } else {
-            router.push('/treasures?scanned=unknown&error=technical')
-          }
-        } catch (error) {
-          console.error('Error processing treasure scan:', error)
-          router.push('/treasures?scanned=unknown&error=technical')
+      try {
+        const response = await fetch("/api/treasure-scan", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ year, code }),
+        });
+        const result = await response.json();
+        if (result.redirect) {
+          router.replace(result.redirect);
+          return;
         }
+      } catch (error) {
+        console.error("Error processing treasure scan:", error);
       }
+      router.replace(`/treasures?year=${year}&error=technical`);
     }
-    
-    handleTreasureScan()
-  }, [paramsPromise, session, isPending, router])
+    void scan();
+  }, [params, session, isPending, router]);
 
-  // Mostrar loading mientras procesa
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600 mx-auto"></div>
+        <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
         <p className="text-gray-600">Procesando código QR...</p>
       </div>
     </div>
-  )
+  );
 }
