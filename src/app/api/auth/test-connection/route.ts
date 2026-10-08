@@ -3,7 +3,7 @@ import { Pool } from 'pg'
 
 export async function GET(request: NextRequest) {
     try {
-        const databaseUrl = process.env.VERCELDB__POSTGRES_PRISMA_URL
+        const databaseUrl = process.env.VERCELDB_POSTGRES_PRISMA_URL || process.env.VERCELDB__POSTGRES_PRISMA_URL
 
         if (!databaseUrl) {
             return Response.json({
@@ -44,4 +44,4 @@ export async function GET(request: NextRequest) {
             code: error instanceof Error && 'code' in error ? (error as any).code : undefined
         }, { status: 500 })
     }
-} 
+}

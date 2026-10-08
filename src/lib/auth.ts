@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 console.log("--- [auth.ts] Loading ---")
-const databaseUrl = process.env.VERCELDB__POSTGRES_PRISMA_URL
+const databaseUrl = process.env.VERCELDB_POSTGRES_PRISMA_URL || process.env.VERCELDB__POSTGRES_PRISMA_URL
 const authBaseURL = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 const trustedOrigins = getAuthTrustedOrigins(authBaseURL)
 
