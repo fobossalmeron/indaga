@@ -13,7 +13,9 @@ export default function TreasureHuntLayout({
       <Header title="Treasure Hunt" subtitle="La ciudad está de festival">
         <SantaLucia className="text-foreground w-full max-w-[170px]" />
       </Header>
-      <Blob className="absolute top-[350px] right-0 hidden h-[50vw] w-auto translate-x-1/2 md:top-[10%] md:translate-x-1/4 lg:block" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <Blob className="absolute top-[350px] right-0 hidden h-[50vw] w-auto translate-x-1/2 md:top-[10%] md:translate-x-1/4 lg:block" />
+      </div>
       {children}
     </div>
   );

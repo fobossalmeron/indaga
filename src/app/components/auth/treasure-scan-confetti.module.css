@@ -1,0 +1,43 @@
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.piece {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 7px;
+  height: 10px;
+  opacity: 0;
+  animation: celebrate 2.6s both;
+}
+
+@keyframes celebrate {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  8% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+    transform: translate3d(calc(var(--x) * 0.65), var(--rise), 0) rotate(var(--rotation));
+    animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--x), 65vh, 0) rotate(calc(var(--rotation) * 2));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti {
+    display: none;
+  }
+}

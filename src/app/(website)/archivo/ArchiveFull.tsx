@@ -1,13 +1,7 @@
 "use client";
 
 import { parseAsStringLiteral, useQueryState } from "nuqs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/app/components/ui/select";
+import { CategorySelect } from "@/app/components/CategorySelect";
 import { archiveTypes, getArchiveType, type ArchivePost } from "@/lib/archive";
 import { ArticleCard } from "./ArticleCard";
 
@@ -27,29 +21,18 @@ export default function ArchiveFull({ posts }: { posts: ArchivePost[] }) {
   return (
     <section
       aria-label="Publicaciones del archivo"
-      className="motion-safe:animate-fadeIn mt-10 motion-safe:[animation-duration:300ms] sm:mt-16"
+      className="motion-safe:animate-fadeIn mt-6 motion-safe:[animation-duration:300ms] sm:mt-10"
     >
-      <Select
-        value={category}
-        onValueChange={(value) => setCategory(value as typeof category)}
-      >
-        <SelectTrigger
-          aria-label="Filtra por categoría"
-          className="mb-[30px] min-w-[202px] bg-transparent font-normal data-[size=default]:h-11"
-        >
-          <SelectValue className="text-accent">
-            {category === "Todas" ? "Filtra por categoría" : category}
-          </SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="Todas">Todas las categorías</SelectItem>
-          {archiveTypes.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <div className="mb-4 flex w-full justify-center sm:mb-8 lg:justify-start">
+        <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
+          <CategorySelect
+            className="w-full"
+            categories={archiveTypes}
+            selectedCategory={category}
+            onSelectCategory={(value) => setCategory(value as typeof category)}
+          />
+        </div>
+      </div>
       <p role="status" className="sr-only">
         {filteredPosts.length} publicaciones
         {category !== "Todas" ? ` de tipo ${category}` : ""}

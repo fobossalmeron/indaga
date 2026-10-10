@@ -31,7 +31,7 @@ export async function isAdminByEmail(email: string): Promise<boolean> {
 // Get redirect URL based on user role
 export async function getRedirectUrlForUser(email: string): Promise<string> {
   const isAdmin = await isAdminByEmail(email)
-  return isAdmin ? '/admin' : '/dashboard'
+  return isAdmin ? '/admin' : '/treasures'
 }
 
 // Server-side session check with redirect logic

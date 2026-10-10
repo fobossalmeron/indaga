@@ -1,6 +1,6 @@
 export default function ArchiveSkeleton() {
   return (
-    <div role="status" className="mt-10 sm:mt-16">
+    <div role="status" className="mt-6 sm:mt-10">
       <span className="sr-only">Cargando publicaciones del archivo…</span>
       <div aria-hidden="true" className="motion-safe:animate-pulse">
         <div className="mb-[30px] h-11 w-[202px] rounded-xl bg-gray-200" />

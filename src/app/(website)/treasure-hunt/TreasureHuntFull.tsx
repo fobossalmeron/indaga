@@ -35,9 +35,9 @@ export default function TreasureHuntFull({ year }: { year: number }) {
         Cada rincón guarda una sorpresa, conoce nuevos espacios, regresa a tus
         favoritos y colecciona los tesoros que tenemos para ti
       </p>
-      <div className="mt-8 flex">
+      <div className="mt-8 flex flex-wrap items-center gap-2">
         <Button asChild>
-          <Link href={`/login?year=${year}`}>Regístrate</Link>
+          <Link href={`/login?year=${year}`}>Comenzar</Link>
         </Button>
       </div>
     </div>

@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
 import { Toaster } from "sonner";
+import { TreasuresPageSkeleton } from "@/app/components/features/treasures-skeleton";
 
 export default function ProtectedLayout({
   children,
@@ -14,6 +15,7 @@ export default function ProtectedLayout({
   const { data: session, isPending } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!isPending) {
@@ -25,6 +27,15 @@ export default function ProtectedLayout({
   }, [session, isPending, router]);
 
   if (isLoading || isPending) {
+    if (pathname === "/treasures") {
+      return (
+        <div className="pt-16">
+          <main className="mx-auto max-w-7xl px-4 py-6 pt-8 sm:px-6 lg:px-8">
+            <TreasuresPageSkeleton />
+          </main>
+        </div>
+      );
+    }
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">

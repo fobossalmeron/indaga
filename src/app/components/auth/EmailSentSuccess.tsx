@@ -1,38 +1,47 @@
-import { CheckCircle, ArrowLeft } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 
 interface EmailSentSuccessProps {
+  email: string;
+  isResending: boolean;
+  resendMessage: string;
+  onResend: () => Promise<void>;
   onBack: () => void;
 }
 
-export function EmailSentSuccess({ onBack }: EmailSentSuccessProps) {
+export function EmailSentSuccess({ email, isResending, resendMessage, onResend, onBack }: EmailSentSuccessProps) {
   return (
-    <div className="flex min-h-dvh items-center justify-center px-4 py-25 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl">¡Revisa tu correo!</h2>
-          <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-6">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-              </div>
-              <div className="ml-3">
-                <p className="text-base font-medium text-green-900">
-                  Te enviamos un enlace mágico a tu correo electrónico.
-                </p>
-                <p className="mt-2 text-base text-green-700">
-                  Haz clic en el enlace para iniciar sesión. El enlace expira en
-                  10 minutos.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6">
-            <Button variant="link" size="sm" onClick={onBack} className="gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Volver al login
+    <div className="flex min-h-dvh w-full items-center justify-center px-4 py-25 sm:px-6 lg:px-8">
+      <div className="w-full space-y-8 text-center sm:max-w-[370px]">
+        <h2 className="text-3xl">Iniciar sesión</h2>
+        <div className="rounded-2xl bg-white px-6 py-8 text-foreground">
+          <svg
+            className="mx-auto mb-6 h-8 w-8 text-primary"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 19a1 1 0 0 1-1-1v-5a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v5a1 1 0 0 1-1 1H3Z" />
+            <path d="M8 7a4 4 0 0 1 4 4v12M16 14V3h3M5 16h4" />
+          </svg>
+          <p className="text-base">
+            Para continuar, haz clic en el enlace enviado a
+            <strong className="mt-1 block break-words font-medium">{email}</strong>
+          </p>
+          <div className="mt-6 flex flex-col items-center">
+            <Button variant="link" onClick={onResend} disabled={isResending} className="underline">
+              {isResending ? "Enviando…" : "Reenviar email"}
+            </Button>
+            <Button variant="link" onClick={onBack} disabled={isResending} className="h-auto min-h-11 max-w-full whitespace-normal px-0 py-2 underline">
+              Usar un correo electrónico diferente
             </Button>
           </div>
+          <p role="status" aria-live="polite" className="text-sm empty:hidden">
+            {resendMessage}
+          </p>
         </div>
       </div>
     </div>

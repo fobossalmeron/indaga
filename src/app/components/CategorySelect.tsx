@@ -7,28 +7,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
-import type { LugarDocumentData } from "../../../../prismicio-types";
+import { useId } from "react";
 
-interface GuideCategorySelectProps {
-  categories: readonly NonNullable<LugarDocumentData["categoria"]>[];
+interface CategorySelectProps {
+  categories: readonly string[];
   selectedCategory: string;
   onSelectCategory: (category: string) => void;
   className?: string;
 }
 
-export function GuideCategorySelect({
+export function CategorySelect({
   categories,
   selectedCategory,
   onSelectCategory,
   className,
-}: GuideCategorySelectProps) {
+}: CategorySelectProps) {
+  const id = useId();
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="category-select" className="text-foreground">
+      <label htmlFor={id} className="text-foreground">
         Categoría
       </label>
       <Select value={selectedCategory} onValueChange={onSelectCategory}>
-        <SelectTrigger id="category-select" className={className}>
+        <SelectTrigger id={id} className={className}>
           <SelectValue placeholder="Todas" />
         </SelectTrigger>
         <SelectContent>

@@ -45,7 +45,7 @@ export default function ArticleFull({ post }: { post: Content.PostDocument }) {
         </div>
       </header>
       {data.hero.url && (
-        <div className="relative mt-8 aspect-[440/280] overflow-hidden rounded-xl bg-gray-200 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">
+        <div className="relative mt-8 aspect-[440/280] overflow-hidden rounded-xl bg-gray-200 lg:sticky lg:top-[6.6rem] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">
           <Image
             src={data.hero.url}
             alt={data.hero.alt || ""}
@@ -58,7 +58,7 @@ export default function ArticleFull({ post }: { post: Content.PostDocument }) {
       )}
       <div className="mt-10 max-w-[635px] min-w-0 lg:col-start-1 lg:row-start-2 lg:mt-14">
         {isFilled.richText(data.introduction) && (
-          <div className="mb-10 text-2xl leading-[1.2] sm:text-[28px] [&_a]:underline">
+          <div className="mb-10 text-lg leading-[1.2] font-medium sm:text-xl [&_a]:underline">
             <PrismicRichText field={data.introduction} />
           </div>
         )}

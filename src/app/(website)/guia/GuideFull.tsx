@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { Content } from "@prismicio/client";
 import { PlaceCard } from "./PlaceCard";
-import { GuideCategorySelect } from "./GuideCategorySelect";
+import { CategorySelect } from "@/app/components/CategorySelect";
 import { useQueryState } from "nuqs";
 import type { LugarDocumentData } from "../../../../prismicio-types";
 
@@ -38,7 +38,7 @@ export default function GuideFull({ lugares }: GuideFullProps) {
     <div className="animate-fadeIn2 mt-0 p-5 sm:mt-5">
       <div className="mb-4 flex w-full justify-center sm:mb-8 lg:justify-start">
         <div className="grid w-full max-w-full grid-cols-2 gap-2 sm:max-w-[500px]">
-          <GuideCategorySelect
+          <CategorySelect
             className="w-full"
             categories={allCategories}
             selectedCategory={selectedCategory}

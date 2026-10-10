@@ -7,7 +7,6 @@ import { admin } from "better-auth/plugins"
 import { supabase, userOperations } from "./supabase"
 import { Resend } from "resend"
 import { Pool } from "pg"
-import { CURRENT_HUNT_YEAR } from "./treasure-hunt-config"
 import { getAuthTrustedOrigins } from "./auth-origins"
 
 // FIX: Handle SSL certificate issues for Supabase
@@ -125,43 +124,50 @@ export default betterAuth({
                   <meta charset="utf-8">
                   <meta name="viewport" content="width=device-width, initial-scale=1">
                   <title>Iniciar sesión en INDAGA</title>
+                  <style>
+                    .indaga-login-button:hover {
+                      background-color: #4c3569 !important;
+                      color: #ffffff !important;
+                    }
+                    .indaga-login-button:focus-visible,
+                    .indaga-login-button:active {
+                      outline: 3px solid rgba(0, 138, 126, 0.5);
+                      outline-offset: 0;
+                    }
+                    @media (prefers-reduced-motion: reduce) {
+                      .indaga-login-button { transition: none !important; }
+                    }
+                  </style>
                 </head>
-                <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; line-height: 1.6; color: #333; background-color: #edf3fd; margin: 0; padding: 20px;">
-                  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; padding: 40px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                      <h1 style="color: #008a7e; margin: 0; font-weight: normal;">¡Hola!</h1>
+                <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; line-height: 1.6; color: #4d4e6a; background-color: #f8f6f2; margin: 0; padding: 12px;">
+                  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                      <h1 style="color: #65468b; margin: 0; font-weight: normal;">¡Hola!</h1>
                       <p style="font-size: 18px; color: #4d4e6a; margin: 10px 0;">Inicia sesión en <span style="font-weight: 600;">INDAGA</span></p>
                     </div>
                     
-                    <div style="background: #f8fafc; padding: 30px; border-radius: 12px; margin: 20px 0;">
-                    <p style="margin: 0 0 20px; font-size: 16px; color: #4d4e6a;">
-                      Haz clic en el siguiente enlace para iniciar sesión en INDAGA:
+                    <div style="background: #f8f6f2; padding: 16px; border-radius: 12px; margin: 16px 0;">
+                    <p style="margin: 0 0 16px; font-size: 16px; color: #4d4e6a;">
+                      Haz clic en el siguiente enlace para iniciar sesión:
                     </p>
                     
-                    <div style="text-align: center; margin: 30px 0;">
-                      <a href="${url}" style="display: inline-block; padding: 16px 32px; background-color: #008a7e; color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
-                        🔗 Iniciar sesión
+                    <div style="text-align: center; margin: 20px 0;">
+                      <a class="indaga-login-button" href="${url}" style="display: inline-block; height: 44px; line-height: 44px; padding: 0 24px; background-color: #65468b; color: #ffffff; text-align: center; text-decoration: none; border-radius: 14px; font-weight: 448; font-size: 16px; white-space: nowrap; cursor: pointer; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1);">
+                        Iniciar&nbsp;sesión
                       </a>
                     </div>
                     
-                    <p style="margin: 20px 0 0; font-size: 14px; color: #4d4e6a;">
+                    <p style="margin: 16px 0 0; font-size: 14px; color: #4d4e6a;">
                       ⏰ Este enlace expira en <strong>10 minutos</strong>.
                     </p>
                   </div>
                   
-                  <div style="margin-top: 30px; padding: 20px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                    <p style="margin: 0; font-size: 14px; color: #92400e;">
-                      🏆 <strong>¡No olvides explorar el Treasure Hunt ${CURRENT_HUNT_YEAR}!</strong><br>
-                      Escanea códigos QR por Monterrey y colecciona tesoros únicos durante el Festival Santa Lucía.
-                    </p>
-                  </div>
-                  
-                  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                  <div style="text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
                     <p style="margin: 0; font-size: 12px; color: #9ca3af;">
                       Si no solicitaste este enlace, puedes ignorar este email.
                     </p>
                     <p style="margin: 5px 0 0; font-size: 12px; color: #9ca3af;">
-                      INDAGA - Explora Monterrey como nunca antes
+                      INDAGA
                     </p>
                   </div>
                   </div>

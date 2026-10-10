@@ -62,9 +62,9 @@ export default function ProgressTracker({
 
   const getTreasureStatusColor = (treasure: AllTreasure) => {
     if (treasure.isScanned) {
-      return "bg-green-100 border-green-500 text-green-800";
+      return "bg-green-100 border-green-500 text-green-800 hover:bg-green-200 active:bg-green-300";
     }
-    return "bg-gray-200 border-gray-300 text-gray-600";
+    return "bg-gray-200 border-gray-300 text-gray-600 hover:bg-gray-300 active:bg-gray-400";
   };
 
   const getTreasureIcon = (treasure: AllTreasure) => {
@@ -93,41 +93,22 @@ export default function ProgressTracker({
       return "¡Felicidades! Has completado la búsqueda del tesoro";
     }
     if (treasuresFound === 0) {
-      return "Comienza tu aventura escaneando tu primer tesoro";
+      return "Comienza escaneando tu primer tesoro";
     }
     if (treasuresFound < 5) {
       return "¡Buen comienzo! Sigue explorando la ciudad";
     }
     if (treasuresFound < 15) {
-      return "¡Vas muy bien! Ya eres todo un explorador";
+      return "¡Vas muy bien! Todavía hay espacios por explorar";
     }
-    return "¡Excelente! Estás muy cerca de completar la búsqueda";
-  };
-
-  const getAchievementLevel = () => {
-    if (treasuresFound === 0) return "Exploradorx Novatx";
-    if (treasuresFound < 5) return "Cazadorx de Tesoros";
-    if (treasuresFound < 15) return "Aventurerx Experimentadx";
-    if (treasuresFound < 20) return "Maestrx Exploradorx";
-    if (isCompleted) return "Leyenda de INDAGA";
-    return "Gran Aventurerx";
+    return "¡Estás muy cerca de completar la búsqueda!";
   };
 
   return (
     <div className="space-y-6">
       {/* Progress Overview */}
-      <div className="rounded-lg bg-white p-4 shadow-lg">
+      <div className="rounded-2xl bg-white px-6 pt-6 pb-4 shadow-lg sm:pt-8">
         <div className="mb-6 text-center">
-          <div
-            className={`mb-4 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-              isCompleted
-                ? "bg-green-100 text-green-800"
-                : "text-primary bg-primary/10"
-            }`}
-          >
-            {getAchievementLevel()}
-          </div>
-
           <h2 className="text-foreground mb-2 text-3xl">
             {treasuresFound} de {totalTreasures} Tesoros · {hunt.year}
           </h2>
@@ -153,17 +134,17 @@ export default function ProgressTracker({
 
         {/* Stats Grid */}
         <div className="mb-6 grid grid-cols-3 gap-2 sm:gap-4">
-          <div className="rounded-lg bg-gray-50 p-2 text-start sm:p-4">
+          <div className="rounded-2xl bg-gray-50 p-2 text-start sm:p-4">
             <div className="text-primary text-3xl">{treasuresFound}</div>
             <div className="text-foreground text-sm">Encontrados</div>
           </div>
-          <div className="rounded-lg bg-gray-50 p-2 text-start sm:p-4">
+          <div className="rounded-2xl bg-gray-50 p-2 text-start sm:p-4">
             <div className="text-3xl text-gray-600">
               {totalTreasures - treasuresFound}
             </div>
             <div className="text-foreground text-sm">Restantes</div>
           </div>
-          <div className="rounded-lg bg-gray-50 p-2 text-start sm:p-4">
+          <div className="rounded-2xl bg-gray-50 p-2 text-start sm:p-4">
             <div className="text-3xl text-green-600">
               {Math.round(completionPercentage)}%
             </div>
@@ -185,13 +166,13 @@ export default function ProgressTracker({
       </div>
 
       {/* Achievements Section */}
-      <div className="rounded-lg bg-white p-6 shadow-lg">
+      <div className="rounded-2xl bg-white p-6 shadow-lg">
         <h3 className="text-foreground text-txl mb-4">Logros desbloqueados</h3>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* First Treasure Achievement */}
           <div
-            className={`rounded-lg border-2 p-4 ${
+            className={`rounded-2xl border-2 p-4 ${
               treasuresFound >= 1
                 ? "border-green-200 bg-green-50"
                 : "border-gray-200 bg-gray-50"
@@ -219,7 +200,7 @@ export default function ProgressTracker({
 
           {/* Explorer Achievement */}
           <div
-            className={`rounded-lg border-2 p-4 ${
+            className={`rounded-2xl border-2 p-4 ${
               treasuresFound >= 5
                 ? "border-blue-200 bg-blue-50"
                 : "border-gray-200 bg-gray-50"
@@ -245,7 +226,7 @@ export default function ProgressTracker({
 
           {/* Master Explorer Achievement */}
           <div
-            className={`rounded-lg border-2 p-4 ${
+            className={`rounded-2xl border-2 p-4 ${
               treasuresFound >= 15
                 ? "border-purple-200 bg-purple-50"
                 : "border-gray-200 bg-gray-50"
@@ -271,7 +252,7 @@ export default function ProgressTracker({
 
           {/* Legend Achievement */}
           <div
-            className={`rounded-lg border-2 p-4 ${
+            className={`rounded-2xl border-2 p-4 ${
               isCompleted
                 ? "border-yellow-200 bg-yellow-50"
                 : "border-gray-200 bg-gray-50"
@@ -300,7 +281,7 @@ export default function ProgressTracker({
       </div>
 
       {/* Treasure Map Section */}
-      <div className="rounded-lg bg-white p-6 shadow-lg">
+      <div className="rounded-2xl bg-white p-6 shadow-lg">
         <div className="mb-6 flex flex-col items-center justify-between md:flex-row">
           <h3 className="text-foreground text-xl">
             Tesoros {hunt.year} ({allTreasures.length})
@@ -333,16 +314,15 @@ export default function ProgressTracker({
                   setSelectedTreasure(treasure);
                   setIsDetailOpen(true);
                 }}
-                className={`cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 ${getTreasureStatusColor(treasure)}`}
+                className={`cursor-pointer rounded-2xl border-2 p-4 transition-colors duration-200 ${getTreasureStatusColor(treasure)}`}
               >
                 <div className="text-center">
                   <div className="mb-2 flex justify-center">
                     {getTreasureIcon(treasure)}
                   </div>
-                  <div className="text-xs font-medium">
+                  <div className="text-sm font-medium">
                     {treasure.treasure_name}
                   </div>
-                  <span className="text-xs opacity-75">{hunt.year}</span>
                 </div>
               </button>
             ))}
@@ -396,7 +376,7 @@ export default function ProgressTracker({
               {selectedTreasure?.isScanned ? (
                 <>
                   <p className="mb-3 text-base font-medium">{isHistorical ? "Visita registrada en tu historial" : "Muestra esta palabra para recibir tu tesoro"}</p>
-                  {selectedTreasure.treasure_secret && <div className="bg-green-100 border-green-500 rounded-lg border-2 px-6 py-4"><p className="text-green-800 text-3xl">{selectedTreasure.treasure_secret}</p></div>}
+                  {selectedTreasure.treasure_secret && <div className="bg-green-100 border-green-500 rounded-2xl border-2 px-6 py-4"><p className="text-green-800 text-3xl">{selectedTreasure.treasure_secret}</p></div>}
                 </>
               ) : (
                 <p className="mb-3 text-base font-medium">{isHistorical ? "No registraste una visita a este lugar en esta edición." : "Visita este lugar y escanea su QR para registrar tu visita."}</p>

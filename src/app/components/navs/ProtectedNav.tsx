@@ -32,9 +32,6 @@ export const ProtectedNav = () => {
           <nav className="animate-fadeSimple flex items-center gap-7 transition-all">
             <ul className="flex items-center gap-3 transition-all">
               {/* <li className="hidden lg:block">
-                <NavLink href="/dashboard">Mi perfil</NavLink>
-              </li> */}
-              {/* <li className="hidden lg:block">
                 <NavLink href="/saved-items">Favoritos</NavLink>
               </li> */}
               <li className="hidden lg:block">

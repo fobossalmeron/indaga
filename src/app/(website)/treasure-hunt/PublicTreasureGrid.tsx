@@ -25,7 +25,7 @@ export default function PublicTreasureGrid({
     <div className="animate-fadeIn3 mt-12 space-y-6">
       <div className="text-left md:text-center">
         <h3 className="text-foreground text-xl font-medium md:text-2xl">
-          Ubicaciones participantes
+          Espacios participantes
         </h3>
         <p className="mt-2 text-gray-600">
           {treasures.length} lugares · Edición {year}

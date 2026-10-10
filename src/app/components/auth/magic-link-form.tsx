@@ -6,10 +6,11 @@ import { Button } from "@/app/components/ui/button";
 interface MagicLinkFormProps {
   onSubmit: (email: string) => Promise<void>;
   isLoading: boolean;
+  initialEmail?: string;
 }
 
-export function MagicLinkForm({ onSubmit, isLoading }: MagicLinkFormProps) {
-  const [email, setEmail] = useState("");
+export function MagicLinkForm({ onSubmit, isLoading, initialEmail = "" }: MagicLinkFormProps) {
+  const [email, setEmail] = useState(initialEmail);
   const [errors, setErrors] = useState<{ email?: string }>({});
 
   const validateForm = () => {
@@ -63,10 +64,6 @@ export function MagicLinkForm({ onSubmit, isLoading }: MagicLinkFormProps) {
       <Button type="submit" disabled={isLoading} className="w-full">
         {isLoading ? "Enviando..." : "Continuar"}
       </Button>
-
-      <div className="text-center text-sm text-gray-600">
-        Te enviaremos un enlace a tu correo para acceder
-      </div>
     </form>
   );
 }

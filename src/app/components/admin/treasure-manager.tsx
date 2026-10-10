@@ -527,7 +527,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
 
               <div className="mt-4 space-y-4">
                 <label className="block text-sm">Instagram / web<input type="url" value={newTreasure.treasure_website} onChange={event => setNewTreasure({ ...newTreasure, treasure_website: event.target.value })} className="mt-1 block w-full rounded-md border p-2" /></label>
-                <label className="block text-sm">Categoría<select value={newTreasure.treasure_category} onChange={event => setNewTreasure({ ...newTreasure, treasure_category: event.target.value })} className="mt-1 block w-full rounded-md border p-2"><option value="">Selecciona categoría</option>{['Cafeterías', 'Restaurantes', 'Bares & Cantinas', 'Espacios de Arte', 'Música en Vivo', 'Compras locales'].map(category => <option key={category}>{category}</option>)}</select></label>
+                <label className="block text-sm">Categoría<select value={newTreasure.treasure_category} onChange={event => setNewTreasure({ ...newTreasure, treasure_category: event.target.value })} className="mt-1 block w-full rounded-md border p-2"><option value="">Selecciona categoría</option>{['Cafeterías', 'Restaurantes', 'Bares & Cantinas', 'Espacios de Arte', 'Música en Vivo', 'Tiendas Locales'].map(category => <option key={category}>{category}</option>)}</select></label>
               </div>
               <div className="mt-6 flex justify-end space-x-3">
                 <button

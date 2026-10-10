@@ -7,7 +7,6 @@ import { getSessionCookie } from 'better-auth/cookies'
 
 // Define protected routes
 const protectedRoutes = [
-  '/dashboard',
   '/treasures',
   '/saved-items',
   '/profile',
@@ -71,7 +70,7 @@ export async function middleware(request: NextRequest) {
       // Check if user is admin and redirect accordingly
       const adminEmails = process.env.ADMIN_EMAILS?.split(',') || ['fobos.salmeron@gmail.com']
       const isAdmin = userEmail && adminEmails.includes(userEmail)
-      const redirectUrl = isAdmin ? '/admin' : '/dashboard'
+      const redirectUrl = isAdmin ? '/admin' : '/treasures'
       console.log(`[MIDDLEWARE] Authenticated user on auth route, redirecting to: ${redirectUrl}`)
       return NextResponse.redirect(new URL(redirectUrl, request.url))
     }
@@ -104,8 +103,8 @@ export async function middleware(request: NextRequest) {
       console.log(`[MIDDLEWARE] Is admin: ${isAdmin}`)
 
       if (!isAdmin) {
-        console.log(`[MIDDLEWARE] Not admin, redirecting to dashboard`)
-        return NextResponse.redirect(new URL('/dashboard', request.url))
+        console.log(`[MIDDLEWARE] Not admin, redirecting to treasures`)
+        return NextResponse.redirect(new URL('/treasures', request.url))
       }
 
       console.log(`[MIDDLEWARE] Admin access granted`)

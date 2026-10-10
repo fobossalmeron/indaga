@@ -65,7 +65,7 @@
     {
       "code": "BENGALA",
       "name": "Bengala",
-      "category": "Compras locales",
+      "category": "Tiendas Locales",
       "website": "https://www.instagram.com/bengala____mx/",
       "maps_url": "https://www.google.com/maps/search/?api=1&query=Bengala&query_place_id=ChIJA0mRyym9YoYRLa8KyR_h_kQ",
       "treasure_secret": "Eclipse"
@@ -233,7 +233,7 @@
     {
       "code": "MUSIC-LAB",
       "name": "Music Lab",
-      "category": "Compras locales",
+      "category": "Tiendas Locales",
       "website": "https://www.instagram.com/musiclabmx/",
       "maps_url": "https://www.google.com/maps/search/?api=1&query=Music+Lab&query_place_id=ChIJPfUSJ-69YoYRxAZpPObJfpE",
       "treasure_secret": "Lucero"
@@ -257,7 +257,7 @@
     {
       "code": "PUNTO-Y-COMA",
       "name": "Punto y Coma",
-      "category": "Compras locales",
+      "category": "Tiendas Locales",
       "website": "https://www.instagram.com/puntocomamty/",
       "maps_url": "https://www.google.com/maps/search/?api=1&query=Punto+y+Coma&query_place_id=ChIJgy2dtpi_YoYRnvdRuuOqfCQ",
       "treasure_secret": "Marea"
