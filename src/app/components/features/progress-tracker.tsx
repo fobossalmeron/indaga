@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/app/components/ui/button";
+import { AchievementIcon } from "@/app/components/ui/achievement-icon";
 import { TreasureStar } from "@/app/components/ui/treasure-star";
 import {
   ResponsiveDialog,
@@ -177,12 +178,8 @@ export default function ProgressTracker({
                 : "border-gray-200 bg-gray-50"
             }`}
           >
-            <div className="mb-2 flex items-center">
-              <span
-                className={`mr-3 text-2xl ${treasuresFound >= 1 ? "" : "grayscale"}`}
-              >
-                🏆
-              </span>
+            <div className="mb-2 flex items-start">
+              <AchievementIcon kind="trophy" unlocked={treasuresFound >= 1} />
               <div>
                 <h4 className="font-medium">Primer tesoro</h4>
                 <p className="text-sm text-gray-600">
@@ -205,12 +202,8 @@ export default function ProgressTracker({
                 : "border-gray-200 bg-gray-50"
             }`}
           >
-            <div className="mb-2 flex items-center">
-              <span
-                className={`mr-3 text-2xl ${treasuresFound >= 5 ? "" : "grayscale"}`}
-              >
-                🧭
-              </span>
+            <div className="mb-2 flex items-start">
+              <AchievementIcon kind="compass" unlocked={treasuresFound >= 5} />
               <div>
                 <h4 className="font-medium">Explorador</h4>
                 <p className="text-sm text-gray-600">Encuentra 5 tesoros</p>
@@ -231,12 +224,8 @@ export default function ProgressTracker({
                 : "border-gray-200 bg-gray-50"
             }`}
           >
-            <div className="mb-2 flex items-center">
-              <span
-                className={`mr-3 text-2xl ${treasuresFound >= 15 ? "" : "grayscale"}`}
-              >
-                🎖️
-              </span>
+            <div className="mb-2 flex items-start">
+              <AchievementIcon kind="medal" unlocked={treasuresFound >= 15} />
               <div>
                 <h4 className="font-medium">Maestro explorador</h4>
                 <p className="text-sm text-gray-600">Encuentra 15 tesoros</p>
@@ -257,12 +246,8 @@ export default function ProgressTracker({
                 : "border-gray-200 bg-gray-50"
             }`}
           >
-            <div className="mb-2 flex items-center">
-              <span
-                className={`mr-3 text-2xl ${isCompleted ? "" : "grayscale"}`}
-              >
-                👑
-              </span>
+            <div className="mb-2 flex items-start">
+              <AchievementIcon kind="crown" unlocked={isCompleted} />
               <div>
                 <h4 className="font-medium">Leyenda</h4>
                 <p className="text-sm text-gray-600">

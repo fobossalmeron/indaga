@@ -65,8 +65,8 @@ export function TreasureProgressSkeleton() {
                 key={index}
                 className="rounded-2xl border border-gray-200 bg-gray-50 p-4"
               >
-                <div className="flex items-center gap-3">
-                  <Skeleton className="size-8 shrink-0 rounded-full" />
+                <div className="flex items-start gap-3">
+                  <Skeleton className="size-6 shrink-0 rounded-full" />
                   <div className="min-w-0 flex-1">
                     <Skeleton className="mb-2 h-5 w-32 max-w-full" />
                     <Skeleton className="h-5 w-full" />
