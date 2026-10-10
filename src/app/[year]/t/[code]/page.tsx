@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { parseHuntYear } from "@/lib/treasure-hunt-config";
+import styles from "./loading.module.css";
 
 interface TreasureLandingProps {
   params: Promise<{ year: string; code: string }>;
@@ -48,10 +49,16 @@ export default function TreasureLanding({ params }: TreasureLandingProps) {
   }, [params, session, isPending, router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-dvh w-full items-center justify-center px-4">
       <div className="text-center">
-        <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
-        <p className="text-gray-600">Procesando código QR...</p>
+        <div
+          className="bg-primary/15 mx-auto mb-4 h-1.5 w-48 overflow-hidden rounded-full"
+          role="progressbar"
+          aria-labelledby="qr-loading-label"
+        >
+          <div className={`bg-primary h-full w-2/5 rounded-full ${styles.indicator}`} />
+        </div>
+        <p id="qr-loading-label" className="text-gray-600">Procesando código QR...</p>
       </div>
     </div>
   );

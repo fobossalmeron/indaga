@@ -41,11 +41,12 @@ const pageUrl = await compile('../src/app/(protected)/treasures/page.tsx', [
 const { default: TreasuresPage } = await import(pageUrl)
 
 for (const [name, Component] of [['page while fetching treasures', TreasuresPage], ['route/session fallback', TreasuresPageSkeleton]]) {
-  test(`${name} retains logo and signed-in user while showing accessible loading placeholders`, () => {
+  test(`${name} retains logo and edition while showing accessible loading placeholders`, () => {
     globalThis.__treasuresLoadingSession = { data: { user: { id: 'user', email: 'explorador@example.test' } }, isPending: false }
     const html = renderToStaticMarkup(createElement(Component))
     assert.match(html, /festival_santa_lucia\.svg/)
-    assert.match(html, /explorador@example.test/)
+    assert.match(html, /Edición/)
+    assert.doesNotMatch(html, /Hola,|explorador@example.test/)
     assert.match(html, /aria-busy="true"/)
     assert.match(html, /role="status"/)
     assert.match(html, /data-slot="skeleton"/)

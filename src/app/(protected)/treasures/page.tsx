@@ -56,8 +56,7 @@ export default function TreasuresPage() {
 
   return (
     <div className="py-4"><div className="mx-auto max-w-4xl">
-      <TreasurePageHeader email={session?.user?.email} />
-      <div className="mb-6 flex flex-wrap items-center justify-center gap-4">
+      <TreasurePageHeader>
         <div className="flex items-center gap-2 text-sm">
           <label htmlFor="treasure-edition">Edición</label>
           <Select disabled={isLoading} value={String(year || CURRENT_HUNT_YEAR)} onValueChange={(value) => router.push(`/treasures?year=${value}`)}>
@@ -69,7 +68,7 @@ export default function TreasuresPage() {
             </SelectContent>
           </Select>
         </div>
-      </div>
+      </TreasurePageHeader>
       {!isLoading && status === "ended" && <p className="mb-6 rounded-lg bg-gray-100 p-4">Esta edición terminó. Consulta aquí tu historial de visitas y logros.</p>}
       {!isLoading && status === "upcoming" && <p className="mb-6 rounded-lg bg-blue-50 p-4">La edición todavía no comienza. Las visitas se registran desde el 30 de septiembre de 2026 a las 23:00, hora de Monterrey.</p>}
       {!isLoading && status === "inactive" && <p className="mb-6 rounded-lg bg-blue-50 p-4">Esta edición está en preparación. El registro de visitas aún no está habilitado.</p>}
