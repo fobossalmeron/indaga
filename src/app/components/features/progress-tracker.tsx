@@ -3,11 +3,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/app/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/app/components/ui/dialog";
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogHeader,
+  ResponsiveDialogTitle,
+} from "@/app/components/ui/responsive-dialog";
 import { Check, HelpCircle, Map } from "lucide-react";
 import type {
   TreasureHunt,
@@ -37,6 +37,7 @@ export default function ProgressTracker({
   scannedCode,
 }: ProgressTrackerProps) {
   const [selectedTreasure, setSelectedTreasure] = useState<AllTreasure | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const allTreasures = useMemo(() => {
     const scannedIds = new Set(scannedTreasures.map((treasure) => treasure.id));
     return treasures.map((treasure) => ({ ...treasure, isScanned: scannedIds.has(treasure.id) }));
@@ -54,13 +55,14 @@ export default function ProgressTracker({
       );
       if (treasure) {
         setSelectedTreasure(treasure);
+        setIsDetailOpen(true);
       }
     }
   }, [scannedCode, allTreasures]);
 
   const getTreasureStatusColor = (treasure: AllTreasure) => {
     if (treasure.isScanned) {
-      return "bg-green-500 border-green-600 text-white";
+      return "bg-green-100 border-green-500 text-green-800";
     }
     return "bg-gray-200 border-gray-300 text-gray-600";
   };
@@ -327,7 +329,10 @@ export default function ProgressTracker({
             {allTreasures.map((treasure) => (
               <button
                 key={treasure.id}
-                onClick={() => setSelectedTreasure(treasure)}
+                onClick={() => {
+                  setSelectedTreasure(treasure);
+                  setIsDetailOpen(true);
+                }}
                 className={`cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 ${getTreasureStatusColor(treasure)}`}
               >
                 <div className="text-center">
@@ -345,12 +350,12 @@ export default function ProgressTracker({
       </div>
 
       {/* Treasure Detail Dialog */}
-      <Dialog
-        open={!!selectedTreasure}
-        onOpenChange={() => setSelectedTreasure(null)}
+      <ResponsiveDialog
+        open={isDetailOpen}
+        onOpenChange={setIsDetailOpen}
       >
-        <DialogContent className="w-full !max-w-[400px] rounded-3xl">
-          <DialogHeader>
+        <ResponsiveDialogContent>
+          <ResponsiveDialogHeader>
             <div className="mb-4 flex items-start gap-4">
               <div
                 className={`flex h-14 w-14 items-center justify-center rounded-full ${
@@ -368,10 +373,10 @@ export default function ProgressTracker({
               </div>
 
               <div className="flex-1 text-left">
-                <DialogTitle className="mb-2 text-xl font-medium text-gray-900">
+                <ResponsiveDialogTitle className="mb-2 text-xl font-medium text-gray-900">
                   {selectedTreasure?.treasure_name}
-                </DialogTitle>
-                <p className="mb-2 text-sm text-gray-500">Edición {hunt.year}{isHistorical ? " · Historial" : ""}</p>
+                </ResponsiveDialogTitle>
+                {isHistorical && <p className="mb-2 text-sm text-gray-500">Historial {hunt.year}</p>}
 
                 {selectedTreasure?.isScanned ? (
                   <span className="inline-block rounded-full border-1 border-green-500 bg-green-100 px-3 py-1 text-sm text-green-800">
@@ -384,38 +389,36 @@ export default function ProgressTracker({
                 )}
               </div>
             </div>
-          </DialogHeader>
+          </ResponsiveDialogHeader>
 
-          <div className="mb-6 space-y-4">
+          <div className="space-y-4">
             <div className="text-center">
               {selectedTreasure?.isScanned ? (
                 <>
-                  {hunt.year === 2025 && <div className="bg-primary/10 border-primary/20 rounded-lg border-2 px-6 py-4"><p className="text-sm text-gray-600">Palabra de esta visita</p><p className="text-primary text-3xl">{selectedTreasure.treasure_secret}</p></div>}
-                  <p className="mt-3 text-base font-medium">{isHistorical ? "Visita registrada en tu historial" : "Muestra esta pantalla para recibir tu tesoro"}</p>
+                  <p className="mb-3 text-base font-medium">{isHistorical ? "Visita registrada en tu historial" : "Muestra esta palabra para recibir tu tesoro"}</p>
+                  {selectedTreasure.treasure_secret && <div className="bg-green-100 border-green-500 rounded-lg border-2 px-6 py-4"><p className="text-green-800 text-3xl">{selectedTreasure.treasure_secret}</p></div>}
                 </>
               ) : (
-                <p className="mb-4 text-sm text-gray-600">{isHistorical ? "No registraste una visita a este lugar en esta edición." : "Visita este lugar y escanea su QR para registrar tu visita."}</p>
+                <p className="mb-3 text-base font-medium">{isHistorical ? "No registraste una visita a este lugar en esta edición." : "Visita este lugar y escanea su QR para registrar tu visita."}</p>
               )}
               {selectedTreasure?.treasure_location_maps_url ? (
-                <a href={selectedTreasure.treasure_location_maps_url} target="_blank" rel="noopener noreferrer" className="mx-auto mt-4 block rounded-lg border-2 border-blue-200 bg-blue-50 px-6 py-4">
-                  <Map className="mx-auto mb-2 h-8 w-8 text-blue-600" /><span className="text-sm font-medium text-blue-600">Ver en el mapa</span>
-                </a>
+                <Button asChild variant="default" className="mt-4 w-full">
+                  <a href={selectedTreasure.treasure_location_maps_url} target="_blank" rel="noopener noreferrer">
+                    <Map className="size-4" aria-hidden="true" />
+                    Ver en el mapa
+                  </a>
+                </Button>
               ) : <p className="mt-4 text-xs text-gray-500">Google Maps próximamente</p>}
-              {selectedTreasure?.treasure_website ? <a href={selectedTreasure.treasure_website} target="_blank" rel="noopener noreferrer" className="mt-3 block text-sm text-primary underline">Instagram / web</a> : <p className="mt-3 text-xs text-gray-500">Instagram / web próximamente</p>}
+              {selectedTreasure?.treasure_website ? (
+                <Button asChild variant="outline" className="mt-3 w-full">
+                  <a href={selectedTreasure.treasure_website} target="_blank" rel="noopener noreferrer">Instagram</a>
+                </Button>
+              ) : <p className="mt-3 text-xs text-gray-500">Instagram próximamente</p>}
             </div>
           </div>
 
-          <div className="flex gap-3">
-            <Button
-              onClick={() => setSelectedTreasure(null)}
-              variant="outline"
-              className="flex-1"
-            >
-              Cerrar
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+        </ResponsiveDialogContent>
+      </ResponsiveDialog>
     </div>
   );
 }

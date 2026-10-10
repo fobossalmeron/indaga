@@ -74,6 +74,7 @@ export const ProtectedNav = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
+                  className="cursor-pointer"
                   onClick={async () => {
                     await signOut();
                     router.push("/login");

@@ -67,7 +67,7 @@ export async function addTreasure(input: { hunt_id: string; treasure_code: strin
     hunt_id: input.hunt_id,
     treasure_name: input.treasure_name.trim(),
     treasure_code: toStoredTreasureCode(hunt.year, input.treasure_code.trim().toUpperCase()),
-    treasure_secret: hunt.year === 2026 ? "ENCONTRADO" : input.treasure_secret,
+    treasure_secret: input.treasure_secret.trim(),
     treasure_location_maps_url: externalUrl(input.treasure_location_maps_url),
     treasure_website: externalUrl(input.treasure_website),
     treasure_category: input.treasure_category || null,
@@ -87,7 +87,7 @@ export async function updateTreasure(treasureId: string, updates: TreasureHunt20
     treasure_location_maps_url: updates.treasure_location_maps_url === undefined ? undefined : externalUrl(updates.treasure_location_maps_url),
     treasure_website: updates.treasure_website === undefined ? undefined : externalUrl(updates.treasure_website),
     treasure_category: updates.treasure_category,
-    treasure_secret: "ENCONTRADO",
+    treasure_secret: updates.treasure_secret?.trim(),
   }).eq("id", treasureId).eq("hunt_id", treasure.hunt_id).select().single();
   if (error) throw new Error(error.message);
   return data;

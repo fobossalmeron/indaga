@@ -31,13 +31,13 @@ for venue in config['venues']:
     if decoded is None or decoded.text != url:
         raise RuntimeError(f'QR decode failed: {code}')
     rows.append({'name':venue['name'],'code':code,'url':url,'png':f'png/{code}.png','svg':f'svg/{code}.svg'})
-assert len(rows) == 49 and len(set(r['url'] for r in rows)) == 49
+assert len(rows) == 40 and len(set(r['url'] for r in rows)) == 40
 (output / 'manifest.json').write_text(json.dumps(rows, ensure_ascii=False, indent=2) + '\n')
 with (output / 'manifest.csv').open('w', newline='', encoding='utf-8-sig') as file:
-    writer = csv.DictWriter(file, fieldnames=rows[0].keys())
+    writer = csv.DictWriter(file, fieldnames=rows[0].keys(), lineterminator='\n')
     writer.writeheader()
     writer.writerows(rows)
-(output / 'LEEME.txt').write_text('''TREASURE HUNT 2026 — 49 códigos QR
+(output / 'LEEME.txt').write_text('''TREASURE HUNT 2026 — 40 códigos QR
 
 Dominio: https://www.indaga.site
 Formato de enlace: /2026/t/CODIGO
@@ -47,7 +47,7 @@ PNG: copia de alta resolución; cada módulo mide 24 píxeles.
 Mantener el margen blanco, proporción cuadrada y contraste negro/blanco.
 No recortar ni superponer logos sobre el código.
 Cada nombre de archivo identifica el lugar en manifest.csv / manifest.json.
-Los 49 PNG se verifican con un lector QR independiente al generarse.
+Los 40 PNG se verifican con un lector QR independiente al generarse.
 
 Los QR pueden imprimirse ahora. Para registrar visitas, primero publicar
 la aplicación 2026 y activar la campaña en la base de datos.
@@ -57,6 +57,6 @@ hasta terminar el 1 de diciembre de 2026, en horario de Monterrey.
 archive = output / 'treasure-hunt-2026-qrs.zip'
 with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
     for file in sorted(output.rglob('*')):
-        if file.is_file() and file != archive:
+        if file.is_file() and file != archive and not file.name.startswith('.'):
             z.write(file, file.relative_to(output))
 print(json.dumps({'venues':len(rows),'decoded':len(rows),'origin':config['public_origin'],'archive':str(archive)}))

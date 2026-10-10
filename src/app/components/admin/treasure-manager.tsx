@@ -106,7 +106,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
         await adminTreasureActions.addTreasure({
           hunt_id: selectedHunt,
           ...newTreasure,
-          treasure_secret: huntDetails.year === 2026 ? 'ENCONTRADO' : newTreasure.treasure_secret
+          treasure_secret: newTreasure.treasure_secret
         })
       }
 
@@ -313,7 +313,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                                     {toPublicTreasureCode(huntDetails.year, treasure.treasure_code)}
                                   </span>
                                 </p>
-                                {huntDetails.year === 2025 && treasure.treasure_secret && (
+                                {treasure.treasure_secret && (
                                   <p className="text-xs text-gray-600 mt-2">
                                     <span className="font-medium">Palabra secreta:</span> {treasure.treasure_secret}
                                   </p>
@@ -328,7 +328,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                                 </div>
                                 {huntDetails.year === 2026 && <button className="mt-2 text-sm text-indigo-600 underline" onClick={() => {
                                   setEditingTreasureId(treasure.id)
-                                  setNewTreasure({ treasure_code: toPublicTreasureCode(huntDetails.year, treasure.treasure_code), treasure_name: treasure.treasure_name, treasure_secret: '', treasure_location_maps_url: treasure.treasure_location_maps_url || '', treasure_website: treasure.treasure_website || '', treasure_category: treasure.treasure_category || '' })
+                                  setNewTreasure({ treasure_code: toPublicTreasureCode(huntDetails.year, treasure.treasure_code), treasure_name: treasure.treasure_name, treasure_secret: treasure.treasure_secret || '', treasure_location_maps_url: treasure.treasure_location_maps_url || '', treasure_website: treasure.treasure_website || '', treasure_category: treasure.treasure_category || '' })
                                   setShowCreateTreasure(true)
                                 }}>Editar lugar / enlaces</button>}
                               </div>
@@ -497,7 +497,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                   />
                 </div>
 
-                {huntDetails?.year !== 2026 && <div>
+                <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Palabra Secreta *
                   </label>
@@ -509,7 +509,7 @@ export default function TreasureManager({ initialHunts = [] }: TreasureManagerPr
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     required
                   />
-                </div>}
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">

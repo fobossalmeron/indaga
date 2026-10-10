@@ -32,7 +32,7 @@ try {
   const current = await request('/api/treasure-data?year=2026');
   assert.equal(current.status, 200);
   assert.equal(current.data.hunt.year, 2026);
-  assert.equal(current.data.allTreasures.length, 49);
+  assert.equal(current.data.allTreasures.length, 40);
   assert.equal(current.data.scannedTreasures.length, 0);
   assert.deepEqual(current.data.availableHunts.map(hunt => hunt.year), [2026]);
   assert.ok(current.data.allTreasures.every(treasure => !treasure.treasure_code.startsWith('2026-')));
@@ -56,11 +56,11 @@ try {
     assert.equal(currentScan.data.success, false);
   }
   const progress = await request('/api/treasure-progress?year=2026');
-  assert.equal(progress.data.totalTreasures, 49);
+  assert.equal(progress.data.totalTreasures, 40);
   assert.equal(progress.data.treasuresFound, 0);
   const scans = await db.query('SELECT count(*)::int AS count FROM public.treasure_hunt_2025_scans WHERE user_id=$1', [user]);
   assert.equal(scans.rows[0].count, 0);
-  console.log(JSON.stringify({ authenticatedCatalog2026:49, historicCatalog2025:21, unauthorized401:true, missingYear400:true, unsupportedYear400:true, closed2025Rejected:true, inactive2026Rejected, active2026ScanSkipped: !inactive2026Rejected, visitsWritten:0 }));
+  console.log(JSON.stringify({ authenticatedCatalog2026:40, historicCatalog2025:21, unauthorized401:true, missingYear400:true, unsupportedYear400:true, closed2025Rejected:true, inactive2026Rejected, active2026ScanSkipped: !inactive2026Rejected, visitsWritten:0 }));
 } finally {
   await db.query('DELETE FROM public.session WHERE "userId"=$1', [user]);
   await db.query('DELETE FROM public.users WHERE id=$1', [user]);

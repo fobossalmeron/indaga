@@ -57,7 +57,7 @@ test('editing links preserves hunt and printed QR identity, and blank links beco
   await actions.updateTreasure('treasure', { hunt_id: 'wrong-hunt', treasure_code: 'REPLACED', treasure_location_maps_url: '', treasure_website: 'https://example.test/place' })
   assert.equal(calls[1].update.treasure_location_maps_url, null)
   assert.equal(calls[1].update.treasure_website, 'https://example.test/place')
-  assert.equal(calls[1].update.treasure_secret, 'ENCONTRADO')
+  assert.equal(calls[1].update.treasure_secret, undefined)
   assert.equal(calls[1].update.hunt_id, undefined)
   assert.equal(calls[1].update.treasure_code, undefined)
   assert.deepEqual(calls[1].filters, [['id', 'treasure'], ['hunt_id', '2026-hunt']])

@@ -152,3 +152,30 @@ test('scan endpoint forwards explicit edition and carries failure reason to that
   assert.equal(redirect.searchParams.get('message'), 'La búsqueda del tesoro ha terminado.')
   assert.equal(redirect.searchParams.get('scanned'), 'CAFE-LIMON')
 })
+
+const dataRouteSource = await readFile(new URL('../src/app/api/treasure-data/route.ts', import.meta.url), 'utf8')
+const compiledDataRoute = ts.transpileModule(dataRouteSource, { compilerOptions: { module: ts.ModuleKind.ES2022 } }).outputText
+  .replace(/import .* from 'next\/server';/, 'const NextResponse = { json: (body, init = {}) => ({ body, status: init.status || 200 }) };')
+  .replace(/import .* from '@\/lib\/auth-utils';/, 'const getCurrentUserId = async () => globalThis.__treasureTestUser;')
+  .replace(/import .* from '@\/lib\/treasure-hunt-2025';/, `
+    const getTreasureHunt = async year => ({ id: 'hunt', year });
+    const getUserScannedTreasures = async () => [{ id: 'found', treasure_secret: 'Nube' }];
+    const getHuntTreasures = async () => [{ id: 'found', treasure_secret: 'Nube' }, { id: 'pending', treasure_secret: 'Faro' }];
+    const getUserProgress = async () => null;
+    const getAvailableTreasureHunts = async () => [];
+  `)
+  .replace("'@/lib/treasure-hunt-config'", JSON.stringify(configUrl))
+const { GET: getTreasureData } = await import(`data:text/javascript;base64,${Buffer.from(compiledDataRoute).toString('base64')}`)
+
+test('secret words are revealed only for scanned places in both editions', async () => {
+  globalThis.__treasureTestUser = 'user'
+  for (const year of [2025, 2026]) {
+    const result = await getTreasureData({ nextUrl: new URL(`http://localhost/api/treasure-data?year=${year}`) })
+    assert.equal(result.status, 200)
+    assert.equal(result.body.allTreasures.find(t => t.id === 'found').treasure_secret, 'Nube')
+    assert.equal(result.body.allTreasures.find(t => t.id === 'pending').treasure_secret, '')
+    assert.equal(result.body.scannedTreasures[0].treasure_secret, 'Nube')
+  }
+  globalThis.__treasureTestUser = null
+  assert.equal((await getTreasureData({ nextUrl: new URL('http://localhost/api/treasure-data?year=2026') })).status, 401)
+})

@@ -21,11 +21,10 @@ export default async function TreasureHunt({ searchParams }: { searchParams: Pro
 
   return (
     <div className="flex flex-col px-5 pb-24">
-      <h2 className="text-2xl">TREASURE HUNT {year}</h2>
       {/* {year === 2026 && <p className="mt-3">Del 30 de septiembre a las 23:00 al 1 de diciembre de 2026 · Hora de Monterrey · Festival Internacional de Santa Lucía</p>} */}
       {year === 2026 && <p className="mt-3">Las fechas serán reveladas pronto</p>}
       {status === "ended" ? <p className="mt-4">Esta edición terminó. Inicia sesión para consultar tu historial.</p> : <TreasureHuntFull year={year} />}
-      {error ? <p role="alert" className="mt-8">No se pudo cargar el catálogo. Intenta de nuevo en unos minutos.</p> : <PublicTreasureGrid year={year} historical={status === "ended"} treasures={(treasures || []).map(treasure => ({ ...treasure, treasure_code: toPublicTreasureCode(year, treasure.treasure_code) }))} />}
+      {error ? <p role="alert" className="mt-8">No se pudo cargar el catálogo. Intenta de nuevo en unos minutos.</p> : <PublicTreasureGrid year={year} treasures={(treasures || []).map(treasure => ({ ...treasure, treasure_code: toPublicTreasureCode(year, treasure.treasure_code) }))} />}
     </div>
   );
 }

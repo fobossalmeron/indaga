@@ -19,12 +19,9 @@ export async function GET(request: NextRequest) {
     ])
     const foundIds = new Set(scannedTreasures.map(treasure => treasure.id))
     const visibleTreasures = allTreasures.map(treasure => ({ ...treasure,
-      treasure_secret: year === 2025 && foundIds.has(treasure.id) ? treasure.treasure_secret : '',
+      treasure_secret: foundIds.has(treasure.id) ? treasure.treasure_secret : '',
     }))
-    const visibleScanned = scannedTreasures.map(treasure => ({ ...treasure,
-      treasure_secret: year === 2025 ? treasure.treasure_secret : '',
-    }))
-    return NextResponse.json({ hunt, progress, scannedTreasures: visibleScanned, allTreasures: visibleTreasures, availableHunts,
+    return NextResponse.json({ hunt, progress, scannedTreasures, allTreasures: visibleTreasures, availableHunts,
       totalScanned: scannedTreasures.length, totalTreasures: allTreasures.length })
   } catch (error) {
     console.error('Error fetching treasure data:', error)

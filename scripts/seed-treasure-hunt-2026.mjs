@@ -10,8 +10,9 @@ const config = JSON.parse(await readFile(`${root}data/treasure-hunt-2026.json`, 
 const apply = process.argv.includes('--apply');
 const activate = process.argv.includes('--activate');
 if (activate && !apply) throw new Error('--activate requires --apply.');
-if (config.venues.length !== 49 || new Set(config.venues.map(v => v.code)).size !== 49) throw new Error('Expected 49 unique venues.');
+if (config.venues.length !== 40 || new Set(config.venues.map(v => v.code)).size !== 40) throw new Error('Expected 40 unique venues.');
 for (const v of config.venues) {
+  if (!v.treasure_secret?.trim() || v.treasure_secret === 'ENCONTRADO') throw new Error('Each venue needs a secret word.');
   if (!/^[A-Z0-9]+(?:-[A-Z0-9]+)*$/.test(v.code)) throw new Error('Invalid public code.');
   for (const value of [v.maps_url, v.website]) if (value !== null && !value.startsWith('https://')) throw new Error('Use null placeholders or HTTPS links.');
 }
@@ -37,7 +38,7 @@ try {
   if (existing.length > 1 || existing.some(h => h.year !== config.year)) throw new Error('Ambiguous 2026 campaign; no data changed.');
   const before = await snapshot();
   if (!apply) {
-    console.log(JSON.stringify({mode:'dry-run', campaign:existing.length ? 'update' : 'create', venues:49, missingMaps:config.venues.filter(v=>!v.maps_url).length, missingWebsite:config.venues.filter(v=>!v.website).length, active:activate || existing[0]?.is_active || false}));
+    console.log(JSON.stringify({mode:'dry-run', campaign:existing.length ? 'update' : 'create', venues:40, missingMaps:config.venues.filter(v=>!v.maps_url).length, missingWebsite:config.venues.filter(v=>!v.website).length, active:activate || existing[0]?.is_active || false}));
     await client.query('ROLLBACK');
   } else {
     const backupDir = `${root}.local-backups/indaga-backup-${new Date().toISOString().replaceAll(':','-')}`;
@@ -77,13 +78,13 @@ try {
         treasure_name=EXCLUDED.treasure_name,treasure_secret=EXCLUDED.treasure_secret,treasure_category=EXCLUDED.treasure_category,
         treasure_website=COALESCE(EXCLUDED.treasure_website,treasure_hunt_2025_treasures.treasure_website),
         treasure_location_maps_url=COALESCE(EXCLUDED.treasure_location_maps_url,treasure_hunt_2025_treasures.treasure_location_maps_url)`,
-        [huntId,code,v.name,config.treasure_secret,v.category,v.website,v.maps_url]);
+        [huntId,code,v.name,v.treasure_secret,v.category,v.website,v.maps_url]);
     }
     if (activate) await client.query('UPDATE public.treasure_hunts SET is_active=true WHERE id=$1',[huntId]);
     const after = await snapshot();
     if (digest(historical(before)) !== digest(historical(after))) throw new Error('Historical data changed; transaction cancelled.');
     const count = after.treasure_hunt_2025_treasures.filter(t=>t.hunt_id===huntId).length;
-    if (count !== 49) throw new Error('Unexpected 2026 catalog size; transaction cancelled.');
+    if (count !== 40) throw new Error('Unexpected 2026 catalog size; transaction cancelled.');
     await client.query('COMMIT');
     console.log(JSON.stringify({mode:'applied',huntId,venues:count,active:after.treasure_hunts.find(h=>h.id===huntId).is_active,historyUnchanged:true,backupDir}));
   }

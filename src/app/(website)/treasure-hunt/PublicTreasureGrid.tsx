@@ -1,15 +1,7 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { PlaceCard } from "@/app/(website)/guia/PlaceCard";
-import { Button } from "@/app/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/app/components/ui/dialog";
-import { HelpCircle, Map } from "lucide-react";
 import Blob from "@/assets/img/blob_happening.svg";
 
 interface PublicTreasure {
@@ -24,107 +16,39 @@ interface PublicTreasure {
 interface PublicTreasureGridProps {
   treasures: PublicTreasure[];
   year: number;
-  historical: boolean;
 }
 
 export default function PublicTreasureGrid({
-  treasures, year, historical,
+  treasures, year,
 }: PublicTreasureGridProps) {
-  const [selectedTreasure, setSelectedTreasure] =
-    useState<PublicTreasure | null>(null);
-
   return (
-    <>
-      <div className="animate-fadeIn3 mt-12 space-y-6">
-        <div className="text-left md:text-center">
-          <h3 className="text-foreground text-xl font-medium md:text-2xl">
-            Ubicaciones participantes
-          </h3>
-          <p className="mt-2 text-gray-600">
-            {treasures.length} lugares · Edición {year}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {treasures.map((treasure, index) => (
-            <Fragment key={treasure.id}>
-              {index === 3 && (
-                <Blob className="align-self-end mb-4 block h-20 w-auto justify-self-end lg:hidden" />
-              )}
-              <div
-                onClick={() => setSelectedTreasure(treasure)}
-                className="cursor-pointer"
-              >
-                <PlaceCard
-                  title={treasure.treasure_name}
-                  mapLink={treasure.treasure_location_maps_url ? { link_type: "Web", url: treasure.treasure_location_maps_url } : undefined}
-                  link={treasure.treasure_website ? { link_type: "Web", url: treasure.treasure_website } : undefined}
-                  category={treasure.treasure_category || undefined}
-                  className="active:border-primary hover:border-primary border-2 border-transparent transition-colors"
-                  description={`Edición ${year}`}
-                  grayscale={true}
-                />
-              </div>
-            </Fragment>
-          ))}
-        </div>
+    <div className="animate-fadeIn3 mt-12 space-y-6">
+      <div className="text-left md:text-center">
+        <h3 className="text-foreground text-xl font-medium md:text-2xl">
+          Ubicaciones participantes
+        </h3>
+        <p className="mt-2 text-gray-600">
+          {treasures.length} lugares · Edición {year}
+        </p>
       </div>
 
-      {/* Treasure Detail Dialog */}
-      <Dialog
-        open={!!selectedTreasure}
-        onOpenChange={() => setSelectedTreasure(null)}
-      >
-        <DialogContent className="w-full !max-w-[400px] rounded-3xl">
-          <DialogHeader>
-            <div className="mb-4 flex items-start gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-300 text-gray-600">
-                <HelpCircle className="h-8 w-8" />
-              </div>
-
-              <div className="flex-1 text-left">
-                <DialogTitle className="mb-2 text-xl font-medium text-gray-900">
-                  {selectedTreasure?.treasure_name}
-                </DialogTitle>
-
-                <span className="inline-block rounded-full border-1 border-gray-400 bg-gray-100 px-3 py-1 text-sm text-gray-800">
-                  {historical ? `Historial ${year}` : `Por descubrir · ${year}`}
-                </span>
-              </div>
-            </div>
-          </DialogHeader>
-
-          <div className="mb-6 space-y-4">
-            <div className="text-center">
-              {selectedTreasure?.treasure_location_maps_url ? <a
-                href={selectedTreasure.treasure_location_maps_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-primary/20 bg-primary/5 hover:bg-primary/10 mx-auto block rounded-lg border-2 px-6 py-4 transition-colors"
-              >
-                <Map className="text-primary mx-auto mb-2 h-8 w-8" />
-                <div className="text-primary text-sm font-medium">
-                  Ver en el mapa
-                </div>
-              </a> : <p className="text-sm text-gray-500">Google Maps próximamente</p>}
-              {selectedTreasure?.treasure_website ? <a href={selectedTreasure.treasure_website} target="_blank" rel="noopener noreferrer" className="mt-4 block text-primary underline">Instagram / web</a> : <p className="mt-4 text-sm text-gray-500">Instagram / web próximamente</p>}
-              <p className="mt-3 text-xs text-gray-500">
-                {historical ? "Esta edición terminó. Consulta tus visitas iniciando sesión." : "Visita este lugar y escanea su QR para registrar tu visita."}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-3">
-            <Button
-              onClick={() => setSelectedTreasure(null)}
-              variant="outline"
-              className="flex-1"
-            >
-              Cerrar
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {treasures.map((treasure, index) => (
+          <Fragment key={treasure.id}>
+            {index === 3 && (
+              <Blob className="align-self-end mb-4 block h-20 w-auto justify-self-end lg:hidden" />
+            )}
+            <PlaceCard
+              title={treasure.treasure_name}
+              mapLink={treasure.treasure_location_maps_url ? { link_type: "Web", url: treasure.treasure_location_maps_url } : undefined}
+              link={treasure.treasure_website ? { link_type: "Web", url: treasure.treasure_website } : undefined}
+              category={treasure.treasure_category || undefined}
+              className="border-2 border-transparent"
+              grayscale={true}
+            />
+          </Fragment>
+        ))}
+      </div>
+    </div>
   );
 }
