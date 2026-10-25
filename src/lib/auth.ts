@@ -8,6 +8,9 @@ import { supabase, userOperations } from "./supabase"
 import { Resend } from "resend"
 import { Pool } from "pg"
 import { getAuthTrustedOrigins } from "./auth-origins"
+import { parseCookies } from "better-auth/cookies"
+import { browserHandoff } from "./browser-handoff"
+import { browserHandoffStore, handoffCookie } from "./browser-handoff-store"
 
 // FIX: Handle SSL certificate issues for Supabase
 // This is necessary for Supabase connections in production
@@ -30,10 +33,7 @@ console.log(
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// BetterAuth configuration
-export default betterAuth({
-  // Database configuration
-  database: new Pool({
+const database = new Pool({
     connectionString: databaseUrl,
     // The restored Supabase role has an empty search_path. Better Auth uses
     // unqualified table names, so select the schema on every pooled connection.
@@ -47,7 +47,12 @@ export default betterAuth({
       idleTimeoutMillis: 30000,
       max: 20,
     }),
-  }),
+  })
+const handoffs = browserHandoffStore(database)
+
+// BetterAuth configuration
+export default betterAuth({
+  database,
 
   // Email configuration (for Magic Links)
   emailAndPassword: {
@@ -90,6 +95,7 @@ export default betterAuth({
 
   // Plugins
   plugins: [
+    browserHandoff(handoffs, authBaseURL),
     admin({
       impersonationSessionDuration: 60 * 60 * 24, // 24 hours
     }),
@@ -98,6 +104,8 @@ export default betterAuth({
       // In production, configure with your preferred email provider (Resend, SendGrid, etc.)
       sendMagicLink: async ({ email, url, token }, request) => {
         try {
+          const secret = parseCookies(request?.headers.get('cookie') || '').get(handoffCookie(authBaseURL).name)
+          if (secret) await handoffs.bind(secret, email, token)
           // For development, still log the magic link
           if (process.env.NODE_ENV === "development") {
             console.log("🔗 Magic Link for", email, ":", url)
@@ -113,7 +121,7 @@ export default betterAuth({
 
           // Send email with Resend
           if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== "your_resend_api_key_here") {
-            await resend.emails.send({
+            const delivery = await resend.emails.send({
               from: 'INDAGA <noreply@indaga.site>',
               to: email,
               subject: 'Inicia sesión en INDAGA',
@@ -160,6 +168,10 @@ export default betterAuth({
                     <p style="margin: 16px 0 0; font-size: 14px; color: #4d4e6a;">
                       ⏰ Este enlace expira en <strong>10 minutos</strong>.
                     </p>
+                    <p style="margin: 16px 0 0; font-size: 14px; color: #4d4e6a;">
+                      También iniciarás sesión en el navegador donde solicitaste este correo.
+                      Si no lo solicitaste tú, no abras el enlace.
+                    </p>
                   </div>
                   
                   <div style="text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
@@ -175,6 +187,7 @@ export default betterAuth({
                 </html>
               `
             })
+            if (delivery.error) throw new Error('No se pudo enviar el enlace de inicio de sesión')
 
             console.log("✅ Magic link email sent successfully to:", email)
           } else {
@@ -183,11 +196,11 @@ export default betterAuth({
           }
         } catch (error) {
           console.error("❌ Error sending magic link email:", error)
-          // Don't throw error to avoid breaking the auth flow
-          // In development, we still log the link
+          // Let the form offer a retry instead of claiming a failed email was sent.
           if (process.env.NODE_ENV === "development") {
             console.log("🔗 Fallback Magic Link:", url)
           }
+          throw error
         }
       },
 

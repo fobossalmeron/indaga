@@ -10,6 +10,7 @@ import { TreasureScanConfetti } from "@/app/components/auth/TreasureScanConfetti
 import { AuthLoadingSpinner } from "@/app/components/auth/AuthLoadingSpinner";
 import { Loader2 } from "lucide-react";
 import { parseHuntYear, treasurePath } from "@/lib/treasure-hunt-config";
+import { authClient } from "@/lib/auth-client";
 
 function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -46,6 +47,29 @@ function LoginContent() {
     }
   }, [session, isPending, scanPath, router]);
 
+  useEffect(() => {
+    if (!sentEmail || session?.user) return;
+    let checking = false;
+    const check = async () => {
+      if (checking || document.visibilityState !== "visible") return;
+      checking = true;
+      try {
+        const result = await authClient.getSession();
+        if (result.data?.user) authClient.$store.notify("$sessionSignal");
+      } catch {
+        // A suspended phone or temporary network failure can retry on return.
+      } finally {
+        checking = false;
+      }
+    };
+    const interval = window.setInterval(() => void check(), 10000);
+    document.addEventListener("visibilitychange", check);
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", check);
+    };
+  }, [sentEmail, session?.user]);
+
   const handleLogin = async (email: string) => {
     if (isLoading) return;
     setIsLoading(true);
@@ -63,6 +87,13 @@ function LoginContent() {
         // Flujo normal
         callbackURL = isAdmin ? "/admin" : "/treasures";
       }
+
+      const handoff = await fetch("/api/auth/browser-handoff/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!handoff.ok) throw new Error("No se pudo iniciar el acceso. Intenta nuevamente.");
 
       const result = await signIn.magicLink({
         email,
