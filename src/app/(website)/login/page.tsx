@@ -25,9 +25,30 @@ function LoginContent() {
   const { signIn, data: session, isPending } = useAuth();
 
   const scannedTreasure = searchParams.get("scanned");
+  const [resolvedTreasure, setResolvedTreasure] = useState<{ key: string; name: string | null; error?: boolean } | null>(null);
   // A legacy login link with only a code belongs to 2025.
   const year = parseHuntYear(searchParams.get("year"), scannedTreasure ? 2025 : 2026);
-  const scanPath = scannedTreasure && year ? treasurePath(year, scannedTreasure) : null;
+  const scanKey = `${year}:${scannedTreasure}`;
+  const currentTreasure = resolvedTreasure?.key === scanKey ? resolvedTreasure : null;
+  const scanPath = scannedTreasure && year && currentTreasure?.name ? treasurePath(year, scannedTreasure) : null;
+
+  useEffect(() => {
+    if (!scannedTreasure || !year) return;
+    const controller = new AbortController();
+    async function resolveTreasure() {
+      try {
+        const response = await fetch(`/api/treasure-public?year=${year}`, { signal: controller.signal, cache: "no-store" });
+        if (!response.ok) throw new Error("No se pudo consultar el código");
+        const data = await response.json();
+        const treasure = data.treasures.find((item: { treasure_code: string; treasure_name: string }) => item.treasure_code === scannedTreasure);
+        if (!controller.signal.aborted) setResolvedTreasure({ key: scanKey, name: treasure?.treasure_name ?? null });
+      } catch {
+        if (!controller.signal.aborted) setResolvedTreasure({ key: scanKey, name: null, error: true });
+      }
+    }
+    void resolveTreasure();
+    return () => controller.abort();
+  }, [scannedTreasure, year, scanKey]);
 
   useEffect(() => {
     if (isPending || session?.user || year !== 2026 || !scanPath || celebratedScan.current === scanPath) return;
@@ -42,10 +63,10 @@ function LoginContent() {
   }, [isPending, session?.user, year, scanPath]);
 
   useEffect(() => {
-    if (!isPending && session?.user) {
+    if (!isPending && session?.user && (!scannedTreasure || currentTreasure || !year)) {
       router.replace(scanPath ? `${scanPath}${shownScan.current === scanPath ? "?confetti=seen" : ""}` : (session.user.role === "admin" ? "/admin" : "/treasures"));
     }
-  }, [session, isPending, scanPath, router]);
+  }, [session, isPending, scanPath, router, scannedTreasure, currentTreasure, year]);
 
   useEffect(() => {
     if (!sentEmail || session?.user) return;
@@ -116,7 +137,7 @@ function LoginContent() {
     }
   };
 
-  if (isPending) {
+  if (isPending || (scannedTreasure && year && !currentTreasure)) {
     return <AuthLoadingSpinner />;
   }
 
@@ -141,14 +162,18 @@ function LoginContent() {
       {showConfetti && <TreasureScanConfetti />}
       <div className="w-full space-y-8 sm:max-w-[370px]">
         <h2 className="text-center text-3xl">
-          {scannedTreasure ? "¡Tesoro encontrado!" : "Iniciar sesión"}
+          {currentTreasure?.name ? "¡Tesoro encontrado!" : "Iniciar sesión"}
         </h2>
         <div className="space-y-8 rounded-2xl bg-white px-6 py-8">
-          {scannedTreasure ? (
-            <TreasureHuntBanner treasureName={scannedTreasure} year={year || 2026} />
+          {currentTreasure?.name ? (
+            <TreasureHuntBanner treasureName={currentTreasure.name} year={year || 2026} />
           ) : (
             <p className="text-center text-base text-gray-600">
-              Inicia sesión o crea tu cuenta
+              {scannedTreasure
+                ? currentTreasure?.error
+                  ? "No pudimos verificar el código. Recarga la página para intentar de nuevo."
+                  : "Este código no corresponde a un espacio de esta edición."
+                : "Inicia sesión o crea tu cuenta"}
             </p>
           )}
           <MagicLinkForm onSubmit={handleLogin} isLoading={isLoading} initialEmail={emailToEdit} />
