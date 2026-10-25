@@ -37,7 +37,11 @@ export default function TreasureLanding({ params }: TreasureLandingProps) {
         });
         const result = await response.json();
         if (result.redirect) {
-          router.replace(result.redirect);
+          const redirect = new URL(result.redirect, window.location.origin);
+          if (new URLSearchParams(window.location.search).get("confetti") === "seen") {
+            redirect.searchParams.set("confetti", "seen");
+          }
+          router.replace(`${redirect.pathname}${redirect.search}`);
           return;
         }
       } catch (error) {

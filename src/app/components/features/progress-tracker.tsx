@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
+import { TreasureScanConfetti } from "@/app/components/auth/TreasureScanConfetti";
 import { Button } from "@/app/components/ui/button";
 import { AchievementIcon } from "@/app/components/ui/achievement-icon";
 import { TreasureStar } from "@/app/components/ui/treasure-star";
@@ -29,6 +31,7 @@ interface ProgressTrackerProps {
   scannedTreasures: Treasure[];
   treasures: Treasure[];
   scannedCode?: string | null;
+  confettiSeen?: boolean;
 }
 
 export default function ProgressTracker({
@@ -37,9 +40,11 @@ export default function ProgressTracker({
   scannedTreasures,
   treasures,
   scannedCode,
+  confettiSeen = false,
 }: ProgressTrackerProps) {
   const [selectedTreasure, setSelectedTreasure] = useState<AllTreasure | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const allTreasures = useMemo(() => {
     const scannedIds = new Set(scannedTreasures.map((treasure) => treasure.id));
     return treasures.map((treasure) => ({ ...treasure, isScanned: scannedIds.has(treasure.id) }));
@@ -58,9 +63,16 @@ export default function ProgressTracker({
       if (treasure) {
         setSelectedTreasure(treasure);
         setIsDetailOpen(true);
+        setShowConfetti(!confettiSeen);
       }
     }
-  }, [scannedCode, allTreasures]);
+  }, [scannedCode, allTreasures, confettiSeen]);
+
+  useEffect(() => {
+    if (!showConfetti) return;
+    const timeout = window.setTimeout(() => setShowConfetti(false), 3000);
+    return () => window.clearTimeout(timeout);
+  }, [showConfetti]);
 
   const getTreasureStatusColor = (treasure: AllTreasure) => {
     if (treasure.isScanned) {
@@ -108,6 +120,12 @@ export default function ProgressTracker({
 
   return (
     <div className="mt-12 space-y-6">
+      {showConfetti && createPortal(
+        <div className="pointer-events-none fixed inset-0 z-[100]" aria-hidden="true">
+          <TreasureScanConfetti />
+        </div>,
+        document.body,
+      )}
       {/* Progress Overview */}
       <div className="rounded-2xl bg-white px-6 pt-9 pb-4 sm:pt-11 lg:pt-[29px]">
         <div className="mb-6 text-left">
@@ -293,6 +311,7 @@ export default function ProgressTracker({
               <button
                 key={treasure.id}
                 onClick={() => {
+                  setShowConfetti(false);
                   setSelectedTreasure(treasure);
                   setIsDetailOpen(true);
                 }}

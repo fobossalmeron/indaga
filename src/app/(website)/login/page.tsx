@@ -18,6 +18,7 @@ function LoginContent() {
   const [resendMessage, setResendMessage] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
   const celebratedScan = useRef<string | null>(null);
+  const shownScan = useRef<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signIn, data: session, isPending } = useAuth();
@@ -31,6 +32,7 @@ function LoginContent() {
     if (isPending || session?.user || year !== 2026 || !scanPath || celebratedScan.current === scanPath) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     setShowConfetti(true);
+    shownScan.current = scanPath;
     const timeout = window.setTimeout(() => {
       celebratedScan.current = scanPath;
       setShowConfetti(false);
@@ -40,7 +42,7 @@ function LoginContent() {
 
   useEffect(() => {
     if (!isPending && session?.user) {
-      router.replace(scanPath || (session.user.role === "admin" ? "/admin" : "/treasures"));
+      router.replace(scanPath ? `${scanPath}${shownScan.current === scanPath ? "?confetti=seen" : ""}` : (session.user.role === "admin" ? "/admin" : "/treasures"));
     }
   }, [session, isPending, scanPath, router]);
 
@@ -56,7 +58,7 @@ function LoginContent() {
       let callbackURL: string;
       if (scanPath) {
         // Si viene de QR, redirect para procesar el treasure
-        callbackURL = scanPath;
+        callbackURL = `${scanPath}${shownScan.current === scanPath ? "?confetti=seen" : ""}`;
       } else {
         // Flujo normal
         callbackURL = isAdmin ? "/admin" : "/treasures";

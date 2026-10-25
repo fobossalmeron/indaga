@@ -74,7 +74,7 @@ export default function TreasuresPage() {
       {!isLoading && status === "inactive" && <p className="mb-6 rounded-lg bg-blue-50 p-4">Esta edición está en preparación. El registro de visitas aún no está habilitado.</p>}
       {scanError && <p role="alert" className="mb-6 rounded-lg bg-red-50 p-4 text-red-700">{message || (scanError === "technical" ? "No se pudo registrar la visita. Intenta escanear el QR nuevamente." : "No se pudo registrar esta visita. Revisa la edición y sus fechas.")}</p>}
       {isLoading ? <TreasureProgressSkeleton /> : loadError ? <p role="alert">No se pudo cargar esta edición. Recarga la página para intentar de nuevo.</p> : !data?.hunt ? <p>Esta edición no está disponible.</p> :
-        <ProgressTracker key={data.hunt.id} hunt={data.hunt} progress={data.progress} scannedTreasures={data.scannedTreasures} treasures={data.allTreasures} scannedCode={searchParams.get("scanned")} />}
+        <ProgressTracker key={data.hunt.id} hunt={data.hunt} progress={data.progress} scannedTreasures={data.scannedTreasures} treasures={data.allTreasures} scannedCode={searchParams.get("scanned")} confettiSeen={searchParams.get("confetti") === "seen"} />}
     </div></div>
   );
 }
